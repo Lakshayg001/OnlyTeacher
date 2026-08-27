@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --navy: #1b2e54;
+    --amber: #ff9b25;
+    --forest: #478a58;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    @apply bg-white text-navy-700 font-sans antialiased;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight;
+  }
+
+  ::selection {
+    @apply bg-amber-500/25 text-navy-800;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-navy-50;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-navy-200 rounded-full border-[3px] border-solid border-navy-50;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-amber-400;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-4 ring-amber-500/40 ring-offset-2 ring-offset-white rounded-2xl;
+  }
+}
+
+@layer components {
+  .container-tot {
+    @apply mx-auto w-full max-w-[1560px] px-5 sm:px-8 lg:px-12 xl:px-16;
+  }
+
+  /* Soft rounded "panel" section, as in the reference deck */
+  .panel {
+    @apply relative overflow-hidden rounded-4xl sm:rounded-5xl;
+  }
+
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/70;
+  }
+
+  .clay-card {
+    @apply relative rounded-4xl bg-white shadow-clay border border-navy-100/60 transition-all duration-300;
+  }
+  .clay-card:hover {
+    @apply -translate-y-1.5 shadow-clay-lg border-amber-200;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-extrabold uppercase tracking-[0.14em];
+  }
+
+  .link-underline {
+    @apply relative after:absolute after:-bottom-0.5 after:left-0 after:h-[2px] after:w-0 after:rounded-full after:bg-amber-500 after:transition-all after:duration-300 hover:after:w-full;
+  }
+
+  .text-gradient-amber {
+    @apply bg-gradient-to-br from-amber-400 via-amber-500 to-amber-600 bg-clip-text text-transparent;
+  }
+
+  .marquee-mask {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  /* ------------------------------------------------------------------------
+     Background washes.
+     Soft, multi-stop gradient fields that replace the old line/dot grids.
+     Each variant is tinted with the brand colours used in that section's
+     foreground, so the ground quietly echoes the content sitting on it.
+     ---------------------------------------------------------------------- */
+
+  .wash {
+    @apply pointer-events-none absolute inset-0;
+  }
+
+  /* Light panels — navy headings, amber accents, forest highlights */
+  .wash-brand {
+    background-image:
+      radial-gradient(58% 62% at 6% 8%, rgba(255, 155, 37, 0.15), transparent 66%),
+      radial-gradient(52% 58% at 94% 12%, rgba(78, 107, 165, 0.14), transparent 64%),
+      radial-gradient(58% 62% at 74% 96%, rgba(71, 138, 88, 0.12), transparent 68%);
+  }
+
+  /* Lilac panels — violet track tabs, amber accents */
+  .wash-violet {
+    background-image:
+      radial-gradient(56% 60% at 10% 6%, rgba(139, 123, 232, 0.16), transparent 66%),
+      radial-gradient(50% 56% at 92% 18%, rgba(255, 155, 37, 0.12), transparent 64%),
+      radial-gradient(56% 60% at 70% 98%, rgba(78, 107, 165, 0.11), transparent 68%);
+  }
+
+  /* Mint panels — forest eyebrow, amber accent */
+  .wash-mint {
+    background-image:
+      radial-gradient(56% 60% at 8% 10%, rgba(71, 138, 88, 0.16), transparent 66%),
+      radial-gradient(52% 56% at 92% 14%, rgba(255, 155, 37, 0.13), transparent 64%),
+      radial-gradient(56% 60% at 76% 96%, rgba(78, 107, 165, 0.10), transparent 68%);
+  }
+
+  /* Amber CTA panel — navy foreground, so the wash cools rather than warms */
+  .wash-onamber {
+    background-image:
+      radial-gradient(62% 66% at 4% 0%, rgba(255, 255, 255, 0.32), transparent 62%),
+      radial-gradient(56% 60% at 96% 6%, rgba(27, 46, 84, 0.13), transparent 64%),
+      radial-gradient(62% 66% at 78% 100%, rgba(44, 87, 56, 0.16), transparent 66%);
+  }
+
+  /* Deep navy panels — white type with amber and forest accents */
+  .wash-deep {
+    background-image:
+      radial-gradient(55% 60% at 6% 6%, rgba(255, 155, 37, 0.13), transparent 64%),
+      radial-gradient(50% 56% at 96% 10%, rgba(71, 138, 88, 0.12), transparent 62%),
+      radial-gradient(68% 72% at 60% 100%, rgba(78, 107, 165, 0.18), transparent 70%);
+  }
+}
+
+@layer utilities {
+  .perspective {
+    perspective: 1400px;
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

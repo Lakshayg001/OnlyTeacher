@@ -80,7 +80,7 @@ export function Footer() {
       {/* Main */}
       <div className="container-tot relative grid gap-10 py-14 lg:grid-cols-[1.4fr_repeat(3,1fr)]">
         <div>
-          <Logo invert />
+          <Logo />
           <p className="mt-5 max-w-sm text-[15px] leading-relaxed text-navy-300">
             One-to-one online tuition for Grades 3–12, across every major curriculum, in four countries.
           </p>

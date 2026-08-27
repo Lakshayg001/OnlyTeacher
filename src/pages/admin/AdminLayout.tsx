@@ -66,7 +66,7 @@ export default function AdminLayout() {
               )}
             >
               <div className="flex items-center justify-between px-5 py-5">
-                <Logo invert to="/admin" />
+                <Logo to="/admin" />
                 {!isDesktop && (
                   <button
                     onClick={() => setOpen(false)}

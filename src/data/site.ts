@@ -674,22 +674,22 @@ export const POSTS: Post[] = [
 export const STEPS = [
   {
     n: '01',
-    title: 'Tell us about your child',
-    body: 'Grade, board, subject and what is getting in the way. Two minutes.',
+    title: 'Book Your Free Demo',
+    body: 'Click "Book a Free Demo" and get started in no time.',
     icon: 'chat' as const,
     accent: 'amber' as const,
   },
   {
     n: '02',
-    title: 'Meet a matched teacher',
-    body: 'A real 45-minute lesson, free. You watch how your child responds.',
+    title: 'Experience TOT Magic',
+    body: 'Enjoy a fun, interactive session with our amazing teachers and see how learning comes alive.',
     icon: 'teacher' as const,
     accent: 'forest' as const,
   },
   {
     n: '03',
-    title: 'Keep them, or we rematch',
-    body: 'Love the teacher and lock the slot. If not, we find another — free.',
+    title: 'You\'re All Set!',
+    body: 'Our academic counselor will assist you with your batch assignment, and your learning journey begins.',
     icon: 'heart' as const,
     accent: 'navy' as const,
   },

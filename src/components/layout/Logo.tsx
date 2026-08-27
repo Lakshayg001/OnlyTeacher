@@ -3,11 +3,9 @@ import { cn } from '@/lib/utils';
 
 export function Logo({
   className,
-  invert = false,
   to = '/',
 }: {
   className?: string;
-  invert?: boolean;
   to?: string;
 }) {
   return (

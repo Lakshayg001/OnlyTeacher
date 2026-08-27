@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, BadgeCheck, PlayCircle } from 'lucide-react';
-import { COUNTRIES, HERO_HIGHLIGHTS, SUBJECT_MARQUEE } from '@/data/site';
+import { ArrowRight } from 'lucide-react';
+import { COUNTRIES, SUBJECT_MARQUEE } from '@/data/site';
 import { IMG } from '@/data/images';
-import ClayIcon from '@/components/clay/ClayIcon';
 import SmartImage from '@/components/ui/SmartImage';
 import Flag from '@/components/ui/Flag';
 import { Button, Marquee } from '@/components/ui/Primitives';

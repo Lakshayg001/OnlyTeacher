@@ -113,11 +113,12 @@ export function DemoPromise() {
                 <div className="relative flex h-full flex-col gap-4">
                   <div className="relative overflow-hidden rounded-4xl shadow-clay-lg ring-8 ring-white">
                     <SmartImage
-                      src={IMG.onlineLesson}
+                      src="/owl.jpeg"
                       alt="A live one-to-one online lesson in progress"
                       fallbackIcon="laptop"
-                      ratio="4/3"
-                      className="w-full"
+                      ratio="1/1"
+                      className="w-full bg-white"
+                      imgClassName="!object-contain"
                       overlay
                     />
                     <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5">

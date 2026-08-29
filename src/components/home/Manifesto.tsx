@@ -37,7 +37,7 @@ export function Manifesto() {
             <div className="relative mt-10 hidden lg:block">
               <div className="relative aspect-[4/3] w-[86%] overflow-hidden rounded-4xl shadow-clay-lg ring-8 ring-white">
                 <SmartImage
-                  src={IMG.groupStudy}
+                  src="/small.jpeg"
                   alt="Students working together"
                   fallbackIcon="student"
                   className="h-full w-full"
@@ -45,7 +45,7 @@ export function Manifesto() {
               </div>
               <div className="absolute -bottom-8 right-0 aspect-square w-40 overflow-hidden rounded-3xl shadow-clay ring-[6px] ring-white">
                 <SmartImage
-                  src={IMG.raiseHand}
+                  src="/chota.jpeg"
                   alt="Student raising a hand"
                   fallbackIcon="student"
                   className="h-full w-full"

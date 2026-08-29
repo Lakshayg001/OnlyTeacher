@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, PhoneCall } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import ClayIcon from '@/components/clay/ClayIcon';
 import { Button } from '@/components/ui/Primitives';
 import { FloatIcon } from '@/components/ui/Decor';
@@ -78,14 +78,7 @@ export function DemoCta() {
                 >
                   Book a Free Demo
                 </Button>
-                <Button
-                  to="/contact"
-                  variant="white"
-                  size="lg"
-                  icon={<PhoneCall className="h-4.5 w-4.5 text-forest-500" />}
-                >
-                  Talk to a counsellor
-                </Button>
+
               </motion.div>
             </div>
 

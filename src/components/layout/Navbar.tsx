@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
-import { ChevronDown, Menu, Sparkles, X } from 'lucide-react';
+import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion';
+import { ChevronDown, Menu, X } from 'lucide-react';
 import { NAV } from '@/data/site';
 import { cn } from '@/lib/utils';
 import { useLockBody, useScrolled } from '@/lib/hooks';
@@ -16,113 +16,112 @@ export function Navbar() {
   const { pathname } = useLocation();
   useLockBody(open);
 
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 28, restDelta: 0.001 });
+
   return (
     <>
-      {/* Announcement strip */}
-      <div className="relative z-50 overflow-hidden bg-navy-700 text-white">
-        <div className="container-tot flex h-9 items-center justify-center gap-2 text-[12px] font-bold sm:text-[13px]">
-          <Sparkles className="h-3.5 w-3.5 shrink-0 text-amber-400" />
-          <span className="truncate">
-            Free 45-minute demo lesson — matched to your child&apos;s board &amp; grade
-          </span>
-          <Link to="/contact" className="hidden shrink-0 text-amber-300 underline-offset-4 hover:underline sm:inline">
-            Book now →
-          </Link>
-        </div>
-      </div>
-
       <header
         className={cn(
           'sticky top-0 z-40 transition-all duration-300',
-          scrolled ? 'py-2' : 'py-3 sm:py-4',
+          scrolled ? 'bg-white/80 backdrop-blur-xl shadow-md' : 'bg-white',
         )}
       >
-        <div className="container-tot">
-          <nav
-            className={cn(
-              'flex items-center justify-between gap-4 rounded-full border px-3 py-2.5 transition-all duration-300 sm:px-4',
-              scrolled
-                ? 'border-navy-100 bg-white/90 shadow-clay backdrop-blur-xl'
-                : 'border-white/70 bg-white/70 shadow-sm backdrop-blur-md',
-            )}
-          >
-            <Logo className="shrink-0" />
+        <div className="container-tot flex h-20 items-center justify-between gap-4 sm:h-24">
+          <Logo className="shrink-0 h-16 sm:h-20 lg:h-24" />
 
-            {/* Desktop nav */}
-            <ul className="hidden items-center gap-1 lg:flex">
-              {NAV.map((item) => {
-                const active = pathname === item.href;
-                return (
-                  <li
-                    key={item.label}
-                    className="relative"
-                    onMouseEnter={() => setOpenMenu(item.children ? item.label : null)}
-                    onMouseLeave={() => setOpenMenu(null)}
+          {/* Desktop nav */}
+          <ul className="hidden items-center gap-1 lg:flex">
+            {NAV.map((item) => {
+              return (
+                <li
+                  key={item.label}
+                  className="relative group"
+                  onMouseEnter={() => setOpenMenu(item.children ? item.label : null)}
+                  onMouseLeave={() => setOpenMenu(null)}
+                >
+                  <NavLink
+                    to={item.href}
+                    className={({ isActive }) =>
+                      cn(
+                        'relative inline-flex items-center gap-1.5 px-4 py-3 text-[15px] font-bold transition-colors',
+                        isActive ? 'text-navy-800' : 'text-navy-500 hover:text-navy-800',
+                      )
+                    }
                   >
-                    <NavLink
-                      to={item.href}
-                      className={cn(
-                        'inline-flex items-center gap-1 rounded-full px-4 py-2.5 text-[14.5px] font-bold transition-colors',
-                        active ? 'bg-navy-50 text-navy-800' : 'text-navy-600 hover:bg-navy-50 hover:text-navy-800',
-                      )}
-                    >
-                      {item.label}
-                      {item.children && (
-                        <ChevronDown
-                          className={cn(
-                            'h-3.5 w-3.5 transition-transform duration-200',
-                            openMenu === item.label && 'rotate-180',
-                          )}
-                        />
-                      )}
-                    </NavLink>
+                    {({ isActive }) => (
+                      <>
+                        {item.label}
+                        {item.children && (
+                          <ChevronDown
+                            className={cn(
+                              'h-4 w-4 opacity-50 transition-transform duration-200',
+                              openMenu === item.label && 'rotate-180',
+                            )}
+                          />
+                        )}
+                        {isActive && (
+                          <motion.span
+                            layoutId="nav-underline"
+                            className="absolute inset-x-2 -bottom-0.5 h-[3px] rounded-full bg-amber-400"
+                            transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                          />
+                        )}
+                      </>
+                    )}
+                  </NavLink>
 
-                    <AnimatePresence>
-                      {item.children && openMenu === item.label && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 8, scale: 0.98 }}
-                          animate={{ opacity: 1, y: 0, scale: 1 }}
-                          exit={{ opacity: 0, y: 8, scale: 0.98 }}
-                          transition={{ duration: 0.18 }}
-                          className="absolute left-1/2 top-full w-[22rem] -translate-x-1/2 pt-3"
-                        >
-                          <div className="overflow-hidden rounded-3xl border border-navy-100 bg-white p-2 shadow-clay-lg">
-                            {item.children.map((c) => (
-                              <Link
-                                key={c.label}
-                                to={c.href}
-                                className="flex items-center gap-3 rounded-2xl px-3 py-2.5 transition-colors hover:bg-navy-50"
-                              >
-                                {c.icon && <ClayIcon name={c.icon} size={38} />}
-                                <span>
-                                  <span className="block text-[14.5px] font-extrabold text-navy-800">{c.label}</span>
-                                  {c.desc && <span className="block text-xs font-semibold text-navy-400">{c.desc}</span>}
-                                </span>
-                              </Link>
-                            ))}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </li>
-                );
-              })}
-            </ul>
+                  <AnimatePresence>
+                    {item.children && openMenu === item.label && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 8, scale: 0.98 }}
+                        transition={{ duration: 0.18 }}
+                        className="absolute left-1/2 top-full w-[22rem] -translate-x-1/2 pt-1"
+                      >
+                        <div className="overflow-hidden rounded-3xl border border-navy-100 bg-white p-2 shadow-xl shadow-navy-900/5 ring-1 ring-black/5">
+                          {item.children.map((c) => (
+                            <Link
+                              key={c.label}
+                              to={c.href}
+                              className="flex items-center gap-3 rounded-2xl px-3 py-2.5 transition-colors hover:bg-navy-50"
+                            >
+                              {c.icon && <ClayIcon name={c.icon} size={38} />}
+                              <span>
+                                <span className="block text-[14.5px] font-extrabold text-navy-800">{c.label}</span>
+                                {c.desc && <span className="block text-xs font-semibold text-navy-400">{c.desc}</span>}
+                              </span>
+                            </Link>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </li>
+              );
+            })}
+          </ul>
 
-            <div className="flex shrink-0 items-center gap-2">
-              <Button to="/contact" size="sm" className="hidden sm:inline-flex">
-                Book a Free Demo
-              </Button>
-              <button
-                onClick={() => setOpen(true)}
-                className="grid h-11 w-11 place-items-center rounded-full bg-navy-700 text-white lg:hidden"
-                aria-label="Open menu"
-              >
-                <Menu className="h-5 w-5" />
-              </button>
-            </div>
-          </nav>
+          <div className="flex shrink-0 items-center gap-3">
+            <Button to="/contact" size="md" className="hidden sm:inline-flex rounded-full bg-amber-500 hover:bg-amber-600 text-white border-0 shadow-md">
+              Try a Free Class! 🚀
+            </Button>
+            <button
+              onClick={() => setOpen(true)}
+              className="grid h-11 w-11 place-items-center rounded-full bg-navy-50 text-navy-700 lg:hidden"
+              aria-label="Open menu"
+            >
+              <Menu className="h-5 w-5" />
+            </button>
+          </div>
         </div>
+
+        {/* scroll progress */}
+        <motion.div
+          style={{ scaleX: progress }}
+          className="absolute inset-x-0 bottom-0 h-[3px] origin-left bg-gradient-to-r from-amber-400 via-amber-300 to-forest-400"
+        />
       </header>
 
       {/* Mobile drawer */}
@@ -202,7 +201,7 @@ export function Navbar() {
                   </p>
                   <p className="mt-1 text-sm text-navy-200">Meet yours in a free 45-minute lesson.</p>
                   <Button to="/contact" full className="mt-4" onClick={() => setOpen(false)}>
-                    Book a Free Demo
+                    Try a Free Class! 🚀
                   </Button>
                 </div>
               </div>

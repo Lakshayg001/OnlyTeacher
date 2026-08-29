@@ -610,7 +610,7 @@ export const POSTS: Post[] = [
     category: 'Study Tips',
     date: '12 Aug 2026',
     readTime: 5,
-    image: IMG.blog1,
+    image: '/gen.jpeg',
     accent: 'amber',
     author: 'Dr. Ananya Rao',
   },

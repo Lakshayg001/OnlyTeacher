@@ -26,7 +26,7 @@ const FEATURES: Feature[] = [
     icon: 'laptop',
     title: 'A whiteboard built for two',
     body: 'Write, draw and solve together in real time. Every lesson is recorded, so nothing is lost the moment it ends.',
-    image: IMG.onlineLesson,
+    image: '/small.jpeg',
     points: ['Shared interactive whiteboard', 'Every class recorded', 'Works on laptop and tablet'],
     accent: 'navy',
   },

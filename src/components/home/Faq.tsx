@@ -96,7 +96,7 @@ export function Faq() {
             <div className="sticky top-28 space-y-4">
               <div className="overflow-hidden rounded-4xl shadow-clay ring-8 ring-white">
                 <SmartImage
-                  src={IMG.kidOnline}
+                  src="/seclast.jpeg"
                   alt="Student in an online class"
                   fallbackIcon="student"
                   ratio="4/3"

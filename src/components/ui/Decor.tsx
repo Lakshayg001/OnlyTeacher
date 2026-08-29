@@ -75,13 +75,13 @@ export function Doodles({ className }: { className?: string }) {
       <circle cx="150" cy="120" r="60" stroke="#FF9B25" strokeOpacity="0.16" strokeWidth="2" />
       <circle cx="150" cy="120" r="92" stroke="#FF9B25" strokeOpacity="0.1" strokeWidth="2" strokeDasharray="6 10" />
       <circle cx="1050" cy="470" r="70" stroke="#478A58" strokeOpacity="0.15" strokeWidth="2" />
-      <text x="920" y="120" fontSize="42" fontWeight="800" fill="#1B2E54" fillOpacity="0.07" fontFamily="Baloo 2, sans-serif">
+      <text x="860" y="50" fontSize="42" fontWeight="800" fill="#1B2E54" fillOpacity="0.07" fontFamily="Baloo 2, sans-serif">
         E = mc²
       </text>
       <text x="80" y="520" fontSize="38" fontWeight="800" fill="#FF9B25" fillOpacity="0.12" fontFamily="Baloo 2, sans-serif">
         a² + b² = c²
       </text>
-      <text x="640" y="80" fontSize="34" fontWeight="800" fill="#478A58" fillOpacity="0.12" fontFamily="Baloo 2, sans-serif">
+      <text x="640" y="40" fontSize="34" fontWeight="800" fill="#478A58" fillOpacity="0.12" fontFamily="Baloo 2, sans-serif">
         ∫ f(x) dx
       </text>
       <text x="420" y="560" fontSize="30" fontWeight="800" fill="#1B2E54" fillOpacity="0.07" fontFamily="Baloo 2, sans-serif">

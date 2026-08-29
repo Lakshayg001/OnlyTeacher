@@ -105,21 +105,17 @@ export function Hero() {
             </div>
 
             {/* ------------------------------ visual ------------------------------ */}
-            <div className="relative z-10 mx-auto w-full max-w-[520px] lg:max-w-none">
-              <div className="relative aspect-[4/4.4]">
-                {/* orbit rings */}
-                <div aria-hidden="true" className="absolute inset-[6%] rounded-full border-2 border-dashed border-amber-300/50 animate-spin-slow" />
-                <div aria-hidden="true" className="absolute inset-[16%] rounded-full border-2 border-navy-200/50" />
-
+            <div className="relative z-10 mx-auto mt-14 w-full max-w-[520px] lg:mt-20 lg:max-w-[600px] xl:max-w-[680px]">
+              <div className="relative aspect-[3/2]">
                 {/* main portrait */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.94, y: 20 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 0.8, 0.3, 1] }}
-                  className="absolute inset-[9%] overflow-hidden rounded-[46%_54%_50%_50%/48%_44%_56%_52%] shadow-clay-lg ring-8 ring-white"
+                  className="absolute inset-0 overflow-hidden rounded-[2rem] shadow-clay-lg ring-8 ring-white"
                 >
                   <SmartImage
-                    src={IMG.heroStudent}
+                    src="/front002.png"
                     alt="Student learning one-to-one online"
                     fallbackIcon="student"
                     priority
@@ -137,29 +133,28 @@ export function Hero() {
                     className={f.cls}
                   />
                 ))}
-
-
-                {/* countries pill */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.85 }}
-                  className="absolute -bottom-2 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full border border-navy-100 bg-white/95 px-4 py-2.5 shadow-clay backdrop-blur"
-                >
-                  <span className="flex items-center -space-x-1.5">
-                    {COUNTRIES.map((c) => (
-                      <Flag
-                        key={c.code}
-                        code={c.flag}
-                        size={22}
-                        title={c.name}
-                        className="ring-2 ring-white"
-                      />
-                    ))}
-                  </span>
-                  <span className="text-[12px] font-extrabold text-navy-700">4 countries</span>
-                </motion.div>
               </div>
+
+              {/* countries pill */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.85 }}
+                className="ml-auto mr-4 mt-8 flex w-fit items-center gap-2 rounded-full border border-navy-100 bg-white/95 px-5 py-3 shadow-clay lg:mr-8"
+              >
+                <span className="flex items-center -space-x-1.5">
+                  {COUNTRIES.map((c) => (
+                    <Flag
+                      key={c.code}
+                      code={c.flag}
+                      size={24}
+                      title={c.name}
+                      className="ring-2 ring-white"
+                    />
+                  ))}
+                </span>
+                <span className="text-[13px] font-extrabold text-navy-700">4 countries</span>
+              </motion.div>
             </div>
           </div>
 

@@ -6,9 +6,9 @@ import { FloatIcon } from '@/components/ui/Decor';
 import type { ClayIconName } from '@/types';
 
 const PROMISES: { icon: ClayIconName; title: string; sub: string }[] = [
-  { icon: 'clock', title: '45 real teaching minutes', sub: 'A lesson, not a sales call' },
-  { icon: 'shield', title: 'No card required', sub: 'Nothing to cancel later' },
-  { icon: 'calendar', title: 'Booked within 24 hours', sub: 'Scheduled in your timezone' },
+  { icon: 'student', title: '1. Personalised One-to-One Learning', sub: 'Every lesson is tailored to your child\'s pace, strengths and goals for better results.' },
+  { icon: 'book', title: '2. Expert & Verified Teachers', sub: 'Qualified, experienced and background-verified teachers who truly understand students.' },
+  { icon: 'target', title: '3. Real Progress & Continuous Support', sub: 'Regular feedback, performance tracking and ongoing support for steady improvement.' },
 ];
 
 export function DemoCta() {
@@ -39,7 +39,7 @@ export function DemoCta() {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-forest-500 opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-forest-500" />
                 </span>
-                Free demo lesson
+                Free 1-to-1 demo lesson
               </motion.span>
 
               <motion.h2
@@ -49,7 +49,7 @@ export function DemoCta() {
                 transition={{ duration: 0.6, delay: 0.06 }}
                 className="mt-5 max-w-xl text-balance font-display text-3xl font-extrabold leading-[1.1] text-navy-800 sm:text-4xl lg:text-[2.9rem]"
               >
-                Meet the Right Teacher This Week.
+                Meet the Right<br />Online Teacher<br />for <span className="relative text-white z-10 inline-block">Your Child.<svg className="absolute -bottom-2.5 left-0 w-[105%] -z-10 text-forest-500" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M-2,15 Q50,-2 102,15" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round" /></svg></span>
               </motion.h2>
 
               <motion.p
@@ -59,8 +59,7 @@ export function DemoCta() {
                 transition={{ duration: 0.6, delay: 0.12 }}
                 className="mt-4 max-w-lg text-[16.5px] font-semibold leading-relaxed text-navy-700"
               >
-                One free lesson, taught one-to-one and matched to your child&apos;s grade, board and
-                country. You decide afterwards — nothing before.
+                Experience a personalised one-to-one demo lesson with a teacher who matches your child&apos;s grade, subject and learning goals.
               </motion.p>
 
               <motion.div

@@ -103,40 +103,40 @@ export const COUNTRIES: Country[] = [
 
 export const MANIFESTO_INTRO = {
   eyebrow: 'Our conviction',
-  title: 'Every Student Deserves the Best Teacher.',
-  body: 'Not the nearest teacher. Not the cheapest. The right one — matched to how your child actually learns.',
+  title: 'Every Student Deserves the Right Teacher.',
+  body: 'Personalised online tuition that connects your child with the right teacher, the right learning approach, and one-to-one attention—because every child learns differently.',
 };
 
 export const MANIFESTO = [
   {
     n: '01',
-    title: 'One teacher. One student.',
-    body: 'No back rows, no waiting to be noticed. Every minute of the lesson belongs to your child.',
-    icon: 'teacher' as const,
+    title: 'One Student. One Teacher.',
+    body: 'Focused attention for meaningful one-to-one learning.',
+    icon: 'student' as const,
   },
   {
     n: '02',
-    title: 'Taught to the child, not the syllabus.',
-    body: 'We start from what they already know and build the plan around the gaps that matter.',
-    icon: 'puzzle' as const,
+    title: 'Teaching That Adapts.',
+    body: 'Lessons shaped around your child\'s pace, level and needs.',
+    icon: 'book' as const,
   },
   {
     n: '03',
-    title: 'The right teacher, or we rematch.',
-    body: 'Chemistry between teacher and student is not optional. If it is not there, we change it — free.',
+    title: 'Connection Comes First.',
+    body: 'The right teacher can make learning feel different.',
     icon: 'heart' as const,
   },
   {
     n: '04',
-    title: 'Every board, everywhere.',
-    body: 'CBSE to A-Level, Hyderabad to London. The curriculum follows the student, not the postcode.',
+    title: 'Learning Without Boundaries.',
+    body: 'Online tuition across subjects, grades and international curricula.',
     icon: 'globe' as const,
   },
   {
     n: '05',
-    title: 'Parents see everything.',
-    body: 'Lesson notes, progress, attendance and honest feedback after every single class.',
-    icon: 'shield' as const,
+    title: 'Parents Stay Informed.',
+    body: 'Clear feedback and visibility into your child\'s learning journey.',
+    icon: 'target' as const,
   },
 ];
 

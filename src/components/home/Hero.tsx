@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import { COUNTRIES, SUBJECT_MARQUEE } from '@/data/site';
-import { IMG } from '@/data/images';
+import { COUNTRIES } from '@/data/site';
 import SmartImage from '@/components/ui/SmartImage';
 import Flag from '@/components/ui/Flag';
-import { Button, Marquee } from '@/components/ui/Primitives';
+import { Button } from '@/components/ui/Primitives';
 import { Doodles, FloatIcon } from '@/components/ui/Decor';
+import ClayIcon from '@/components/clay/ClayIcon';
 
 const FLOATERS = [
   { name: 'math', cls: 'left-[-4%] top-[8%]', size: 66, delay: 0 },
@@ -25,8 +25,6 @@ export function Hero() {
           <div aria-hidden="true" className="pointer-events-none absolute inset-0">
             <div className="wash wash-brand" />
             <Doodles />
-            <div className="absolute -left-28 top-10 h-80 w-80 rounded-full bg-amber-300/25 blur-3xl animate-float-slow" />
-            <div className="absolute -right-24 bottom-0 h-96 w-96 rounded-full bg-navy-300/25 blur-3xl animate-float-slow" style={{ animationDelay: '2.5s' }} />
             <div className="absolute left-1/3 top-1/2 h-64 w-64 rounded-full bg-forest-300/20 blur-3xl animate-float-slow" style={{ animationDelay: '4s' }} />
           </div>
 
@@ -52,13 +50,15 @@ export function Hero() {
                 initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.08 }}
-                className="mt-5 text-balance font-display text-[2.6rem] font-extrabold leading-[1.05] tracking-tight text-navy-800 sm:text-6xl lg:text-[4.1rem]"
+                className="mt-5 text-balance font-display text-[2.6rem] font-extrabold leading-[1.05] tracking-tight text-navy-800 sm:text-5xl lg:text-[3.8rem]"
               >
-                Find Your
+                Personalised
                 <br />
-                Perfect{' '}
+                Online Tuition
+                <br />
+                With{' '}
                 <span className="relative inline-block">
-                  <span className="text-gradient-amber">Teacher.</span>
+                  <span className="text-amber-500 italic">Teachers</span>
                   <motion.svg
                     viewBox="0 0 300 16"
                     className="absolute -bottom-1.5 left-0 h-3 w-full"
@@ -78,6 +78,10 @@ export function Hero() {
                     />
                   </motion.svg>
                 </span>
+                <br />
+                Who Understand
+                <br />
+                Your Child.
               </motion.h1>
 
               <motion.p
@@ -86,7 +90,7 @@ export function Hero() {
                 transition={{ duration: 0.6, delay: 0.18 }}
                 className="mt-6 max-w-lg text-[17px] leading-relaxed text-navy-500 sm:text-lg xl:max-w-xl"
               >
-                Personalized learning with teachers who understand your child.
+                One-to-one live sessions tailored to your child's learning style, pace and goals.
               </motion.p>
 
               <motion.div
@@ -158,9 +162,42 @@ export function Hero() {
             </div>
           </div>
 
-          {/* subject marquee */}
-          <div className="relative border-t border-white/60 bg-white/55 py-5 backdrop-blur">
-            <Marquee items={SUBJECT_MARQUEE} />
+          {/* feature strip */}
+          <div className="relative rounded-b-3xl border-t border-white/60 bg-white/95 px-6 py-6 sm:px-10 lg:px-14 backdrop-blur">
+            <div className="grid grid-cols-1 gap-6 divide-y divide-navy-100/50 sm:grid-cols-2 sm:gap-4 sm:divide-x sm:divide-y-0 lg:grid-cols-4">
+              {/* feature 1 */}
+              <div className="flex items-center gap-4 pt-4 sm:pr-4 sm:pt-0">
+                <ClayIcon name="student" size={44} tone="forest" shadow={false} />
+                <div>
+                  <h4 className="font-display text-[15px] font-bold text-forest-700">Personalised Learning</h4>
+                  <p className="mt-1 text-[13px] leading-snug text-navy-500">Tailored lessons for every student.</p>
+                </div>
+              </div>
+              {/* feature 2 */}
+              <div className="flex items-center gap-4 pt-4 sm:px-4 sm:pt-0">
+                <ClayIcon name="chat" size={44} tone="sky" shadow={false} />
+                <div>
+                  <h4 className="font-display text-[15px] font-bold text-sky-700">One-to-One Attention</h4>
+                  <p className="mt-1 text-[13px] leading-snug text-navy-500">Focused on your child, every step of the way.</p>
+                </div>
+              </div>
+              {/* feature 3 */}
+              <div className="flex items-center gap-4 pt-4 sm:px-4 sm:pt-0">
+                <ClayIcon name="teacher" size={44} tone="amber" shadow={false} />
+                <div>
+                  <h4 className="font-display text-[15px] font-bold text-amber-700">Expert Teachers</h4>
+                  <p className="mt-1 text-[13px] leading-snug text-navy-500">Experienced, passionate and student-first.</p>
+                </div>
+              </div>
+              {/* feature 4 */}
+              <div className="flex items-center gap-4 pt-4 sm:pl-4 sm:pt-0">
+                <ClayIcon name="shield" size={44} tone="violet" shadow={false} />
+                <div>
+                  <h4 className="font-display text-[15px] font-bold text-violet-700">Safe & Flexible Learning</h4>
+                  <p className="mt-1 text-[13px] leading-snug text-navy-500">Learn from the comfort of your home.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

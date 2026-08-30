@@ -72,9 +72,6 @@ export function Doodles({ className }: { className?: string }) {
         strokeWidth="2"
         strokeDasharray="10 12"
       />
-      <circle cx="150" cy="120" r="60" stroke="#FF9B25" strokeOpacity="0.16" strokeWidth="2" />
-      <circle cx="150" cy="120" r="92" stroke="#FF9B25" strokeOpacity="0.1" strokeWidth="2" strokeDasharray="6 10" />
-      <circle cx="1050" cy="470" r="70" stroke="#478A58" strokeOpacity="0.15" strokeWidth="2" />
       <text x="860" y="50" fontSize="42" fontWeight="800" fill="#1B2E54" fillOpacity="0.07" fontFamily="Baloo 2, sans-serif">
         E = mc²
       </text>

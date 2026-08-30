@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { MANIFESTO, MANIFESTO_INTRO } from '@/data/site';
-import { IMG } from '@/data/images';
 import ClayIcon from '@/components/clay/ClayIcon';
 import SmartImage from '@/components/ui/SmartImage';
 import { Button, Eyebrow } from '@/components/ui/Primitives';
@@ -17,7 +16,7 @@ export function Manifesto() {
 
             <h2 className="mt-5 text-balance font-display text-3xl font-extrabold leading-[1.1] text-navy-800 sm:text-4xl lg:text-[2.9rem]">
               Every Student Deserves the{' '}
-              <span className="text-gradient-amber">Best Teacher.</span>
+              <span className="text-amber-500">Right Teacher.</span>
             </h2>
 
             <p className="mt-5 max-w-md text-[17px] leading-relaxed text-navy-500">
@@ -58,10 +57,11 @@ export function Manifesto() {
           </div>
 
           {/* ------------------------------ statements ------------------------------ */}
-          <ol className="relative space-y-4">
+          <ol className="relative flex flex-col gap-3">
+            {/* The vertical dashed line */}
             <span
               aria-hidden="true"
-              className="absolute bottom-6 left-[2.15rem] top-6 hidden w-0.5 bg-gradient-to-b from-amber-300 via-forest-300 to-navy-200 sm:block"
+              className="absolute bottom-32 left-[1.4rem] top-6 hidden w-0 border-l-[2px] border-dashed border-forest-300 sm:block"
             />
             {MANIFESTO.map((m, i) => (
               <motion.li
@@ -70,21 +70,25 @@ export function Manifesto() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: '-70px' }}
                 transition={{ duration: 0.55, delay: i * 0.06, ease: [0.22, 0.8, 0.3, 1] }}
-                className="group relative flex gap-4 rounded-4xl border border-navy-100 bg-white p-5 shadow-clay transition-all duration-300 hover:-translate-y-1 hover:border-amber-200 hover:shadow-clay-lg sm:gap-5 sm:p-6"
+                className="group relative flex items-center gap-4 sm:gap-5"
               >
-                <div className="relative shrink-0">
-                  <span className="grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-navy-700 to-navy-900 font-display text-lg font-extrabold text-white shadow-clay-navy transition-transform duration-300 group-hover:-rotate-6">
+                {/* Number Box on the line */}
+                <div className="relative z-10 shrink-0 hidden sm:block">
+                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-navy-800 font-display text-[15px] font-bold text-white shadow-sm">
                     {m.n}
                   </span>
-                  <span className="absolute -bottom-3 -right-3 opacity-0 transition-all duration-300 group-hover:opacity-100">
-                    <ClayIcon name={m.icon} size={34} shadow={false} />
-                  </span>
                 </div>
-                <div>
-                  <h3 className="font-display text-lg font-extrabold leading-snug text-navy-800 sm:text-xl">
-                    {m.title}
-                  </h3>
-                  <p className="mt-1.5 text-[15px] leading-relaxed text-navy-500">{m.body}</p>
+                {/* Content Card */}
+                <div className="flex flex-1 items-center gap-4 rounded-2xl border border-navy-50 bg-white p-3.5 shadow-sm transition-all duration-300 hover:shadow-md sm:p-4 sm:pr-6">
+                  <div className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-slate-50">
+                    <ClayIcon name={m.icon} size={36} shadow={false} />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-[15.5px] font-extrabold leading-snug text-navy-800 sm:text-[17px]">
+                      {m.title}
+                    </h3>
+                    <p className="mt-1 text-[13.5px] leading-relaxed text-navy-500">{m.body}</p>
+                  </div>
                 </div>
               </motion.li>
             ))}
@@ -95,17 +99,31 @@ export function Manifesto() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="relative overflow-hidden rounded-4xl bg-gradient-to-br from-forest-500 to-forest-700 p-6 shadow-clay sm:p-8"
+              className="relative mt-2 overflow-hidden rounded-2xl bg-forest-700 p-5 shadow-md sm:p-6"
             >
-              <div aria-hidden="true" className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
-              <div className="relative flex items-start gap-4">
-                <ClayIcon name="graduation" size={58} tone="sun" />
-                <div>
-                  <p className="font-display text-xl font-extrabold leading-snug text-white sm:text-2xl">
-                    That is the whole promise. Nothing clever, just done properly.
+              <div className="absolute right-4 top-4 hidden sm:block">
+                <svg
+                  aria-hidden="true"
+                  className="h-16 w-32 text-white/30"
+                  viewBox="0 0 100 60"
+                  fill="none"
+                >
+                  <path d="M10,50 Q40,50 60,30 T90,10" stroke="currentColor" strokeWidth="2" strokeDasharray="4 4" />
+                  <path d="M85,5 L95,10 L85,15 L88,10 Z" fill="currentColor" opacity="0.8" />
+                </svg>
+              </div>
+              <div className="relative flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-5">
+                <div className="grid h-16 w-16 shrink-0 place-items-center rounded-full bg-white shadow-sm">
+                  <ClayIcon name="graduation" size={44} tone="amber" shadow={false} />
+                </div>
+                <div className="max-w-[85%]">
+                  <p className="font-display text-[17px] font-extrabold leading-snug text-white sm:text-[19px]">
+                    Connect With the Right Teacher.
+                    <br className="hidden sm:block" />
+                    Learn With Confidence. Grow With TOT.
                   </p>
-                  <p className="mt-2 text-[15px] font-semibold text-forest-50/90">
-                    12,500 students across four countries have taken us up on it.
+                  <p className="mt-1.5 text-[14px] font-medium leading-relaxed text-forest-50/90">
+                    We connect students with teachers who understand, personalise learning and help them grow every day.
                   </p>
                 </div>
               </div>

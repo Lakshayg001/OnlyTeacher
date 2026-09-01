@@ -66,7 +66,7 @@ export default function About() {
             <SectionHeading
               align="left"
               eyebrow="Why we exist"
-              title={<>Good Teaching Was Never <span className="text-gradient-amber">Evenly Distributed.</span></>}
+              title={<>The Right <span className="text-gradient-amber font-bold">Teacher</span> Can Change Everything. We Make That <span className="text-gradient-amber font-bold">Match</span> Possible.</>}
               sub="Some children get the teacher who makes a subject click. Most get whoever was available. TOT exists to close that gap — one matched pairing at a time, in whichever country the family happens to live."
             />
             <div className="mt-8 grid grid-cols-2 gap-4">

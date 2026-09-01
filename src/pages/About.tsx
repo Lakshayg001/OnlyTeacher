@@ -66,8 +66,8 @@ export default function About() {
             <SectionHeading
               align="left"
               eyebrow="Why we exist"
-              title={<>The Right <span className="text-gradient-amber font-bold">Teacher</span> Can Change Everything. We Make That <span className="text-gradient-amber font-bold">Match</span> Possible.</>}
-              sub="Some children get the teacher who makes a subject click. Most get whoever was available. TOT exists to close that gap — one matched pairing at a time, in whichever country the family happens to live."
+              className="mt-4"
+              title={<span className="font-medium">The Right <span className="text-gradient-amber">Teacher</span> Can Change Everything. We Make That <span className="text-gradient-amber">Match</span> Possible.</span>}
             />
             <div className="mt-8 grid grid-cols-2 gap-4">
               {STATS.map((s) => (

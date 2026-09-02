@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { BookOpen, Clock3 } from 'lucide-react';
-import { BOARDS, COURSES, COURSE_SPECS, TRACKS } from '@/data/site';
+import { COURSES, COURSE_SPECS, TRACKS } from '@/data/site';
 import ClayIcon from '@/components/clay/ClayIcon';
 import SmartImage from '@/components/ui/SmartImage';
 import FilterBar from '@/components/ui/FilterBar';
@@ -26,7 +26,7 @@ export default function Courses() {
  const [params, setParams] = useSearchParams();
  const [query, setQuery] = useState('');
  const [track, setTrack] = useState<string>('all');
- const [board, setBoard] = useState<string>('all');
+
 
  const subject = params.get('s') ?? 'all';
 
@@ -38,7 +38,7 @@ export default function Courses() {
  const results = COURSES.filter((c) => {
   if (subject !== 'all' && c.subject !== subject) return false;
   if (track !== 'all' && c.track !== track) return false;
-  if (board !== 'all' && !c.boards.some((b) => b.includes(board))) return false;
+
   if (query && !`${c.title} ${c.subject} ${c.blurb}`.toLowerCase().includes(query.toLowerCase()))
    return false;
   return true;
@@ -93,16 +93,6 @@ export default function Courses() {
         options: [
          { value: 'all', label: 'All stages' },
          ...TRACKS.map((t) => ({ value: t.id, label: t.label, hint: t.grades })),
-        ],
-       },
-       {
-        id: 'board',
-        label: 'Board',
-        value: board,
-        onChange: setBoard,
-        options: [
-         { value: 'all', label: 'All boards' },
-         ...BOARDS.map((b) => ({ value: b.name, label: b.name })),
         ],
        },
       ]}
@@ -163,13 +153,7 @@ export default function Courses() {
            {c.title}
           </h3>
           <p className="mt-1.5 flex-1 text-[14px] leading-relaxed text-navy-500">{c.blurb}</p>
-          <div className="mt-4 flex flex-wrap gap-1.5">
-           {c.boards.map((b) => (
-            <span key={b} className="rounded-lg border border-navy-100 bg-navy-50 px-2 py-1 text-[10.5px] font-extrabold uppercase tracking-wider text-navy-500">
-             {b}
-            </span>
-           ))}
-          </div>
+
           <div className="mt-4 flex items-center justify-between border-t border-navy-100 pt-4 text-[12px] font-bold text-navy-500">
            <span className="inline-flex items-center gap-1.5">
             <BookOpen className="h-3.5 w-3.5 text-amber-500" /> {c.modules}

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import Flag from '@/components/ui/Flag';
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Youtube } from 'lucide-react';
-import { BOARDS, BRAND, COUNTRIES } from '@/data/site';
+import { BRAND, COUNTRIES } from '@/data/site';
 import ClayIcon from '@/components/clay/ClayIcon';
 import { Button } from '@/components/ui/Primitives';
 import Logo from './Logo';
@@ -142,21 +142,7 @@ export function Footer() {
    {/* Boards + countries strip */}
    <div className="container-tot relative border-t border-white/10 py-8">
     <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-     <div>
-      <p className="mb-3 text-[11px] font-extrabold uppercase tracking-[0.2em] text-navy-400">
-       Curricula supported
-      </p>
-      <div className="flex flex-wrap gap-2">
-       {BOARDS.map((b) => (
-        <span
-         key={b.id}
-         className="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-bold text-navy-200"
-        >
-         {b.name}
-        </span>
-       ))}
-      </div>
-     </div>
+
      <div>
       <p className="mb-3 text-[11px] font-extrabold uppercase tracking-[0.2em] text-navy-400">
        Learning without borders

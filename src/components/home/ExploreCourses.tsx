@@ -215,27 +215,7 @@ export function ExploreCourses() {
           </motion.div>
          ))}
          
-         {/* Footer row */}
-         <div className="col-span-full mt-1.5 flex flex-col items-center justify-between gap-4 rounded-2xl border border-sky-100 bg-sky-50/60 p-4 sm:flex-row">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-sm">
-           <ClayIcon name="graduation" size={32} />
-          </div>
-          <div className="relative hidden flex-1 items-center sm:flex">
-           <div className="h-[2px] w-full border-t-2 border-dotted border-sky-200"></div>
-           <Sparkles className="absolute left-1/2 h-3.5 w-3.5 -translate-x-1/2 text-amber-400" />
-          </div>
-          <div className="shrink-0 text-center text-[15px] font-extrabold text-navy-800">
-           Every child learns differently.<br />
-           <span className="text-amber-500">We discover how</span> your child learns best . .
-          </div>
-          <div className="relative hidden flex-1 items-center sm:flex">
-           <div className="h-[2px] w-full border-t-2 border-dotted border-sky-200"></div>
-           <Sparkles className="absolute left-1/2 h-3.5 w-3.5 -translate-x-1/2 text-amber-400" />
-          </div>
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-sm">
-           <ClayIcon name="book" size={32} />
-          </div>
-         </div>
+
         </div>
        </div>
       </Reveal>

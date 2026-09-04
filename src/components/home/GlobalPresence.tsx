@@ -3,7 +3,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Clock, Users } from 'lucide-react';
 import { COUNTRIES } from '@/data/site';
 import { MAP_H, MAP_W, arcPath, buildDotPath, project } from '@/data/geo';
-import ClayIcon from '@/components/clay/ClayIcon';
 import Flag from '@/components/ui/Flag';
 import { Reveal, SectionHeading } from '@/components/ui/Primitives';
 import { cn } from '@/lib/utils';
@@ -297,10 +296,9 @@ export function GlobalPresence() {
       {/* ------------------------------- footer row ----------------------------- */}
       <Reveal>
        <div className="mt-4 flex items-center justify-center gap-4 rounded-3xl border border-white/10 bg-white/[0.04] p-5">
-        <ClayIcon name="heart" size={48} />
         <p className="text-[13.5px] font-bold leading-snug text-navy-200">
-         Country changes your curriculum and timezone {' '}
-         <span className="text-white">never your price.</span>
+         Every child learns differently.{' '}
+         <span className="text-white">We discover how your child learns best . .</span>
         </p>
        </div>
       </Reveal>

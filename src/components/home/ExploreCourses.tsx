@@ -60,8 +60,8 @@ export function ExploreCourses() {
         eyebrow="Explore courses"
         title={
          <>
-          Built Around Your Child,{' '}
-          <span className="text-gradient-amber">Not the Class Average.</span>
+          One Child. One Teacher.<br />
+          <span className="text-gradient-amber">One Learning Journey.</span>
          </>
         }
         sub="Pick a stage to see what a term looks like Every course below is taught one-to-one on your board"

@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { MessageCircleQuestion, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { FAQS } from '@/data/site';
 import { IMG } from '@/data/images';
 import ClayIcon from '@/components/clay/ClayIcon';
 import SmartImage from '@/components/ui/SmartImage';
-import { Button, Reveal, SectionHeading } from '@/components/ui/Primitives';
+import { Reveal, SectionHeading } from '@/components/ui/Primitives';
 import { cn } from '@/lib/utils';
 
 export function Faq() {
@@ -19,11 +19,11 @@ export function Faq() {
                         eyebrow="Questions parents ask"
                         title={
                             <>
-                                Everything You Want to Know,{' '}
-                                <span className="text-gradient-amber">Answered Plainly</span>
+                                Everything You're Wondering<br className="hidden sm:block" />
+                                <span className="text-gradient-amber">Answered With Clarity</span>
                             </>
                         }
-                        sub="If something is not covered here our team replies in minutes 24×7 in your timezone"
+                        sub="Clear answers about teachers, learning, personalisation and your child's journey"
                     />
                 </Reveal>
 

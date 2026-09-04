@@ -51,7 +51,7 @@ export default function About() {
                     <Reveal>
                         <div className="relative">
                             <div className="overflow-hidden rounded-4xl shadow-clay-lg ring-8 ring-white">
-                                <SmartImage src="/about01.jpeg" alt="A teacher working with a student" fallbackIcon="teacher" className="w-full" imgClassName="!h-auto !object-contain" />
+                                <SmartImage src="/aboutv.jpeg" alt="A teacher working with a student" fallbackIcon="teacher" className="w-full" imgClassName="!h-auto !object-contain" />
                             </div>
 
                             <div className="absolute -left-5 -top-5 animate-float">

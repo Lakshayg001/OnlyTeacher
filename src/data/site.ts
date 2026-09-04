@@ -565,38 +565,38 @@ export const TESTIMONIALS: Testimonial[] = [
 
 export const FAQS: Faq[] = [
  {
-  q: 'How does one-to-one teaching actually work?',
-  a: 'Your child joins a private live classroom with one dedicated teacher never a group. The teacher opens an interactive whiteboard, works through concepts at your child’s pace, and shares notes plus a recording afterwards. Same teacher, same slot, every week.',
-  icon: 'teacher',
+  q: 'How does one-to-one learning at TOT work?',
+  a: 'Your child learns privately with one dedicated teacher who gets to know them not a crowded classroom. Every lesson is shaped around their pace, strengths and learning needs, with interactive teaching, personalised guidance and notes to support learning beyond the session.',
+  icon: 'laptop',
  },
  {
-  q: 'Which boards and curricula are supported?',
-  a: 'CBSE, ICSE, IB (PYP, MYP and DP), IGCSE, GCSE, A-Level, the American curriculum including AP, and the Australian curriculum. If your school follows a state or regional syllabus, tell us and we will match a teacher who has taught it.',
+  q: 'Which boards and curricula does TOT support?',
+  a: 'TOT supports major international and Indian curricula, including <strong>CBSE, ICSE, IB (PYP, MYP & DP), IGCSE, GCSE, A-Levels, AP and Australian curricula</strong>, along with country, state and regional syllabuses.',
   icon: 'book',
  },
  {
-  q: 'How are teachers selected?',
-  a: 'Every applicant goes through a subject test, a live teaching demo in front of an academic panel, background and ID verification, and a board-specific assessment. Roughly 3 in 100 make it through. Monthly ratings keep them accountable.',
+  q: 'How are TOT teachers selected?',
+  a: '<span class="text-amber-500 font-medium block mb-2">Because the right teacher makes all the difference.</span>Every TOT teacher is carefully selected for subject expertise, teaching ability, experience, communication and genuine care for students. Each applicant goes through a rigorous subject assessment, live teaching demonstration, academic evaluation, identity and background verification, and curriculum-specific assessment before joining our teaching community.',
   icon: 'shield',
  },
  {
-  q: 'Are class bundles available?',
-  a: 'Yes weekly, monthly and full-term plans, plus exam-season intensives. Your academic counsellor builds the plan around your child’s timetable and shares it before anything is confirmed.',
+  q: 'Do you offer flexible learning plans?',
+  a: 'Choose a schedule that works for your child, whether that means weekly lessons, monthly plans, full-term learning or focused exam preparation. Your academic counsellor helps shape the right plan around your child\'s school timetable, goals, pace and learning needs before anything is confirmed.',
   icon: 'calendar',
  },
  {
-  q: 'How does the free demo work?',
-  a: 'Book a slot, tell us the grade, board and subject, and we match a teacher. The demo is a real 50-minute lesson not a sales call. Afterwards you get an honest assessment of where your child stands.',
+  q: 'What happens in the first free lesson?',
+  a: '<span class="text-amber-500 font-medium block mb-2">Your child meets a teacher. The teacher meets the learner.</span>We begin by understanding your child not simply starting with a textbook. The teacher observes how they think, explains concepts at their level, encourages questions and creates a comfortable space to learn.<br/><br/>Afterwards, we share thoughtful feedback so you can understand where your child is today and how we can help them move forward.<br/><br/><strong>One lesson. One teacher. A first glimpse of what personalised learning can feel like.</strong>',
   icon: 'rocket',
  },
  {
-  q: 'Is live support available?',
-  a: 'Yes, 24×7. Reschedule a class, ask a doubt between lessons, or request a different teacher the support team works across IST, GMT, GST and AEST.',
+  q: 'What if we need help between lessons?',
+  a: 'Our support team is available to help with scheduling, lesson changes, questions, teacher coordination and anything else that keeps your child’s learning journey running smoothly.',
   icon: 'support',
  },
  {
-  q: 'Can students learn from different countries?',
-  a: 'That is the point. Students in India, the UK, the UAE and Australia learn from the same teacher pool. We schedule in your local timezone and match teachers to your curriculum, not your postcode.',
+  q: 'Can my child learn from a teacher in another country?',
+  a: '<span class="text-amber-500 font-medium block mb-2">Absolutely. Great teaching shouldn’t stop at a border.</span>TOT connects children with teachers from our global teaching community, while matching the learning experience to <strong>their curriculum, goals, level and preferred schedule.</strong>',
   icon: 'globe',
  },
 ];

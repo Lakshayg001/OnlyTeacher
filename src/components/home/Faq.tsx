@@ -80,9 +80,10 @@ export function Faq() {
                                                 exit={{ height: 0, opacity: 0 }}
                                                 transition={{ duration: 0.3, ease: [0.22, 0.8, 0.3, 1] }}
                                             >
-                                                <p className="px-5 pb-5 pl-[4.75rem] text-[15px] leading-relaxed text-navy-500">
-                                                    {f.a}
-                                                </p>
+                                                <p
+                                                    className="px-5 pb-5 pl-[4.75rem] text-[15px] leading-relaxed text-navy-500"
+                                                    dangerouslySetInnerHTML={{ __html: f.a }}
+                                                />
                                             </motion.div>
                                         )}
                                     </AnimatePresence>

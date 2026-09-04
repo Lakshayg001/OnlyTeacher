@@ -61,7 +61,7 @@ export function ExploreCourses() {
         title={
          <>
           One Child. One Teacher.<br />
-          <span className="text-gradient-amber">One Learning Journey.</span>
+          <span className="text-gradient-amber">One </span><span className="text-forest-500">Learning</span><span className="text-gradient-amber"> Journey.</span>
          </>
         }
         sub="One-to-one teaching, personalised to your child's pace, strengths and goals."

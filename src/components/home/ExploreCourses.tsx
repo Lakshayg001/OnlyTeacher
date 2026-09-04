@@ -25,9 +25,9 @@ type DiffItem = {
 
 const DIFFERENCES: DiffItem[] = [
   { title: 'One-to-One', desc: 'Focused attention, tailored to your child.', icon: 'target', accent: 'amber' },
-  { title: 'Expert Teachers', desc: 'Experienced educators who know how to teach—not just what to teach.', icon: 'teacher', accent: 'forest' },
+  { title: 'Expert Teachers', desc: 'Experienced educators who know how to teach not just what to teach.', icon: 'teacher', accent: 'forest' },
   { title: 'Personalised Learning', desc: 'Lessons shaped around your child, not the class average.', icon: 'puzzle', accent: 'violet' },
-  { title: 'Friendly & Supportive', desc: 'A teacher who makes learning comfortable, confident, enjoyable.', icon: 'teacher', accent: 'sky' },
+  { title: 'Friendly & Supportive', desc: 'A teacher who makes learning comfortable, confident, enjoyable.', icon: 'support', accent: 'sky' },
   { title: 'Global Learning', desc: 'World-class teaching, wherever your family lives.', icon: 'globe', accent: 'amber' },
   { title: 'Progress That Matters', desc: 'Building confidence through meaningful, measurable learning.', icon: 'rocket', accent: 'forest' },
 ];

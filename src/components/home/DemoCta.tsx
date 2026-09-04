@@ -8,7 +8,7 @@ import type { ClayIconName } from '@/types';
 const PROMISES: { icon: ClayIconName; title: string; sub: string }[] = [
     { icon: 'student', title: '1. Personalised One-to-One Learning', sub: 'Every lesson is tailored to your child\'s pace, strengths and goals for better results.' },
     { icon: 'book', title: '2. Expert & Verified Teachers', sub: 'Qualified, experienced and background-verified teachers who truly understand students.' },
-    { icon: 'target', title: '3. Real Progress & Continuous Support', sub: 'Regular feedback, performance tracking and ongoing support for steady improvement.' },
+    { icon: 'target', title: '3. Progress With Purpose', sub: 'Regular feedback, performance tracking and ongoing support for steady improvement.' },
 ];
 
 export function DemoCta() {

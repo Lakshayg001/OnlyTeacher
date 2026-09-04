@@ -35,7 +35,10 @@ export function DemoPromise() {
        <div className="text-center mb-12">
         <h2 className="font-display text-4xl font-extrabold tracking-tight text-navy-900 sm:text-5xl md:text-6xl">
          Meet. Connect.{' '}
-         <span className="text-gradient-amber block sm:inline">Learn. Grow.</span>
+         <span className="block sm:inline">
+          <span className="text-forest-500">Learn.</span>{' '}
+          <span className="text-gradient-amber">Grow.</span>
+         </span>
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-lg font-medium text-navy-600 sm:text-xl">
          Your child's journey to better learning starts with{' '}

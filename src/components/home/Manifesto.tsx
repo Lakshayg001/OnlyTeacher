@@ -47,7 +47,7 @@ export function Manifesto() {
      </div>
 
      {/* ------------------------------ statements ------------------------------ */}
-     <ol className="relative flex flex-col gap-5">
+     <ol className="relative flex flex-col gap-8">
       {/* The vertical dashed line */}
       <span
        aria-hidden="true"

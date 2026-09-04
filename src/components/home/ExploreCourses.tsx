@@ -29,7 +29,7 @@ const DIFFERENCES: DiffItem[] = [
  { title: 'Personalised Learning', desc: 'Lessons shaped around your child, not the class average.', icon: 'puzzle', accent: 'violet' },
  { title: 'Friendly & Supportive', desc: 'A teacher who makes learning comfortable, confident, enjoyable.', icon: 'heart', accent: 'sky' },
  { title: 'Global Learning', desc: 'World-class teaching, wherever your family lives.', icon: 'globe', accent: 'amber' },
- { title: 'Progress That Matters', desc: 'Building confidence through meaningful, measurable learning.', icon: 'biology', accent: 'forest' },
+ { title: 'Progress That Matters', desc: 'Building confidence through meaningful, measurable learning.', icon: 'dna', accent: 'forest' },
 ];
 
 const ACCENT_BAR = {

@@ -22,7 +22,8 @@ export type ClayIconName =
  | 'laptop'
  | 'puzzle'
  | 'target'
- | 'clock';
+ | 'clock'
+ | 'dna';
 
 export interface NavItem {
  label: string;

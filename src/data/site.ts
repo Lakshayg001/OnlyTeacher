@@ -131,12 +131,6 @@ export const MANIFESTO = [
   body: 'Online tuition across subjects, grades and international curricula.',
   icon: 'globe' as const,
  },
- {
-  n: '05',
-  title: 'Parents Stay Informed.',
-  body: 'Clear feedback and visibility into your child\'s learning journey.',
-  icon: 'target' as const,
- },
 ];
 
 export const TRACKS: Track[] = [

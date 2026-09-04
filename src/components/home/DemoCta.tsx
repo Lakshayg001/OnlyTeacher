@@ -75,7 +75,7 @@ export function DemoCta() {
                                     size="lg"
                                     iconRight={<ArrowRight className="h-4.5 w-4.5" />}
                                 >
-                                    Book a Free Demo
+                                    Book a Free Class
                                 </Button>
 
                             </motion.div>

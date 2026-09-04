@@ -27,9 +27,6 @@ export function Manifesto() {
        <Button to="/about" variant="dark" iconRight={<ArrowUpRight className="h-4 w-4" />}>
         Read our story
        </Button>
-       <Button to="/teachers" variant="outline">
-        Meet the teachers
-       </Button>
       </div>
 
       {/* image stack */}

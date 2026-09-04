@@ -31,7 +31,7 @@ export function Manifesto() {
 
       {/* image stack */}
       <div className="relative mt-10 hidden lg:block">
-       <div className="relative aspect-square w-full overflow-hidden rounded-4xl shadow-clay-lg ring-8 ring-white">
+       <div className="relative aspect-[4/5] w-full overflow-hidden rounded-4xl shadow-clay-lg ring-8 ring-white">
         <SmartImage
          src="/small.jpeg"
          alt="Students working together"

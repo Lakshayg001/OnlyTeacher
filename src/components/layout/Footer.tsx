@@ -57,10 +57,7 @@ export function Footer() {
             {/* Main */}
             <div className="container-tot relative grid gap-10 py-14 lg:grid-cols-[1.4fr_repeat(3,1fr)]">
                 <div>
-                    <Logo className="h-40" />
-                    <p className="mt-5 max-w-sm text-[15px] leading-relaxed text-navy-300">
-                        One-to-one online tuition for all Grades, across every major curriculum, in four countries.
-                    </p>
+                    <Logo className="h-56" />
 
                     <ul className="mt-6 space-y-3 text-sm">
                         <li className="flex items-start gap-3">

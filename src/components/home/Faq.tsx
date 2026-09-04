@@ -20,7 +20,7 @@ export function Faq() {
                         title={
                             <>
                                 Everything You're Wondering<br className="hidden sm:block" />
-                                <span className="text-gradient-amber">Answered With Clarity</span>
+                                <span className="text-gradient-amber">Answered With </span><span className="text-forest-500">Clarity</span>
                             </>
                         }
                         sub="Clear answers about teachers, learning, personalisation and your child's journey"

@@ -590,7 +590,7 @@ export const FAQS: Faq[] = [
  },
  {
   q: 'Can my child learn from a teacher in another country?',
-  a: '<span class="text-amber-500 font-medium block mb-2">Absolutely. Great teaching shouldn’t stop at a border.</span>TOT connects children with teachers from our global teaching community, while matching the learning experience to <strong>their curriculum, goals, level and preferred schedule.</strong>',
+  a: 'Absolutely. Great teaching shouldn’t stop at a border. TOT connects children with teachers from our global teaching community, while matching the learning experience to <strong>their curriculum, goals, level and preferred schedule.</strong>',
   icon: 'globe',
  },
 ];

@@ -93,11 +93,11 @@ export function DemoPromise() {
        {/* Promises & CTA */}
        <Reveal delay={0.15}>
         <div className="flex h-full flex-col gap-6">
-         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+         <div className="flex flex-wrap justify-center gap-4">
           {PROMISES.map(({ Icon, label, sub, accent, bg }) => (
            <div
             key={label}
-            className="flex items-start gap-4 rounded-3xl border border-navy-100 bg-white/85 p-5 shadow-sm backdrop-blur"
+            className="flex w-full sm:w-[calc(50%-0.5rem)] lg:w-full xl:w-[calc(50%-0.5rem)] items-start gap-4 rounded-3xl border border-navy-100 bg-white/85 p-5 shadow-sm backdrop-blur"
            >
             <div className={cn("flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl", bg)}>
              <Icon className={cn("h-6 w-6", accent)} />
@@ -112,20 +112,9 @@ export function DemoPromise() {
           ))}
          </div>
 
-         <div className="flex flex-1 flex-col justify-center gap-4 rounded-4xl bg-gradient-to-br from-navy-700 to-navy-900 p-8 shadow-clay-navy mt-auto">
-          <div className="flex items-start gap-4">
-           <ClayIcon name="heart" size={54} />
-           <div>
-            <p className="font-display text-lg font-extrabold leading-snug text-white md:text-xl">
-             Not the right fit? We rematch, free.
-            </p>
-            <p className="mt-1 text-[14.5px] font-medium text-navy-300">
-             Chemistry between teacher and student is not a nice-to-have.
-            </p>
-           </div>
-          </div>
-          <Button to="/contact" size="lg" full iconRight={<ArrowRight className="h-5 w-5" />} className="mt-2">
-           Book a Free Demo
+         <div className="pt-2">
+          <Button to="/contact" size="lg" full iconRight={<ArrowRight className="h-5 w-5" />} className="shadow-lg shadow-amber-500/20">
+           Book a Free Class
           </Button>
          </div>
         </div>

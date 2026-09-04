@@ -56,8 +56,8 @@ export function GlobalPresence() {
        }
        sub={
         <span className="text-navy-300">
-         Four countries, one teacher pool. We match by curriculum and timezone never by
-         postcode, and never by price.
+         A Global Pool of Exceptional Teachers<br />
+         Carefully matched to each child’s curriculum, learning needs and timezone
         </span>
        }
       />

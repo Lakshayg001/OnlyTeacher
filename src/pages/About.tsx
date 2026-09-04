@@ -65,13 +65,13 @@ export default function About() {
                             align="left"
                             eyebrow="Why we exist"
                             className="mt-4"
-                            title={<span className="font-bold text-navy-800">The Right Teacher and perfect pedagogy can <span className="text-gradient-amber">Change Everything.</span></span>}
+                            title={<span className="font-bold text-navy-800">The Right Teacher and perfect <span className="text-forest-500">pedagogy</span> can <span className="text-gradient-amber">Change Everything.</span></span>}
                             sub="Every child deserves a teacher who sees more than a grade, a teacher who understands how they think, how they learn, and what helps them believe in themselves."
                         />
                         <div className="mt-8 grid sm:grid-cols-2 gap-4">
                             {[
                                 {
-                                    icon: 'heart' as const,
+                                    icon: 'teacher' as const,
                                     title: 'A Teacher Who Gets You',
                                     body: "Find a teacher who understands your child's questions, strengths, challenges and learning style—and makes them feel comfortable.",
                                 },
@@ -86,7 +86,7 @@ export default function About() {
                                     body: "TOT connects children with experienced teachers across the world.",
                                 },
                                 {
-                                    icon: 'biology' as const,
+                                    icon: 'rocket' as const,
                                     title: 'From "I Can\'t" to "I Can."',
                                     body: "We help children build knowledge, confidence, curiosity and independent learning skills.",
                                 },

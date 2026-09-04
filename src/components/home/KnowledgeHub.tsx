@@ -25,11 +25,11 @@ export function KnowledgeHub() {
        tone="navy"
        title={
         <>
-         Ideas Worth Reading{' '}
-         <span className="text-gradient-amber">Before the Next Lesson.</span>
+         Helping Every<br className="hidden sm:block" />
+         <span className="text-gradient-amber">Child Learn Better</span>
         </>
        }
-       sub="Study strategy subject deep-dives and honest parent guides from the teachers who write them"
+       sub="Simple strategies for children, thoughtful guidance for parents, and insights from teachers who understand how learning really works."
       />
      </Reveal>
      <Reveal delay={0.08}>

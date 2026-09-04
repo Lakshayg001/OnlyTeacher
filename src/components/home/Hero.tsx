@@ -1,8 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import { COUNTRIES } from '@/data/site';
 import SmartImage from '@/components/ui/SmartImage';
-import Flag from '@/components/ui/Flag';
 import { Button } from '@/components/ui/Primitives';
 import { Doodles, FloatIcon } from '@/components/ui/Decor';
 import ClayIcon from '@/components/clay/ClayIcon';
@@ -133,26 +131,7 @@ export function Hero() {
                                 ))}
                             </div>
 
-                            {/* countries pill */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.6, delay: 0.85 }}
-                                className="ml-auto mr-4 mt-8 flex w-fit items-center gap-2 rounded-full border border-navy-100 bg-white/95 px-5 py-3 shadow-clay lg:mr-8"
-                            >
-                                <span className="flex items-center -space-x-1.5">
-                                    {COUNTRIES.map((c) => (
-                                        <Flag
-                                            key={c.code}
-                                            code={c.flag}
-                                            size={24}
-                                            title={c.name}
-                                            className="ring-2 ring-white"
-                                        />
-                                    ))}
-                                </span>
-                                <span className="text-[13px] font-extrabold text-navy-700">4 countries</span>
-                            </motion.div>
+
                         </div>
                     </div>
 

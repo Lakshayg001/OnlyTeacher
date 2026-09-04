@@ -27,7 +27,7 @@ const DIFFERENCES: DiffItem[] = [
  { title: 'One-to-One', desc: 'Focused attention, tailored to your child.', icon: 'target', accent: 'amber' },
  { title: 'Expert Teachers', desc: 'Experienced educators who know how to teach—not just what to teach.', icon: 'teacher', accent: 'forest' },
  { title: 'Personalised Learning', desc: 'Lessons shaped around your child, not the class average.', icon: 'puzzle', accent: 'violet' },
- { title: 'Friendly & Supportive', desc: 'A teacher who makes learning comfortable, confident, enjoyable.', icon: 'heart', accent: 'sky' },
+ { title: 'Friendly & Supportive', desc: 'A teacher who makes learning comfortable, confident, enjoyable.', icon: 'teacher', accent: 'sky' },
  { title: 'Global Learning', desc: 'World-class teaching, wherever your family lives.', icon: 'globe', accent: 'amber' },
  { title: 'Progress That Matters', desc: 'Building confidence through meaningful, measurable learning.', icon: 'rocket', accent: 'forest' },
 ];
@@ -181,11 +181,6 @@ export function ExploreCourses() {
          <h3 className="max-w-2xl text-balance font-display text-[1.4rem] font-extrabold leading-tight text-navy-800 sm:text-3xl">
           Great <span className="text-amber-500">teaching</span> starts with understanding the <span className="text-forest-500">learner</span>
          </h3>
-         <div className="flex w-full max-w-[200px] items-center justify-center gap-2 opacity-60">
-          <div className="h-px flex-1 bg-gradient-to-r from-transparent to-navy-200"></div>
-          <Sparkles className="h-3.5 w-3.5 text-amber-400" />
-          <div className="h-px flex-1 bg-gradient-to-l from-transparent to-navy-200"></div>
-         </div>
         </div>
 
         <div className="mt-8 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">

@@ -298,7 +298,7 @@ export function GlobalPresence() {
               <div className="mt-4 flex items-center justify-center gap-4 rounded-3xl border border-white/10 bg-white/[0.04] p-5">
                 <p className="text-[13.5px] font-bold leading-snug text-navy-200">
                   Every child learns differently.{' '}
-                  <span className="text-white">We discover how your child learns best . .</span>
+                  <span className="text-white">We discover how your child learns best .</span>
                 </p>
               </div>
             </Reveal>

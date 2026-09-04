@@ -63,9 +63,8 @@ export default function About() {
                     <Reveal delay={0.1}>
                         <SectionHeading
                             align="left"
-                            eyebrow="Why we exist"
                             className="mt-4"
-                            title={<span className="font-bold text-navy-800">The Right Teacher and perfect <span className="text-forest-500">pedagogy</span> can <span className="text-gradient-amber">Change Everything.</span></span>}
+                            title={<span className="font-bold text-navy-800">The Right <span className="text-amber-500">Teacher</span> and perfect <span className="text-forest-500">pedagogy</span> can Change Everything.</span>}
                             sub="Every child deserves a teacher who sees more than a grade, a teacher who understands how they think, how they learn, and what helps them believe in themselves."
                         />
                         <div className="mt-8 grid sm:grid-cols-2 gap-4">

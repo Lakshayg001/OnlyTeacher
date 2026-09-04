@@ -65,20 +65,43 @@ export default function About() {
                             align="left"
                             eyebrow="Why we exist"
                             className="mt-4"
-                            title={<span className="font-medium">The Right <span className="text-gradient-amber">Teacher</span> Can Change Everything. We Make That <span className="text-gradient-amber">Match</span> Possible.</span>}
+                            title={<span className="font-bold text-navy-800">The Right Teacher and perfect pedagogy can <span className="text-gradient-amber">Change Everything.</span></span>}
+                            sub="Every child deserves a teacher who sees more than a grade, a teacher who understands how they think, how they learn, and what helps them believe in themselves."
                         />
-                        <div className="mt-8 grid grid-cols-2 gap-4">
-                            {STATS.map((s) => (
-                                <div key={s.label} className="rounded-3xl border border-navy-100 bg-white p-4 shadow-clay">
-                                    <ClayIcon name={s.icon} size={40} />
-                                    <p className="mt-2 font-display text-2xl font-extrabold text-navy-800">
-                                        <Counter value={s.value} suffix={s.suffix} />
-                                    </p>
-                                    <p className="text-[12.5px] font-bold leading-snug text-navy-500">{s.label}</p>
+                        <div className="mt-8 grid sm:grid-cols-2 gap-4">
+                            {[
+                                {
+                                    icon: 'heart' as const,
+                                    title: 'A Teacher Who Gets You',
+                                    body: "Find a teacher who understands your child's questions, strengths, challenges and learning style—and makes them feel comfortable.",
+                                },
+                                {
+                                    icon: 'target' as const,
+                                    title: 'Learning That Feels Like Yours',
+                                    body: "No two children learn in exactly the same way. Learning is always personalised.",
+                                },
+                                {
+                                    icon: 'globe' as const,
+                                    title: 'Great Teaching Without Borders',
+                                    body: "TOT connects children with experienced teachers across the world.",
+                                },
+                                {
+                                    icon: 'biology' as const,
+                                    title: 'From "I Can\'t" to "I Can."',
+                                    body: "We help children build knowledge, confidence, curiosity and independent learning skills.",
+                                },
+                            ].map((card) => (
+                                <div key={card.title} className="flex flex-col sm:flex-row gap-4 rounded-3xl border border-navy-100 bg-white p-5 shadow-clay">
+                                    <div className="shrink-0">
+                                        <ClayIcon name={card.icon} size={48} />
+                                    </div>
+                                    <div>
+                                        <h3 className="font-display text-[17px] font-extrabold leading-snug text-navy-800">{card.title}</h3>
+                                        <p className="mt-1.5 text-[14px] leading-relaxed text-navy-500">{card.body}</p>
+                                    </div>
                                 </div>
                             ))}
                         </div>
-                        <Button to="/contact" size="lg" className="mt-8">Book a Free Demo</Button>
                     </Reveal>
                 </div>
             </section>

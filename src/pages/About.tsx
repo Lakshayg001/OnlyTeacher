@@ -72,7 +72,7 @@ export default function About() {
                                 {
                                     icon: 'teacher' as const,
                                     title: 'A Teacher Who Gets You',
-                                    body: "Find a teacher who understands your child's questions, strengths, challenges and learning style—and makes them feel comfortable.",
+                                    body: "Find a teacher who understands your child's questions, strengths, challenges and learning style and makes them feel comfortable.",
                                 },
                                 {
                                     icon: 'target' as const,

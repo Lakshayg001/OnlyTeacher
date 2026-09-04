@@ -1,18 +1,36 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight, BookOpen, Clock3, Sparkles } from 'lucide-react';
-import { COURSES, COURSE_SPECS, TRACKS } from '@/data/site';
+import { COURSES, TRACKS } from '@/data/site';
 import type { TrackId } from '@/types';
 import ClayIcon from '@/components/clay/ClayIcon';
 import SmartImage from '@/components/ui/SmartImage';
 import { Button, Reveal, SectionHeading, Stars } from '@/components/ui/Primitives';
 import { cn } from '@/lib/utils';
 
-const SPEC_TONE = {
+const SPEC_TONE: Record<string, string> = {
  amber: 'bg-amber-50 border-amber-200/70',
  forest: 'bg-forest-50 border-forest-200/70',
  navy: 'bg-navy-50 border-navy-200/70',
-} as const;
+ violet: 'bg-violet-50 border-violet-200/70',
+ sky: 'bg-sky-50 border-sky-200/70',
+};
+
+type DiffItem = {
+ title: string;
+ desc: string;
+ icon: any;
+ accent: string;
+};
+
+const DIFFERENCES: DiffItem[] = [
+ { title: 'One-to-One', desc: 'Focused attention, tailored to your child.', icon: 'target', accent: 'amber' },
+ { title: 'Expert Teachers', desc: 'Experienced educators who know how to teach—not just what to teach.', icon: 'teacher', accent: 'forest' },
+ { title: 'Personalised Learning', desc: 'Lessons shaped around your child, not the class average.', icon: 'puzzle', accent: 'violet' },
+ { title: 'Friendly & Supportive', desc: 'A teacher who makes learning comfortable, confident, enjoyable.', icon: 'heart', accent: 'sky' },
+ { title: 'Global Learning', desc: 'World-class teaching, wherever your family lives.', icon: 'globe', accent: 'amber' },
+ { title: 'Progress That Matters', desc: 'Building confidence through meaningful, measurable learning.', icon: 'biology', accent: 'forest' },
+];
 
 const ACCENT_BAR = {
  amber: 'from-amber-400 to-amber-600',
@@ -152,21 +170,26 @@ export function ExploreCourses() {
        </motion.div>
       </AnimatePresence>
 
-      {/* --------------------------- academic specifications -------------------- */}
+      {/* --------------------------- why tot feels different -------------------- */}
       <Reveal delay={0.1}>
        <div className="mt-12 rounded-4xl border border-navy-100 bg-white p-6 shadow-clay sm:p-8">
-        <div className="flex flex-col items-center gap-2 text-center">
-         <span className="inline-flex items-center gap-2 rounded-full bg-navy-700 px-4 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.18em] text-white">
-          <Sparkles className="h-3.5 w-3.5 text-amber-400" />
-          What every course includes
+        <div className="flex flex-col items-center gap-4 text-center">
+         <span className="inline-flex items-center gap-2 rounded-full bg-navy-900 px-5 py-2 text-[11px] font-extrabold uppercase tracking-[0.18em] text-white shadow-sm">
+          <Sparkles className="h-4 w-4 text-amber-400" />
+          Why TOT Feels Different
          </span>
-         <p className="mt-1 max-w-xl text-[15px] font-semibold text-navy-500">
-          The same six guarantees, whatever the subject, grade or country.
-         </p>
+         <h3 className="max-w-2xl text-balance font-display text-[1.4rem] font-extrabold leading-tight text-navy-800 sm:text-3xl">
+          Because great teaching starts with <span className="text-amber-500">understanding</span> the learner.
+         </h3>
+         <div className="flex w-full max-w-[200px] items-center justify-center gap-2 opacity-60">
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent to-navy-200"></div>
+          <Sparkles className="h-3.5 w-3.5 text-amber-400" />
+          <div className="h-px flex-1 bg-gradient-to-l from-transparent to-navy-200"></div>
+         </div>
         </div>
 
-        <div className="mt-7 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
-         {COURSE_SPECS.map((s, i) => (
+        <div className="mt-8 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
+         {DIFFERENCES.map((s, i) => (
           <motion.div
            key={s.title}
            initial={{ opacity: 0, y: 16 }}
@@ -174,12 +197,12 @@ export function ExploreCourses() {
            viewport={{ once: true }}
            transition={{ duration: 0.45, delay: i * 0.05 }}
            className={cn(
-            'group flex items-start gap-3.5 rounded-3xl border p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-clay',
+            'group flex items-center gap-4 rounded-3xl border p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-clay',
             SPEC_TONE[s.accent],
            )}
           >
            <span className="shrink-0 transition-transform duration-300 group-hover:scale-110">
-            <ClayIcon name={s.icon} size={46} />
+            <ClayIcon name={s.icon} size={56} />
            </span>
            <span>
             <span className="block text-[15px] font-extrabold leading-snug text-navy-800">
@@ -191,6 +214,28 @@ export function ExploreCourses() {
            </span>
           </motion.div>
          ))}
+         
+         {/* Footer row */}
+         <div className="col-span-full mt-1.5 flex flex-col items-center justify-between gap-4 rounded-2xl border border-sky-100 bg-sky-50/60 p-4 sm:flex-row">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-sm">
+           <ClayIcon name="graduation" size={32} />
+          </div>
+          <div className="relative hidden flex-1 items-center sm:flex">
+           <div className="h-[2px] w-full border-t-2 border-dotted border-sky-200"></div>
+           <Sparkles className="absolute left-1/2 h-3.5 w-3.5 -translate-x-1/2 text-amber-400" />
+          </div>
+          <div className="shrink-0 text-center text-[15px] font-extrabold text-navy-800">
+           Every child learns differently.<br />
+           <span className="text-amber-500">We discover how</span> your child learns best . .
+          </div>
+          <div className="relative hidden flex-1 items-center sm:flex">
+           <div className="h-[2px] w-full border-t-2 border-dotted border-sky-200"></div>
+           <Sparkles className="absolute left-1/2 h-3.5 w-3.5 -translate-x-1/2 text-amber-400" />
+          </div>
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-sm">
+           <ClayIcon name="book" size={32} />
+          </div>
+         </div>
         </div>
        </div>
       </Reveal>

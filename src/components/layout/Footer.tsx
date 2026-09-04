@@ -2,8 +2,6 @@ import { Link } from 'react-router-dom';
 import Flag from '@/components/ui/Flag';
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Youtube } from 'lucide-react';
 import { BRAND, COUNTRIES } from '@/data/site';
-import ClayIcon from '@/components/clay/ClayIcon';
-import { Button } from '@/components/ui/Primitives';
 import Logo from './Logo';
 
 const COLUMNS = [
@@ -55,27 +53,6 @@ export function Footer() {
     <div className="wash wash-deep" />
    </div>
 
-   {/* CTA band */}
-   <div className="container-tot relative pt-14">
-    <div className="panel flex flex-col items-center gap-6 bg-gradient-to-br from-amber-400 via-amber-500 to-amber-600 px-6 py-10 text-center shadow-clay-lg sm:px-12 lg:flex-row lg:justify-between lg:text-left">
-     <div className="flex items-center gap-5">
-      <div className="hidden shrink-0 sm:block">
-       <ClayIcon name="rocket" size={78} tone="navy" />
-      </div>
-      <div>
-       <h2 className="font-display text-2xl font-extrabold leading-tight text-navy-800 sm:text-3xl">
-        Finding the right teacher should not be difficult
-       </h2>
-       <p className="mt-1.5 max-w-xl text-[15px] font-semibold text-navy-700">
-        One free lesson. One matched teacher. No card, no commitment.
-       </p>
-      </div>
-     </div>
-     <Button to="/contact" variant="dark" size="lg" className="shrink-0">
-      Book a Free Demo
-     </Button>
-    </div>
-   </div>
 
    {/* Main */}
    <div className="container-tot relative grid gap-10 py-14 lg:grid-cols-[1.4fr_repeat(3,1fr)]">

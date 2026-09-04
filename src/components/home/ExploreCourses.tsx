@@ -179,7 +179,7 @@ export function ExploreCourses() {
           Why TOT Feels Different
          </span>
          <h3 className="max-w-2xl text-balance font-display text-[1.4rem] font-extrabold leading-tight text-navy-800 sm:text-3xl">
-          Because great teaching starts with <span className="text-amber-500">understanding</span> the learner.
+          Great <span className="text-amber-500">teaching</span> starts with understanding the <span className="text-forest-500">learner</span>
          </h3>
          <div className="flex w-full max-w-[200px] items-center justify-center gap-2 opacity-60">
           <div className="h-px flex-1 bg-gradient-to-r from-transparent to-navy-200"></div>

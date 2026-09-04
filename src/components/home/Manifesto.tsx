@@ -33,7 +33,7 @@ export function Manifesto() {
       <div className="relative mt-10 hidden lg:block">
        <div className="relative aspect-[4/3] w-[86%] overflow-hidden rounded-4xl shadow-clay-lg ring-8 ring-white">
         <SmartImage
-         src="/changeh.jpeg"
+         src="/small.jpeg"
          alt="Students working together"
          fallbackIcon="student"
          className="h-full w-full"

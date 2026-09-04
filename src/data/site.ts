@@ -586,7 +586,7 @@ export const FAQS: Faq[] = [
  },
  {
   q: 'What happens in the first free lesson?',
-  a: 'Your child meets a teacher. The teacher meets the learner.<br/><br/>We begin by understanding your child not simply starting with a textbook. The teacher observes how they think, explains concepts at their level, encourages questions and creates a comfortable space to learn.<br/><br/>Afterwards, we share thoughtful feedback so you can understand where your child is today and how we can help them move forward.<br/><br/>One lesson. One teacher. A first glimpse of what personalised learning can feel like.',
+  a: 'We begin by understanding your child not simply starting with a textbook. The teacher observes how they think, explains concepts at their level, encourages questions and creates a comfortable space to learn.<br/>Afterwards, we share thoughtful feedback so you can understand where your child is today and how we can help them move forward.',
   icon: 'rocket',
  },
  {

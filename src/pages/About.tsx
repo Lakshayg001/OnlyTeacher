@@ -9,10 +9,10 @@ import { Button, Counter, Reveal, SectionHeading } from '@/components/ui/Primiti
 import { cn } from '@/lib/utils';
 
 const VALUES = [
-    { icon: 'heart' as const, title: 'Student first, always', body: 'Every decision starts with one question: does this help the child in the lesson?' },
-    { icon: 'shield' as const, title: 'Honest over impressive', body: 'We tell parents what we actually see including when tuition is not the answer.' },
-    { icon: 'globe' as const, title: 'Access without borders', body: 'A student in Sydney and one in Hyderabad get the same bench of teachers.' },
-    { icon: 'bulb' as const, title: 'Understanding over marks', body: 'Marks follow understanding. We have never seen it work the other way round.' },
+    { icon: 'heart' as const, title: 'The Child Comes First', body: 'Personalised learning built around the child not the average.' },
+    { icon: 'bulb' as const, title: 'Understanding Comes Before Marks', body: 'When a child truly understands, confidence grows and results follow.' },
+    { icon: 'globe' as const, title: 'Great Teaching Has No Borders', body: 'Connecting children with exceptional teachers across countries, curricula and time zones.' },
+    { icon: 'laptop' as const, title: 'Technology enhanced Learning', body: 'Every Tot Lesson is supported by latest and adaptive digital platform to make every lesson memorable and everlasting.' },
 ];
 
 const GALLERY = [
@@ -114,7 +114,7 @@ export default function About() {
                             <SectionHeading
                                 eyebrow="What we hold to"
                                 tone="forest"
-                                title={<>Four Things We <span className="text-gradient-amber">Do Not Trade Away</span></>}
+                                title={<>Four Promises Behind Every <span className="text-gradient-amber">TOT Class</span></>}
                             />
                             <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                                 {VALUES.map((v, i) => (

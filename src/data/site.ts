@@ -576,7 +576,7 @@ export const FAQS: Faq[] = [
  },
  {
   q: 'How are TOT teachers selected?',
-  a: '<span class="text-amber-500 font-medium block mb-2">Because the right teacher makes all the difference.</span>Every TOT teacher is carefully selected for subject expertise, teaching ability, experience, communication and genuine care for students. Each applicant goes through a rigorous subject assessment, live teaching demonstration, academic evaluation, identity and background verification, and curriculum-specific assessment before joining our teaching community.',
+  a: 'Every TOT teacher is carefully selected for subject expertise, teaching ability, experience, communication and genuine care for students. Each applicant goes through a rigorous subject assessment, live teaching demonstration, academic evaluation, identity and background verification, and curriculum-specific assessment before joining our teaching community.',
   icon: 'shield',
  },
  {
@@ -586,7 +586,7 @@ export const FAQS: Faq[] = [
  },
  {
   q: 'What happens in the first free lesson?',
-  a: '<span class="text-amber-500 font-medium block mb-2">Your child meets a teacher. The teacher meets the learner.</span>We begin by understanding your child not simply starting with a textbook. The teacher observes how they think, explains concepts at their level, encourages questions and creates a comfortable space to learn.<br/><br/>Afterwards, we share thoughtful feedback so you can understand where your child is today and how we can help them move forward.<br/><br/><strong>One lesson. One teacher. A first glimpse of what personalised learning can feel like.</strong>',
+  a: 'Your child meets a teacher. The teacher meets the learner.<br/><br/>We begin by understanding your child not simply starting with a textbook. The teacher observes how they think, explains concepts at their level, encourages questions and creates a comfortable space to learn.<br/><br/>Afterwards, we share thoughtful feedback so you can understand where your child is today and how we can help them move forward.<br/><br/>One lesson. One teacher. A first glimpse of what personalised learning can feel like.',
   icon: 'rocket',
  },
  {

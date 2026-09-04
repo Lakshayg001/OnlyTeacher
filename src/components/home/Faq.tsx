@@ -105,25 +105,7 @@ export function Faq() {
                                 />
                             </div>
 
-                            <div className="relative overflow-hidden rounded-4xl bg-gradient-to-br from-navy-700 to-navy-900 p-6 text-center shadow-clay-navy">
-                                <div aria-hidden="true" className="absolute -right-10 -top-10 h-36 w-36 rounded-full bg-amber-500/20 blur-2xl" />
-                                <div className="relative">
-                                    <MessageCircleQuestion className="mx-auto h-9 w-9 text-amber-400" />
-                                    <p className="mt-3 font-display text-xl font-extrabold leading-snug text-white">
-                                        Still deciding?
-                                    </p>
-                                    <p className="mt-1.5 text-[14px] font-semibold text-navy-300">
-                                        Talk to an academic counsellor not a salesperson. They will tell you honestly
-                                        whether TOT is right for your child.
-                                    </p>
-                                    <Button to="/contact" full className="mt-5">
-                                        Talk to a counsellor
-                                    </Button>
-                                    <p className="mt-3 text-[11.5px] font-bold uppercase tracking-[0.14em] text-navy-400">
-                                        Replies in under 10 minutes · 24×7
-                                    </p>
-                                </div>
-                            </div>
+
                         </div>
                     </Reveal>
                 </div>

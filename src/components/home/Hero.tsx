@@ -92,7 +92,7 @@ export function Hero() {
                                 className="mt-8 flex flex-wrap items-center gap-3"
                             >
                                 <Button to="/contact" size="lg" iconRight={<ArrowRight className="h-4.5 w-4.5" />}>
-                                    Book a Free Demo
+                                    Book a Free Class
                                 </Button>
 
                             </motion.div>
@@ -139,7 +139,7 @@ export function Hero() {
                     <div className="relative rounded-b-3xl border-t border-white/60 bg-white/95 px-6 py-6 sm:px-10 lg:px-14 backdrop-blur">
                         <div className="grid grid-cols-1 gap-6 divide-y divide-navy-100/50 sm:grid-cols-2 sm:gap-4 sm:divide-x sm:divide-y-0 lg:grid-cols-4">
                             {/* feature 1 */}
-                            <div className="flex items-center gap-4 pt-4 sm:pr-4 sm:pt-0">
+                            <div className="flex items-start gap-4 pt-4 sm:pr-4 sm:pt-0">
                                 <ClayIcon name="student" size={44} tone="forest" shadow={false} />
                                 <div>
                                     <h4 className="font-display text-[15px] font-bold text-forest-700">Personalised Learning</h4>
@@ -147,7 +147,7 @@ export function Hero() {
                                 </div>
                             </div>
                             {/* feature 2 */}
-                            <div className="flex items-center gap-4 pt-4 sm:px-4 sm:pt-0">
+                            <div className="flex items-start gap-4 pt-4 sm:px-4 sm:pt-0">
                                 <ClayIcon name="chat" size={44} tone="sky" shadow={false} />
                                 <div>
                                     <h4 className="font-display text-[15px] font-bold text-sky-700">One-to-One Attention</h4>
@@ -155,7 +155,7 @@ export function Hero() {
                                 </div>
                             </div>
                             {/* feature 3 */}
-                            <div className="flex items-center gap-4 pt-4 sm:px-4 sm:pt-0">
+                            <div className="flex items-start gap-4 pt-4 sm:px-4 sm:pt-0">
                                 <ClayIcon name="teacher" size={44} tone="amber" shadow={false} />
                                 <div>
                                     <h4 className="font-display text-[15px] font-bold text-amber-700">Expert Teachers</h4>
@@ -163,7 +163,7 @@ export function Hero() {
                                 </div>
                             </div>
                             {/* feature 4 */}
-                            <div className="flex items-center gap-4 pt-4 sm:pl-4 sm:pt-0">
+                            <div className="flex items-start gap-4 pt-4 sm:pl-4 sm:pt-0">
                                 <ClayIcon name="shield" size={44} tone="violet" shadow={false} />
                                 <div>
                                     <h4 className="font-display text-[15px] font-bold text-violet-700">Safe & Flexible Learning</h4>

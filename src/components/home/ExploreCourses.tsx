@@ -64,7 +64,7 @@ export function ExploreCourses() {
           <span className="text-gradient-amber">One Learning Journey.</span>
          </>
         }
-        sub="Pick a stage to see what a term looks like Every course below is taught one-to-one on your board"
+        sub="One-to-one teaching, personalised to your child's pace, strengths and goals."
        />
       </Reveal>
 

@@ -673,23 +673,23 @@ export const POSTS: Post[] = [
 export const STEPS = [
  {
   n: '01',
-  title: 'Book Your Free Demo',
-  body: 'Click "Book a Free Demo" and get started in no time.',
-  icon: 'chat' as const,
+  title: 'Tell Us About Your Child',
+  body: 'Share their grade, subjects, strengths and learning needs.',
+  icon: 'student' as const,
   accent: 'amber' as const,
  },
  {
   n: '02',
-  title: 'Experience TOT Magic',
-  body: 'Enjoy a fun, interactive session with our amazing teachers and see how learning comes alive.',
-  icon: 'teacher' as const,
+  title: 'Meet Their Teacher',
+  body: 'We carefully match your child with the right teacher for them.',
+  icon: 'chat' as const,
   accent: 'forest' as const,
  },
  {
   n: '03',
-  title: 'You\'re All Set!',
-  body: 'Our academic counselor will assist you with your batch assignment, and your learning journey begins.',
-  icon: 'heart' as const,
+  title: 'Experience TOT',
+  body: 'A free 1:1 session designed to understand your child and their learning style.',
+  icon: 'bulb' as const,
   accent: 'navy' as const,
  },
 ];

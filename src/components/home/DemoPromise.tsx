@@ -1,28 +1,22 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, CalendarCheck, ShieldCheck, Timer } from 'lucide-react';
+import { ArrowRight, BookOpen, Clock, UserCheck } from 'lucide-react';
 import { STEPS } from '@/data/site';
 
 import ClayIcon from '@/components/clay/ClayIcon';
 import SmartImage from '@/components/ui/SmartImage';
-import { Button, Reveal, SectionHeading } from '@/components/ui/Primitives';
+import { Button, Reveal } from '@/components/ui/Primitives';
 import { cn } from '@/lib/utils';
 
-const CARD = {
- amber: 'from-amber-50 to-white border-amber-200/70',
- forest: 'from-forest-50 to-white border-forest-200/70',
- navy: 'from-navy-50 to-white border-navy-200/70',
-} as const;
-
 const NUMBER = {
- amber: 'text-amber-500/25',
- forest: 'text-forest-500/25',
- navy: 'text-navy-500/25',
+ amber: 'text-amber-500/90',
+ forest: 'text-forest-500/90',
+ navy: 'text-navy-500/90',
 } as const;
 
 const PROMISES = [
- { Icon: Timer, label: '50 real teaching minutes', sub: 'Not a sales call' },
- { Icon: ShieldCheck, label: 'No card, no commitment', sub: 'Nothing to cancel' },
- { Icon: CalendarCheck, label: 'Booked within 24 hours', sub: 'In your timezone' },
+ { Icon: Clock, label: '50-Minute One-to-One', sub: 'Undivided attention. Real teaching.', accent: 'text-amber-500', bg: 'bg-amber-100/50' },
+ { Icon: UserCheck, label: 'A Teacher Chosen for Your Child', sub: 'A thoughtful match, not a random assignment.', accent: 'text-forest-500', bg: 'bg-forest-100/50' },
+ { Icon: BookOpen, label: 'Learning Made Personal', sub: 'At your child\'s pace, in their own way.', accent: 'text-navy-500', bg: 'bg-navy-100/50' },
 ];
 
 export function DemoPromise() {
@@ -38,123 +32,134 @@ export function DemoPromise() {
 
      <div className="relative">
       <Reveal>
-       <SectionHeading
-        eyebrow="Your first lesson"
-        title={
-         <>
-          Finding the Right Teacher{' '}
-          <span className="text-gradient-amber">Should Not Be Difficult.</span>
-         </>
-        }
-        sub="Three steps one free lesson and an honest answer about where your child actually stands"
-       />
+       <div className="text-center mb-12">
+        <h2 className="font-display text-4xl font-extrabold tracking-tight text-navy-900 sm:text-5xl md:text-6xl">
+         Meet. Connect.{' '}
+         <span className="text-gradient-amber block sm:inline">Learn. Grow.</span>
+        </h2>
+        <p className="mx-auto mt-4 max-w-2xl text-lg font-medium text-navy-600 sm:text-xl">
+         Your child's journey to better learning starts with{' '}
+         <span className="text-amber-600 font-bold">The Only Teacher</span>.
+        </p>
+       </div>
       </Reveal>
 
-      <div className="mt-11 grid gap-6 lg:grid-cols-[1fr_0.85fr] lg:gap-10">
-       {/* steps */}
-       <ol className="space-y-4">
+      {/* horizontal steps */}
+      <div className="relative mb-14">
+       {/* Dotted connecting line for desktop */}
+       <div className="absolute top-1/2 left-0 right-0 hidden h-0.5 -translate-y-1/2 border-t-2 border-dashed border-navy-200 lg:block" aria-hidden="true" />
+       
+       <ol className="relative z-10 grid gap-6 lg:grid-cols-3">
         {STEPS.map((s, i) => (
          <motion.li
           key={s.n}
-          initial={{ opacity: 0, x: -24 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.55, delay: i * 0.1 }}
           className={cn(
-           'group relative flex items-center gap-5 overflow-hidden rounded-4xl border bg-gradient-to-br p-5 shadow-clay transition-all duration-300 hover:-translate-y-1 hover:shadow-clay-lg sm:p-6',
-           CARD[s.accent],
+           'group relative flex flex-col items-center text-center gap-5 rounded-4xl border bg-white p-6 shadow-clay-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-clay lg:p-8',
           )}
          >
-          <span
-           aria-hidden="true"
-           className={cn(
-            'pointer-events-none absolute -right-2 -top-6 font-display text-[6rem] font-extrabold leading-none transition-transform duration-500 group-hover:scale-110',
-            NUMBER[s.accent],
-           )}
-          >
-           {s.n}
-          </span>
-          <span className="shrink-0 transition-transform duration-500 group-hover:-rotate-12 group-hover:scale-110">
-           <ClayIcon name={s.icon} size={62} />
-          </span>
-          <span className="relative">
-           <span className="block font-display text-lg font-extrabold leading-snug text-navy-800 sm:text-xl">
+          <div className="flex w-full items-center justify-between lg:justify-center">
+           <span
+            className={cn(
+             'font-display text-2xl font-extrabold leading-none transition-transform duration-500',
+             NUMBER[s.accent],
+            )}
+           >
+            {s.n}
+           </span>
+          </div>
+          
+          <div className="shrink-0 transition-transform duration-500 group-hover:-translate-y-2">
+           <ClayIcon name={s.icon} size={82} />
+          </div>
+          
+          <div className="relative mt-2">
+           <span className="block font-display text-xl font-extrabold leading-snug text-navy-800">
             {s.title}
            </span>
-           <span className="mt-1 block text-[14.5px] leading-relaxed text-navy-500">
+           <span className="mt-2 block text-[14.5px] leading-relaxed text-navy-500">
             {s.body}
            </span>
-          </span>
+          </div>
          </motion.li>
         ))}
+       </ol>
+      </div>
 
-        <Reveal delay={0.15}>
-         <div className="grid gap-2.5 sm:grid-cols-3">
-          {PROMISES.map(({ Icon, label, sub }) => (
+      <div className="grid gap-6 lg:grid-cols-[1fr_0.85fr] lg:gap-10 items-stretch">
+       {/* Promises & CTA */}
+       <Reveal delay={0.15}>
+        <div className="flex h-full flex-col gap-6">
+         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+          {PROMISES.map(({ Icon, label, sub, accent, bg }) => (
            <div
             key={label}
-            className="flex items-center gap-2.5 rounded-2xl border border-navy-100 bg-white/85 px-3 py-2.5 backdrop-blur"
+            className="flex items-start gap-4 rounded-3xl border border-navy-100 bg-white/85 p-5 shadow-sm backdrop-blur"
            >
-            <Icon className="h-4.5 w-4.5 shrink-0 text-forest-500" />
-            <span>
-             <span className="block text-[12.5px] font-extrabold leading-tight text-navy-800">
+            <div className={cn("flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl", bg)}>
+             <Icon className={cn("h-6 w-6", accent)} />
+            </div>
+            <div>
+             <span className="block text-base font-extrabold leading-tight text-navy-800">
               {label}
              </span>
-             <span className="block text-[11px] font-bold text-navy-400">{sub}</span>
-            </span>
+             <span className="mt-1.5 block text-sm font-medium text-navy-500">{sub}</span>
+            </div>
            </div>
           ))}
          </div>
-        </Reveal>
-       </ol>
 
-       {/* visual + CTA */}
-       <Reveal delay={0.12}>
-        <div className="relative flex h-full flex-col gap-4">
-         <div className="relative overflow-hidden rounded-4xl shadow-clay-lg ring-8 ring-white">
-          <SmartImage
-           src="/owl.jpeg"
-           alt="A live one-to-one online lesson in progress"
-           fallbackIcon="laptop"
-           ratio="1/1"
-           className="w-full bg-white"
-           imgClassName="!object-contain"
-           overlay
-          />
-          <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5">
-           <div>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-[0.14em] text-navy-700">
-             <span className="h-1.5 w-1.5 rounded-full bg-red-500" /> Demo lesson
-            </span>
-            <p className="mt-2 font-display text-xl font-extrabold leading-tight text-white">
-             50 minutes, one student
-            </p>
-           </div>
-           <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white/95 font-display text-lg font-extrabold text-amber-600">
-            1:1
-           </span>
-          </div>
-         </div>
-
-         <div className="flex flex-1 flex-col justify-between gap-4 rounded-4xl bg-gradient-to-br from-navy-700 to-navy-900 p-6 shadow-clay-navy">
+         <div className="flex flex-1 flex-col justify-center gap-4 rounded-4xl bg-gradient-to-br from-navy-700 to-navy-900 p-8 shadow-clay-navy mt-auto">
           <div className="flex items-start gap-4">
            <ClayIcon name="heart" size={54} />
            <div>
-            <p className="font-display text-lg font-extrabold leading-snug text-white">
+            <p className="font-display text-lg font-extrabold leading-snug text-white md:text-xl">
              Not the right fit? We rematch, free.
             </p>
-            <p className="mt-1 text-[14px] font-semibold text-navy-300">
+            <p className="mt-1 text-[14.5px] font-medium text-navy-300">
              Chemistry between teacher and student is not a nice-to-have.
             </p>
            </div>
           </div>
-          <Button to="/contact" size="lg" full iconRight={<ArrowRight className="h-4.5 w-4.5" />}>
+          <Button to="/contact" size="lg" full iconRight={<ArrowRight className="h-5 w-5" />} className="mt-2">
            Book a Free Demo
           </Button>
          </div>
         </div>
        </Reveal>
+
+       {/* visual */}
+       <Reveal delay={0.12}>
+        <div className="relative h-full overflow-hidden rounded-4xl shadow-clay-lg ring-8 ring-white">
+         <SmartImage
+          src="/owl.jpeg"
+          alt="A live one-to-one online lesson in progress"
+          fallbackIcon="laptop"
+          ratio="1/1"
+          className="h-full w-full bg-white object-cover"
+          imgClassName="!object-contain"
+          overlay
+         />
+         <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5">
+          <div>
+           <span className="inline-flex items-center gap-1.5 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-[0.14em] text-navy-700">
+            <span className="h-1.5 w-1.5 rounded-full bg-red-500" /> Demo lesson
+           </span>
+           <p className="mt-2 font-display text-xl font-extrabold leading-tight text-white">
+            50 minutes, one student
+           </p>
+          </div>
+          <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white/95 font-display text-lg font-extrabold text-amber-600">
+           1:1
+          </span>
+         </div>
+        </div>
+       </Reveal>
       </div>
+
      </div>
     </div>
    </div>

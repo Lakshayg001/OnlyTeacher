@@ -110,44 +110,7 @@ export default function About() {
                 </div>
             </section>
 
-            {/* classroom gallery */}
-            <section className="py-14">
-                <div className="container-tot">
-                    <SectionHeading
-                        eyebrow="Inside a TOT lesson"
-                        tone="navy"
-                        title={<>A Teacher who knows <span className="text-gradient-amber">Inn & Out</span></>}
-                        sub="Live whiteboards real experiments past papers and a teacher who knows the student's name"
-                    />
-                    <div className="mt-10 grid auto-rows-[168px] grid-cols-2 gap-4 sm:auto-rows-[190px] lg:grid-cols-4">
-                        {GALLERY.map((g, i) => (
-                            <motion.figure
-                                key={g.alt}
-                                initial={{ opacity: 0, scale: 0.94 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true, margin: '-50px' }}
-                                transition={{ duration: 0.5, delay: (i % 4) * 0.07 }}
-                                className={cn(
-                                    'group relative overflow-hidden rounded-4xl shadow-clay transition-all duration-300 hover:-translate-y-1.5 hover:shadow-clay-lg',
-                                    g.span,
-                                )}
-                            >
-                                <SmartImage
-                                    src={g.src}
-                                    alt={g.alt}
-                                    fallbackIcon={g.icon}
-                                    className="h-full w-full"
-                                    imgClassName="group-hover:scale-110"
-                                    overlay
-                                />
-                                <figcaption className="absolute inset-x-0 bottom-0 p-4">
-                                    <span className="text-[13px] font-extrabold text-white drop-shadow">{g.alt}</span>
-                                </figcaption>
-                            </motion.figure>
-                        ))}
-                    </div>
-                </div>
-            </section>
+
 
             {/* timeline */}
             <section className="py-14">
@@ -192,60 +155,7 @@ export default function About() {
                 </div>
             </section>
 
-            {/* manifesto recap */}
-            <section className="py-14">
-                <div className="container-tot">
-                    <div className="panel bg-gradient-to-br from-navy-800 to-navy-900 px-6 py-12 shadow-clay-lg sm:px-10">
-                        <div aria-hidden="true" className="wash wash-deep" />
-                        <div className="relative">
-                            <SectionHeading
-                                eyebrow="Our conviction"
-                                title={<span className="text-white">Every Student Deserves the <span className="text-gradient-amber">Best Teacher</span></span>}
-                                sub={<span className="text-navy-300">Five promises we make to every family, in every country we teach in.</span>}
-                            />
-                            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                                {MANIFESTO.map((m, i) => (
-                                    <Reveal key={m.n} delay={i * 0.06}>
-                                        <div className="h-full rounded-4xl border border-white/10 bg-white/[0.06] p-5 backdrop-blur">
-                                            <div className="flex items-center justify-between">
-                                                <ClayIcon name={m.icon} size={48} />
-                                                <span className="font-display text-3xl font-extrabold text-white/15">{m.n}</span>
-                                            </div>
-                                            <h3 className="mt-3 font-display text-[17px] font-extrabold leading-snug text-white">{m.title}</h3>
-                                            <p className="mt-1.5 text-[14px] leading-relaxed text-navy-300">{m.body}</p>
-                                        </div>
-                                    </Reveal>
-                                ))}
-                                <Reveal delay={0.3}>
-                                    <div className="flex h-full flex-col justify-between rounded-4xl bg-gradient-to-br from-amber-400 to-amber-600 p-5 shadow-clay-amber">
-                                        <ClayIcon name="rocket" size={52} tone="navy" />
-                                        <div className="mt-4">
-                                            <p className="font-display text-xl font-extrabold leading-snug text-navy-800">
-                                                Meet a teacher this week.
-                                            </p>
-                                            <Button to="/contact" variant="dark" full className="mt-4">
-                                                Book a Free Demo
-                                            </Button>
-                                        </div>
-                                    </div>
-                                </Reveal>
-                            </div>
 
-                            <div className="mt-8 flex flex-wrap items-center justify-center gap-2.5">
-                                {COUNTRIES.map((c) => (
-                                    <span
-                                        key={c.code}
-                                        className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[13px] font-extrabold text-navy-200"
-                                    >
-                                        <Flag code={c.flag} size={20} />
-                                        {c.name}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
         </>
     );
 }

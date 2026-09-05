@@ -151,17 +151,7 @@ export function ExploreCourses() {
 
 
 
-                      <div className="mt-4 flex items-center justify-between border-t border-navy-100 pt-4 text-[12px] font-bold text-navy-500">
-                        <span className="inline-flex items-center gap-1.5">
-                          <BookOpen className="h-3.5 w-3.5 text-amber-500" /> {c.modules} modules
-                        </span>
-                        <span className="inline-flex items-center gap-1.5">
-                          <Clock3 className="h-3.5 w-3.5 text-forest-500" /> {c.hours}h
-                        </span>
-                        <span className="inline-flex items-center gap-1">
-                          <Stars rating={c.rating} size={12} />
-                        </span>
-                      </div>
+
 
                       <div className={cn('mt-4 h-1.5 w-full origin-left scale-x-0 rounded-full bg-gradient-to-r transition-transform duration-500 group-hover:scale-x-100', ACCENT_BAR[c.accent])} />
                     </div>

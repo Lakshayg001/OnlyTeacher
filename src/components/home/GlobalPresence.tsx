@@ -223,7 +223,7 @@ export function GlobalPresence() {
                     <span className="text-[13px] font-extrabold text-white">{shown.name}</span>
                   </span>
                   <span className="mt-1 block text-[11.5px] font-bold text-amber-400">
-                    {shown.students} students · {shown.timezone}
+                    {shown.timezone}
                   </span>
                 </motion.div>
               </AnimatePresence>
@@ -277,10 +277,6 @@ export function GlobalPresence() {
                     </span>
 
                     <span className="mt-3 flex items-center gap-4">
-                      <span className="flex items-center gap-1.5">
-                        <Users className="h-3.5 w-3.5 text-forest-400" />
-                        <span className="text-[13px] font-extrabold text-white">{c.students}</span>
-                      </span>
                       <span className="flex items-center gap-1.5">
                         <Clock className="h-3.5 w-3.5 text-amber-400" />
                         <span className="text-[13px] font-extrabold text-white">24×7</span>

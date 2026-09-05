@@ -177,8 +177,8 @@ export default function About() {
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                                             </div>
                                             <div className="space-y-3">
-                                                <h4 className="text-[17px] font-extrabold text-amber-600">
-                                                    Don't Just Teach the Subject. Understand the Student.
+                                                <h4 className="text-[17px] font-extrabold text-navy-800">
+                                                    Don't Just <span className="text-amber-500">Teach</span> the Subject. Understand the <span className="text-forest-500">Student</span>.
                                                 </h4>
                                                 <p className="text-[14.5px] leading-relaxed text-navy-600">
                                                     A great teacher learns to see beyond the textbook to notice <span className="font-bold text-amber-600">how a child thinks, where they hesitate, what excites them</span>, what they already understand and <span className="font-bold text-amber-600">what they need explained differently.</span>

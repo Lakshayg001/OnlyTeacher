@@ -147,13 +147,13 @@ export default function About() {
                                                 <path d="m8 14 4-4 4 4"/>
                                             </svg>
                                         </div>
-                                        <h2 className="font-display text-2xl font-extrabold text-navy-800 sm:text-3xl">
+                                        <h2 className="text-2xl font-extrabold text-navy-800 sm:text-3xl">
                                             The Philosophy Behind <span className="text-amber-500">TOT</span>
                                         </h2>
                                     </div>
 
                                     <div className="space-y-4">
-                                        <h3 className="font-display text-xl font-extrabold text-navy-800">
+                                        <h3 className="text-xl font-extrabold text-navy-800">
                                             Inspired by the <span className="text-amber-500">Idea</span> of the "Only True <span className="text-forest-500">Teacher</span>"
                                         </h3>
                                         <p className="text-[15px] leading-relaxed text-navy-600">
@@ -163,12 +163,12 @@ export default function About() {
 
                                     <div className="relative rounded-2xl bg-amber-500/10 px-6 py-4 border-l-4 border-amber-400">
                                         <p className="text-[15px] font-medium italic text-navy-700">
-                                            <span className="font-display text-3xl font-bold text-amber-500 leading-none">"</span> The only true teacher is he who can immediately come down to the level of the student...
+                                            <span className="text-3xl font-bold text-amber-500 leading-none">"</span> The only true teacher is he who can immediately come down to the level of the student...
                                         </p>
                                     </div>
 
                                     <div className="space-y-4">
-                                        <h3 className="font-display text-xl font-extrabold text-navy-800">
+                                        <h3 className="text-xl font-extrabold text-navy-800">
                                             For TOT, this idea becomes a guiding principle:
                                         </h3>
                                         

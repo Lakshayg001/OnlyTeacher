@@ -239,55 +239,7 @@ export function GlobalPresence() {
               </div>
             </div>
 
-            {/* ------------------------------ country cards --------------------------- */}
-            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {COUNTRIES.map((c) => {
-                const on = shown.code === c.code;
-                return (
-                  <motion.button
-                    key={c.code}
-                    onClick={() => pick(c.code)}
-                    onMouseEnter={() => setHovered(c.code)}
-                    onMouseLeave={() => setHovered(null)}
-                    animate={{ y: on ? -4 : 0 }}
-                    transition={{ type: 'spring', stiffness: 300, damping: 24 }}
-                    className={cn(
-                      'group relative overflow-hidden rounded-3xl border p-4 text-left transition-colors duration-300',
-                      on
-                        ? 'border-amber-400/60 bg-amber-500/[0.12]'
-                        : 'border-white/10 bg-white/[0.04] hover:border-white/25 hover:bg-white/[0.07]',
-                    )}
-                  >
-                    <span
-                      aria-hidden="true"
-                      className={cn(
-                        'absolute inset-x-0 top-0 h-1 origin-left bg-amber-500 transition-transform duration-500',
-                        on ? 'scale-x-100' : 'scale-x-0',
-                      )}
-                    />
 
-                    <span className="flex items-center justify-between gap-2">
-                      <span className="flex items-center gap-2.5">
-                        <Flag code={c.flag} size={26} />
-                        <span className="text-[15px] font-extrabold text-white">{c.name}</span>
-                      </span>
-                      <span className="rounded-full bg-white/10 px-2 py-1 text-[10px] font-extrabold uppercase tracking-wider text-navy-200">
-                        {c.timezone}
-                      </span>
-                    </span>
-
-                    <span className="mt-3 flex items-center gap-4">
-                      <span className="flex items-center gap-1.5">
-                        <Clock className="h-3.5 w-3.5 text-amber-400" />
-                        <span className="text-[13px] font-extrabold text-white">24×7</span>
-                      </span>
-                    </span>
-
-
-                  </motion.button>
-                );
-              })}
-            </div>
 
             {/* ------------------------------- footer row ----------------------------- */}
             <Reveal>

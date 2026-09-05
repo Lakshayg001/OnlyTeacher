@@ -150,7 +150,7 @@ export default function About() {
                                     <div className="relative w-full max-w-md">
                                         <div className="absolute inset-0 rounded-full bg-amber-400/10 blur-2xl" />
                                         <img
-                                            src="/anish.jpeg"
+                                            src="/anish1.png"
                                             alt="Anish Rajan - Founder"
                                             className="relative z-10 w-full object-contain drop-shadow-2xl"
                                         />

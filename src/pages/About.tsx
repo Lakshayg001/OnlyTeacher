@@ -70,7 +70,7 @@ export default function About() {
                                             Inspired by the <span className="text-amber-500">Idea</span> of the "Only True <span className="text-forest-500">Teacher</span>"
                                         </h3>
                                         <p className="text-[15px] leading-relaxed text-navy-600">
-                                            Swami Vivekananda described a true teacher not simply as someone who possesses knowledge, but as someone who can <span className="font-bold text-amber-600">understand the learner deeply enough to teach from the learner's perspective.</span>
+                                            Swami Vivekananda described a true teacher not simply as someone who possesses knowledge, but as someone who can understand the learner deeply enough to teach from the learner's perspective.
                                         </p>
                                     </div>
 

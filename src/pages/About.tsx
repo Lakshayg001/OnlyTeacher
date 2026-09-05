@@ -45,93 +45,6 @@ export default function About() {
                 icons={['graduation', 'heart', 'globe']}
             />
 
-            {/* mission split */}
-            <section className="py-14">
-                <div className="container-tot grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
-                    <Reveal>
-                        <div className="relative">
-                            <div className="overflow-hidden rounded-4xl shadow-clay-lg ring-8 ring-white">
-                                <SmartImage src="/aboutv.jpeg" alt="A teacher working with a student" fallbackIcon="teacher" className="w-full" imgClassName="!h-auto !object-contain" />
-                            </div>
-
-                            <div className="absolute -left-5 -top-5 animate-float">
-                                <ClayIcon name="bulb" size={62} />
-                            </div>
-                        </div>
-                    </Reveal>
-
-                    <Reveal delay={0.1}>
-                        <SectionHeading
-                            align="left"
-                            className="mt-4"
-                            title={<span className="font-bold text-navy-800">The Right <span className="text-amber-500">Teacher</span> and perfect <span className="text-forest-500">pedagogy</span> can Change Everything.</span>}
-                            sub="Every child deserves a teacher who sees more than a grade, a teacher who understands how they think, how they learn, and what helps them believe in themselves."
-                        />
-                        <div className="mt-8 grid sm:grid-cols-2 gap-4">
-                            {[
-                                {
-                                    icon: 'teacher' as const,
-                                    title: 'A Teacher Who Gets You',
-                                    body: "Find a teacher who understands your child's questions, strengths, challenges and learning style and makes them feel comfortable.",
-                                },
-                                {
-                                    icon: 'target' as const,
-                                    title: 'Learning That Feels Like Yours',
-                                    body: "No two children learn in exactly the same way. Learning is always personalised.",
-                                },
-                                {
-                                    icon: 'globe' as const,
-                                    title: 'Great Teaching Without Borders',
-                                    body: "TOT connects children with experienced teachers across the world.",
-                                },
-                                {
-                                    icon: 'rocket' as const,
-                                    title: 'From "I Can\'t" to "I Can."',
-                                    body: "We help children build knowledge, confidence, curiosity and independent learning skills.",
-                                },
-                            ].map((card) => (
-                                <div key={card.title} className="flex flex-col sm:flex-row gap-4 rounded-3xl border border-navy-100 bg-white p-5 shadow-clay">
-                                    <div className="shrink-0">
-                                        <ClayIcon name={card.icon} size={48} />
-                                    </div>
-                                    <div>
-                                        <h3 className="font-display text-[17px] font-extrabold leading-snug text-navy-800">{card.title}</h3>
-                                        <p className="mt-1.5 text-[14px] leading-relaxed text-navy-500">{card.body}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </Reveal>
-                </div>
-            </section>
-
-            {/* values */}
-            <section className="py-14">
-                <div className="container-tot">
-                    <div className="panel bg-gradient-to-br from-mint via-white to-peach px-6 py-12 shadow-clay sm:px-10">
-                        <div aria-hidden="true" className="wash wash-mint" />
-                        <div className="relative">
-                            <SectionHeading
-                                eyebrow="What we hold to"
-                                tone="forest"
-                                title={<>Four Promises Behind Every <span className="text-gradient-amber">TOT Class</span></>}
-                            />
-                            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                                {VALUES.map((v, i) => (
-                                    <Reveal key={v.title} delay={i * 0.07}>
-                                        <div className="h-full rounded-4xl border border-navy-100 bg-white p-5 shadow-clay transition-transform duration-300 hover:-translate-y-1.5">
-                                            <ClayIcon name={v.icon} size={54} />
-                                            <h3 className="mt-3.5 font-display text-lg font-extrabold leading-snug text-navy-800">{v.title}</h3>
-                                            <p className="mt-1.5 text-[14px] leading-relaxed text-navy-500">{v.body}</p>
-                                        </div>
-                                    </Reveal>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             {/* philosophy */}
             <section className="py-14">
                 <div className="container-tot">
@@ -221,6 +134,93 @@ export default function About() {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </Reveal>
+                </div>
+            </section>
+
+            {/* values */}
+            <section className="py-14">
+                <div className="container-tot">
+                    <div className="panel bg-gradient-to-br from-mint via-white to-peach px-6 py-12 shadow-clay sm:px-10">
+                        <div aria-hidden="true" className="wash wash-mint" />
+                        <div className="relative">
+                            <SectionHeading
+                                eyebrow="What we hold to"
+                                tone="forest"
+                                title={<>Four Promises Behind Every <span className="text-gradient-amber">TOT Class</span></>}
+                            />
+                            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                                {VALUES.map((v, i) => (
+                                    <Reveal key={v.title} delay={i * 0.07}>
+                                        <div className="h-full rounded-4xl border border-navy-100 bg-white p-5 shadow-clay transition-transform duration-300 hover:-translate-y-1.5">
+                                            <ClayIcon name={v.icon} size={54} />
+                                            <h3 className="mt-3.5 font-display text-lg font-extrabold leading-snug text-navy-800">{v.title}</h3>
+                                            <p className="mt-1.5 text-[14px] leading-relaxed text-navy-500">{v.body}</p>
+                                        </div>
+                                    </Reveal>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* mission split */}
+            <section className="py-14">
+                <div className="container-tot grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+                    <Reveal>
+                        <div className="relative">
+                            <div className="overflow-hidden rounded-4xl shadow-clay-lg ring-8 ring-white">
+                                <SmartImage src="/aboutv.jpeg" alt="A teacher working with a student" fallbackIcon="teacher" className="w-full" imgClassName="!h-auto !object-contain" />
+                            </div>
+
+                            <div className="absolute -left-5 -top-5 animate-float">
+                                <ClayIcon name="bulb" size={62} />
+                            </div>
+                        </div>
+                    </Reveal>
+
+                    <Reveal delay={0.1}>
+                        <SectionHeading
+                            align="left"
+                            className="mt-4"
+                            title={<span className="font-bold text-navy-800">The Right <span className="text-amber-500">Teacher</span> and perfect <span className="text-forest-500">pedagogy</span> can Change Everything.</span>}
+                            sub="Every child deserves a teacher who sees more than a grade, a teacher who understands how they think, how they learn, and what helps them believe in themselves."
+                        />
+                        <div className="mt-8 grid sm:grid-cols-2 gap-4">
+                            {[
+                                {
+                                    icon: 'teacher' as const,
+                                    title: 'A Teacher Who Gets You',
+                                    body: "Find a teacher who understands your child's questions, strengths, challenges and learning style and makes them feel comfortable.",
+                                },
+                                {
+                                    icon: 'target' as const,
+                                    title: 'Learning That Feels Like Yours',
+                                    body: "No two children learn in exactly the same way. Learning is always personalised.",
+                                },
+                                {
+                                    icon: 'globe' as const,
+                                    title: 'Great Teaching Without Borders',
+                                    body: "TOT connects children with experienced teachers across the world.",
+                                },
+                                {
+                                    icon: 'rocket' as const,
+                                    title: 'From "I Can\'t" to "I Can."',
+                                    body: "We help children build knowledge, confidence, curiosity and independent learning skills.",
+                                },
+                            ].map((card) => (
+                                <div key={card.title} className="flex flex-col sm:flex-row gap-4 rounded-3xl border border-navy-100 bg-white p-5 shadow-clay">
+                                    <div className="shrink-0">
+                                        <ClayIcon name={card.icon} size={48} />
+                                    </div>
+                                    <div>
+                                        <h3 className="font-display text-[17px] font-extrabold leading-snug text-navy-800">{card.title}</h3>
+                                        <p className="mt-1.5 text-[14px] leading-relaxed text-navy-500">{card.body}</p>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </Reveal>
                 </div>

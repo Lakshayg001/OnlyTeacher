@@ -147,7 +147,7 @@ export default function About() {
                                                 <path d="m8 14 4-4 4 4"/>
                                             </svg>
                                         </div>
-                                        <h2 className="font-display text-2xl font-extrabold uppercase tracking-wide text-navy-800 sm:text-3xl">
+                                        <h2 className="font-display text-2xl font-extrabold text-navy-800 sm:text-3xl">
                                             The Philosophy Behind <span className="text-amber-500">TOT</span>
                                         </h2>
                                     </div>

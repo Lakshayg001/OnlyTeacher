@@ -153,8 +153,8 @@ export default function About() {
                                     </div>
 
                                     <div className="space-y-4">
-                                        <h3 className="text-[17px] font-extrabold text-navy-800">
-                                            Inspired by the Idea of the "Only True Teacher"
+                                        <h3 className="font-display text-xl font-extrabold text-navy-800">
+                                            Inspired by the <span className="text-amber-500">Idea</span> of the "Only True <span className="text-forest-500">Teacher</span>"
                                         </h3>
                                         <p className="text-[15px] leading-relaxed text-navy-600">
                                             Swami Vivekananda described a true teacher not simply as someone who possesses knowledge, but as someone who can <span className="font-bold text-amber-600">understand the learner deeply enough to teach from the learner's perspective.</span>
@@ -168,9 +168,9 @@ export default function About() {
                                     </div>
 
                                     <div className="space-y-4">
-                                        <p className="text-[15px] font-extrabold text-navy-800">
+                                        <h3 className="font-display text-xl font-extrabold text-navy-800">
                                             For TOT, this idea becomes a guiding principle:
-                                        </p>
+                                        </h3>
                                         
                                         <div className="flex items-start gap-4">
                                             <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-600">

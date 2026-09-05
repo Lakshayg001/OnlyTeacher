@@ -142,7 +142,10 @@ export default function About() {
                                 <div className="space-y-8 relative z-10">
                                     <div className="flex items-center gap-4">
                                         <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-amber-500 text-white shadow-sm">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m7.5 17 4.5-4.5 4.5 4.5"/><path d="M12 12.5V17"/></svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                                <circle cx="12" cy="12" r="9"/>
+                                                <path d="m8 14 4-4 4 4"/>
+                                            </svg>
                                         </div>
                                         <h2 className="font-display text-2xl font-extrabold uppercase tracking-wide text-navy-800 sm:text-3xl">
                                             The Philosophy Behind <span className="text-amber-500">TOT</span>
@@ -204,7 +207,7 @@ export default function About() {
 
                                 {/* Right Image */}
                                 <div className="relative flex justify-center lg:justify-end">
-                                    <div className="relative w-full max-w-sm">
+                                    <div className="relative w-full max-w-sm flex flex-col items-center">
                                         <div className="absolute inset-0 rounded-full bg-amber-400/20 blur-3xl" />
                                         <img 
                                             src="/swamiji.png" 
@@ -212,7 +215,7 @@ export default function About() {
                                             className="relative z-10 w-full object-contain drop-shadow-2xl"
                                             style={{ maxHeight: '600px', maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)' }}
                                         />
-                                        <p className="absolute bottom-4 right-4 z-20 font-display text-2xl text-navy-800/40 italic" style={{ fontFamily: "'Brush Script MT', cursive" }}>
+                                        <p className="relative z-20 mt-4 text-center font-display text-2xl text-navy-800/40 italic" style={{ fontFamily: "'Brush Script MT', cursive" }}>
                                             Swami Vivekananda
                                         </p>
                                     </div>

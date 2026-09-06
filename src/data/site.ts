@@ -306,13 +306,13 @@ export const COURSE_SPECS: Spec[] = [
 export const COURSES: Course[] = [
  {
   id: 'c1',
-  title: 'Number Sense & Early Algebra',
+  title: 'Math Quest',
   subject: 'Mathematics',
   grade: 'Grades 3–5',
   track: 'primary',
-  image: IMG.math,
+  image: '/mathhome.jpeg',
   icon: 'math',
-  blurb: 'Confidence with numbers before speed built through play and pattern.',
+  blurb: 'Solve it. Discover it. Master it.',
   boards: ['CBSE', 'ICSE', 'IGCSE'],
   modules: 12,
   hours: 36,

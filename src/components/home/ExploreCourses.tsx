@@ -127,12 +127,9 @@ export function ExploreCourses() {
                         src={c.image}
                         alt={c.title}
                         fallbackIcon={c.icon}
-                        ratio="16/10"
+                        ratio={c.image.includes('mathhome.jpeg') ? "1/1" : "16/10"}
                         className="w-full bg-white"
-                        imgClassName={cn(
-                          'group-hover:scale-105',
-                          c.image.includes('mathhome.jpeg') && '!object-contain'
-                        )}
+                        imgClassName="group-hover:scale-105"
                       />
                       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-900/60 via-transparent to-transparent" />
                       <span className={cn('absolute left-4 top-4 rounded-full px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.12em]', ACCENT_TEXT[c.accent])}>

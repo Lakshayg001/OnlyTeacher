@@ -132,7 +132,7 @@ export default function Courses() {
            src={c.image}
            alt={c.title}
            fallbackIcon={c.icon}
-           ratio={c.image.includes('mathhome.jpeg') ? "1/1" : "16/10"}
+           ratio={c.image.includes('/classes/') ? "1/1" : "16/10"}
            className="w-full bg-white"
            imgClassName="group-hover:scale-105"
           />

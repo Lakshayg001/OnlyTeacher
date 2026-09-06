@@ -247,20 +247,8 @@ export default function About() {
                             <div className="absolute top-0 left-0 -ml-20 -mt-20 h-[500px] w-[500px] rounded-full bg-navy-50 blur-3xl" />
                             <div className="absolute bottom-0 right-0 -mr-20 -mb-20 h-[400px] w-[400px] rounded-full bg-peach/20 blur-3xl" />
                             
-                            <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-8 items-center relative z-10">
-                                {/* Left Image */}
-                                <div className="relative flex justify-center lg:justify-start">
-                                    <div className="relative w-full max-w-md">
-                                        <div className="absolute inset-0 rounded-full bg-amber-400/10 blur-2xl" />
-                                        <img
-                                            src="/akhil.png"
-                                            alt="Akhilesh Singh - CEO"
-                                            className="relative z-10 w-full object-contain drop-shadow-2xl"
-                                        />
-                                    </div>
-                                </div>
-
-                                {/* Right Content */}
+                            <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8 items-center relative z-10">
+                                {/* Left Content */}
                                 <div className="space-y-6">
                                     <div className="space-y-1">
                                         <h3 className="text-xl md:text-2xl font-medium text-navy-800">
@@ -276,13 +264,25 @@ export default function About() {
                                         <span className="text-4xl md:text-5xl font-serif font-bold text-amber-500 leading-none mt-1">"</span>
                                         <p className="text-xl md:text-2xl font-medium italic text-navy-800 leading-tight">
                                             The future of education is not about teaching every child the same way; it is about understanding every child deeply enough to help them learn their way.
-                                            <span className="text-4xl md:text-5xl font-serif font-bold text-amber-500 leading-none ml-2">"</span>
+                                            <span className="inline-block text-4xl md:text-5xl font-serif font-bold text-amber-500 leading-[0] ml-2 translate-y-2">"</span>
                                         </p>
                                     </div>
 
                                     <p className="text-[15px] md:text-[16px] leading-relaxed text-navy-600 font-medium max-w-2xl">
                                         Akhilesh is a Physics teacher at heart and an engineer by education, bringing 17 years of experience across India's evolving EdTech ecosystem. His journey with Unicorn EdTech companies, high growth startups, and leading education organizations has shaped his belief that technology must serve meaningful learning. As CEO of TOT, his vision is to bring together great teachers, strong pedagogy, technology, and learner understanding to help every child build knowledge, confidence, curiosity, and lifelong learning skills.
                                     </p>
+                                </div>
+
+                                {/* Right Image */}
+                                <div className="relative flex justify-center lg:justify-end">
+                                    <div className="relative w-full max-w-md">
+                                        <div className="absolute inset-0 rounded-full bg-amber-400/10 blur-2xl" />
+                                        <img
+                                            src="/akhil.png"
+                                            alt="Akhilesh Singh - CEO"
+                                            className="relative z-10 w-full object-contain drop-shadow-2xl"
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>

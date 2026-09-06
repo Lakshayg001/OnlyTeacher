@@ -239,6 +239,57 @@ export default function About() {
                 </div>
             </section>
 
+            {/* co-founder */}
+            <section className="py-14">
+                <div className="container-tot">
+                    <Reveal>
+                        <div className="relative overflow-hidden rounded-4xl bg-white p-8 shadow-clay sm:p-12 lg:p-16">
+                            <div className="absolute top-0 right-0 -mr-20 -mt-20 h-[500px] w-[500px] rounded-full bg-peach/20 blur-3xl" />
+                            <div className="absolute bottom-0 left-0 -ml-20 -mb-20 h-[400px] w-[400px] rounded-full bg-navy-50 blur-3xl" />
+                            
+                            <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-8 items-center relative z-10">
+                                {/* Left Image */}
+                                <div className="relative flex justify-center lg:justify-start">
+                                    <div className="relative w-full max-w-md">
+                                        <div className="absolute inset-0 rounded-full bg-amber-400/10 blur-2xl" />
+                                        <img
+                                            src="/deep.png"
+                                            alt="Deepika Rai - Co-Founder"
+                                            className="relative z-10 w-full object-contain drop-shadow-2xl"
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Right Content */}
+                                <div className="space-y-6">
+                                    <div className="space-y-1">
+                                        <h3 className="text-xl md:text-2xl font-medium text-navy-800">
+                                            Meet Our Co-Founder
+                                        </h3>
+                                        <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight">
+                                            <span className="text-navy-900">Deepika </span>
+                                            <span className="text-amber-500">Rai</span>
+                                        </h2>
+                                    </div>
+
+                                    <div className="relative py-2 flex gap-2 items-start">
+                                        <span className="text-4xl md:text-5xl font-serif font-bold text-amber-500 leading-none mt-1">"</span>
+                                        <p className="text-xl md:text-2xl font-medium italic text-navy-800 leading-tight">
+                                            When we understand the learner, we unlock the potential within.
+                                            <span className="text-4xl md:text-5xl font-serif font-bold text-amber-500 leading-none ml-2">"</span>
+                                        </p>
+                                    </div>
+
+                                    <p className="text-[15px] md:text-[16px] leading-relaxed text-navy-600 font-medium max-w-2xl">
+                                        With over 20 years of experience in Corporate HR, Recruitment, and Talent Management, Deepika Rai brings a deep understanding of people, potential, and purposeful guidance. Her journey into EdTech reflects a belief that education should go beyond academics. As Co-Founder of TOT, she is helping build a personalized, technology-enabled learning ecosystem that nurtures knowledge, confidence, critical thinking, and future-ready skills turning experience in nurturing talent into a mission to nurture the next generation.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </Reveal>
+                </div>
+            </section>
+
             {/* values */}
             <section className="py-14">
                 <div className="container-tot">

@@ -138,9 +138,7 @@ export function ExploreCourses() {
                       <span className="absolute -bottom-6 right-4 drop-shadow-lg transition-transform duration-500 group-hover:-rotate-12 group-hover:scale-110">
                         <ClayIcon name={c.icon} size={58} />
                       </span>
-                      <span className="absolute bottom-3 left-4 text-[12px] font-extrabold text-white">
-                        {c.grade}
-                      </span>
+
                     </div>
 
                     <div className="flex flex-1 flex-col p-5 pt-6">

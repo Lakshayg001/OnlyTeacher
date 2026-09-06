@@ -144,20 +144,8 @@ export default function About() {
                             <div className="absolute top-0 right-0 -mr-20 -mt-20 h-[500px] w-[500px] rounded-full bg-peach/20 blur-3xl" />
                             <div className="absolute bottom-0 left-0 -ml-20 -mb-20 h-[400px] w-[400px] rounded-full bg-navy-50 blur-3xl" />
                             
-                            <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-8 items-center relative z-10">
-                                {/* Left Image */}
-                                <div className="relative flex justify-center lg:justify-start">
-                                    <div className="relative w-full max-w-md">
-                                        <div className="absolute inset-0 rounded-full bg-amber-400/10 blur-2xl" />
-                                        <img
-                                            src="/anish1.png"
-                                            alt="Anish Rajan - Founder"
-                                            className="relative z-10 w-full object-contain drop-shadow-2xl"
-                                        />
-                                    </div>
-                                </div>
-
-                                {/* Right Content */}
+                            <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8 items-center relative z-10">
+                                {/* Left Content */}
                                 <div className="space-y-6">
                                     <div className="space-y-1">
                                         <h3 className="text-xl md:text-2xl font-medium text-navy-800">
@@ -181,6 +169,18 @@ export default function About() {
                                     <p className="text-[15px] md:text-[16px] leading-relaxed text-navy-600 font-medium max-w-2xl">
                                         Anish Rajan is an education-focused entrepreneur and recruitment professional with years of experience connecting people and opportunities across the education and EdTech ecosystem. His journey with educators, leaders, and learners inspired him to build The Only Teacher (TOT) a vision where education becomes more personal, empathetic, engaging, and truly learner-centric.
                                     </p>
+                                </div>
+
+                                {/* Right Image */}
+                                <div className="relative flex justify-center lg:justify-end">
+                                    <div className="relative w-full max-w-md">
+                                        <div className="absolute inset-0 rounded-full bg-amber-400/10 blur-2xl" />
+                                        <img
+                                            src="/anishrep.png"
+                                            alt="Anish Rajan - Founder"
+                                            className="relative z-10 w-full object-contain drop-shadow-2xl"
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>

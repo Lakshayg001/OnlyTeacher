@@ -66,11 +66,12 @@ export function SmartImage({
      decoding="async"
      onLoad={() => setState('ok')}
      onError={() => setState('error')}
-     className={cn(
-      'h-full w-full object-cover transition-all duration-700',
-      state === 'ok' ? 'scale-100 opacity-100' : 'scale-105 opacity-0',
-      imgClassName,
-     )}
+      className={cn(
+       'h-full w-full transition-all duration-700',
+       imgClassName?.includes('object-contain') ? '' : 'object-cover',
+       state === 'ok' ? 'scale-100 opacity-100' : 'scale-105 opacity-0',
+       imgClassName,
+      )}
     />
    )}
 

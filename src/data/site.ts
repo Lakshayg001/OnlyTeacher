@@ -351,8 +351,8 @@ export const COURSES: Course[] = [
  },
  {
   id: 'c4',
-  title: 'Fractions, Ratios & Geometry',
-  subject: 'Mathematics',
+  title: 'Exam Edge',
+  subject: 'Exam Edge',
   grade: 'Grades 6–8',
   track: 'intermediate',
   image: '/classes/f1.jpeg',

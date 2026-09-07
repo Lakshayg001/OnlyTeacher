@@ -60,45 +60,7 @@ export default function Courses() {
     icons={['math', 'science', 'technology']}
    />
 
-   {/* filters */}
-   <section className="py-8">
-    <div className="container-tot">
-     <FilterBar
-      query={query}
-      onQuery={setQuery}
-      placeholder="Search a subject, topic or course…"
-      resultLabel={`${results.length} course${results.length === 1 ? '' : 's'}`}
-      onReset={() => {
-       setQuery('');
-       setTrack('all');
-       setBoard('all');
-       setSubject('all');
-      }}
-      groups={[
-       {
-        id: 'subject',
-        label: 'Subject',
-        value: subject,
-        onChange: setSubject,
-        options: subjects.map((s) => ({
-         value: s,
-         label: s === 'all' ? 'All subjects' : s,
-        })),
-       },
-       {
-        id: 'stage',
-        label: 'Stage',
-        value: track,
-        onChange: setTrack,
-        options: [
-         { value: 'all', label: 'All stages' },
-         ...TRACKS.map((t) => ({ value: t.id, label: t.label, hint: t.grades })),
-        ],
-       },
-      ]}
-     />
-    </div>
-   </section>
+
 
    {/* results */}
    <section className="pb-14">

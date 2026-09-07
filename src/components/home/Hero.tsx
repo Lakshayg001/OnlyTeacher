@@ -40,7 +40,7 @@ export function Hero() {
                                     <span className="relative inline-flex h-2 w-2 rounded-full bg-forest-500" />
                                 </span>
                                 <span className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-navy-700">
-                                    One-to-One Live Tuition · Grades 3–12
+                                    One-to-One Live Tuition
                                 </span>
                             </motion.div>
 
@@ -52,7 +52,7 @@ export function Hero() {
                             >
                                 Find Your
                                 <br />
-                                Perfect{' '}
+                                Only{' '}
                                 <span className="relative inline-block">
                                     <span className="text-amber-500">Teacher</span>
                                     <motion.svg

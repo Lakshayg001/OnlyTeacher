@@ -45,7 +45,7 @@ const ACCENT_TEXT = {
 } as const;
 
 export function ExploreCourses() {
-  const [track, setTrack] = useState<TrackId>('secondary');
+  const [track, setTrack] = useState<TrackId>('intermediate');
   const courses = COURSES.filter((c) => c.track === track);
 
   return (

@@ -68,7 +68,7 @@ export interface Course {
  accent: 'amber' | 'forest' | 'navy';
 }
 
-export type TrackId = 'primary' | 'middle' | 'secondary' | 'senior';
+export type TrackId = 'elementary' | 'intermediate' | 'advanced';
 
 export interface Track {
  id: TrackId;

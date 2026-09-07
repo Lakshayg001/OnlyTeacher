@@ -15,8 +15,8 @@ export function Manifesto() {
       <Eyebrow tone="forest">{MANIFESTO_INTRO.eyebrow}</Eyebrow>
 
       <h2 className="mt-5 text-balance font-display text-3xl font-extrabold leading-[1.1] text-navy-800 sm:text-4xl lg:text-[2.9rem]">
-       Every Student Deserves the{' '}
-       <span className="text-amber-500">Right Teacher</span>
+       Every Student Deserves The{' '}
+       <span className="text-amber-500">Only Teacher</span>
       </h2>
 
       <p className="mt-5 max-w-md text-[17px] leading-relaxed text-navy-500">

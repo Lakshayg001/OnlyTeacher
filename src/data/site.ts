@@ -31,8 +31,9 @@ export const NAV: NavItem[] = [
   children: [
    { label: 'Mathematics', href: '/courses?s=Mathematics', desc: 'Grades 3–12 · All boards', icon: 'math' },
    { label: 'Science', href: '/courses?s=Science', desc: 'Physics · Chemistry · Biology', icon: 'science' },
-   { label: 'Technology', href: '/courses?s=Technology', desc: 'Coding · AI · Computer Science', icon: 'technology' },
-   { label: 'Engineering Prep', href: '/courses?s=Physics', desc: 'Olympiad · Entrance readiness', icon: 'engineering' },
+   { label: 'English', href: '/courses?s=English', desc: 'Language · Literature · Reading', icon: 'book' },
+   { label: 'ExamEdge', href: '/courses?s=ExamEdge', desc: 'Olympiad · Entrance readiness', icon: 'engineering' },
+   { label: 'Technology (Coming Soon)', href: '/courses?s=Technology', desc: 'Coding · AI · Computer Science', icon: 'technology' },
   ],
  },
  { label: 'Blog', href: '/blog' },

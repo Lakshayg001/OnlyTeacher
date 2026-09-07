@@ -143,13 +143,13 @@ export default function About() {
                         <div className="relative overflow-hidden rounded-4xl bg-white p-8 shadow-clay sm:p-12 lg:p-16">
                             <div className="absolute top-0 right-0 -mr-20 -mt-20 h-[500px] w-[500px] rounded-full bg-peach/20 blur-3xl" />
                             <div className="absolute bottom-0 left-0 -ml-20 -mb-20 h-[400px] w-[400px] rounded-full bg-navy-50 blur-3xl" />
-                            
+
                             <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8 items-center relative z-10">
                                 {/* Left Content */}
                                 <div className="space-y-6">
                                     <div className="space-y-1">
                                         <h3 className="text-xl md:text-2xl font-medium text-navy-800">
-                                            Meet Our Founder :
+                                            Meet Our Founder
                                         </h3>
                                         <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight">
                                             <span className="text-navy-900">Anish </span>
@@ -195,7 +195,7 @@ export default function About() {
                         <div className="relative overflow-hidden rounded-4xl bg-white p-8 shadow-clay sm:p-12 lg:p-16">
                             <div className="absolute top-0 right-0 -mr-20 -mt-20 h-[500px] w-[500px] rounded-full bg-peach/20 blur-3xl" />
                             <div className="absolute bottom-0 left-0 -ml-20 -mb-20 h-[400px] w-[400px] rounded-full bg-navy-50 blur-3xl" />
-                            
+
                             <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-8 items-center relative z-10">
                                 {/* Left Image */}
                                 <div className="relative flex justify-center lg:justify-start">
@@ -246,7 +246,7 @@ export default function About() {
                         <div className="relative overflow-hidden rounded-4xl bg-white p-8 shadow-clay sm:p-12 lg:p-16">
                             <div className="absolute top-0 left-0 -ml-20 -mt-20 h-[500px] w-[500px] rounded-full bg-navy-50 blur-3xl" />
                             <div className="absolute bottom-0 right-0 -mr-20 -mb-20 h-[400px] w-[400px] rounded-full bg-peach/20 blur-3xl" />
-                            
+
                             <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8 items-center relative z-10">
                                 {/* Left Content */}
                                 <div className="space-y-6">

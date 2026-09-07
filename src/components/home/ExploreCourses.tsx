@@ -46,8 +46,8 @@ const ACCENT_TEXT = {
 } as const;
 
 export function ExploreCourses() {
-  const [track, setTrack] = useState<TrackId>('intermediate');
-  const courses = COURSES.filter((c) => c.track === track);
+  const [track, setTrack] = useState<TrackId>('elementary');
+  const courses = COURSES.filter((c) => ['c1', 'c2', 'c3'].includes(c.id));
 
   return (
     <section id="courses" className="relative py-14 sm:py-18">

@@ -326,7 +326,7 @@ export const COURSES: Course[] = [
   track: 'elementary',
   image: '/classes/f2.jpeg',
   icon: 'science',
-  blurb: 'Read it. Speak it. Own it.',
+  blurb: 'Ask. Explore. Discover.',
   boards: ['CBSE', 'IB PYP', 'American'],
   modules: 10,
   hours: 30,

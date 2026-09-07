@@ -114,9 +114,12 @@ export default function Courses() {
           </h3>
           <p className="mt-1.5 flex-1 text-[14px] leading-relaxed text-navy-500">{c.blurb}</p>
 
+          <p className="mt-2 text-[13px] font-bold text-navy-600">
+           {c.track.charAt(0).toUpperCase() + c.track.slice(1)}
+          </p>
 
           <Button to="/contact" variant="outline" size="sm" full className="mt-4">
-           Book a free demo
+           Book A Free Class
           </Button>
          </div>
         </motion.article>

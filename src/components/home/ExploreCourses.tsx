@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight, BookOpen, Clock3, Sparkles } from 'lucide-react';
 import { COURSES, TRACKS } from '@/data/site';
@@ -118,7 +119,8 @@ export function ExploreCourses() {
                 className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
               >
                 {courses.map((c) => (
-                  <article
+                  <Link
+                    to="/courses"
                     key={c.id}
                     className="group flex flex-col overflow-hidden rounded-4xl border border-navy-100 bg-white shadow-clay transition-all duration-300 hover:-translate-y-2 hover:border-amber-200 hover:shadow-clay-lg"
                   >
@@ -153,7 +155,7 @@ export function ExploreCourses() {
 
                       <div className={cn('mt-4 h-1.5 w-full origin-left scale-x-0 rounded-full bg-gradient-to-r transition-transform duration-500 group-hover:scale-x-100', ACCENT_BAR[c.accent])} />
                     </div>
-                  </article>
+                  </Link>
                 ))}
               </motion.div>
             </AnimatePresence>

@@ -47,7 +47,8 @@ const ACCENT_TEXT = {
 
 export function ExploreCourses() {
   const [track, setTrack] = useState<TrackId>('elementary');
-  const courses = COURSES.filter((c) => ['c1', 'c2', 'c3'].includes(c.id));
+  const displayOrder = ['c2', 'c1', 'c3'];
+  const courses = displayOrder.map((id) => COURSES.find((c) => c.id === id)!);
 
   return (
     <section id="courses" className="relative py-14 sm:py-18">
@@ -75,9 +76,9 @@ export function ExploreCourses() {
                 {TRACKS.map((t) => {
                   const on = t.id === track;
                   return (
-                    <button
+                    <Link
+                      to="/courses"
                       key={t.id}
-                      onClick={() => setTrack(t.id)}
                       className={cn(
                         'group relative flex shrink-0 items-center gap-2.5 rounded-full border-2 py-2 pl-2 pr-5 transition-all duration-300',
                         on
@@ -102,7 +103,7 @@ export function ExploreCourses() {
                           {t.grades}
                         </span>
                       </span>
-                    </button>
+                    </Link>
                   );
                 })}
               </div>

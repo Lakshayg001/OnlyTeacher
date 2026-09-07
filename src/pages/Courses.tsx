@@ -114,15 +114,7 @@ export default function Courses() {
           </h3>
           <p className="mt-1.5 flex-1 text-[14px] leading-relaxed text-navy-500">{c.blurb}</p>
 
-          <div className="mt-4 flex items-center justify-between border-t border-navy-100 pt-4 text-[12px] font-bold text-navy-500">
-           <span className="inline-flex items-center gap-1.5">
-            <BookOpen className="h-3.5 w-3.5 text-amber-500" /> {c.modules}
-           </span>
-           <span className="inline-flex items-center gap-1.5">
-            <Clock3 className="h-3.5 w-3.5 text-forest-500" /> {c.hours}h
-           </span>
-           <Stars rating={c.rating} size={12} />
-          </div>
+
           <Button to="/contact" variant="outline" size="sm" full className="mt-4">
            Book a free demo
           </Button>

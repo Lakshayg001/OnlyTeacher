@@ -6,7 +6,6 @@ import ExploreCourses from '@/components/home/ExploreCourses';
 
 import DemoPromise from '@/components/home/DemoPromise';
 import Faq from '@/components/home/Faq';
-import KnowledgeHub from '@/components/home/KnowledgeHub';
 
 export default function Home() {
  return (
@@ -19,7 +18,6 @@ export default function Home() {
 
    <DemoPromise />
    <Faq />
-   <KnowledgeHub />
   </>
  );
 }

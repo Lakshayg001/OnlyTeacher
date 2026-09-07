@@ -35,7 +35,7 @@ export default function Courses() {
   [],
  );
 
- const results = COURSES.filter((c) => {
+ const results = COURSES.slice(0, 4).filter((c) => {
   if (subject !== 'all' && c.subject !== subject) return false;
   if (track !== 'all' && c.track !== track) return false;
 

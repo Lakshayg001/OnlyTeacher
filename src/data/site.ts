@@ -355,7 +355,7 @@ export const COURSES: Course[] = [
   subject: 'Mathematics',
   grade: 'Grades 6–8',
   track: 'intermediate',
-  image: IMG.mathBoard,
+  image: '/classes/f1.jpeg',
   icon: 'math',
   blurb: 'The middle-school bridge most students slip on rebuilt properly.',
   boards: ['CBSE', 'ICSE', 'IB MYP'],

@@ -94,9 +94,9 @@ export default function Courses() {
            src={c.image}
            alt={c.title}
            fallbackIcon={c.icon}
-           ratio={c.image.includes('/classes/') ? "1/1" : "16/10"}
+           ratio={c.image.includes('/classes/') ? "4/3" : "16/10"}
            className="w-full bg-white"
-           imgClassName="group-hover:scale-105"
+           imgClassName="object-contain group-hover:scale-105"
           />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-900/60 to-transparent" />
           <span className={cn('absolute left-4 top-4 rounded-full px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.12em]', ACCENT_TEXT[c.accent])}>

@@ -114,9 +114,11 @@ export default function Courses() {
           </h3>
           <p className="mt-1.5 flex-1 text-[14px] leading-relaxed text-navy-500">{c.blurb}</p>
 
-          <p className="mt-2 text-[13px] font-bold text-navy-600">
-           Elementary, Intermediate, Advanced
-          </p>
+          {c.id !== 'c4' && (
+           <p className="mt-2 text-[13px] font-bold text-navy-600">
+            Elementary • Intermediate • Advanced
+           </p>
+          )}
 
           <Button to="/contact" variant="outline" size="sm" full className="mt-4">
            Book A Free Class

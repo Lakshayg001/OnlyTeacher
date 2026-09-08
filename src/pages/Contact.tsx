@@ -304,13 +304,7 @@ export default function Contact() {
          )}
         </div>
 
-        {/* reassurance sits with the submit button, where the hesitation is */}
-        <div className="mt-5 flex items-center gap-4 rounded-3xl border border-forest-200 bg-forest-50 p-4">
-         <ClayIcon name="shield" size={44} />
-         <p className="text-[13.5px] font-bold leading-snug text-forest-800">
-          We never share your details, and there is no card required to book.
-         </p>
-        </div>
+
        </form>
       )}
      </div>
@@ -320,7 +314,7 @@ export default function Contact() {
       <Reveal>
        <div className="relative overflow-hidden rounded-4xl shadow-clay ring-8 ring-white">
         <SmartImage
-         src={IMG.heroLaptop}
+         src="/con.jpeg"
          alt="A student in a live one-to-one lesson"
          fallbackIcon="laptop"
          ratio="4/3"
@@ -343,66 +337,12 @@ export default function Contact() {
        </div>
       </Reveal>
 
-      <Reveal delay={0.04}>
-       <div className="rounded-4xl bg-gradient-to-br from-navy-700 to-navy-900 p-6 shadow-clay-navy">
-        <ClayIcon name="support" size={58} />
-        <h3 className="mt-3.5 font-display text-xl font-extrabold text-white">
-         Prefer to just talk?
-        </h3>
-        <p className="mt-1.5 text-[14.5px] text-navy-300">
-         Our counsellors answer 24×7 across IST, GMT, GST and AEST.
-        </p>
-        <div className="mt-5 space-y-2.5">
-         <a href={`tel:${BRAND.phone.replace(/\s/g, '')}`} className="flex items-center gap-3 rounded-2xl bg-white/[0.07] px-4 py-3 transition-colors hover:bg-white/[0.12]">
-          <Phone className="h-4.5 w-4.5 text-amber-400" />
-          <span className="text-[14.5px] font-extrabold text-white">{BRAND.phone}</span>
-         </a>
-         <a href={`mailto:${BRAND.email}`} className="flex items-center gap-3 rounded-2xl bg-white/[0.07] px-4 py-3 transition-colors hover:bg-white/[0.12]">
-          <Mail className="h-4.5 w-4.5 text-amber-400" />
-          <span className="text-[14.5px] font-extrabold text-white">{BRAND.email}</span>
-         </a>
-         <div className="flex items-start gap-3 rounded-2xl bg-white/[0.07] px-4 py-3">
-          <MapPin className="mt-0.5 h-4.5 w-4.5 shrink-0 text-amber-400" />
-          <span className="text-[13.5px] font-semibold text-navy-200">{BRAND.address}</span>
-         </div>
-        </div>
-       </div>
-      </Reveal>
+
 
      </div>
     </div>
 
-    {/* ------------------------- what happens next -------------------------- */}
-    <div className="container-tot mt-6">
-     <Reveal>
-      <div className="rounded-4xl border border-navy-100 bg-white p-6 shadow-clay sm:p-7">
-       <h2 className="font-display text-lg font-extrabold text-navy-800">
-        What happens next
-       </h2>
-       <ol className="mt-5 grid gap-4 sm:grid-cols-3">
-        {NEXT_STEPS.map((s, i) => (
-         <li
-          key={s.t}
-          className="relative flex items-start gap-3.5 rounded-3xl border border-navy-100 bg-navy-50/50 p-4"
-         >
-          <ClayIcon name={s.icon} size={46} />
-          <span className="min-w-0">
-           <span className="block text-[10px] font-extrabold uppercase tracking-[0.16em] text-navy-400">
-            Step {i + 1}
-           </span>
-           <span className="mt-0.5 block text-[14.5px] font-extrabold leading-snug text-navy-800">
-            {s.t}
-           </span>
-           <span className="mt-0.5 block text-[13px] font-semibold leading-snug text-navy-500">
-            {s.b}
-           </span>
-          </span>
-         </li>
-        ))}
-       </ol>
-      </div>
-     </Reveal>
-    </div>
+
    </section>
   </>
  );

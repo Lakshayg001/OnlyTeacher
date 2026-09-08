@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Check, ClipboardList, Mail, MapPin, PartyPopper, Phone } from 'lucide-react';
 import { BOARDS, BRAND, COUNTRIES, COURSES } from '@/data/site';
 import { IMG } from '@/data/images';
-import conImg from '@/assets/con.jpeg';
+import conImg from '@/assets/contact-img.jpeg';
 import ClayIcon from '@/components/clay/ClayIcon';
 import SmartImage from '@/components/ui/SmartImage';
 import Flag from '@/components/ui/Flag';

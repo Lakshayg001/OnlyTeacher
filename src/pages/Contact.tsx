@@ -322,19 +322,11 @@ export default function Contact() {
          className="w-full"
          overlay
         />
-        <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5">
-         <div>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-[0.14em] text-navy-700">
-           <span className="h-1.5 w-1.5 rounded-full bg-red-500" /> Free demo
-          </span>
-          <p className="mt-2 font-display text-xl font-extrabold leading-tight text-white">
-           50 minutes, one student
+         <div className="absolute inset-x-0 bottom-0 p-5 text-center">
+          <p className="font-display text-lg font-extrabold leading-tight text-white drop-shadow-md">
+           Need Guidance? Arjun, Aditi & TOTO Are Ready to Connect.
           </p>
          </div>
-         <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white/95 font-display text-lg font-extrabold text-amber-600">
-          1:1
-         </span>
-        </div>
        </div>
       </Reveal>
 

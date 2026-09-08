@@ -131,45 +131,7 @@ export default function Courses() {
     </div>
    </section>
 
-   {/* specs */}
-   <section className="pb-16">
-    <div className="container-tot">
-     <Reveal>
-      <div className="panel bg-gradient-to-br from-lilac via-white to-mint px-6 py-12 shadow-clay sm:px-10">
-       <SectionHeading
-        eyebrow="Included with every course"
-        title={
-         <>
-          Six Guarantees,{' '}
-          <span className="text-gradient-amber">Every Single Time.</span>
-         </>
-        }
-       />
-       <div className="mt-9 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
-        {COURSE_SPECS.map((s, i) => (
-         <motion.div
-          key={s.title}
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.45, delay: i * 0.05 }}
-          className={cn(
-           'flex items-start gap-3.5 rounded-3xl border bg-white/70 p-4 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:shadow-clay',
-           SPEC_TONE[s.accent],
-          )}
-         >
-          <ClayIcon name={s.icon} size={46} />
-          <span>
-           <span className="block text-[15px] font-extrabold text-navy-800">{s.title}</span>
-           <span className="mt-0.5 block text-[13px] font-semibold text-navy-500">{s.desc}</span>
-          </span>
-         </motion.div>
-        ))}
-       </div>
-      </div>
-     </Reveal>
-    </div>
-   </section>
+
   </>
  );
 }

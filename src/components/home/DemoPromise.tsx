@@ -127,7 +127,7 @@ export function DemoPromise() {
        <Reveal delay={0.12}>
         <div className="relative h-full overflow-hidden rounded-4xl shadow-clay-lg ring-8 ring-white">
          <SmartImage
-          src="/owl.jpeg"
+          src="/totore.jpeg"
           alt="A live one-to-one online lesson in progress"
           fallbackIcon="laptop"
           ratio="1/1"

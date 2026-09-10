@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowLeft, ArrowRight, Check, ClipboardList, Mail, MapPin, PartyPopper, Phone } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, ChevronDown, ClipboardList, Mail, MapPin, PartyPopper, Phone } from 'lucide-react';
 import { BRAND, COUNTRIES, COURSES } from '@/data/site';
 import { IMG } from '@/data/images';
 import conImg from '@/assets/contact-img.jpeg';
@@ -188,22 +188,11 @@ export default function Contact() {
          >
           {step === 0 && (
            <>
-            <label className="block">
-             <span className="mb-2 block text-[11px] font-extrabold uppercase tracking-[0.16em] text-navy-400">
-              Country
-             </span>
-             <select
-              required
-              value={form.country}
-              onChange={(e) => set('country', e.target.value)}
-              className="h-13 w-full rounded-2xl border-2 border-navy-100 bg-navy-50/50 px-4 text-[15px] font-semibold text-navy-700 outline-none transition-colors focus:border-amber-300 focus:bg-white"
-             >
-              <option value="" disabled>Select a country</option>
-              {COUNTRIES.map((c) => (
-               <option key={c.name} value={c.name}>{c.name}</option>
-              ))}
-             </select>
-            </label>
+            <CountryDropdown
+             value={form.country}
+             onChange={(v) => set('country', v)}
+             options={COUNTRIES.map((c) => ({ value: c.name, label: c.name, flag: c.flag }))}
+            />
             <Field
              label="Board / curriculum"
              value={form.board}
@@ -418,5 +407,85 @@ function Field({
     className="h-13 w-full rounded-2xl border-2 border-navy-100 bg-navy-50/50 px-4 text-[15px] font-semibold text-navy-700 outline-none transition-colors placeholder:font-medium placeholder:text-navy-300 focus:border-amber-300 focus:bg-white"
    />
   </label>
+ );
+}
+
+function CountryDropdown({
+ value,
+ onChange,
+ options,
+}: {
+ value: string;
+ onChange: (v: string) => void;
+ options: { value: string; label: string; flag?: string }[];
+}) {
+ const [open, setOpen] = useState(false);
+ const ref = useRef<HTMLDivElement>(null);
+ const selected = options.find((o) => o.value === value);
+
+ useEffect(() => {
+  function handleClickOutside(event: MouseEvent) {
+   if (ref.current && !ref.current.contains(event.target as Node)) {
+    setOpen(false);
+   }
+  }
+  document.addEventListener('mousedown', handleClickOutside);
+  return () => document.removeEventListener('mousedown', handleClickOutside);
+ }, []);
+
+ return (
+  <div className="relative" ref={ref}>
+   <span className="mb-2 block text-[11px] font-extrabold uppercase tracking-[0.16em] text-navy-400">
+    Country
+   </span>
+   <button
+    type="button"
+    onClick={() => setOpen(!open)}
+    className="flex h-13 w-full items-center justify-between rounded-2xl border-2 border-navy-100 bg-navy-50/50 px-4 text-[15px] font-semibold text-navy-700 outline-none transition-colors hover:bg-navy-50 focus:border-amber-300 focus:bg-white"
+   >
+    {selected ? (
+     <div className="flex items-center gap-2">
+      {selected.flag && <Flag code={selected.flag} size={18} />}
+      <span>{selected.label}</span>
+     </div>
+    ) : (
+     <span className="font-medium text-navy-300">Select a country</span>
+    )}
+    <ChevronDown className={cn('h-5 w-5 text-navy-400 transition-transform', open && 'rotate-180')} />
+   </button>
+
+   <AnimatePresence>
+    {open && (
+     <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.15 }}
+      className="absolute z-10 mt-2 w-full overflow-hidden rounded-2xl border border-navy-100 bg-white p-2 shadow-lg"
+     >
+      <div className="max-h-60 overflow-y-auto pr-1">
+       {options.map((o) => (
+        <button
+         key={o.value}
+         type="button"
+         onClick={() => {
+          onChange(o.value);
+          setOpen(false);
+         }}
+         className={cn(
+          'flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-[14px] font-semibold transition-colors',
+          value === o.value ? 'bg-amber-50 text-amber-700' : 'text-navy-600 hover:bg-navy-50'
+         )}
+        >
+         {o.flag && <Flag code={o.flag} size={20} />}
+         {o.label}
+         {value === o.value && <Check className="ml-auto h-4 w-4 text-amber-500" />}
+        </button>
+       ))}
+      </div>
+     </motion.div>
+    )}
+   </AnimatePresence>
+  </div>
  );
 }

@@ -132,7 +132,7 @@ export function DemoPromise() {
           fallbackIcon="laptop"
           ratio="1/1"
           className="h-full w-full bg-white object-cover"
-          imgClassName="!object-contain"
+          imgClassName="!object-cover"
           overlay
          />
 

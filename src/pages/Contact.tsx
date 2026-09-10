@@ -11,8 +11,8 @@ import PageHero from '@/components/layout/PageHero';
 import { Button, Reveal } from '@/components/ui/Primitives';
 import { cn } from '@/lib/utils';
 
-const GRADES = ['3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
-const SUBJECTS = Array.from(new Set(COURSES.map((c) => c.subject)));
+const GRADES = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+const SUBJECTS = Array.from(new Set(COURSES.map((c) => c.subject))).filter(s => !s.toLowerCase().includes('technology'));
 const SLOTS = ['Weekday morning', 'Weekday afternoon', 'Weekday evening', 'Weekend'];
 
 interface FormState {
@@ -204,17 +204,19 @@ export default function Contact() {
 
           {step === 1 && (
            <>
-            <Choices
+            <DropdownField
              label="Grade"
              value={form.grade}
              onChange={(v) => set('grade', v)}
              options={GRADES.map((g) => ({ value: g, label: `Grade ${g}` }))}
+             placeholder="Select a grade"
             />
-            <Choices
+            <DropdownField
              label="Subject"
              value={form.subject}
              onChange={(v) => set('subject', v)}
              options={SUBJECTS.map((s) => ({ value: s, label: s }))}
+             placeholder="Select a subject"
             />
             <Choices
              label="Preferred slot"
@@ -478,6 +480,84 @@ function CountryDropdown({
          )}
         >
          {o.flag && <Flag code={o.flag} size={20} />}
+         {o.label}
+         {value === o.value && <Check className="ml-auto h-4 w-4 text-amber-500" />}
+        </button>
+       ))}
+      </div>
+     </motion.div>
+    )}
+   </AnimatePresence>
+  </div>
+ );
+}
+
+function DropdownField({
+ label,
+ value,
+ onChange,
+ options,
+ placeholder,
+}: {
+ label: string;
+ value: string;
+ onChange: (v: string) => void;
+ options: { value: string; label: string }[];
+ placeholder?: string;
+}) {
+ const [open, setOpen] = useState(false);
+ const ref = useRef<HTMLDivElement>(null);
+ const selected = options.find((o) => o.value === value);
+
+ useEffect(() => {
+  function handleClickOutside(event: MouseEvent) {
+   if (ref.current && !ref.current.contains(event.target as Node)) {
+    setOpen(false);
+   }
+  }
+  document.addEventListener('mousedown', handleClickOutside);
+  return () => document.removeEventListener('mousedown', handleClickOutside);
+ }, []);
+
+ return (
+  <div className="relative" ref={ref}>
+   <span className="mb-2 block text-[11px] font-extrabold uppercase tracking-[0.16em] text-navy-400">
+    {label}
+   </span>
+   <button
+    type="button"
+    onClick={() => setOpen(!open)}
+    className="flex h-13 w-full items-center justify-between rounded-2xl border-2 border-navy-100 bg-navy-50/50 px-4 text-[15px] font-semibold text-navy-700 outline-none transition-colors hover:bg-navy-50 focus:border-amber-300 focus:bg-white"
+   >
+    <span className={cn(!selected && "font-medium text-navy-300")}>
+     {selected ? selected.label : placeholder || `Select ${label.toLowerCase()}`}
+    </span>
+    <ChevronDown className={cn('h-5 w-5 text-navy-400 transition-transform', open && 'rotate-180')} />
+   </button>
+
+   <AnimatePresence>
+    {open && (
+     <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.15 }}
+      className="absolute z-10 mt-2 w-full overflow-hidden rounded-2xl border border-navy-100 bg-white p-2 shadow-lg"
+     >
+      <div className="max-h-60 overflow-y-auto pr-1">
+       {options.map((o) => (
+        <button
+         key={o.value}
+         type="button"
+         onClick={() => {
+          onChange(o.value);
+          setOpen(false);
+         }}
+         className={cn(
+          'flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-[14px] font-semibold transition-colors',
+          value === o.value ? 'bg-amber-50 text-amber-700' : 'text-navy-600 hover:bg-navy-50'
+         )}
+        >
          {o.label}
          {value === o.value && <Check className="ml-auto h-4 w-4 text-amber-500" />}
         </button>

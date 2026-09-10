@@ -8,6 +8,58 @@ import PageHero from '@/components/layout/PageHero';
 import { Button, Counter, Reveal, SectionHeading } from '@/components/ui/Primitives';
 import { cn } from '@/lib/utils';
 
+const TEACHERS = [
+    {
+        name: 'Tr. Jiya Saxena',
+        initials: 'JS',
+        subject: 'Mathematics Educator',
+        quote: undefined,
+        bio: 'With over 10 years of teaching experience, Tr. Jiya Saxena specialises in Mathematics through personalised, concept-driven learning. She has taught Cambridge, MYP, British Curriculum, GCSE, OCR and Edexcel learners, focusing on conceptual clarity, reasoning and real-world application. Her one-to-one approach adapts to each student\'s learning style, helping them overcome foundational gaps, build confidence, think independently and approach challenging problems with greater clarity.',
+    },
+    {
+        name: 'Tr. Sakshi Agarwal',
+        initials: 'SA',
+        subject: 'Mathematics Educator',
+        quote: undefined,
+        bio: 'My teaching journey began in 2017 with a belief that Mathematics becomes meaningful when students understand the "why" behind every concept. From traditional classrooms to EdTech, academic leadership, content development and personalised one-to-one learning, I have worked with diverse learners across CBSE, Cambridge, MYP, British Curriculum, GCSE, OCR and Edexcel International GCSE. My approach combines conceptual clarity, reasoning, application and confidence-building, helping every student move beyond memorisation to develop independent mathematical thinking and problem-solving skills.',
+    },
+    {
+        name: 'Dr. Kritika',
+        initials: 'DK',
+        subject: 'English Educator',
+        quote: undefined,
+        bio: 'With extensive experience teaching English Language and Literature to Classes 6–12 across CBSE and Indian State Boards, Dr. Kritika believes English is more than grammar and examinations. Her teaching focuses on conceptual clarity, communication, critical thinking and confident expression. By simplifying complex concepts, using relatable examples, visual learning and structured practice, she adapts to different learning levels and needs. Her goal is to help students become independent, articulate and confident users of English, while developing skills that extend beyond the classroom.',
+    },
+    {
+        name: 'Tr. Lavisha',
+        initials: 'LV',
+        subject: 'Biology & Chemistry Educator',
+        quote: undefined,
+        bio: 'Tr. Lavisha\'s journey into teaching began unexpectedly — from being a Radio Jockey to supporting her studies through teaching at NEETprep. A mentor\'s influence transformed teaching from a job into a purpose. Over the years, she has taught Biology, Chemistry and Geography across CBSE, Cambridge, IGCSE, GCSE and IB curricula, working with learners globally. Her student-centred approach focuses on understanding individual challenges, building confidence and encouraging curiosity. For her, teaching is about helping students recognise their potential.',
+    },
+    {
+        name: 'Tr. Vanshikka Sharma',
+        initials: 'VS',
+        subject: 'English Educator',
+        quote: undefined,
+        bio: 'Tr. Vanshikka Sharma is an experienced English educator and TESOL/TEFL-certified Language Trainer with postgraduate qualifications in MBA and M.Com. She teaches learners globally, including students from Australia, the UK and the Middle East, across IB and Cambridge curricula. Her expertise spans English language, literature, grammar, communication, critical thinking and textual analysis, along with preparation for NAPLAN, SAT, AP English Language & Composition and other academic examinations.',
+    },
+    {
+        name: 'Tr. Divya',
+        initials: 'DM',
+        subject: 'Science Educator',
+        quote: undefined,
+        bio: 'Tr. Divya Mittal is a passionate Science and Chemistry educator with 4+ years of online teaching experience across diverse age groups and learning levels. She has taught students following the Australian Curriculum, CBSE, ICSE and IGCSE curricula. Her student-centred, concept-based approach uses real-life examples, visual resources, demonstrations, quizzes and discussions to make complex concepts engaging and accessible. She focuses on building scientific thinking, curiosity, problem-solving and independent learning skills.',
+    },
+    {
+        name: 'Tr. Pranavi',
+        initials: 'PR',
+        subject: 'Mathematics Educator',
+        quote: 'I don\'t just teach Mathematics; I cultivate the confidence to think, question, and solve.',
+        bio: 'Tr. Pranavi began her teaching journey in 2014, driven by her passion for Mathematics and Physics. Her experience across classrooms, EdTech, academic leadership, content creation and personalised learning includes Cambridge, MYP, GCSE, Edexcel, IB, AS and A Level curricula. Her student-centred approach combines conceptual clarity, questioning, real-world application and technology to help learners overcome challenges, build confidence and develop independent thinking. For her, the greatest achievement is turning "I can\'t do this" into "Let me try."',
+    },
+];
+
 const VALUES = [
     { icon: 'heart' as const, title: 'The Child Comes First', body: 'Personalised learning built around the child not the average.' },
     { icon: 'bulb' as const, title: 'Understanding Comes Before Marks', body: 'When a child truly understands, confidence grows and results follow.' },
@@ -317,6 +369,59 @@ export default function About() {
                 </div>
             </section>
 
+            {/* teachers */}
+            <section className="py-14">
+                <div className="container-tot">
+                    <div className="panel bg-gradient-to-br from-peach via-white to-mint px-6 py-12 shadow-clay sm:px-10">
+                        <div aria-hidden="true" className="wash wash-brand" />
+                        <div className="relative">
+                            <SectionHeading
+                                eyebrow="The people who teach"
+                                tone="forest"
+                                title={<>Meet Our <span className="text-gradient-amber">Teachers</span></>}
+                                sub="Specialists across curricula, united by one belief — every child deserves a teacher who truly understands them."
+                            />
+                            <div className="mt-10 grid gap-6 sm:grid-cols-2">
+                                {TEACHERS.map((t, i) => (
+                                    <Reveal key={t.name} delay={i * 0.07}>
+                                        <div className="clay-card h-full p-6 sm:p-7">
+                                            {/* header */}
+                                            <div className="flex items-start gap-4">
+                                                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-amber-100 text-amber-600 font-display text-xl font-extrabold shadow-inner-soft">
+                                                    {t.initials}
+                                                </div>
+                                                <div className="min-w-0">
+                                                    <h3 className="font-display text-[18px] font-extrabold leading-snug text-navy-800">
+                                                        {t.name}
+                                                    </h3>
+                                                    <span className="mt-1 inline-flex items-center gap-1.5 rounded-full bg-amber-500/10 px-3 py-0.5 text-[12px] font-extrabold uppercase tracking-[0.1em] text-amber-600">
+                                                        {t.subject}
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            {/* quote */}
+                                            {t.quote && (
+                                                <div className="mt-4 rounded-2xl border-l-4 border-forest-400 bg-forest-50 px-4 py-3">
+                                                    <p className="text-[13.5px] font-medium italic leading-relaxed text-forest-700">
+                                                        "{t.quote}"
+                                                    </p>
+                                                </div>
+                                            )}
+
+                                            {/* bio */}
+                                            <p className="mt-4 text-[14px] leading-relaxed text-navy-500">
+                                                {t.bio}
+                                            </p>
+                                        </div>
+                                    </Reveal>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* mission split */}
             <section className="py-14">
                 <div className="container-tot grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
@@ -376,50 +481,6 @@ export default function About() {
                     </Reveal>
                 </div>
             </section>
-
-            {/* timeline */}
-            <section className="py-14">
-                <div className="container-tot">
-                    <SectionHeading
-                        eyebrow="How we got here"
-                        title={<>From One Tutor to <span className="text-gradient-amber">Four Countries</span></>}
-                    />
-                    <div className="relative mt-12">
-                        <span aria-hidden="true" className="absolute left-6 top-0 hidden h-full w-0.5 bg-gradient-to-b from-amber-300 via-forest-300 to-navy-200 lg:left-1/2 lg:block" />
-                        <div className="space-y-5">
-                            {TIMELINE.map((t, i) => (
-                                <motion.div
-                                    key={t.year}
-                                    initial={{ opacity: 0, y: 24 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true, margin: '-60px' }}
-                                    transition={{ duration: 0.5, delay: i * 0.08 }}
-                                    className={cn(
-                                        'relative lg:w-[calc(50%-2rem)]',
-                                        i % 2 === 1 ? 'lg:ml-auto' : '',
-                                    )}
-                                >
-                                    <div className="rounded-4xl border border-navy-100 bg-white p-5 shadow-clay sm:p-6">
-                                        <span className="inline-flex rounded-full bg-navy-700 px-3.5 py-1.5 font-display text-sm font-extrabold text-white">
-                                            {t.year}
-                                        </span>
-                                        <h3 className="mt-3 font-display text-xl font-extrabold text-navy-800">{t.title}</h3>
-                                        <p className="mt-1.5 text-[15px] leading-relaxed text-navy-500">{t.body}</p>
-                                    </div>
-                                    <span
-                                        aria-hidden="true"
-                                        className={cn(
-                                            'absolute top-8 hidden h-4 w-4 rounded-full bg-amber-500 ring-4 ring-white lg:block',
-                                            i % 2 === 1 ? '-left-[2.5rem]' : '-right-[2.5rem]',
-                                        )}
-                                    />
-                                </motion.div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
 
         </>
     );

@@ -130,6 +130,7 @@ export function DemoPromise() {
           src="/totore.jpeg"
           alt="A live one-to-one online lesson in progress"
           fallbackIcon="laptop"
+          ratio="4/5"
           className="h-full w-full"
           imgClassName="!object-cover !object-top"
           overlay

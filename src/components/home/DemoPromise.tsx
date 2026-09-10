@@ -92,7 +92,7 @@ export function DemoPromise() {
        </ol>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[1fr_0.85fr] lg:gap-10 items-stretch">
+      <div className="grid gap-6 lg:grid-cols-[1fr_0.85fr] lg:gap-10 items-center">
        {/* Promises & CTA */}
        <Reveal delay={0.15}>
         <div className="flex h-full flex-col gap-6">
@@ -125,14 +125,13 @@ export function DemoPromise() {
 
        {/* visual */}
        <Reveal delay={0.12}>
-        <div className="relative h-full overflow-hidden rounded-4xl shadow-clay-lg ring-8 ring-white">
+        <div className="relative w-full overflow-hidden rounded-4xl shadow-clay-lg ring-8 ring-white">
          <SmartImage
           src="/totore.jpeg"
           alt="A live one-to-one online lesson in progress"
           fallbackIcon="laptop"
-          ratio="1/1"
-          className="h-full w-full bg-white object-cover"
-          imgClassName="!object-cover"
+          className="w-full h-auto bg-white"
+          imgClassName="!object-contain"
           overlay
          />
 

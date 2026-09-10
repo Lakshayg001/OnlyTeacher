@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Check, ClipboardList, Mail, MapPin, PartyPopper, Phone } from 'lucide-react';
-import { BOARDS, BRAND, COUNTRIES, COURSES } from '@/data/site';
+import { BRAND, COUNTRIES, COURSES } from '@/data/site';
 import { IMG } from '@/data/images';
 import conImg from '@/assets/contact-img.jpeg';
 import ClayIcon from '@/components/clay/ClayIcon';
@@ -188,17 +188,27 @@ export default function Contact() {
          >
           {step === 0 && (
            <>
-            <Choices
-             label="Country"
-             value={form.country}
-             onChange={(v) => set('country', v)}
-             options={COUNTRIES.map((c) => ({ value: c.name, label: c.name, flag: c.flag }))}
-            />
-            <Choices
+            <label className="block">
+             <span className="mb-2 block text-[11px] font-extrabold uppercase tracking-[0.16em] text-navy-400">
+              Country
+             </span>
+             <select
+              required
+              value={form.country}
+              onChange={(e) => set('country', e.target.value)}
+              className="h-13 w-full rounded-2xl border-2 border-navy-100 bg-navy-50/50 px-4 text-[15px] font-semibold text-navy-700 outline-none transition-colors focus:border-amber-300 focus:bg-white"
+             >
+              <option value="" disabled>Select a country</option>
+              {COUNTRIES.map((c) => (
+               <option key={c.name} value={c.name}>{c.name}</option>
+              ))}
+             </select>
+            </label>
+            <Field
              label="Board / curriculum"
              value={form.board}
              onChange={(v) => set('board', v)}
-             options={BOARDS.map((b) => ({ value: b.name, label: b.name }))}
+             placeholder="e.g. CBSE, IGCSE"
             />
            </>
           )}

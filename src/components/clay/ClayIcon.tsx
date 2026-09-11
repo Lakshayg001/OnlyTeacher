@@ -428,20 +428,23 @@ function shapes(name: ClayIconName, g: string, gl: string, p: Palette) {
   case 'child':
    return (
     <>
-     {/* Body */}
-     <path d="M18 56c0-10 8-16 14-16s14 6 14 16" fill={p.b} />
-     <path d="M18 56c0-10 8-16 14-16s14 6 14 16" fill={gloss} opacity="0.4" />
+     {/* Shoulders / Body */}
+     <path d="M16 56c0-10 8-18 16-18s16 8 16 18" fill={p.b} />
+     <path d="M16 56c0-10 8-18 16-18s16 8 16 18" fill={gloss} opacity="0.3" />
      {/* Head */}
-     <circle cx="32" cy="26" r="16" fill={body} />
-     {/* Face highlights (eyes) */}
-     <ellipse cx="26" cy="22" rx="2" ry="3" fill="#fff" opacity="0.8" />
-     <ellipse cx="38" cy="22" rx="2" ry="3" fill="#fff" opacity="0.8" />
-     {/* Pacifier / Dummy */}
-     <circle cx="32" cy="32" r="5" fill="#fff" opacity="0.95" />
-     <circle cx="32" cy="32" r="2.5" fill={P.amber.b} />
-     <path d="M26 32c0-3 12-3 12 0" stroke="#fff" strokeWidth="3" strokeLinecap="round" opacity="0.9" />
-     {/* Hair curl */}
-     <path d="M32 10c0-6 6-6 6-2 0 3-4 4-6 2" stroke={p.c} strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.6" />
+     <circle cx="32" cy="24" r="15" fill={body} />
+     {/* Cute Hair Curl */}
+     <path d="M30 9c0-4 4-5 5-2 1 2-2 4-4 2" stroke={p.c} strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.7" />
+     {/* Eyes */}
+     <circle cx="27" cy="22" r="2.5" fill="#fff" opacity="0.9" />
+     <circle cx="37" cy="22" r="2.5" fill="#fff" opacity="0.9" />
+     <circle cx="27" cy="22" r="1.2" fill={p.c} opacity="0.9" />
+     <circle cx="37" cy="22" r="1.2" fill={p.c} opacity="0.9" />
+     {/* Cheeks */}
+     <circle cx="23" cy="25" r="2.5" fill={p.c} opacity="0.2" />
+     <circle cx="41" cy="25" r="2.5" fill={p.c} opacity="0.2" />
+     {/* Happy Smile */}
+     <path d="M29 27c1.5 2 4.5 2 6 0" stroke={p.c} strokeWidth="2" strokeLinecap="round" fill="none" opacity="0.8" />
     </>
    );
 

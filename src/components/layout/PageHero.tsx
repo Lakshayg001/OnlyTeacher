@@ -17,7 +17,7 @@ export default function PageHero({
  crumb,
 }: {
  eyebrow: string;
- title: string;
+ title: ReactNode;
  accent?: string;
  sub: string;
  icons?: ClayIconName[];

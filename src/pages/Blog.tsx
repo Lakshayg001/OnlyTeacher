@@ -25,7 +25,7 @@ export default function Blog() {
    <PageHero
     crumb="Blog"
     eyebrow="Knowledge hub"
-    title="Helping Children Learn Without Losing"
+    title={<>Helping Children <span className="text-forest-500">Learn</span> Without Losing</>}
     accent="Their Confidence"
     sub="Practical knowledge from educators who work with students every day."
     icons={['book', 'math', 'science']}

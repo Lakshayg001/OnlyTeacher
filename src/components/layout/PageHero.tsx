@@ -27,7 +27,7 @@ export default function PageHero({
  compact?: boolean;
 }) {
  return (
-  <section className={`relative pb-4 pt-4 sm:pt-6 ${compact ? 'max-w-4xl mx-auto' : ''}`}>
+  <section className="relative pb-4 pt-4 sm:pt-6">
    <div className="container-tot">
     <div className={`panel bg-gradient-to-br from-sky via-white to-peach px-6 shadow-clay sm:px-10 lg:px-14 ${compact ? 'py-8 sm:py-10' : 'py-12 sm:py-16'}`}>
      <div aria-hidden="true" className="pointer-events-none absolute inset-0">

@@ -754,7 +754,7 @@ export const POSTS: Post[] = [
   id: 'b8',
   title: 'Why The Only Teacher Could Be the Right Learning Partner for Your Child',
   excerpt: 'Is your child receiving lessons, or actually learning?',
-  category: 'Parent Guides',
+  category: 'Why TOT',
   date: '12 Sep 2026',
   readTime: 4,
   image: '/newblo.jpeg',
@@ -786,9 +786,9 @@ export const POSTS: Post[] = [
 <p>TOT is designed to support the child behind the result, not just the result itself.</p>
 
 <h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">One Platform. Global Curriculum Support.</h3>
-<p>TOT is not limited to one board or one country. We support learners across a wide range of Indian and international curricula, including:</p>
+<p>TOT is not limited to one board or one country. We support learners across a wide range of International curricula, including:</p>
 <p>CBSE, Cambridge, IB, IGCSE, GCSE and other global curricula.</p>
-<p>Whether your child is studying in India, the UK, Australia, the Middle East or another part of the world, our aim is to help families find the right teacher and the right learning approach for their curriculum and goals.</p>
+<p>Whether your child is studying in New Zealand, the UK, Australia, the Middle East or another part of the world, our aim is to help families find the right teacher and the right learning approach for their curriculum and goals.</p>
 
 <h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">What Makes TOT Different?</h3>
 <p>We are not trying to make every child learn in the same way.</p>
@@ -814,7 +814,7 @@ export const POSTS: Post[] = [
   category: 'Special Education',
   date: '12 Sep 2026',
   readTime: 5,
-  image: '/gen.jpeg',
+  image: '/adhd.jpeg',
   accent: 'navy',
   author: 'The Only Teacher',
   content: `
@@ -847,7 +847,7 @@ export const POSTS: Post[] = [
   id: 'b7',
   title: 'How to Prepare Your Child for NAPLAN Without Creating Exam Stress',
   excerpt: 'NAPLAN is an important part of a child’s school journey, but preparing for it does not need to become stressful.',
-  category: 'Parent Guides',
+  category: 'NAPLAN',
   date: '11 Sep 2026',
   readTime: 5,
   image: '/phelablo.jpeg',

@@ -134,8 +134,7 @@ export default function Courses() {
    <section className="py-20 text-center">
     <div className="container-tot max-w-4xl mx-auto">
      <h2 className="font-display text-2xl md:text-3xl font-extrabold text-navy-800 leading-snug tracking-tight">
-      More subjects. Smarter exam prep. Exciting extracurriculars. <br/>
-      <span className="text-amber-500 mt-2 block">The next chapter is loading.</span>
+      More subjects and hobby classes coming soon.
      </h2>
     </div>
    </section>

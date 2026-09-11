@@ -55,7 +55,7 @@ export function Footer() {
 
 
             {/* Main */}
-            <div className="container-tot relative grid gap-10 py-14 lg:grid-cols-[1.4fr_repeat(3,1fr)]">
+            <div className="container-tot relative grid gap-10 py-14 lg:grid-cols-[1.4fr_3fr]">
                 <div>
                     <Logo className="h-56" />
 
@@ -92,32 +92,30 @@ export function Footer() {
                     </div>
                 </div>
 
-                {COLUMNS.map((col) => (
-                    <div key={col.title}>
-                        <h3 className="font-display text-base font-extrabold uppercase tracking-[0.16em] text-white">
-                            {col.title}
-                        </h3>
-                        <ul className="mt-4 space-y-2.5">
-                            {col.links.map((l) => (
-                                <li key={l.label}>
-                                    <Link
-                                        to={l.to}
-                                        className="link-underline text-[14.5px] font-semibold text-navy-300 transition-colors hover:text-white"
-                                    >
-                                        {l.label}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
+                <div className="flex flex-col gap-10 lg:gap-14">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-8">
+                        {COLUMNS.map((col) => (
+                            <div key={col.title}>
+                                <h3 className="font-display text-base font-extrabold uppercase tracking-[0.16em] text-white">
+                                    {col.title}
+                                </h3>
+                                <ul className="mt-4 space-y-2.5">
+                                    {col.links.map((l) => (
+                                        <li key={l.label}>
+                                            <Link
+                                                to={l.to}
+                                                className="link-underline text-[14.5px] font-semibold text-navy-300 transition-colors hover:text-white"
+                                            >
+                                                {l.label}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
                     </div>
-                ))}
-            </div>
 
-            {/* Boards + countries strip */}
-            <div className="container-tot relative border-t border-white/10 py-8">
-                <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-
-                    <div>
+                    <div className="border-t border-white/10 pt-8">
                         <p className="mb-3 text-[11px] font-extrabold uppercase tracking-[0.2em] text-navy-400">
                             Learning without borders
                         </p>

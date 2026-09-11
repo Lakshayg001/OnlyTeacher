@@ -42,6 +42,7 @@ const THEME: Record<ClayIconName, keyof typeof P> = {
  clock: 'sky',
  dna: 'forest',
  brain: 'rose',
+ child: 'rose',
 };
 
 export interface ClayIconProps {
@@ -421,6 +422,26 @@ function shapes(name: ClayIconName, g: string, gl: string, p: Palette) {
      <path d="M32 10v34" stroke={p.c} strokeWidth="4" strokeLinecap="round" opacity="0.5" />
      <path d="M26 22c-2 2-6 2-8 0M38 22c2 2 6 2 8 0" stroke="#fff" strokeWidth="3" strokeLinecap="round" opacity="0.6" />
      <path d="M22 32c-3 2-7 1-9-1M42 32c3 2 7 1 9-1" stroke="#fff" strokeWidth="3" strokeLinecap="round" opacity="0.4" />
+    </>
+   );
+
+  case 'child':
+   return (
+    <>
+     {/* Body */}
+     <path d="M18 56c0-10 8-16 14-16s14 6 14 16" fill={p.b} />
+     <path d="M18 56c0-10 8-16 14-16s14 6 14 16" fill={gloss} opacity="0.4" />
+     {/* Head */}
+     <circle cx="32" cy="26" r="16" fill={body} />
+     {/* Face highlights (eyes) */}
+     <ellipse cx="26" cy="22" rx="2" ry="3" fill="#fff" opacity="0.8" />
+     <ellipse cx="38" cy="22" rx="2" ry="3" fill="#fff" opacity="0.8" />
+     {/* Pacifier / Dummy */}
+     <circle cx="32" cy="32" r="5" fill="#fff" opacity="0.95" />
+     <circle cx="32" cy="32" r="2.5" fill={P.amber.b} />
+     <path d="M26 32c0-3 12-3 12 0" stroke="#fff" strokeWidth="3" strokeLinecap="round" opacity="0.9" />
+     {/* Hair curl */}
+     <path d="M32 10c0-6 6-6 6-2 0 3-4 4-6 2" stroke={p.c} strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.6" />
     </>
    );
 

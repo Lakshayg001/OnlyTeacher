@@ -15,19 +15,21 @@ export default function PageHero({
  icons = ['book', 'globe', 'bulb'],
  children,
  crumb,
+ compact,
 }: {
- eyebrow: string;
+ eyebrow?: string;
  title: ReactNode;
  accent?: string;
- sub: string;
+ sub?: string;
  icons?: ClayIconName[];
  children?: ReactNode;
  crumb: string;
+ compact?: boolean;
 }) {
  return (
-  <section className="relative pb-4 pt-4 sm:pt-6">
+  <section className={`relative pb-4 pt-4 sm:pt-6 ${compact ? 'max-w-4xl mx-auto' : ''}`}>
    <div className="container-tot">
-    <div className="panel bg-gradient-to-br from-sky via-white to-peach px-6 py-12 shadow-clay sm:px-10 sm:py-16 lg:px-14">
+    <div className={`panel bg-gradient-to-br from-sky via-white to-peach px-6 shadow-clay sm:px-10 lg:px-14 ${compact ? 'py-8 sm:py-10' : 'py-12 sm:py-16'}`}>
      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
       <div className="wash wash-brand" />
       <Doodles />
@@ -42,7 +44,7 @@ export default function PageHero({
        <span className="text-navy-700">{crumb}</span>
       </nav>
 
-      <Eyebrow>{eyebrow}</Eyebrow>
+      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
 
       <motion.h1
        initial={{ opacity: 0, y: 20 }}
@@ -54,14 +56,16 @@ export default function PageHero({
        {accent && <span className="text-gradient-amber"> {accent}</span>}
       </motion.h1>
 
-      <motion.p
-       initial={{ opacity: 0, y: 18 }}
-       animate={{ opacity: 1, y: 0 }}
-       transition={{ duration: 0.6, delay: 0.1 }}
-       className="mt-5 max-w-2xl text-[16.5px] leading-relaxed text-navy-500"
-      >
-       {sub}
-      </motion.p>
+      {sub && (
+       <motion.p
+        initial={{ opacity: 0, y: 18 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
+        className="mt-5 max-w-2xl text-[16.5px] leading-relaxed text-navy-500"
+       >
+        {sub}
+       </motion.p>
+      )}
 
       <div className="mt-7 flex items-center gap-4">
        {icons.map((n, i) => (

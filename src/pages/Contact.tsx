@@ -77,10 +77,9 @@ export default function Contact() {
   <>
    <PageHero
     crumb="Contact"
-    eyebrow="Book a free demo"
     title={<>The <span className="text-amber-500">Only Teacher</span> Opens a World of <span className="text-forest-500">Possibilities</span></>}
-    sub="50 real teaching minutes with a teacher chosen for your child's board and grade No card no commitment"
     icons={['rocket', 'teacher', 'calendar']}
+    compact={true}
    />
 
    <section className="py-12">

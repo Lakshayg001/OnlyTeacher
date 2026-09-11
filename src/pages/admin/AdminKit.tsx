@@ -27,7 +27,7 @@ export function Panel({
     <header className="mb-4 flex items-start justify-between gap-3">
      <div>
       {title && (
-       <h2 className="font-display text-[16.5px] font-extrabold text-navy-800">{title}</h2>
+       <h2 className="font-display text-[16.5px] font-extrabold text-navy-700">{title}</h2>
       )}
       {sub && <p className="mt-0.5 text-[12.5px] font-semibold text-navy-400">{sub}</p>}
      </div>
@@ -78,7 +78,7 @@ export function Kpi({
      <ClayIcon name={icon} size={40} />
     </span>
    </div>
-   <p className="mt-3 font-display text-3xl font-extrabold leading-none text-navy-800">
+   <p className="mt-3 font-display text-3xl font-extrabold leading-none text-navy-700">
     <Counter value={value} suffix={suffix} />
    </p>
    <p
@@ -204,7 +204,7 @@ export function Donut({
     </svg>
     <div className="absolute inset-0 grid place-items-center">
      <div className="text-center">
-      <p className="font-display text-2xl font-extrabold leading-none text-navy-800">
+      <p className="font-display text-2xl font-extrabold leading-none text-navy-700">
        {total.toLocaleString('en-US')}
       </p>
       <p className="text-[10.5px] font-extrabold uppercase tracking-wider text-navy-400">

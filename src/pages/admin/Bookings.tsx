@@ -55,7 +55,7 @@ export default function Bookings() {
      >
       <ClayIcon name={s.icon} size={48} />
       <div>
-       <p className="font-display text-2xl font-extrabold leading-none text-navy-800">{s.value}</p>
+       <p className="font-display text-2xl font-extrabold leading-none text-navy-700">{s.value}</p>
        <p className="mt-1 text-[12px] font-extrabold uppercase tracking-wider text-navy-400">
         {s.label}
        </p>
@@ -108,7 +108,7 @@ export default function Bookings() {
     {rows.length === 0 ? (
      <div className="flex flex-col items-center py-14 text-center">
       <ClayIcon name="calendar" size={64} />
-      <p className="mt-3 font-display text-lg font-extrabold text-navy-800">No bookings match</p>
+      <p className="mt-3 font-display text-lg font-extrabold text-navy-700">No bookings match</p>
       <p className="text-[13.5px] font-semibold text-navy-400">Try a different status or search term.</p>
      </div>
     ) : (

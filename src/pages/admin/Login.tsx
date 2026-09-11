@@ -24,7 +24,7 @@ export default function Login() {
     >
      <Logo />
 
-     <h1 className="mt-9 font-display text-3xl font-extrabold leading-tight text-navy-800">
+     <h1 className="mt-9 font-display text-3xl font-extrabold leading-tight text-navy-700">
       Welcome back
      </h1>
      <p className="mt-2 text-[15px] text-navy-500">

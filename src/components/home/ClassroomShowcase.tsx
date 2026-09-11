@@ -130,7 +130,7 @@ export function ClassroomShowcase() {
      >
       <div className="relative order-2 lg:order-1">
        <ClayIcon name={feature.icon} size={64} className="mb-4" />
-       <h3 className="font-display text-2xl font-extrabold leading-tight text-navy-800 sm:text-3xl">
+       <h3 className="font-display text-2xl font-extrabold leading-tight text-navy-700 sm:text-3xl">
         {feature.title}
        </h3>
        <p className="mt-3 text-[16px] leading-relaxed text-navy-500">{feature.body}</p>

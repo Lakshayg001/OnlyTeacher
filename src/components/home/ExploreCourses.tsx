@@ -145,7 +145,7 @@ export function ExploreCourses() {
                     </div>
 
                     <div className="flex flex-1 flex-col p-5 pt-6">
-                      <h3 className="font-display text-lg font-extrabold leading-snug text-navy-800">
+                      <h3 className="font-display text-lg font-extrabold leading-snug text-navy-700">
                         {c.title}
                       </h3>
                       <p className="mt-1.5 flex-1 text-[14px] leading-relaxed text-navy-500">{c.blurb}</p>
@@ -169,7 +169,7 @@ export function ExploreCourses() {
                     <Sparkles className="h-4 w-4 text-amber-400" />
                     Why TOT Feels Different
                   </span>
-                  <h3 className="max-w-2xl text-balance font-display text-[1.4rem] font-extrabold leading-tight text-navy-800 sm:text-3xl">
+                  <h3 className="max-w-2xl text-balance font-display text-[1.4rem] font-extrabold leading-tight text-navy-700 sm:text-3xl">
                     Great <span className="text-amber-500">teaching</span> starts with understanding the <span className="text-forest-500">learner</span>
                   </h3>
                 </div>

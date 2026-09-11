@@ -74,7 +74,7 @@ export function Testimonials() {
           className="h-14 w-14 rounded-2xl ring-4 ring-amber-100"
          />
          <div className="flex-1">
-          <p className="font-display text-base font-extrabold text-navy-800">{active.name}</p>
+          <p className="font-display text-base font-extrabold text-navy-700">{active.name}</p>
           <p className="text-[13px] font-semibold text-navy-500">{active.role}</p>
          </div>
          <Stars rating={active.rating} size={17} />

@@ -19,8 +19,8 @@ export default function NotFound() {
         </span>
        ))}
       </div>
-      <p className="mt-8 font-display text-6xl font-extrabold text-navy-800 sm:text-8xl">404</p>
-      <h1 className="mt-3 font-display text-2xl font-extrabold text-navy-800 sm:text-3xl">
+      <p className="mt-8 font-display text-6xl font-extrabold text-navy-700 sm:text-8xl">404</p>
+      <h1 className="mt-3 font-display text-2xl font-extrabold text-navy-700 sm:text-3xl">
        This lesson is not on the timetable
       </h1>
       <p className="mt-3 max-w-md text-[16px] text-navy-500">

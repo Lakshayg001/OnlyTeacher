@@ -68,7 +68,7 @@ export default function Courses() {
      {results.length === 0 ? (
       <div className="rounded-4xl border-2 border-dashed border-navy-200 p-14 text-center">
        <ClayIcon name="puzzle" size={72} className="mx-auto" />
-       <h3 className="mt-4 font-display text-xl font-extrabold text-navy-800">
+       <h3 className="mt-4 font-display text-xl font-extrabold text-navy-700">
         No courses match those filters yet
        </h3>
        <p className="mt-1.5 text-[15px] text-navy-500">
@@ -109,7 +109,7 @@ export default function Courses() {
          </div>
 
          <div className="flex flex-1 flex-col p-5 pt-6">
-          <h3 className="font-display text-lg font-extrabold leading-snug text-navy-800">
+          <h3 className="font-display text-lg font-extrabold leading-snug text-navy-700">
            {c.title}
           </h3>
           <p className="mt-1.5 flex-1 text-[14px] leading-relaxed text-navy-500">{c.blurb}</p>

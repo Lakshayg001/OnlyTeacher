@@ -74,7 +74,7 @@ export default function Blog() {
          <span className={cn('chip absolute left-4 top-4', CAT[p.accent])}>{p.category}</span>
         </div>
         <div className="flex flex-1 flex-col p-5">
-         <h2 className="font-display text-lg font-extrabold leading-snug text-navy-800 transition-colors group-hover:text-amber-600">
+         <h2 className="font-display text-lg font-extrabold leading-snug text-navy-700 transition-colors group-hover:text-amber-600">
           {p.title}
          </h2>
          <p className="mt-2 flex-1 text-[14px] leading-relaxed text-navy-500">{p.excerpt}</p>
@@ -103,7 +103,7 @@ export default function Blog() {
       <div className="panel flex flex-col items-center gap-6 bg-gradient-to-br from-lilac via-white to-sky p-8 text-center shadow-clay sm:p-12">
        <ClayIcon name="chat" size={72} />
        <div>
-        <h2 className="font-display text-2xl font-extrabold text-navy-800 sm:text-3xl">
+        <h2 className="font-display text-2xl font-extrabold text-navy-700 sm:text-3xl">
          One useful email a month That is it
         </h2>
         <p className="mx-auto mt-2 max-w-lg text-[15px] text-navy-500">
@@ -138,7 +138,7 @@ export default function Blog() {
        <span className={cn('chip absolute left-4 top-4', CAT[selectedPost.accent as keyof typeof CAT])}>{selectedPost.category}</span>
       </div>
       <div className="p-6 sm:p-10">
-       <h2 className="font-display text-2xl sm:text-4xl font-extrabold text-navy-800 mb-4">{selectedPost.title}</h2>
+       <h2 className="font-display text-2xl sm:text-4xl font-extrabold text-navy-700 mb-4">{selectedPost.title}</h2>
        <div className="flex flex-wrap items-center gap-4 text-[13px] font-bold text-navy-500 mb-8">
         <span className="flex items-center gap-1.5"><CalendarDays className="w-4 h-4" /> {selectedPost.date}</span>
         <span className="flex items-center gap-1.5"><Clock3 className="w-4 h-4" /> {selectedPost.readTime} min read</span>

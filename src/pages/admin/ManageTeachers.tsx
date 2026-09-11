@@ -30,7 +30,7 @@ export default function ManageTeachers() {
      <div key={s.label} className={cn('flex items-center gap-4 rounded-3xl border bg-white p-5 shadow-sm', s.border)}>
       <ClayIcon name={s.icon} size={48} />
       <div>
-       <p className="font-display text-2xl font-extrabold leading-none text-navy-800">{s.value}</p>
+       <p className="font-display text-2xl font-extrabold leading-none text-navy-700">{s.value}</p>
        <p className="mt-1 text-[12px] font-extrabold uppercase tracking-wider text-navy-400">{s.label}</p>
       </div>
      </div>

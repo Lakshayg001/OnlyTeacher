@@ -89,7 +89,7 @@ export function BoardsCurricula() {
          </span>
         </div>
 
-        <h3 className="mt-4 text-[14px] font-extrabold leading-snug text-navy-800">{b.full}</h3>
+        <h3 className="mt-4 text-[14px] font-extrabold leading-snug text-navy-700">{b.full}</h3>
 
         <p className="mt-1 text-[12px] font-bold uppercase tracking-wider text-navy-400">
          {b.region}
@@ -119,7 +119,7 @@ export function BoardsCurricula() {
       <div className="flex items-center gap-4">
        <ClayIcon name="globe" size={64} />
        <div>
-        <p className="font-display text-lg font-extrabold leading-snug text-navy-800 sm:text-xl">
+        <p className="font-display text-lg font-extrabold leading-snug text-navy-700 sm:text-xl">
          Following a state or regional syllabus?
         </p>
         <p className="mt-0.5 text-[14px] font-semibold text-navy-500">

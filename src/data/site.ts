@@ -763,10 +763,10 @@ export const POSTS: Post[] = [
   content: `
 <p>NAPLAN is an important part of a child’s school journey, but preparing for it does not need to become stressful. The goal should be to help children feel familiar with the assessment, strengthen their skills and build confidence without putting unnecessary pressure on performance.</p>
 
-<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">1. Understand What NAPLAN Assesses</h3>
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">1. Understand What NAPLAN Assesses</h3>
 <p>NAPLAN assesses key areas of literacy and numeracy, including <em>reading, writing, conventions of language and numeracy</em>. Understanding these areas helps parents focus on meaningful preparation rather than simply making children complete endless practice papers.</p>
 
-<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">2. Strengthen the Foundations</h3>
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">2. Strengthen the Foundations</h3>
 <p>Good NAPLAN preparation begins with everyday learning.</p>
 <p>Encourage your child to:</p>
 <ul class="list-disc pl-5 mt-2 mb-4 space-y-1">
@@ -777,20 +777,20 @@ export const POSTS: Post[] = [
 </ul>
 <p>Strong foundations make children more comfortable when they encounter unfamiliar questions.</p>
 
-<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">3. Practise Without Pressure</h3>
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">3. Practise Without Pressure</h3>
 <p>Practice should help children become familiar with question formats and manage their time. However, too much testing can increase anxiety.</p>
 <p>Keep practice sessions <em>short, consistent and purposeful</em>. Focus on understanding mistakes instead of counting how many questions were answered incorrectly.</p>
 
-<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">4. Build Confidence</h3>
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">4. Build Confidence</h3>
 <p>Children often perform better when they feel comfortable making mistakes.</p>
 <p>Instead of saying, "You must get a high score," encourage them with: <em>"Do your best, read carefully and take your time."</em></p>
 <p>Remind your child that one assessment does not define their intelligence or ability.</p>
 
-<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">5. Personalised Support Can Help</h3>
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">5. Personalised Support Can Help</h3>
 <p>Every child has different strengths and learning gaps. Some may need support with reading comprehension, while others may need more practice with numeracy, writing or time management.</p>
 <p>A personalised learning approach allows teachers to identify specific challenges and provide targeted support at the right pace.</p>
 
-<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">Prepare the Child, Not Just for the Test</h3>
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">Prepare the Child, Not Just for the Test</h3>
 <p>The best NAPLAN preparation is not about creating exam pressure. It is about developing <em>skills, familiarity and confidence</em>.</p>
 <p>At <strong>The Only Teacher (TOT)</strong>, we believe children learn best when they are understood as individuals. With the right guidance, preparation can become a positive learning experience rather than a source of stress.</p>
 <p class="font-bold text-amber-600 mt-4"><em>Prepare with confidence. Learn with understanding. Perform at your best.</em></p>
@@ -810,23 +810,23 @@ export const POSTS: Post[] = [
 <p>Some children can understand English well but hesitate when they need to speak, write, or explain their thoughts. They may know the meaning of words and understand what they read, yet struggle to put their ideas into clear sentences.</p>
 <p>This is more common than many parents realise, and it does not necessarily mean a child has weak English skills.</p>
 
-<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">1. Understanding Is Different From Expressing</h3>
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">1. Understanding Is Different From Expressing</h3>
 <p>Listening and reading are receptive skills, while speaking and writing require children to actively organise their thoughts, choose vocabulary and construct sentences.</p>
 <p>A child may understand a question perfectly but need more time to formulate an answer.</p>
 
-<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">2. Limited Vocabulary and Sentence Skills</h3>
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">2. Limited Vocabulary and Sentence Skills</h3>
 <p>Children sometimes understand the general meaning of English but lack the vocabulary or sentence structures needed to express themselves accurately.</p>
 <p>Regular reading, conversations and guided writing can help build these skills naturally.</p>
 
-<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">3. Fear of Making Mistakes</h3>
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">3. Fear of Making Mistakes</h3>
 <p>Confidence plays a major role in communication. Children who worry about grammar mistakes, pronunciation or what others might think may choose to remain quiet.</p>
 <p>A supportive environment where mistakes are treated as part of learning can make a significant difference.</p>
 
-<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">4. They May Need a Different Learning Approach</h3>
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">4. They May Need a Different Learning Approach</h3>
 <p>Every child develops communication skills differently. Some respond well to conversations and storytelling, while others benefit from visual prompts, structured writing exercises, debates or real-life situations.</p>
 <p>Personalised teaching helps identify what works best for each learner.</p>
 
-<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">5. Encourage Thinking, Not Just Correct Answers</h3>
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">5. Encourage Thinking, Not Just Correct Answers</h3>
 <p>Strong communication is about more than grammar. Children need to learn how to <em>think, organise ideas, explain opinions and communicate with confidence</em>.</p>
 <p>Parents can encourage this through simple everyday questions such as:</p>
 <ul class="list-disc pl-5 mt-2 mb-4 space-y-1">
@@ -835,7 +835,7 @@ export const POSTS: Post[] = [
   <li>“Can you explain it in your own words?”</li>
 </ul>
 
-<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">Building Confident Communicators</h3>
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">Building Confident Communicators</h3>
 <p>With the right support, a child can gradually move from understanding English to using it confidently.</p>
 <p>At <strong>The Only Teacher (TOT)</strong>, we believe English learning should go beyond textbooks and grammar rules. Our personalised approach focuses on helping children understand, express, communicate and think independently.</p>
 <p class="font-bold text-amber-600 mt-4"><em>Because knowing English is important. Having the confidence to use it is even more powerful.</em></p>
@@ -854,14 +854,14 @@ export const POSTS: Post[] = [
   content: `
 <p>The Digital SAT can feel overwhelming at first, but understanding the test and preparing with the right strategy can make the journey much more manageable.</p>
 
-<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">What Is the Digital SAT?</h3>
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">What Is the Digital SAT?</h3>
 <p>The SAT is a digital college admissions test consisting of two sections: Reading and Writing and Math. The test takes 2 hours and 14 minutes, with 64 minutes for Reading and Writing and 70 minutes for Math. Each section has two timed modules, and the second module adapts based on performance in the first.</p>
 
-<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">What Does the SAT Test?</h3>
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">What Does the SAT Test?</h3>
 <p>The Reading and Writing section assesses comprehension, vocabulary, grammar, evidence, reasoning and effective written expression.</p>
 <p>The Math section covers Algebra, Advanced Math, Problem-Solving and Data Analysis, Geometry and Trigonometry.</p>
 
-<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">How Should Students Prepare?</h3>
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">How Should Students Prepare?</h3>
 <p>Effective SAT preparation should begin with understanding the student's current strengths and weaknesses.</p>
 <p>A strong preparation plan includes:</p>
 <ul class="list-disc pl-5 mt-2 mb-4 space-y-1">
@@ -875,11 +875,11 @@ export const POSTS: Post[] = [
 </ul>
 <p>Because the SAT is adaptive, students should focus on accuracy as well as speed.</p>
 
-<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">How Can Parents Help?</h3>
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">How Can Parents Help?</h3>
 <p>Parents can support preparation without creating unnecessary pressure. Encourage consistent study, healthy routines and progress rather than focusing only on scores.</p>
 <p>The goal should be to help students become confident, independent learners who understand how to approach different types of questions.</p>
 
-<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">Personalised SAT Preparation</h3>
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">Personalised SAT Preparation</h3>
 <p>Every student starts from a different level. A personalised approach can identify learning gaps, target specific skills and create a preparation plan around the student's goals and timeline.</p>
 <p>At <strong>The Only Teacher (TOT)</strong>, we believe SAT preparation should go beyond solving practice papers. It should help students understand, reason, improve and approach the test with confidence.</p>
 <p class="font-bold text-amber-600 mt-4"><em>Prepare with strategy. Learn with purpose. Perform with confidence.</em></p>
@@ -898,23 +898,23 @@ export const POSTS: Post[] = [
   content: `
 <p>Mathematics can be challenging for children, but struggling with Maths does not mean a child lacks ability. Often, the real issue is a combination of foundational gaps, confidence, learning style and practice.</p>
 
-<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">1. Foundational Gaps</h3>
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">1. Foundational Gaps</h3>
 <p>Maths is cumulative. If a child has difficulty with multiplication, fractions, place value or basic arithmetic, later topics such as algebra, percentages and equations can become much harder.</p>
 <p>A good teacher first identifies where the difficulty begins instead of simply moving ahead with the syllabus.</p>
 
-<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">2. Confidence Can Change Everything</h3>
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">2. Confidence Can Change Everything</h3>
 <p>Repeated mistakes can make children think, <em>"I'm not good at Maths."</em> This can lead to anxiety, avoidance and less practice.</p>
 <p>The right teacher creates a safe environment where questions and mistakes are part of learning. Building confidence can be just as important as teaching the concept.</p>
 
-<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">3. Every Child Learns Differently</h3>
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">3. Every Child Learns Differently</h3>
 <p>Some children learn through visual explanations, others through practical examples, discussion or step-by-step guidance.</p>
 <p>When one teaching method does not work, the solution is not always more practice. Sometimes the child needs the concept explained differently.</p>
 
-<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">4. Practice Should Build Understanding</h3>
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">4. Practice Should Build Understanding</h3>
 <p>Effective Maths practice is not about solving hundreds of questions. Children need to understand why a method works, correct their mistakes and gradually apply their knowledge to unfamiliar problems.</p>
 <p>The goal is to develop reasoning, problem-solving and independent thinking, not just memorisation.</p>
 
-<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">5. The Right Teacher Understands the Child</h3>
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">5. The Right Teacher Understands the Child</h3>
 <p>A great Maths teacher looks beyond the textbook. They observe where a child hesitates, what they understand, how they approach problems and where their confidence drops.</p>
 <p>Personalised teaching allows the teacher to adjust the pace, explanation, examples and practice to the learner.</p>
 

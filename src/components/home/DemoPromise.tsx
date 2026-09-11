@@ -33,7 +33,7 @@ export function DemoPromise() {
      <div className="relative">
       <Reveal>
        <div className="text-center mb-12">
-        <h2 className="font-display text-4xl font-extrabold tracking-tight text-navy-900 sm:text-5xl md:text-6xl">
+        <h2 className="font-display text-4xl font-extrabold tracking-tight text-navy-700 sm:text-5xl md:text-6xl">
          Meet. Connect.{' '}
          <span className="block sm:inline">
           <span className="text-forest-500">Learn.</span>{' '}

@@ -14,7 +14,7 @@ export function Manifesto() {
      <div className="lg:sticky lg:top-28 lg:h-fit">
       <Eyebrow tone="forest">{MANIFESTO_INTRO.eyebrow}</Eyebrow>
 
-      <h2 className="mt-5 text-balance font-display text-3xl font-extrabold leading-[1.1] text-navy-800 sm:text-4xl lg:text-[2.9rem]">
+      <h2 className="mt-5 text-balance font-display text-3xl font-extrabold leading-[1.1] text-navy-700 sm:text-4xl lg:text-[2.9rem]">
        Every Student Deserves The{' '}
        <span className="text-amber-500">Only Teacher</span>
       </h2>
@@ -74,7 +74,7 @@ export function Manifesto() {
           <ClayIcon name={m.icon} size={36} shadow={false} />
          </div>
          <div>
-          <h3 className="font-display text-[15.5px] font-extrabold leading-snug text-navy-800 sm:text-[17px]">
+          <h3 className="font-display text-[15.5px] font-extrabold leading-snug text-navy-700 sm:text-[17px]">
            {m.title}
           </h3>
           <p className="mt-1 text-[13.5px] leading-relaxed text-navy-500">{m.body}</p>

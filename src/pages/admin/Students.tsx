@@ -29,21 +29,21 @@ export default function Students() {
     <div className="flex items-center gap-4 rounded-3xl border border-amber-200/70 bg-white p-5 shadow-sm">
      <ClayIcon name="student" size={48} />
      <div>
-      <p className="font-display text-2xl font-extrabold leading-none text-navy-800">{STUDENTS.length}</p>
+      <p className="font-display text-2xl font-extrabold leading-none text-navy-700">{STUDENTS.length}</p>
       <p className="mt-1 text-[12px] font-extrabold uppercase tracking-wider text-navy-400">On roster</p>
      </div>
     </div>
     <div className="flex items-center gap-4 rounded-3xl border border-forest-200/70 bg-white p-5 shadow-sm">
      <ClayIcon name="calendar" size={48} />
      <div>
-      <p className="font-display text-2xl font-extrabold leading-none text-navy-800">{avgAttendance}%</p>
+      <p className="font-display text-2xl font-extrabold leading-none text-navy-700">{avgAttendance}%</p>
       <p className="mt-1 text-[12px] font-extrabold uppercase tracking-wider text-navy-400">Avg attendance</p>
      </div>
     </div>
     <div className="flex items-center gap-4 rounded-3xl border border-navy-200/70 bg-white p-5 shadow-sm">
      <ClayIcon name="target" size={48} />
      <div>
-      <p className="font-display text-2xl font-extrabold leading-none text-navy-800">{avgProgress}%</p>
+      <p className="font-display text-2xl font-extrabold leading-none text-navy-700">{avgProgress}%</p>
       <p className="mt-1 text-[12px] font-extrabold uppercase tracking-wider text-navy-400">Avg syllabus progress</p>
      </div>
     </div>

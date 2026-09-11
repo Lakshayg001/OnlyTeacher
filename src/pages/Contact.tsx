@@ -98,7 +98,7 @@ export default function Contact() {
          <ClayIcon name="trophy" size={92} />
          <PartyPopper className="absolute -right-3 -top-2 h-7 w-7 text-amber-500" />
         </div>
-        <h2 className="mt-5 font-display text-2xl font-extrabold text-navy-800 sm:text-3xl">
+        <h2 className="mt-5 font-display text-2xl font-extrabold text-navy-700 sm:text-3xl">
          Request received {form.parent.split(' ')[0]}
         </h2>
         <p className="mt-2.5 max-w-md text-[15.5px] leading-relaxed text-navy-500">
@@ -171,7 +171,7 @@ export default function Contact() {
         </ol>
 
         <div className="mt-6">
-         <h2 className="font-display text-xl font-extrabold text-navy-800 sm:text-2xl">
+         <h2 className="font-display text-xl font-extrabold text-navy-700 sm:text-2xl">
           {STEP_META[step].title}
          </h2>
          <p className="mt-1 text-[14.5px] text-navy-500">{STEP_META[step].sub}</p>

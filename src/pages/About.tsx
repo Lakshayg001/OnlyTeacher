@@ -119,13 +119,13 @@ export default function About() {
                                                 <path d="m8 14 4-4 4 4" />
                                             </svg>
                                         </div>
-                                        <h2 className="text-2xl font-extrabold text-navy-800 sm:text-3xl">
+                                        <h2 className="text-2xl font-extrabold text-navy-700 sm:text-3xl">
                                             The Philosophy Behind <span className="text-amber-500">TOT</span>
                                         </h2>
                                     </div>
 
                                     <div className="space-y-4">
-                                        <h3 className="text-xl font-extrabold text-navy-800">
+                                        <h3 className="text-xl font-extrabold text-navy-700">
                                             Inspired by the <span className="text-amber-500">Idea</span> of the "Only True <span className="text-forest-500">Teacher</span>"
                                         </h3>
                                         <p className="text-[15px] leading-relaxed text-navy-600">
@@ -140,7 +140,7 @@ export default function About() {
                                     </div>
 
                                     <div className="space-y-4">
-                                        <h3 className="text-xl font-extrabold text-navy-800">
+                                        <h3 className="text-xl font-extrabold text-navy-700">
                                             For TOT, this idea becomes a guiding principle:
                                         </h3>
 
@@ -149,7 +149,7 @@ export default function About() {
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
                                             </div>
                                             <div className="space-y-3">
-                                                <h4 className="text-[17px] font-extrabold text-navy-800">
+                                                <h4 className="text-[17px] font-extrabold text-navy-700">
                                                     Don't Just <span className="text-amber-500">Teach</span> the Subject. Understand the <span className="text-forest-500">Student</span>.
                                                 </h4>
                                                 <p className="text-[14.5px] leading-relaxed text-navy-600">
@@ -164,7 +164,7 @@ export default function About() {
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" /><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" /></svg>
                                         </div>
                                         <div>
-                                            <h4 className="text-[15px] font-extrabold text-navy-800">
+                                            <h4 className="text-[15px] font-extrabold text-navy-700">
                                                 That is the spirit behind The Only Teacher.
                                             </h4>
                                             <p className="text-[14px] font-bold text-forest-600">
@@ -184,7 +184,7 @@ export default function About() {
                                             className="relative z-10 w-full object-contain drop-shadow-2xl"
                                             style={{ maxHeight: '600px', maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)' }}
                                         />
-                                        <p className="relative z-20 mt-4 text-center font-display text-2xl text-navy-800/40 italic" style={{ fontFamily: "'Brush Script MT', cursive" }}>
+                                        <p className="relative z-20 mt-4 text-center font-display text-2xl text-navy-700/40 italic" style={{ fontFamily: "'Brush Script MT', cursive" }}>
                                             Swami Vivekananda
                                         </p>
                                     </div>
@@ -207,7 +207,7 @@ export default function About() {
                                 {/* Left Content */}
                                 <div className="space-y-6">
                                     <div className="space-y-1">
-                                        <h3 className="text-xl md:text-2xl font-medium text-navy-800">
+                                        <h3 className="text-xl md:text-2xl font-medium text-navy-700">
                                             Meet Our Founder
                                         </h3>
                                         <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight">
@@ -271,7 +271,7 @@ export default function About() {
                                 {/* Right Content */}
                                 <div className="space-y-6">
                                     <div className="space-y-1">
-                                        <h3 className="text-xl md:text-2xl font-medium text-navy-800">
+                                        <h3 className="text-xl md:text-2xl font-medium text-navy-700">
                                             Meet Our Co-Founder
                                         </h3>
                                         <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight">
@@ -310,7 +310,7 @@ export default function About() {
                                 {/* Left Content */}
                                 <div className="space-y-6">
                                     <div className="space-y-1">
-                                        <h3 className="text-xl md:text-2xl font-medium text-navy-800">
+                                        <h3 className="text-xl md:text-2xl font-medium text-navy-700">
                                             Meet Our CEO
                                         </h3>
                                         <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight">
@@ -365,7 +365,7 @@ export default function About() {
                                     <Reveal key={v.title} delay={i * 0.07}>
                                         <div className="h-full rounded-4xl border border-navy-100 bg-white p-5 shadow-clay transition-transform duration-300 hover:-translate-y-1.5">
                                             <ClayIcon name={v.icon} size={54} />
-                                            <h3 className="mt-3.5 font-display text-lg font-extrabold leading-snug text-navy-800">{v.title}</h3>
+                                            <h3 className="mt-3.5 font-display text-lg font-extrabold leading-snug text-navy-700">{v.title}</h3>
                                             <p className="mt-1.5 text-[14px] leading-relaxed text-navy-500">{v.body}</p>
                                         </div>
                                     </Reveal>
@@ -398,7 +398,7 @@ export default function About() {
                                                     {t.initials}
                                                 </div>
                                                 <div className="min-w-0">
-                                                    <h3 className="font-display text-[18px] font-extrabold leading-snug text-navy-800">
+                                                    <h3 className="font-display text-[18px] font-extrabold leading-snug text-navy-700">
                                                         {t.name}
                                                     </h3>
                                                     <span className="mt-1 inline-flex items-center gap-1.5 rounded-full bg-amber-500/10 px-3 py-0.5 text-[12px] font-extrabold uppercase tracking-[0.1em] text-amber-600">
@@ -479,7 +479,7 @@ export default function About() {
                                         <ClayIcon name={card.icon} size={48} />
                                     </div>
                                     <div>
-                                        <h3 className="font-display text-[17px] font-extrabold leading-snug text-navy-800">{card.title}</h3>
+                                        <h3 className="font-display text-[17px] font-extrabold leading-snug text-navy-700">{card.title}</h3>
                                         <p className="mt-1.5 text-[14px] leading-relaxed text-navy-500">{card.body}</p>
                                     </div>
                                 </div>

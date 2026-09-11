@@ -42,7 +42,7 @@ export default function Content() {
      <div key={s} className="flex items-center gap-4 rounded-3xl border border-navy-100 bg-white p-5 shadow-sm">
       <ClayIcon name={s === 'published' ? 'rocket' : s === 'review' ? 'bulb' : 'book'} size={46} />
       <div>
-       <p className="font-display text-2xl font-extrabold leading-none text-navy-800">
+       <p className="font-display text-2xl font-extrabold leading-none text-navy-700">
         {counts[s] ?? 0}
        </p>
        <p className="mt-1 text-[12px] font-extrabold uppercase tracking-wider text-navy-400 capitalize">
@@ -91,7 +91,7 @@ export default function Content() {
         <span className="text-[11px] font-extrabold uppercase tracking-[0.14em] text-amber-600">
          {p.category}
         </span>
-        <h3 className="mt-1.5 text-[14.5px] font-extrabold leading-snug text-navy-800">{p.title}</h3>
+        <h3 className="mt-1.5 text-[14.5px] font-extrabold leading-snug text-navy-700">{p.title}</h3>
         <p className="mt-2 flex items-center gap-2 text-[11.5px] font-bold text-navy-400">
          {p.author} <span className="h-3 w-px bg-navy-200" /> {p.date} <span className="h-3 w-px bg-navy-200" /> {p.readTime} min
         </p>

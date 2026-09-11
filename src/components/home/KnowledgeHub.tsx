@@ -91,7 +91,7 @@ export function KnowledgeHub() {
         />
         <div className="flex min-w-0 flex-1 flex-col justify-center py-2 pr-3">
          <span className={cn('chip w-fit', CAT[p.accent])}>{p.category}</span>
-         <h3 className="mt-2.5 font-display text-[16.5px] font-extrabold leading-snug text-navy-800 transition-colors group-hover:text-amber-600">
+         <h3 className="mt-2.5 font-display text-[16.5px] font-extrabold leading-snug text-navy-700 transition-colors group-hover:text-amber-600">
           {p.title}
          </h3>
          <p className="mt-1 line-clamp-2 text-[13.5px] leading-snug text-navy-500">

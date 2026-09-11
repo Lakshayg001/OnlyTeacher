@@ -144,7 +144,7 @@ export default function AdminLayout() {
       )}
 
       <div>
-       <h1 className="font-display text-lg font-extrabold leading-tight text-navy-800 sm:text-xl">
+       <h1 className="font-display text-lg font-extrabold leading-tight text-navy-700 sm:text-xl">
         {current?.label ?? 'Admin'}
        </h1>
        <p className="hidden text-[12px] font-semibold text-navy-400 sm:block">

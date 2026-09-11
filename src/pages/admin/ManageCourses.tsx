@@ -39,7 +39,7 @@ export default function ManageCourses() {
      <div key={s.label} className="flex items-center gap-4 rounded-3xl border border-navy-100 bg-white p-5 shadow-sm">
       <ClayIcon name={s.icon} size={46} />
       <div>
-       <p className="font-display text-2xl font-extrabold leading-none text-navy-800">{s.value}</p>
+       <p className="font-display text-2xl font-extrabold leading-none text-navy-700">{s.value}</p>
        <p className="mt-1 text-[12px] font-extrabold uppercase tracking-wider text-navy-400">{s.label}</p>
       </div>
      </div>

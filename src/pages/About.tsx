@@ -218,7 +218,7 @@ export default function About() {
 
                                     <div className="relative py-2 flex gap-2 items-start">
                                         <span className="text-4xl md:text-5xl font-serif font-bold text-amber-500 leading-none mt-1">"</span>
-                                        <p className="text-2xl md:text-3xl font-medium italic text-navy-800 leading-tight">
+                                        <p className="text-xl md:text-2xl font-medium italic text-navy-800 leading-tight">
                                             Education should not only prepare children for the future;<br />
                                             it should empower them to shape it.
                                             <span className="text-4xl md:text-5xl font-serif font-bold text-amber-500 leading-none ml-2">"</span>

@@ -816,6 +816,52 @@ export const POSTS: Post[] = [
   accent: 'navy',
   author: 'Priya Nair',
  },
+ {
+  id: 'b7',
+  title: 'How to Prepare Your Child for NAPLAN Without Creating Exam Stress',
+  excerpt: 'NAPLAN is an important part of a child’s school journey, but preparing for it does not need to become stressful.',
+  category: 'Parent Guides',
+  date: '11 Sep 2026',
+  readTime: 5,
+  image: '/gen.jpeg',
+  accent: 'amber',
+  author: 'The Only Teacher',
+  content: `
+<p>NAPLAN is an important part of a child’s school journey, but preparing for it does not need to become stressful. The goal should be to help children feel familiar with the assessment, strengthen their skills and build confidence without putting unnecessary pressure on performance.</p>
+
+<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">1. Understand What NAPLAN Assesses</h3>
+<p>NAPLAN assesses key areas of literacy and numeracy, including <em>reading, writing, conventions of language and numeracy</em>. Understanding these areas helps parents focus on meaningful preparation rather than simply making children complete endless practice papers.</p>
+
+<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">2. Strengthen the Foundations</h3>
+<p>Good NAPLAN preparation begins with everyday learning.</p>
+<p>Encourage your child to:</p>
+<ul class="list-disc pl-5 mt-2 mb-4 space-y-1">
+  <li>Read regularly and discuss what they have read.</li>
+  <li>Practise spelling, grammar and sentence construction.</li>
+  <li>Solve age-appropriate Maths problems.</li>
+  <li>Explain how they reached an answer rather than only giving the answer.</li>
+</ul>
+<p>Strong foundations make children more comfortable when they encounter unfamiliar questions.</p>
+
+<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">3. Practise Without Pressure</h3>
+<p>Practice should help children become familiar with question formats and manage their time. However, too much testing can increase anxiety.</p>
+<p>Keep practice sessions <em>short, consistent and purposeful</em>. Focus on understanding mistakes instead of counting how many questions were answered incorrectly.</p>
+
+<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">4. Build Confidence</h3>
+<p>Children often perform better when they feel comfortable making mistakes.</p>
+<p>Instead of saying, "You must get a high score," encourage them with: <em>"Do your best, read carefully and take your time."</em></p>
+<p>Remind your child that one assessment does not define their intelligence or ability.</p>
+
+<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">5. Personalised Support Can Help</h3>
+<p>Every child has different strengths and learning gaps. Some may need support with reading comprehension, while others may need more practice with numeracy, writing or time management.</p>
+<p>A personalised learning approach allows teachers to identify specific challenges and provide targeted support at the right pace.</p>
+
+<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">Prepare the Child, Not Just for the Test</h3>
+<p>The best NAPLAN preparation is not about creating exam pressure. It is about developing <em>skills, familiarity and confidence</em>.</p>
+<p>At <strong>The Only Teacher (TOT)</strong>, we believe children learn best when they are understood as individuals. With the right guidance, preparation can become a positive learning experience rather than a source of stress.</p>
+<p class="font-bold text-amber-600 mt-4"><em>Prepare with confidence. Learn with understanding. Perform at your best.</em></p>
+`
+ }
 ];
 
 export const STEPS = [

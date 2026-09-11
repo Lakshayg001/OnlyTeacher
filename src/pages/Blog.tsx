@@ -64,7 +64,7 @@ export default function Blog() {
        >
         <div className="relative">
          <SmartImage
-          src={'/napblog.jpeg'}
+          src={p.image || '/napblog.jpeg'}
           alt={p.title}
           fallbackIcon="book"
           ratio="16/10"
@@ -131,7 +131,7 @@ export default function Blog() {
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-navy-900/80 backdrop-blur-sm" onClick={() => setSelectedPost(null)}>
      <div className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-white rounded-3xl shadow-2xl" onClick={(e) => e.stopPropagation()}>
       <div className="relative h-64 sm:h-80">
-       <img src={'/napblog.jpeg'} alt={selectedPost.title} className="w-full h-full object-cover rounded-t-3xl" />
+       <img src={selectedPost.image || '/napblog.jpeg'} alt={selectedPost.title} className="w-full h-full object-cover rounded-t-3xl" />
        <button onClick={() => setSelectedPost(null)} className="absolute top-4 right-4 bg-white/50 hover:bg-white/90 p-2 rounded-full backdrop-blur transition">
         <X className="w-5 h-5 text-navy-900" />
        </button>
@@ -146,7 +146,11 @@ export default function Blog() {
        </div>
        <div className="prose prose-navy max-w-none text-[15px] leading-relaxed">
         <p className="text-lg font-medium text-navy-700 mb-6">{selectedPost.excerpt}</p>
-        <p>The full blog content will be placed here. You can paste your word file content later.</p>
+        {selectedPost.content ? (
+         <div dangerouslySetInnerHTML={{ __html: selectedPost.content }} />
+        ) : (
+         <p>The full blog content will be placed here. You can paste your word file content later.</p>
+        )}
        </div>
       </div>
      </div>

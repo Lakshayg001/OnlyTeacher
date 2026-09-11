@@ -135,6 +135,7 @@ export interface Post {
  image: string;
  accent: 'amber' | 'forest' | 'navy';
  author: string;
+ content?: string;
 }
 
 export interface Spec {

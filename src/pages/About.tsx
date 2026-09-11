@@ -31,11 +31,11 @@ const TEACHERS = [
         bio: 'Dr. Kritika is an experienced English educator teaching Classes 6–12 across CBSE and Indian State Boards. Her teaching focuses on conceptual clarity, communication, critical thinking, and confident expression. Through relatable examples, visual learning, and structured practice, she makes complex concepts accessible while nurturing independent, articulate learners prepared for academic success and life beyond the classroom.',
     },
     {
-        name: 'Tr. Lavisha',
-        initials: 'LV',
+        name: 'Tr. Lavisha Deshmukh',
+        initials: 'LD',
         subject: 'Biology & Chemistry Educator',
-        quote: undefined,
-        bio: 'Tr. Lavisha\'s journey into teaching began unexpectedly — from being a Radio Jockey to supporting her studies through teaching at NEETprep. A mentor\'s influence transformed teaching from a job into a purpose. Over the years, she has taught Biology, Chemistry and Geography across CBSE, Cambridge, IGCSE, GCSE and IB curricula, working with learners globally. Her student-centred approach focuses on understanding individual challenges, building confidence and encouraging curiosity. For her, teaching is about helping students recognise their potential.',
+        quote: 'I don’t just teach Science; I make curiosity feel possible. I turn questions into understanding, and students into confident learners.',
+        bio: 'Tr. Lavisha’s teaching journey began with a simple opportunity that gradually became a meaningful purpose. Her experience with EdTech and competitive-exam preparation introduced her to the impact a dedicated teacher can have on a student’s confidence and growth. She has taught Biology, Chemistry and Geography across CBSE, IGCSE, GCSE, IB and Cambridge curricula, working with learners from diverse backgrounds worldwide. Her approach focuses on understanding individual learning challenges, simplifying concepts and building confidence. For her, teaching goes beyond completing a syllabus; it is about helping students believe in their abilities and become independent, confident learners.',
     },
     {
         name: 'Tr. Vanshikka Sharma',

@@ -950,6 +950,45 @@ export const POSTS: Post[] = [
 <p>At <strong>The Only Teacher (TOT)</strong>, we believe SAT preparation should go beyond solving practice papers. It should help students understand, reason, improve and approach the test with confidence.</p>
 <p class="font-bold text-amber-600 mt-4"><em>Prepare with strategy. Learn with purpose. Perform with confidence.</em></p>
 `
+ },
+ {
+  id: 'b10',
+  title: 'Why Children Struggle With Mathematics — And How the Right Teacher Can Help',
+  excerpt: 'Mathematics can be challenging for children, but struggling with Maths does not mean a child lacks ability. Often, the real issue is a combination of foundational gaps, confidence, learning style and practice.',
+  category: 'Mathematics',
+  date: '11 Sep 2026',
+  readTime: 5,
+  image: '/mathblog.jpeg',
+  accent: 'forest',
+  author: 'The Only Teacher',
+  content: `
+<p>Mathematics can be challenging for children, but struggling with Maths does not mean a child lacks ability. Often, the real issue is a combination of foundational gaps, confidence, learning style and practice.</p>
+
+<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">1. Foundational Gaps</h3>
+<p>Maths is cumulative. If a child has difficulty with multiplication, fractions, place value or basic arithmetic, later topics such as algebra, percentages and equations can become much harder.</p>
+<p>A good teacher first identifies where the difficulty begins instead of simply moving ahead with the syllabus.</p>
+
+<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">2. Confidence Can Change Everything</h3>
+<p>Repeated mistakes can make children think, <em>"I'm not good at Maths."</em> This can lead to anxiety, avoidance and less practice.</p>
+<p>The right teacher creates a safe environment where questions and mistakes are part of learning. Building confidence can be just as important as teaching the concept.</p>
+
+<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">3. Every Child Learns Differently</h3>
+<p>Some children learn through visual explanations, others through practical examples, discussion or step-by-step guidance.</p>
+<p>When one teaching method does not work, the solution is not always more practice. Sometimes the child needs the concept explained differently.</p>
+
+<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">4. Practice Should Build Understanding</h3>
+<p>Effective Maths practice is not about solving hundreds of questions. Children need to understand why a method works, correct their mistakes and gradually apply their knowledge to unfamiliar problems.</p>
+<p>The goal is to develop reasoning, problem-solving and independent thinking, not just memorisation.</p>
+
+<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">5. The Right Teacher Understands the Child</h3>
+<p>A great Maths teacher looks beyond the textbook. They observe where a child hesitates, what they understand, how they approach problems and where their confidence drops.</p>
+<p>Personalised teaching allows the teacher to adjust the pace, explanation, examples and practice to the learner.</p>
+
+<p class="mt-6">At <strong>The Only Teacher (TOT)</strong>, we believe the first question should not be, <em>"What chapter are we teaching?"</em> but:</p>
+<p class="font-bold text-navy-800 italic mt-2">"What does this child need to understand and succeed?"</p>
+<p class="mt-4">Because sometimes, a child doesn't need more Maths.</p>
+<p class="font-bold text-amber-600 mt-2"><em>They need the right teacher to make Maths make sense.</em></p>
+`
  }
 ];
 

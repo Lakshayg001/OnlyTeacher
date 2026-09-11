@@ -757,11 +757,10 @@ export const POSTS: Post[] = [
   category: 'Parent Guides',
   date: '12 Sep 2026',
   readTime: 4,
-  image: '/gen.jpeg',
+  image: '/newblo.jpeg',
   accent: 'forest',
   author: 'The Only Teacher',
   content: `
-<p><strong>Is your child receiving lessons, or actually learning?</strong></p>
 <p>Choosing a tutor is not simply about finding someone who can complete a syllabus. It is about finding a teacher who understands how your child thinks, where they struggle, what motivates them, and how they learn best.</p>
 <p>That is the difference we are building at The Only Teacher (TOT).</p>
 

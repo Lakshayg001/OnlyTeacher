@@ -906,6 +906,50 @@ export const POSTS: Post[] = [
 <p>At <strong>The Only Teacher (TOT)</strong>, we believe English learning should go beyond textbooks and grammar rules. Our personalised approach focuses on helping children understand, express, communicate and think independently.</p>
 <p class="font-bold text-amber-600 mt-4"><em>Because knowing English is important. Having the confidence to use it is even more powerful.</em></p>
 `
+ },
+ {
+  id: 'b9',
+  title: 'Digital SAT Guide for Students and Parents: Everything You Need to Know',
+  excerpt: 'The Digital SAT can feel overwhelming at first, but understanding the test and preparing with the right strategy can make the journey much more manageable.',
+  category: 'Exam Prep',
+  date: '11 Sep 2026',
+  readTime: 6,
+  image: '/satbl.jpeg',
+  accent: 'amber',
+  author: 'The Only Teacher',
+  content: `
+<p>The Digital SAT can feel overwhelming at first, but understanding the test and preparing with the right strategy can make the journey much more manageable.</p>
+
+<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">What Is the Digital SAT?</h3>
+<p>The SAT is a digital college admissions test consisting of two sections: Reading and Writing and Math. The test takes 2 hours and 14 minutes, with 64 minutes for Reading and Writing and 70 minutes for Math. Each section has two timed modules, and the second module adapts based on performance in the first.</p>
+
+<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">What Does the SAT Test?</h3>
+<p>The Reading and Writing section assesses comprehension, vocabulary, grammar, evidence, reasoning and effective written expression.</p>
+<p>The Math section covers Algebra, Advanced Math, Problem-Solving and Data Analysis, Geometry and Trigonometry.</p>
+
+<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">How Should Students Prepare?</h3>
+<p>Effective SAT preparation should begin with understanding the student's current strengths and weaknesses.</p>
+<p>A strong preparation plan includes:</p>
+<ul class="list-disc pl-5 mt-2 mb-4 space-y-1">
+  <li>Building core Maths and English skills</li>
+  <li>Developing reading and reasoning abilities</li>
+  <li>Learning SAT question patterns</li>
+  <li>Practising time management</li>
+  <li>Reviewing mistakes carefully</li>
+  <li>Taking full-length practice tests</li>
+  <li>Developing strategies for unfamiliar questions</li>
+</ul>
+<p>Because the SAT is adaptive, students should focus on accuracy as well as speed.</p>
+
+<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">How Can Parents Help?</h3>
+<p>Parents can support preparation without creating unnecessary pressure. Encourage consistent study, healthy routines and progress rather than focusing only on scores.</p>
+<p>The goal should be to help students become confident, independent learners who understand how to approach different types of questions.</p>
+
+<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">Personalised SAT Preparation</h3>
+<p>Every student starts from a different level. A personalised approach can identify learning gaps, target specific skills and create a preparation plan around the student's goals and timeline.</p>
+<p>At <strong>The Only Teacher (TOT)</strong>, we believe SAT preparation should go beyond solving practice papers. It should help students understand, reason, improve and approach the test with confidence.</p>
+<p class="font-bold text-amber-600 mt-4"><em>Prepare with strategy. Learn with purpose. Perform with confidence.</em></p>
+`
  }
 ];
 

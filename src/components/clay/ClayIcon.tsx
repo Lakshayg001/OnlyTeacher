@@ -41,6 +41,7 @@ const THEME: Record<ClayIconName, keyof typeof P> = {
  target: 'rose',
  clock: 'sky',
  dna: 'forest',
+ brain: 'rose',
 };
 
 export interface ClayIconProps {
@@ -407,6 +408,19 @@ function shapes(name: ClayIconName, g: string, gl: string, p: Palette) {
      <path d="M25 22h14M22 32h20M25 42h14" stroke={p.c} strokeWidth="3" strokeLinecap="round" />
      <circle cx="32" cy="14" r="3" fill="#fff" opacity="0.9" />
      <circle cx="32" cy="50" r="3" fill="#fff" opacity="0.9" />
+    </>
+   );
+
+  case 'brain':
+   return (
+    <>
+     <path
+      d="M32 48c-10 0-18-6-18-16 0-3 1-6 3-8-2-2-3-5-3-8 0-6 5-11 11-11 3 0 6 1 8 3 2-2 5-3 8-3 6 0 11 5 11 11 0 3-1 6-3 8 2 2 3 5 3 8 0 10-8 16-18 16z"
+      fill={body}
+     />
+     <path d="M32 10v34" stroke={p.c} strokeWidth="4" strokeLinecap="round" opacity="0.5" />
+     <path d="M26 22c-2 2-6 2-8 0M38 22c2 2 6 2 8 0" stroke="#fff" strokeWidth="3" strokeLinecap="round" opacity="0.6" />
+     <path d="M22 32c-3 2-7 1-9-1M42 32c3 2 7 1 9-1" stroke="#fff" strokeWidth="3" strokeLinecap="round" opacity="0.4" />
     </>
    );
 

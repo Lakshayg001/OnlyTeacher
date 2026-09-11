@@ -144,22 +144,22 @@ export default function About() {
                                             For TOT, this idea becomes a guiding principle:
                                         </h3>
 
-                                        <div className="flex items-start gap-4">
-                                            <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-600">
+                                        <div className="flex items-start gap-4 rounded-2xl bg-amber-50/30 p-5 border border-amber-100/50">
+                                            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-600">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
                                             </div>
-                                            <div className="space-y-3">
-                                                <h4 className="text-[17px] font-extrabold text-navy-700">
+                                            <div className="space-y-2">
+                                                <h4 className="text-[16px] font-extrabold text-navy-700">
                                                     Don't Just <span className="text-amber-500">Teach</span> the Subject. Understand the <span className="text-forest-500">Student</span>.
                                                 </h4>
-                                                <p className="text-[14.5px] leading-relaxed text-navy-600">
+                                                <p className="text-[14px] leading-relaxed text-navy-600">
                                                     A great teacher learns to see beyond the textbook to notice how a child thinks, where they hesitate, what excites them, what they already understand and what they need explained differently. Because teaching becomes powerful when knowledge meets empathy, patience and understanding.
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div className="flex items-center gap-4 rounded-2xl bg-forest-50 p-5 border border-forest-100">
+                                    <div className="flex items-start gap-4 rounded-2xl bg-forest-50/50 p-5 border border-forest-100/50">
                                         <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-forest-100 text-forest-600">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" /><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" /></svg>
                                         </div>

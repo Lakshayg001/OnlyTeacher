@@ -56,7 +56,7 @@ export default function Courses() {
     eyebrow="Course catalogue"
     title="One Student."
     accent="One Teacher."
-    sub="Every course is taught live and one-to-one matched to the board your school follows Plans are built after your free demo never from a price list"
+    sub="Every course is taught live and one-to-one matched to the board your school follows Plans are built after your free class never from a price list"
     icons={['math', 'science', 'technology']}
    />
 

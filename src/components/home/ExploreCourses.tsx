@@ -212,7 +212,7 @@ export function ExploreCourses() {
                   View the full course catalogue
                 </Button>
                 <p className="text-[13px] font-bold text-navy-400">
-                  Plans are built after the free demo never a fixed price list.
+                  Plans are built after the free class never a fixed price list.
                 </p>
               </div>
             </Reveal>

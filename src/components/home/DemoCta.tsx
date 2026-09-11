@@ -28,20 +28,6 @@ export function DemoCta() {
                     <div className="relative grid items-center gap-9 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
                         {/* ------------------------------- pitch ------------------------------- */}
                         <div>
-                            <motion.span
-                                initial={{ opacity: 0, y: 14 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5 }}
-                                className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.2em] text-navy-700 shadow-sm"
-                            >
-                                <span className="relative flex h-2 w-2">
-                                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-forest-500 opacity-75" />
-                                    <span className="relative inline-flex h-2 w-2 rounded-full bg-forest-500" />
-                                </span>
-                                Free 1-to-1 demo lesson
-                            </motion.span>
-
                             <motion.h2
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}

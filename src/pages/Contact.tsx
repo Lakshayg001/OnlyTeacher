@@ -299,7 +299,7 @@ export default function Contact() {
           </Button>
          ) : (
           <Button type="submit" size="lg" disabled={!valid[2]}>
-           Book my free demo
+           Book my free class
           </Button>
          )}
         </div>

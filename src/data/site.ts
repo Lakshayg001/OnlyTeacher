@@ -19,7 +19,7 @@ import type {
   tagline: 'Every Student Deserves the Best Teacher.',
   email: 'Info@theonlyteacher.com',
   phone: '+91 9898632990',
-  address: 'Level 8, Cyber Tower, HITEC City, Hyderabad, India 500081',
+  address: 'C30, C Block, Sector 63, Noida, UP, 201301',
 };
 
 export const NAV: NavItem[] = [

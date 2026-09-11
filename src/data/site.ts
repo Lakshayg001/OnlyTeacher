@@ -751,6 +751,100 @@ export const FAQS: Faq[] = [
 
 export const POSTS: Post[] = [
  {
+  id: 'b8',
+  title: 'Why The Only Teacher Could Be the Right Learning Partner for Your Child',
+  excerpt: 'Is your child receiving lessons, or actually learning?',
+  category: 'Parent Guides',
+  date: '12 Sep 2026',
+  readTime: 4,
+  image: '/gen.jpeg',
+  accent: 'forest',
+  author: 'The Only Teacher',
+  content: `
+<p><strong>Is your child receiving lessons, or actually learning?</strong></p>
+<p>Choosing a tutor is not simply about finding someone who can complete a syllabus. It is about finding a teacher who understands how your child thinks, where they struggle, what motivates them, and how they learn best.</p>
+<p>That is the difference we are building at The Only Teacher (TOT).</p>
+
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">Premium Learning Without the Premium Price</h3>
+<p>At TOT, we believe quality education should not be limited by a family’s budget. Our goal is to make personalised, high-quality tutoring affordable without compromising on teaching standards, academic expertise or learner experience.</p>
+<p>Affordable does not mean ordinary. It means making better education accessible to more families.</p>
+
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">Why Does the Teacher Matter More Than the Platform?</h3>
+<p>Technology can deliver a lesson, but only a great teacher can recognise hesitation, change an explanation, encourage a struggling learner and build genuine confidence.</p>
+<p>That is why TOT focuses on bringing experienced, knowledgeable and passionate teachers onboard. Our educators are selected for their subject expertise, curriculum understanding, communication skills and ability to make learning clear, engaging and meaningful.</p>
+
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">Does Your Child Need More Than Marks?</h3>
+<p>Of course, academic progress matters. But real learning also develops:</p>
+<ul class="list-disc pl-5 mt-2 mb-4 space-y-1">
+ <li>Conceptual clarity</li>
+ <li>Independent thinking</li>
+ <li>Problem-solving ability</li>
+ <li>Confidence</li>
+ <li>Curiosity</li>
+ <li>Communication</li>
+ <li>Consistent learning habits</li>
+</ul>
+<p>TOT is designed to support the child behind the result, not just the result itself.</p>
+
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">One Platform. Global Curriculum Support.</h3>
+<p>TOT is not limited to one board or one country. We support learners across a wide range of Indian and international curricula, including:</p>
+<p>CBSE, Cambridge, IB, IGCSE, GCSE and other global curricula.</p>
+<p>Whether your child is studying in India, the UK, Australia, the Middle East or another part of the world, our aim is to help families find the right teacher and the right learning approach for their curriculum and goals.</p>
+
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">What Makes TOT Different?</h3>
+<p>We are not trying to make every child learn in the same way.</p>
+<p>We believe every learner deserves:</p>
+<ul class="list-disc pl-5 mt-2 mb-4 space-y-1">
+ <li>The right teacher</li>
+ <li>Personalised attention</li>
+ <li>Clear explanations</li>
+ <li>Curriculum-aligned support</li>
+ <li>Honest academic guidance</li>
+ <li>Affordable access to quality education</li>
+ <li>A learning environment built on trust</li>
+</ul>
+<p>Because education should not make children feel smaller.</p>
+<p>It should help them understand more, ask better questions and believe they are capable of achieving more.</p>
+<p>The Only Teacher where great teachers meet individual learners, and quality education becomes accessible to every child.</p>
+`
+ },
+ {
+  id: 'b9',
+  title: 'Learning That Understands Every Child',
+  excerpt: 'How TOT supports children with ADHD. Every child learns differently.',
+  category: 'Special Education',
+  date: '12 Sep 2026',
+  readTime: 5,
+  image: '/gen.jpeg',
+  accent: 'navy',
+  author: 'The Only Teacher',
+  content: `
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">How TOT supports children with ADHD</h3>
+<p>Every child learns differently. For children with ADHD, learning becomes more meaningful when their energy, attention, curiosity and individual strengths are understood rather than judged.</p>
+<p>At The Only Teacher, we do not expect every child to sit, listen and learn in exactly the same way. We create learning experiences that are patient, structured, flexible and personalised to the child.</p>
+<p>Our teachers focus on:</p>
+<ul class="list-disc pl-5 mt-2 mb-4 space-y-1">
+ <li>Short, clear and manageable learning steps</li>
+ <li>Simple explanations supported by examples and visual learning</li>
+ <li>Interactive lessons that encourage participation</li>
+ <li>Regular breaks and movement when appropriate</li>
+ <li>Positive reinforcement instead of constant correction</li>
+ <li>Clear routines and realistic learning goals</li>
+ <li>Frequent feedback to help children recognise their progress</li>
+ <li>Personalised strategies based on the child’s pace, interests and learning needs</li>
+</ul>
+
+<h3 class="font-bold text-navy-700 text-lg mt-6 mb-2">More Than Attention</h3>
+<p>We understand that a child’s difficulty staying focused does not mean a lack of intelligence, effort or potential. Our aim is to help learners build confidence, understand concepts and develop practical learning habits without feeling pressured or labelled.</p>
+<p>TOT teachers work closely with parents to understand what supports the child best. We encourage open communication about progress, challenges and strategies that can make learning more comfortable and productive.</p>
+<p>Our approach is not about changing who the child is. It is about creating the right environment for the child to participate, understand and succeed.</p>
+<p>Every child deserves a teacher who sees potential before difficulty.</p>
+<p>With experienced educators, personalised tutoring and a supportive learning environment, TOT helps children with ADHD move from frustration to understanding, from hesitation to confidence, and from “I cannot do this” to “Let me try.”</p>
+<p>At TOT, we do not teach every child the same way. We help every child discover their own way to learn.</p>
+<p class="mt-6 italic text-navy-600">TOT provides educational support and does not replace professional medical, psychological or therapeutic care. Where appropriate, we encourage families to work with qualified healthcare or learning specialists alongside tutoring.</p>
+`
+ },
+ {
   id: 'b7',
   title: 'How to Prepare Your Child for NAPLAN Without Creating Exam Stress',
   excerpt: 'NAPLAN is an important part of a child’s school journey, but preparing for it does not need to become stressful.',

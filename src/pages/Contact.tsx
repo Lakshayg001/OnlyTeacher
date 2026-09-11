@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Check, ChevronDown, ClipboardList, Mail, MapPin, PartyPopper, Phone } from 'lucide-react';
 import { BRAND, COUNTRIES, COURSES } from '@/data/site';
 import { IMG } from '@/data/images';
-import conImg from '@/assets/contact-img.jpeg';
+
 import ClayIcon from '@/components/clay/ClayIcon';
 import SmartImage from '@/components/ui/SmartImage';
 import Flag from '@/components/ui/Flag';
@@ -316,7 +316,7 @@ export default function Contact() {
       <Reveal>
        <div className="relative overflow-hidden rounded-4xl shadow-clay ring-8 ring-white">
         <SmartImage
-         src={conImg}
+         src="/totconre.jpeg"
          alt="A student in a live one-to-one lesson"
          fallbackIcon="laptop"
          ratio="4/3"

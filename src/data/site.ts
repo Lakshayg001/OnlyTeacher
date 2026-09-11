@@ -15,7 +15,7 @@ import type {
 
  export const BRAND = {
   name: 'TOT',
-  full: 'The Online Tutors',
+  full: 'The Only Teacher',
   tagline: 'Every Student Deserves the Best Teacher.',
   email: 'Info@theonlyteacher.com',
   phone: '+91 9898632990',
@@ -980,7 +980,7 @@ export const POSTS: Post[] = [
  },
  {
   id: 'b10',
-  title: 'Why Children Struggle With Mathematics — And How the Right Teacher Can Help',
+  title: 'Why Children Struggle With Mathematics And How the Right Teacher Can Help',
   excerpt: 'Mathematics can be challenging for children, but struggling with Maths does not mean a child lacks ability. Often, the real issue is a combination of foundational gaps, confidence, learning style and practice.',
   category: 'Mathematics',
   date: '11 Sep 2026',

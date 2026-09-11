@@ -129,7 +129,7 @@ export default function About() {
                                             Inspired by the <span className="text-amber-500">Idea</span> of the "Only True <span className="text-forest-500">Teacher</span>"
                                         </h3>
                                         <p className="text-[15px] leading-relaxed text-navy-600">
-                                            Swami Vivekananda described a true teacher not simply as someone who possesses knowledge, but as someone who can understand the learner deeply enough to teach from the learner's perspective.
+                                            <strong>Swami Vivekananda</strong> described a true teacher not simply as someone who possesses knowledge, but as someone who can understand the learner deeply enough to teach from the learner's perspective.
                                         </p>
                                     </div>
 
@@ -185,7 +185,7 @@ export default function About() {
                                             style={{ maxHeight: '600px', maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)' }}
                                         />
                                         <p className="relative z-20 mt-4 text-center font-display text-2xl text-navy-700/40 italic" style={{ fontFamily: "'Brush Script MT', cursive" }}>
-                                            Swami Vivekananda
+                                            <strong>Swami Vivekananda</strong>
                                         </p>
                                     </div>
                                 </div>

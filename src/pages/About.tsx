@@ -101,7 +101,7 @@ export default function About() {
                 title="We Build TOT With One"
                 accent="Belief"
                 sub="That a child's progress depends less on the platform the app or the price and almost entirely on who is teaching them"
-                icons={['graduation', 'brain', 'globe']}
+                icons={['graduation', 'trophy', 'globe']}
             />
 
             {/* philosophy */}

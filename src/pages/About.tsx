@@ -219,14 +219,14 @@ export default function About() {
                                     <div className="relative py-2 flex gap-2 items-start">
                                         <span className="text-4xl md:text-5xl font-serif font-bold text-amber-500 leading-none mt-1">"</span>
                                         <p className="text-2xl md:text-3xl font-medium italic text-navy-800 leading-tight">
-                                            Before we teach a child,<br />
-                                            we must first understand the child.
+                                            Education should not only prepare children for the future;<br />
+                                            it should empower them to shape it.
                                             <span className="text-4xl md:text-5xl font-serif font-bold text-amber-500 leading-none ml-2">"</span>
                                         </p>
                                     </div>
 
                                     <p className="text-[15px] md:text-[16px] leading-relaxed text-navy-600 font-medium max-w-2xl">
-                                        Anish Rajan is an education-focused entrepreneur and recruitment professional with years of experience connecting people and opportunities across the education and EdTech ecosystem. His journey with educators, leaders, and learners inspired him to build The Only Teacher (TOT) a vision where education becomes more personal, empathetic, engaging, and truly learner-centric.
+                                        With 15 years of experience in the service sector, Anish Rajan has built his journey around people, trust, and meaningful opportunities. His experience in recruitment, business development, and client partnerships inspired him to create The Only Teacher (TOT). His vision is to make premium, personalised tutoring affordable and accessible worldwide, connecting every child with the right teacher, confidence, and possibilities. For Anish, TOT is not just a company; it is a commitment to transform the way children learn, grow, and dream.
                                     </p>
                                 </div>
 

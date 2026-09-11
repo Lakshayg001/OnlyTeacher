@@ -319,15 +319,9 @@ export default function Contact() {
          src="/totconre.jpeg"
          alt="A student in a live one-to-one lesson"
          fallbackIcon="laptop"
-         ratio="4/3"
          className="w-full"
-         overlay
+         imgClassName="!h-auto !object-contain"
         />
-         <div className="absolute inset-x-0 bottom-0 p-5 text-center">
-          <p className="font-display text-lg font-extrabold leading-tight text-white drop-shadow-md">
-           Need Guidance? Arjun, Aditi & TOTO Are Ready to Connect.
-          </p>
-         </div>
        </div>
       </Reveal>
 

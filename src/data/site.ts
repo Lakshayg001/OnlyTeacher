@@ -13,13 +13,13 @@ import type {
  Track,
 } from '@/types';
 
-export const BRAND = {
- name: 'TOT',
- full: 'The Online Tutors',
- tagline: 'Every Student Deserves the Best Teacher.',
- email: 'hello@tot.education',
- phone: '+91 98765 43210',
- address: 'Level 8, Cyber Tower, HITEC City, Hyderabad, India 500081',
+ export const BRAND = {
+  name: 'TOT',
+  full: 'The Online Tutors',
+  tagline: 'Every Student Deserves the Best Teacher.',
+  email: 'Info@theonlyteacher.com',
+  phone: '+91 9898632990',
+  address: 'Level 8, Cyber Tower, HITEC City, Hyderabad, India 500081',
 };
 
 export const NAV: NavItem[] = [

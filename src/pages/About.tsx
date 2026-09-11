@@ -58,6 +58,13 @@ const TEACHERS = [
         quote: 'I don\'t just teach Mathematics; I cultivate the confidence to think, question, and solve.',
         bio: 'Tr. Pranavi began her teaching journey in 2014, driven by her passion for Mathematics and Physics. Her experience across classrooms, EdTech, academic leadership, content creation and personalised learning includes Cambridge, MYP, GCSE, Edexcel, IB, AS and A Level curricula. Her student-centred approach combines conceptual clarity, questioning, real-world application and technology to help learners overcome challenges, build confidence and develop independent thinking. For her, the greatest achievement is turning "I can\'t do this" into "Let me try."',
     },
+    {
+        name: 'Tr. Sara Siddiqui',
+        initials: 'SS',
+        subject: 'English Educator | Curriculum & Exam Preparation',
+        quote: 'I believe every student can excel when learning becomes clear, purposeful, and inspiring. My goal is to build confidence, nurture curiosity, and help every learner discover the power of their own potential.',
+        bio: 'With 6+ years of teaching experience across UK, US, Australia, UAE and Indian curricula, Sara Siddiqui brings academic expertise, thoughtful guidance, and a student-first approach to every lesson. She has delivered 4,000+ classes, supporting learners from Grades 2–11 in English, exam preparation, and curriculum-based learning. Her teaching focuses on clear explanations, structured practice, and building confidence that helps students achieve meaningful academic progress.',
+    },
 ];
 
 const VALUES = [

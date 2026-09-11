@@ -386,7 +386,7 @@ export default function About() {
                                 eyebrow="The people who teach"
                                 tone="forest"
                                 title={<>Meet Our <span className="text-gradient-amber">Teachers</span></>}
-                                sub="Specialists across curricula, united by one belief — every child deserves a teacher who truly understands them."
+                                sub="Specialists across curricula, united by one belief every child deserves a teacher who truly understands them."
                             />
                             <div className="mt-10 grid gap-6 sm:grid-cols-2">
                                 {TEACHERS.map((t, i) => (

@@ -757,7 +757,7 @@ export const POSTS: Post[] = [
   category: 'Parent Guides',
   date: '11 Sep 2026',
   readTime: 5,
-  image: '/gen.jpeg',
+  image: '/phelablo.jpeg',
   accent: 'amber',
   author: 'The Only Teacher',
   content: `

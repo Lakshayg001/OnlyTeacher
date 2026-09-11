@@ -25,9 +25,9 @@ export default function Blog() {
    <PageHero
     crumb="Blog"
     eyebrow="Knowledge hub"
-    title="Study Strategy Written by the"
-    accent="People Who Teach It."
-    sub="Maths science technology exam preparation and honest guides for parents no filler no clickbait"
+    title="Helping Children Learn Without Losing"
+    accent="Their Confidence"
+    sub="Practical knowledge from educators who work with students every day."
     icons={['book', 'math', 'science']}
    />
 

@@ -861,6 +861,51 @@ export const POSTS: Post[] = [
 <p>At <strong>The Only Teacher (TOT)</strong>, we believe children learn best when they are understood as individuals. With the right guidance, preparation can become a positive learning experience rather than a source of stress.</p>
 <p class="font-bold text-amber-600 mt-4"><em>Prepare with confidence. Learn with understanding. Perform at your best.</em></p>
 `
+ },
+ {
+  id: 'b8',
+  title: 'Why Some Children Understand English but Struggle to Express Themselves',
+  excerpt: 'Some children can understand English well but hesitate when they need to speak, write, or explain their thoughts.',
+  category: 'English',
+  date: '11 Sep 2026',
+  readTime: 4,
+  image: '/underdtandblog.jpeg',
+  accent: 'navy',
+  author: 'The Only Teacher',
+  content: `
+<p>Some children can understand English well but hesitate when they need to speak, write, or explain their thoughts. They may know the meaning of words and understand what they read, yet struggle to put their ideas into clear sentences.</p>
+<p>This is more common than many parents realise, and it does not necessarily mean a child has weak English skills.</p>
+
+<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">1. Understanding Is Different From Expressing</h3>
+<p>Listening and reading are receptive skills, while speaking and writing require children to actively organise their thoughts, choose vocabulary and construct sentences.</p>
+<p>A child may understand a question perfectly but need more time to formulate an answer.</p>
+
+<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">2. Limited Vocabulary and Sentence Skills</h3>
+<p>Children sometimes understand the general meaning of English but lack the vocabulary or sentence structures needed to express themselves accurately.</p>
+<p>Regular reading, conversations and guided writing can help build these skills naturally.</p>
+
+<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">3. Fear of Making Mistakes</h3>
+<p>Confidence plays a major role in communication. Children who worry about grammar mistakes, pronunciation or what others might think may choose to remain quiet.</p>
+<p>A supportive environment where mistakes are treated as part of learning can make a significant difference.</p>
+
+<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">4. They May Need a Different Learning Approach</h3>
+<p>Every child develops communication skills differently. Some respond well to conversations and storytelling, while others benefit from visual prompts, structured writing exercises, debates or real-life situations.</p>
+<p>Personalised teaching helps identify what works best for each learner.</p>
+
+<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">5. Encourage Thinking, Not Just Correct Answers</h3>
+<p>Strong communication is about more than grammar. Children need to learn how to <em>think, organise ideas, explain opinions and communicate with confidence</em>.</p>
+<p>Parents can encourage this through simple everyday questions such as:</p>
+<ul class="list-disc pl-5 mt-2 mb-4 space-y-1">
+  <li>“What do you think?”</li>
+  <li>“Why do you feel that way?”</li>
+  <li>“Can you explain it in your own words?”</li>
+</ul>
+
+<h3 class="font-bold text-navy-800 text-lg mt-6 mb-2">Building Confident Communicators</h3>
+<p>With the right support, a child can gradually move from understanding English to using it confidently.</p>
+<p>At <strong>The Only Teacher (TOT)</strong>, we believe English learning should go beyond textbooks and grammar rules. Our personalised approach focuses on helping children understand, express, communicate and think independently.</p>
+<p class="font-bold text-amber-600 mt-4"><em>Because knowing English is important. Having the confidence to use it is even more powerful.</em></p>
+`
  }
 ];
 

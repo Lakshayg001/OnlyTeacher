@@ -120,7 +120,7 @@ export default function About() {
                                             </svg>
                                         </div>
                                         <h2 className="text-2xl font-extrabold text-navy-700 sm:text-3xl">
-                                            The Philosophy Behind <span className="text-amber-500">TOT</span>
+                                            The Philosophy Behind The <span className="text-amber-500">Only Teacher</span>
                                         </h2>
                                     </div>
 

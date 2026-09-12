@@ -39,8 +39,7 @@ const EMPTY: FormState = {
 };
 
 const STEP_META = [
- { key: 'Where', title: 'Where are you learning?', sub: 'Country and curriculum decide the teacher match.' },
- { key: 'What', title: 'What does your child need?', sub: 'Grade, subject and a slot that works for you.' },
+ { key: 'Where & What', title: 'Where and what are you learning?', sub: 'Country, curriculum, grade, subject and a slot that works for you.' },
  { key: 'Who', title: 'How do we reach you?', sub: 'We confirm the class within 24 hours.' },
 ];
 
@@ -59,14 +58,13 @@ export default function Contact() {
   setForm((f) => ({ ...f, [k]: v }));
 
  const valid = [
-  Boolean(form.country && form.board),
-  Boolean(form.grade && form.subject && form.slot),
+  Boolean(form.country && form.board && form.grade && form.subject && form.slot),
   Boolean(form.parent && form.student && form.email && form.phone && form.whatsapp && form.contactPref && form.agreeToTerms),
  ];
 
  const submit = (e: React.FormEvent) => {
   e.preventDefault();
-  if (!valid[2]) return;
+  if (!valid[1]) return;
   setDone(true);
  };
 
@@ -202,11 +200,6 @@ export default function Contact() {
              onChange={(v) => set('board', v)}
              placeholder="e.g. CBSE, IGCSE"
             />
-           </>
-          )}
-
-          {step === 1 && (
-           <>
             <DropdownField
              label="Grade"
              value={form.grade}
@@ -230,7 +223,7 @@ export default function Contact() {
            </>
           )}
 
-          {step === 2 && (
+          {step === 1 && (
            <>
             <div className="grid gap-4 sm:grid-cols-2">
              <Field label="Parent name" value={form.parent} onChange={(v) => set('parent', v)} placeholder="Your full name" />
@@ -320,7 +313,7 @@ export default function Contact() {
           Back
          </Button>
 
-         {step < 2 ? (
+         {step < 1 ? (
           <Button
            type="button"
            onClick={() => valid[step] && setStep((s) => s + 1)}
@@ -330,7 +323,7 @@ export default function Contact() {
            Continue
           </Button>
          ) : (
-          <Button type="submit" size="lg" disabled={!valid[2]}>
+          <Button type="submit" size="lg" disabled={!valid[1]}>
            Book my free class
           </Button>
          )}

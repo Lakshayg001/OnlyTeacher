@@ -22,6 +22,13 @@ export default function TermsOfUse() {
      </div>
      
      <div className="rounded-4xl border border-navy-100 bg-white p-8 shadow-clay">
+      <h2 className="font-display text-2xl font-extrabold text-navy-700 mb-4">Legal Compliance</h2>
+      <p className="text-[15px] leading-relaxed text-navy-600">
+       We operate in strict accordance with the provisions of the Family Educational Rights and Privacy Act ("FERPA"), the Children's Online Privacy Protection Act ("COPPA") and applicable state laws, including without limitation, the Illinois Student Online Personal Protection Act ("SOPPA"). We are committed to safeguarding the privacy and educational records of our students.
+      </p>
+     </div>
+     
+     <div className="rounded-4xl border border-navy-100 bg-white p-8 shadow-clay">
       <h2 className="font-display text-2xl font-extrabold text-navy-700 mb-4">Contact Information</h2>
       <p className="text-[15px] leading-relaxed text-navy-600 mb-2">
        For any questions regarding these terms, you can contact us at:

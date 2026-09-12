@@ -24,19 +24,22 @@ interface FormState {
  parent: string;
  student: string;
  email: string;
+ phoneCode: string;
  phone: string;
+ whatsappCode: string;
+ whatsapp: string;
  notes: string;
 }
 
 const EMPTY: FormState = {
  country: '', board: '', grade: '', subject: '', slot: '',
- parent: '', student: '', email: '', phone: '', notes: '',
+ parent: '', student: '', email: '', phoneCode: '+91', phone: '', whatsappCode: '+91', whatsapp: '', notes: '',
 };
 
 const STEP_META = [
  { key: 'Where', title: 'Where are you learning?', sub: 'Country and curriculum decide the teacher match.' },
  { key: 'What', title: 'What does your child need?', sub: 'Grade, subject and a slot that works for you.' },
- { key: 'Who', title: 'How do we reach you?', sub: 'We confirm the demo within 24 hours.' },
+ { key: 'Who', title: 'How do we reach you?', sub: 'We confirm the class within 24 hours.' },
 ];
 
 const NEXT_STEPS = [
@@ -56,7 +59,7 @@ export default function Contact() {
  const valid = [
   Boolean(form.country && form.board),
   Boolean(form.grade && form.subject && form.slot),
-  Boolean(form.parent && form.student && form.email && form.phone),
+  Boolean(form.parent && form.student && form.email && form.phone && form.whatsapp),
  ];
 
  const submit = (e: React.FormEvent) => {
@@ -231,7 +234,8 @@ export default function Contact() {
              <Field label="Parent name" value={form.parent} onChange={(v) => set('parent', v)} placeholder="Your full name" />
              <Field label="Student name" value={form.student} onChange={(v) => set('student', v)} placeholder="Your child's name" />
              <Field label="Email" type="email" value={form.email} onChange={(v) => set('email', v)} placeholder="you@example.com" />
-             <Field label="Phone" type="tel" value={form.phone} onChange={(v) => set('phone', v)} placeholder="+91 98765 43210" />
+             <PhoneField label="Phone" codeValue={form.phoneCode} phoneValue={form.phone} onCodeChange={(v) => set('phoneCode', v)} onPhoneChange={(v) => set('phone', v)} placeholder="98765 43210" />
+             <PhoneField label="WhatsApp" codeValue={form.whatsappCode} phoneValue={form.whatsapp} onCodeChange={(v) => set('whatsappCode', v)} onPhoneChange={(v) => set('whatsapp', v)} placeholder="98765 43210" />
             </div>
             <div>
              <p className="mb-2 text-[11px] font-extrabold uppercase tracking-[0.16em] text-navy-400">
@@ -559,5 +563,47 @@ function DropdownField({
     )}
    </AnimatePresence>
   </div>
+ );
+}
+
+function PhoneField({
+ label,
+ codeValue,
+ phoneValue,
+ onCodeChange,
+ onPhoneChange,
+ placeholder,
+}: {
+ label: string;
+ codeValue: string;
+ phoneValue: string;
+ onCodeChange: (v: string) => void;
+ onPhoneChange: (v: string) => void;
+ placeholder?: string;
+}) {
+ const codes = ['+91', '+44', '+1', '+971', '+61', '+65', '+64', '+974', '+966', '+968', '+965', '+60', '+55', '+52', '+81', '+973', '+41'];
+ return (
+  <label className="block">
+   <span className="mb-2 block text-[11px] font-extrabold uppercase tracking-[0.16em] text-navy-400">
+    {label}
+   </span>
+   <div className="flex gap-2">
+    <select
+     value={codeValue}
+     onChange={(e) => onCodeChange(e.target.value)}
+     className="h-13 rounded-2xl border-2 border-navy-100 bg-navy-50/50 px-2 text-[15px] font-semibold text-navy-700 outline-none transition-colors focus:border-amber-300 focus:bg-white"
+    >
+     {codes.map(c => <option key={c} value={c}>{c}</option>)}
+    </select>
+    <input
+     type="tel"
+     required
+     value={phoneValue}
+     placeholder={placeholder}
+     onChange={(e) => onPhoneChange(e.target.value)}
+     className="h-13 flex-1 w-full rounded-2xl border-2 border-navy-100 bg-navy-50/50 px-4 text-[15px] font-semibold text-navy-700 outline-none transition-colors placeholder:font-medium placeholder:text-navy-300 focus:border-amber-300 focus:bg-white"
+    />
+   </div>
+  </label>
  );
 }

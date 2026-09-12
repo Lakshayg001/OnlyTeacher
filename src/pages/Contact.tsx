@@ -566,6 +566,78 @@ function DropdownField({
  );
 }
 
+function PhoneCodeDropdown({
+ value,
+ onChange,
+ options,
+}: {
+ value: string;
+ onChange: (v: string) => void;
+ options: { code: string; flag: string }[];
+}) {
+ const [open, setOpen] = useState(false);
+ const ref = useRef<HTMLDivElement>(null);
+ const selected = options.find((o) => o.code === value) || options[0];
+
+ useEffect(() => {
+  function handleClickOutside(event: MouseEvent) {
+   if (ref.current && !ref.current.contains(event.target as Node)) {
+    setOpen(false);
+   }
+  }
+  document.addEventListener('mousedown', handleClickOutside);
+  return () => document.removeEventListener('mousedown', handleClickOutside);
+ }, []);
+
+ return (
+  <div className="relative" ref={ref}>
+   <button
+    type="button"
+    onClick={() => setOpen(!open)}
+    className="flex h-13 w-[100px] items-center justify-between rounded-2xl border-2 border-navy-100 bg-navy-50/50 px-3 text-[14px] font-semibold text-navy-700 outline-none transition-colors hover:bg-navy-50 focus:border-amber-300 focus:bg-white"
+   >
+    <div className="flex items-center gap-1.5">
+     {selected.flag && <Flag code={selected.flag} size={16} />}
+     <span>{selected.code}</span>
+    </div>
+    <ChevronDown className={cn('h-4 w-4 ml-1 text-navy-400 transition-transform', open && 'rotate-180')} />
+   </button>
+
+   <AnimatePresence>
+    {open && (
+     <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.15 }}
+      className="absolute z-10 mt-2 w-[110px] overflow-hidden rounded-2xl border border-navy-100 bg-white p-2 shadow-lg"
+     >
+      <div className="max-h-60 overflow-y-auto pr-1">
+       {options.map((o) => (
+        <button
+         key={o.code}
+         type="button"
+         onClick={() => {
+          onChange(o.code);
+          setOpen(false);
+         }}
+         className={cn(
+          'flex w-full items-center gap-2 rounded-xl px-2 py-2 text-left text-[13px] font-semibold transition-colors',
+          value === o.code ? 'bg-amber-50 text-amber-700' : 'text-navy-600 hover:bg-navy-50'
+         )}
+        >
+         <Flag code={o.flag} size={16} />
+         <span>{o.code}</span>
+        </button>
+       ))}
+      </div>
+     </motion.div>
+    )}
+   </AnimatePresence>
+  </div>
+ );
+}
+
 function PhoneField({
  label,
  codeValue,
@@ -581,20 +653,37 @@ function PhoneField({
  onPhoneChange: (v: string) => void;
  placeholder?: string;
 }) {
- const codes = ['+91', '+44', '+1', '+971', '+61', '+65', '+64', '+974', '+966', '+968', '+965', '+60', '+55', '+52', '+81', '+973', '+41'];
+ const PHONE_CODES = [
+  { code: '+91', flag: 'IN' },
+  { code: '+44', flag: 'GB' },
+  { code: '+1', flag: 'US' },
+  { code: '+971', flag: 'AE' },
+  { code: '+61', flag: 'AU' },
+  { code: '+65', flag: 'SG' },
+  { code: '+64', flag: 'NZ' },
+  { code: '+974', flag: 'QA' },
+  { code: '+966', flag: 'SA' },
+  { code: '+968', flag: 'OM' },
+  { code: '+965', flag: 'KW' },
+  { code: '+60', flag: 'MY' },
+  { code: '+55', flag: 'BR' },
+  { code: '+52', flag: 'MX' },
+  { code: '+81', flag: 'JP' },
+  { code: '+973', flag: 'BH' },
+  { code: '+41', flag: 'CH' },
+ ];
+
  return (
   <label className="block">
    <span className="mb-2 block text-[11px] font-extrabold uppercase tracking-[0.16em] text-navy-400">
     {label}
    </span>
    <div className="flex gap-2">
-    <select
+    <PhoneCodeDropdown
      value={codeValue}
-     onChange={(e) => onCodeChange(e.target.value)}
-     className="h-13 rounded-2xl border-2 border-navy-100 bg-navy-50/50 px-2 text-[15px] font-semibold text-navy-700 outline-none transition-colors focus:border-amber-300 focus:bg-white"
-    >
-     {codes.map(c => <option key={c} value={c}>{c}</option>)}
-    </select>
+     onChange={onCodeChange}
+     options={PHONE_CODES}
+    />
     <input
      type="tel"
      required

@@ -30,11 +30,12 @@ interface FormState {
  whatsapp: string;
  contactPref: string;
  notes: string;
+ agreeToTerms: boolean;
 }
 
 const EMPTY: FormState = {
  country: '', board: '', grade: '', subject: '', slot: '',
- parent: '', student: '', email: '', phoneCode: '+91', phone: '', whatsappCode: '+91', whatsapp: '', contactPref: '', notes: '',
+ parent: '', student: '', email: '', phoneCode: '+91', phone: '', whatsappCode: '+91', whatsapp: '', contactPref: '', notes: '', agreeToTerms: false,
 };
 
 const STEP_META = [
@@ -60,7 +61,7 @@ export default function Contact() {
  const valid = [
   Boolean(form.country && form.board),
   Boolean(form.grade && form.subject && form.slot),
-  Boolean(form.parent && form.student && form.email && form.phone && form.whatsapp && form.contactPref),
+  Boolean(form.parent && form.student && form.email && form.phone && form.whatsapp && form.contactPref && form.agreeToTerms),
  ];
 
  const submit = (e: React.FormEvent) => {
@@ -262,6 +263,20 @@ export default function Contact() {
               className="w-full rounded-3xl border-2 border-navy-100 bg-navy-50/50 p-4 text-[15px] font-semibold text-navy-700 outline-none transition-colors placeholder:font-medium placeholder:text-navy-300 focus:border-amber-300 focus:bg-white"
              />
             </div>
+            <label className="flex items-start gap-3">
+             <div className="flex items-center h-5 mt-0.5">
+              <input
+               type="checkbox"
+               required
+               checked={form.agreeToTerms}
+               onChange={(e) => set('agreeToTerms', e.target.checked)}
+               className="h-4 w-4 rounded border-navy-300 text-forest-500 focus:ring-forest-500"
+              />
+             </div>
+             <div className="text-[13px] font-medium text-navy-600">
+              I agree to the Terms & Conditions and Privacy Policy.
+             </div>
+            </label>
            </>
           )}
          </motion.div>

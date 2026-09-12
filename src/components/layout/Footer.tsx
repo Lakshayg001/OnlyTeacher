@@ -31,8 +31,8 @@ const COLUMNS = [
             { label: 'Help Centre', to: '/contact' },
             { label: '24×7 Support', to: '/contact' },
             { label: 'Reschedule a Class', to: '/contact' },
-            { label: 'Privacy Policy', to: '/contact' },
-            { label: 'Terms of Use', to: '/contact' },
+            { label: 'Privacy Policy', to: '/privacy-policy' },
+            { label: 'Terms of Use', to: '/terms-of-use' },
         ],
     },
 ];

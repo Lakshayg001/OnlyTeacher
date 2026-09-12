@@ -28,12 +28,13 @@ interface FormState {
  phone: string;
  whatsappCode: string;
  whatsapp: string;
+ contactPref: string;
  notes: string;
 }
 
 const EMPTY: FormState = {
  country: '', board: '', grade: '', subject: '', slot: '',
- parent: '', student: '', email: '', phoneCode: '+91', phone: '', whatsappCode: '+91', whatsapp: '', notes: '',
+ parent: '', student: '', email: '', phoneCode: '+91', phone: '', whatsappCode: '+91', whatsapp: '', contactPref: '', notes: '',
 };
 
 const STEP_META = [
@@ -59,7 +60,7 @@ export default function Contact() {
  const valid = [
   Boolean(form.country && form.board),
   Boolean(form.grade && form.subject && form.slot),
-  Boolean(form.parent && form.student && form.email && form.phone && form.whatsapp),
+  Boolean(form.parent && form.student && form.email && form.phone && form.whatsapp && form.contactPref),
  ];
 
  const submit = (e: React.FormEvent) => {
@@ -236,6 +237,18 @@ export default function Contact() {
              <Field label="Email" type="email" value={form.email} onChange={(v) => set('email', v)} placeholder="you@example.com" />
              <PhoneField label="Phone" codeValue={form.phoneCode} phoneValue={form.phone} onCodeChange={(v) => set('phoneCode', v)} onPhoneChange={(v) => set('phone', v)} placeholder="98765 43210" />
              <PhoneField label="WhatsApp" codeValue={form.whatsappCode} phoneValue={form.whatsapp} onCodeChange={(v) => set('whatsappCode', v)} onPhoneChange={(v) => set('whatsapp', v)} placeholder="98765 43210" />
+             <div className="sm:col-span-2">
+              <DropdownField
+               label="How would you prefer to be contacted?"
+               value={form.contactPref}
+               onChange={(v) => set('contactPref', v)}
+               options={[
+                { value: 'WhatsApp', label: 'WhatsApp from our official number' },
+                { value: 'Meeting', label: 'Google Meet / Zoom meeting' },
+               ]}
+               placeholder="Please select one option"
+              />
+             </div>
             </div>
             <div>
              <p className="mb-2 text-[11px] font-extrabold uppercase tracking-[0.16em] text-navy-400">

@@ -13,13 +13,18 @@ import { cn } from '@/lib/utils';
 
 const GRADES = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
 const SUBJECTS = Array.from(new Set(COURSES.map((c) => c.subject))).filter(s => !s.toLowerCase().includes('technology'));
-const SLOTS = [
- 'Weekday morning (9 AM - 12 PM)',
- 'Weekday afternoon (12 PM - 4 PM)',
- 'Weekday evening (4 PM - 9 PM)',
- 'Weekend morning (9 AM - 12 PM)',
- 'Weekend afternoon (12 PM - 4 PM)',
- 'Weekend evening (4 PM - 9 PM)',
+const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+const TIMES = [
+ '9:00 AM - 10:00 AM',
+ '10:00 AM - 11:00 AM',
+ '11:00 AM - 12:00 PM',
+ '12:00 PM - 1:00 PM',
+ '1:00 PM - 2:00 PM',
+ '2:00 PM - 3:00 PM',
+ '3:00 PM - 4:00 PM',
+ '4:00 PM - 5:00 PM',
+ '5:00 PM - 6:00 PM',
+ '6:00 PM - 7:00 PM',
 ];
 
 interface FormState {
@@ -27,6 +32,7 @@ interface FormState {
  board: string;
  grade: string;
  subject: string;
+ day: string;
  slot: string;
  parent: string;
  student: string;
@@ -41,7 +47,7 @@ interface FormState {
 }
 
 const EMPTY: FormState = {
- country: '', board: '', grade: '', subject: '', slot: '',
+ country: '', board: '', grade: '', subject: '', day: '', slot: '',
  parent: '', student: '', email: '', phoneCode: '+91', phone: '', whatsappCode: '+91', whatsapp: '', contactPref: '', notes: '', agreeToTerms: false,
 };
 
@@ -65,7 +71,7 @@ export default function Contact() {
   setForm((f) => ({ ...f, [k]: v }));
 
  const valid = [
-  Boolean(form.country && form.board && form.grade && form.subject && form.slot),
+  Boolean(form.country && form.board && form.grade && form.subject && form.day && form.slot),
   Boolean(form.parent && form.student && form.email && form.phone && form.whatsapp && form.contactPref && form.agreeToTerms),
  ];
 
@@ -80,7 +86,8 @@ export default function Contact() {
   { label: 'Board', value: form.board },
   { label: 'Grade', value: form.grade ? `Grade ${form.grade}` : '' },
   { label: 'Subject', value: form.subject },
-  { label: 'Slot', value: form.slot },
+  { label: 'Day', value: form.day },
+  { label: 'Time', value: form.slot },
  ];
 
  return (
@@ -221,11 +228,19 @@ export default function Contact() {
              options={SUBJECTS.map((s) => ({ value: s, label: s }))}
              placeholder="Select a subject"
             />
-            <Choices
-             label="Preferred slot"
+            <DropdownField
+             label="Preferred Day"
+             value={form.day}
+             onChange={(v) => set('day', v)}
+             options={DAYS.map((d) => ({ value: d, label: d }))}
+             placeholder="Select a day"
+            />
+            <DropdownField
+             label="Preferred Time"
              value={form.slot}
              onChange={(v) => set('slot', v)}
-             options={SLOTS.map((s) => ({ value: s, label: s }))}
+             options={TIMES.map((t) => ({ value: t, label: t }))}
+             placeholder="Select a time slot"
             />
            </>
           )}

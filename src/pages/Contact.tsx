@@ -13,7 +13,14 @@ import { cn } from '@/lib/utils';
 
 const GRADES = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
 const SUBJECTS = Array.from(new Set(COURSES.map((c) => c.subject))).filter(s => !s.toLowerCase().includes('technology'));
-const SLOTS = ['Weekday morning', 'Weekday afternoon', 'Weekday evening', 'Weekend'];
+const SLOTS = [
+ 'Weekday morning (9 AM - 12 PM)',
+ 'Weekday afternoon (12 PM - 4 PM)',
+ 'Weekday evening (4 PM - 9 PM)',
+ 'Weekend morning (9 AM - 12 PM)',
+ 'Weekend afternoon (12 PM - 4 PM)',
+ 'Weekend evening (4 PM - 9 PM)',
+];
 
 interface FormState {
  country: string;

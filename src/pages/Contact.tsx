@@ -13,6 +13,7 @@ import { cn } from '@/lib/utils';
 
 const GRADES = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
 const SUBJECTS = Array.from(new Set(COURSES.map((c) => c.subject))).filter(s => !s.toLowerCase().includes('technology'));
+const EXAMS = ['NAPLAN', 'PAT', 'HSC', 'VCE', 'QCE', 'SACE', 'WACE', 'ATAR', 'UCAT', 'ISAT', 'EmSAT', 'IGCSE', 'GCSE', 'AS Level', 'A Level', 'International A Level', 'IB', 'SAT', 'ACT', 'AP', 'UK National Curriculum', 'KS1–KS3', 'SATs', '7+, 8+ and 11+ Entrance Exams', 'Grammar School Entrance', 'PSAT', 'AP Exams', 'Pre-AP', 'GED', 'TOEFL'];
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 const TIMES = [
  '9:00 AM - 10:00 AM',
@@ -35,6 +36,7 @@ interface FormState {
  board: string;
  grade: string;
  subject: string;
+ examEdge: string;
  day: string;
  slot: string;
  parent: string;
@@ -50,7 +52,7 @@ interface FormState {
 }
 
 const EMPTY: FormState = {
- country: '', board: '', grade: '', subject: '', day: '', slot: '',
+ country: '', board: '', grade: '', subject: '', examEdge: '', day: '', slot: '',
  parent: '', student: '', email: '', phoneCode: '+91', phone: '', whatsappCode: '+91', whatsapp: '', contactPref: '', notes: '', agreeToTerms: false,
 };
 
@@ -74,7 +76,7 @@ export default function Contact() {
   setForm((f) => ({ ...f, [k]: v }));
 
  const valid = [
-  Boolean(form.country && form.board && form.grade && form.subject && form.day && form.slot),
+  Boolean(form.country && form.board && form.grade && form.day && form.slot && (form.subject || form.examEdge)),
   Boolean(form.parent && form.student && form.email && form.phone && form.whatsapp && form.contactPref && form.agreeToTerms),
  ];
 
@@ -89,6 +91,7 @@ export default function Contact() {
   { label: 'Board', value: form.board },
   { label: 'Grade', value: form.grade ? `Grade ${form.grade}` : '' },
   { label: 'Subject', value: form.subject },
+  { label: 'Exam Edge', value: form.examEdge },
   { label: 'Day', value: form.day },
   { label: 'Time', value: form.slot },
  ];
@@ -225,9 +228,22 @@ export default function Contact() {
              placeholder="Select a grade"
             />
             <DropdownField
+             label="Exam Edge"
+             value={form.examEdge}
+             onChange={(v) => {
+               set('examEdge', v);
+               if (v) set('subject', '');
+             }}
+             options={EXAMS.map((e) => ({ value: e, label: e }))}
+             placeholder="Select an exam"
+            />
+            <DropdownField
              label="Subject"
              value={form.subject}
-             onChange={(v) => set('subject', v)}
+             onChange={(v) => {
+               set('subject', v);
+               if (v) set('examEdge', '');
+             }}
              options={SUBJECTS.map((s) => ({ value: s, label: s }))}
              placeholder="Select a subject"
             />

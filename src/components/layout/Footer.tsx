@@ -10,7 +10,6 @@ const COLUMNS = [
         links: [
             { label: 'All Courses', to: '/courses' },
             { label: 'Boards & Curricula', to: '/courses' },
-            { label: 'Find a Teacher', to: '/teachers' },
             { label: 'Free Class', to: '/contact' },
             { label: 'Knowledge Hub', to: '/blog' },
         ],
@@ -22,13 +21,11 @@ const COLUMNS = [
             { label: 'Our Conviction', to: '/about' },
             { label: 'Teach with Us', to: '/contact' },
             { label: 'Contact', to: '/contact' },
-            { label: 'Admin Console', to: '/admin' },
         ],
     },
     {
         title: 'Support',
         links: [
-            { label: 'Help Centre', to: '/contact' },
             { label: '24×7 Support', to: '/contact' },
             { label: 'Reschedule a Class', to: '/contact' },
             { label: 'Privacy Policy', to: '/privacy-policy' },

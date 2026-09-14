@@ -111,7 +111,7 @@ export default function About() {
                         <div className="relative overflow-hidden rounded-4xl bg-gradient-to-br from-[#FFF9F2] to-[#FFF0E0] p-8 shadow-clay sm:p-12 lg:p-16">
                             <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:gap-8 items-center">
                                 {/* Left Content */}
-                                <div className="space-y-8 relative z-10">
+                                <div className="space-y-6 relative z-10">
                                     <div className="flex items-center gap-4">
                                         <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-amber-500 text-white shadow-sm">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -120,59 +120,61 @@ export default function About() {
                                             </svg>
                                         </div>
                                         <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-navy-700">
-                                            The Philosophy Behind The <span className="text-amber-500">Only Teacher</span>
+                                            The Teacher Who Believed in the <span className="text-amber-500">Power Within</span>
                                         </h2>
                                     </div>
 
                                     <div className="space-y-4">
-                                        <h3 className="text-xl md:text-2xl font-extrabold text-navy-700">
-                                            Inspired by the <span className="text-amber-500">Idea</span> of the "Only True <span className="text-forest-500">Teacher</span>"
-                                        </h3>
                                         <p className="text-[15px] md:text-[16px] leading-relaxed text-navy-600 font-medium">
-                                            <strong>Swami Vivekananda</strong> described a true teacher not simply as someone who possesses knowledge, but as someone who can understand the learner deeply enough to teach from the learner's perspective.
+                                            Long before classrooms became digital and learning moved beyond geographical boundaries, Swami Vivekananda spoke about an education that could awaken the strength already present within every human being. For him, education was not merely the collection of information. It was the process of bringing out the perfection that already exists within a person. He believed that the purpose of education was to build character, develop strength, awaken confidence and help individuals stand on their own feet. Knowledge, in his vision, was meaningful when it created courage, clarity, discipline and compassion.
+                                        </p>
+                                        <p className="text-[15px] md:text-[16px] leading-relaxed text-navy-600 font-medium">
+                                            Swami Vivekananda also understood that every learner is different. A teacher's responsibility was not simply to transfer information, but to understand the student and guide the learning process according to the learner's nature and ability. He expressed this idea through a powerful thought:
                                         </p>
                                     </div>
 
-                                    <div className="relative rounded-2xl bg-amber-500/10 px-6 py-4 border-l-4 border-amber-400 flex items-start gap-2">
-                                        <span className="text-4xl md:text-5xl font-serif font-bold text-amber-500 leading-none mt-1">"</span>
-                                        <p className="text-lg md:text-xl font-medium italic text-navy-800 leading-tight pt-2">
-                                            The only true teacher is he who can immediately come down to the level of the student.
-                                            <span className="text-4xl md:text-5xl font-serif font-bold text-amber-500 leading-none ml-2">"</span>
-                                        </p>
+                                    {/* Quote Block like Image 2 */}
+                                    <div className="relative rounded-[2rem] bg-[#FDF5ED] px-8 py-8 border border-amber-900/5 shadow-sm mt-2 mb-2">
+                                        <div className="flex gap-4">
+                                            <span className="text-6xl font-serif font-bold text-[#A74B31] leading-none -mt-1">“</span>
+                                            <div className="flex flex-col gap-4 w-full">
+                                                <p className="text-xl md:text-2xl font-medium italic text-[#A74B31] leading-snug text-center md:text-left pr-4">
+                                                    The only true teacher is he who can immediately come down to the level of the student.”
+                                                </p>
+                                                <div className="text-center md:text-right pr-4">
+                                                    <span className="text-[15px] font-bold text-[#A74B31]/80">
+                                                        — Swami Vivekananda
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div className="space-y-4">
-                                        <h3 className="text-xl md:text-2xl font-extrabold text-navy-700">
-                                            For TOT, this idea becomes a guiding principle:
-                                        </h3>
-
-                                        <div className="flex items-start gap-4 rounded-2xl bg-amber-50/30 p-5 border border-amber-100/50">
-                                            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-600">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
-                                            </div>
-                                            <div className="space-y-2">
-                                                <h4 className="text-[16px] md:text-[18px] lg:text-[20px] font-extrabold text-navy-700">
-                                                    Don't Just <span className="text-amber-500">Teach</span> the Subject. Understand the <span className="text-forest-500">Student</span>.
-                                                </h4>
-                                                <p className="text-[14px] md:text-[15px] leading-relaxed text-navy-600 font-medium">
-                                                    A great teacher learns to see beyond the textbook to notice how a child thinks, where they hesitate, what excites them, what they already understand and what they need explained differently. Because teaching becomes powerful when knowledge meets empathy, patience and understanding.
-                                                </p>
-                                            </div>
-                                        </div>
+                                        <p className="text-[15px] md:text-[16px] leading-relaxed text-navy-600 font-medium">
+                                            This was not a call to lower the standard of education. It was a call to make learning understandable, purposeful and human. A teacher must observe before explaining, listen before correcting and encourage before judging. The role of a teacher is to help a learner discover their own strength not to make every child learn in exactly the same way.
+                                        </p>
                                     </div>
 
-                                    <div className="flex items-start gap-4 rounded-2xl bg-forest-50/50 p-5 border border-forest-100/50">
-                                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-forest-100 text-forest-600">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" /><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" /></svg>
-                                        </div>
-                                        <div>
-                                            <h4 className="text-[15px] md:text-[18px] lg:text-[20px] font-extrabold text-navy-700">
-                                                That is the spirit behind The Only Teacher.
-                                            </h4>
-                                            <p className="text-[14px] md:text-[15px] font-bold text-forest-600 mt-1">
-                                                One teacher. One child. One deeply personal learning relationship.
-                                            </p>
-                                        </div>
+                                    <div className="space-y-4 mt-8 pt-4 border-t border-navy-100/50">
+                                        <h3 className="text-2xl md:text-3xl font-extrabold text-navy-700">
+                                            This vision continues to inspire <span className="text-amber-500">The Only Teacher.</span>
+                                        </h3>
+                                        <p className="text-[15px] md:text-[16px] leading-relaxed text-navy-600 font-medium">
+                                            At TOT, we believe that every child has potential, but every child may need a different path to discover it. Some learners need stronger foundations. Some need more practice. Some need visual explanations, real-life examples or simply the confidence to ask questions. Our responsibility is to connect each learner with the right teacher and the right learning approach.
+                                        </p>
+                                        <p className="text-[15px] md:text-[16px] leading-relaxed text-navy-600 font-medium">
+                                            We aim to build an educational experience where teachers are respected for their knowledge, patience and understanding; where parents feel heard and supported; and where children are encouraged to think, question, explore and grow with confidence. Technology will help us connect learners and educators across boundaries, but the heart of learning will always remain human. Swami Vivekananda's vision reminds us that education is not only about preparing a child for an examination. It is about preparing a child for life with knowledge, character, confidence and the courage to discover what they are capable of becoming.
+                                        </p>
+                                    </div>
+
+                                    <div className="mt-6 rounded-2xl bg-forest-50/50 p-5 border border-forest-100/50">
+                                        <h4 className="text-[18px] md:text-[20px] font-extrabold text-forest-700 mb-2">
+                                            That is the direction we want to follow.
+                                        </h4>
+                                        <p className="text-[14px] md:text-[15px] font-bold text-forest-600">
+                                            At The Only Teacher, we do not want to teach every child in the same way. We want to understand every child well enough to help them learn, grow and believe in their own potential.
+                                        </p>
                                     </div>
                                 </div>
 

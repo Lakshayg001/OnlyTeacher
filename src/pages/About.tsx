@@ -119,28 +119,30 @@ export default function About() {
                                                 <path d="m8 14 4-4 4 4" />
                                             </svg>
                                         </div>
-                                        <h2 className="text-2xl font-extrabold text-navy-700 sm:text-3xl">
+                                        <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-navy-700">
                                             The Philosophy Behind The <span className="text-amber-500">Only Teacher</span>
                                         </h2>
                                     </div>
 
                                     <div className="space-y-4">
-                                        <h3 className="text-xl font-extrabold text-navy-700">
+                                        <h3 className="text-xl md:text-2xl font-extrabold text-navy-700">
                                             Inspired by the <span className="text-amber-500">Idea</span> of the "Only True <span className="text-forest-500">Teacher</span>"
                                         </h3>
-                                        <p className="text-[15px] leading-relaxed text-navy-600">
+                                        <p className="text-[15px] md:text-[16px] leading-relaxed text-navy-600 font-medium">
                                             <strong>Swami Vivekananda</strong> described a true teacher not simply as someone who possesses knowledge, but as someone who can understand the learner deeply enough to teach from the learner's perspective.
                                         </p>
                                     </div>
 
-                                    <div className="relative rounded-2xl bg-amber-500/10 px-6 py-4 border-l-4 border-amber-400">
-                                        <p className="text-[15px] font-medium italic text-navy-700">
-                                            <span className="text-3xl font-bold text-amber-500 leading-none">"</span> The only true teacher is he who can immediately come down to the level of the student.<span className="text-3xl font-bold text-amber-500 leading-none">"</span>
+                                    <div className="relative rounded-2xl bg-amber-500/10 px-6 py-4 border-l-4 border-amber-400 flex items-start gap-2">
+                                        <span className="text-4xl md:text-5xl font-serif font-bold text-amber-500 leading-none mt-1">"</span>
+                                        <p className="text-lg md:text-xl font-medium italic text-navy-800 leading-tight pt-2">
+                                            The only true teacher is he who can immediately come down to the level of the student.
+                                            <span className="text-4xl md:text-5xl font-serif font-bold text-amber-500 leading-none ml-2">"</span>
                                         </p>
                                     </div>
 
                                     <div className="space-y-4">
-                                        <h3 className="text-xl font-extrabold text-navy-700">
+                                        <h3 className="text-xl md:text-2xl font-extrabold text-navy-700">
                                             For TOT, this idea becomes a guiding principle:
                                         </h3>
 
@@ -149,10 +151,10 @@ export default function About() {
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
                                             </div>
                                             <div className="space-y-2">
-                                                <h4 className="text-[16px] font-extrabold text-navy-700">
+                                                <h4 className="text-[16px] md:text-[18px] lg:text-[20px] font-extrabold text-navy-700">
                                                     Don't Just <span className="text-amber-500">Teach</span> the Subject. Understand the <span className="text-forest-500">Student</span>.
                                                 </h4>
-                                                <p className="text-[14px] leading-relaxed text-navy-600">
+                                                <p className="text-[14px] md:text-[15px] leading-relaxed text-navy-600 font-medium">
                                                     A great teacher learns to see beyond the textbook to notice how a child thinks, where they hesitate, what excites them, what they already understand and what they need explained differently. Because teaching becomes powerful when knowledge meets empathy, patience and understanding.
                                                 </p>
                                             </div>
@@ -164,10 +166,10 @@ export default function About() {
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" /><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" /></svg>
                                         </div>
                                         <div>
-                                            <h4 className="text-[15px] font-extrabold text-navy-700">
+                                            <h4 className="text-[15px] md:text-[18px] lg:text-[20px] font-extrabold text-navy-700">
                                                 That is the spirit behind The Only Teacher.
                                             </h4>
-                                            <p className="text-[14px] font-bold text-forest-600">
+                                            <p className="text-[14px] md:text-[15px] font-bold text-forest-600 mt-1">
                                                 One teacher. One child. One deeply personal learning relationship.
                                             </p>
                                         </div>

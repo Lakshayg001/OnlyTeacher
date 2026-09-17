@@ -33,7 +33,7 @@ export default function Bookings() {
     return;
    }
    try {
-    const res = await fetch('/api/admin/contacts?page=0&size=100&sort=createdAt,desc', {
+    const res = await fetch(import.meta.env.PROD ? 'http://13.201.30.247/api/admin/contacts?page=0&size=100&sort=createdAt,desc' : '/api/admin/contacts?page=0&size=100&sort=createdAt,desc', {
      headers: { Authorization: `Bearer ${token}` },
     });
     if (res.status === 401 || res.status === 403) {

@@ -32,7 +32,7 @@ export default function Dashboard() {
       return;
     }
 
-    const res = await fetch('/api/admin/contacts?size=10000', {
+    const res = await fetch(import.meta.env.PROD ? 'http://13.201.30.247/api/admin/contacts?size=10000' : '/api/admin/contacts?size=10000', {
      headers: { 'Authorization': `Bearer ${token}` }
     });
     

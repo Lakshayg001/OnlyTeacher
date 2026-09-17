@@ -89,7 +89,7 @@ export default function Contact() {
   setError(null);
   
   try {
-   const response = await fetch('/api/contact', {
+   const response = await fetch(import.meta.env.PROD ? 'http://13.201.30.247/api/contact' : '/api/contact', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(form)

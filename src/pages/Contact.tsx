@@ -71,6 +71,8 @@ export default function Contact() {
  const [step, setStep] = useState(0);
  const [form, setForm] = useState<FormState>(EMPTY);
  const [done, setDone] = useState(false);
+ const [isSubmitting, setIsSubmitting] = useState(false);
+ const [error, setError] = useState<string | null>(null);
 
  const set = <K extends keyof FormState>(k: K, v: FormState[K]) =>
   setForm((f) => ({ ...f, [k]: v }));
@@ -80,10 +82,43 @@ export default function Contact() {
   Boolean(form.parent && form.student && form.email && form.phone && form.whatsapp && form.contactPref && form.agreeToTerms),
  ];
 
- const submit = (e: React.FormEvent) => {
+ const submit = async (e: React.FormEvent) => {
   e.preventDefault();
   if (!valid[1]) return;
-  setDone(true);
+  setIsSubmitting(true);
+  setError(null);
+  
+  try {
+   const response = await fetch('/api/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(form)
+   });
+
+   let data;
+   const contentType = response.headers.get("content-type");
+   if (contentType && contentType.indexOf("application/json") !== -1) {
+    data = await response.json();
+   } else {
+    // If the backend is down, Vite proxy might return a 500 error with empty body or HTML
+    throw new Error(`Server returned status ${response.status} without JSON data.`);
+   }
+
+   if (!data.success) {
+    if (data.errors && data.errors.length > 0) {
+     setError(data.errors[0].message);
+    } else {
+     setError(data.message || 'Validation failed');
+    }
+   } else {
+    setDone(true);
+   }
+  } catch (err) {
+   console.error(err);
+   setError('Failed to submit the form. Please try again later.');
+  } finally {
+   setIsSubmitting(false);
+  }
  };
 
  const recap = [
@@ -348,7 +383,7 @@ export default function Contact() {
           type="button"
           variant="ghost"
           onClick={() => setStep((s) => Math.max(0, s - 1))}
-          disabled={step === 0}
+          disabled={step === 0 || isSubmitting}
           icon={<ArrowLeft className="h-4 w-4" />}
          >
           Back
@@ -364,9 +399,12 @@ export default function Contact() {
            Continue
           </Button>
          ) : (
-          <Button type="submit" size="lg" disabled={!valid[1]}>
-           Book my free class
-          </Button>
+          <div className="flex flex-col items-end gap-2">
+           <Button type="submit" size="lg" disabled={!valid[1] || isSubmitting}>
+            {isSubmitting ? 'Submitting...' : 'Book my free class'}
+           </Button>
+           {error && <p className="text-sm font-semibold text-red-500">{error}</p>}
+          </div>
          )}
         </div>
 

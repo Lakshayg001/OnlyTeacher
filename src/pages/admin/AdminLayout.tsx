@@ -1,5 +1,5 @@
-import { Suspense, useState } from 'react';
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { Suspense, useState, useEffect } from 'react';
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
  BarChart3,
@@ -21,21 +21,23 @@ import { useLockBody, useMediaQuery } from '@/lib/hooks';
 import Logo from '@/components/layout/Logo';
 import RouteFallback from '@/components/layout/RouteFallback';
 
-const NAV = [
+const NAV: { to: string; label: string; Icon: any; end?: boolean; badge?: string }[] = [
  { to: '/admin', label: 'Dashboard', Icon: LayoutDashboard, end: true },
- { to: '/admin/bookings', label: 'Demo bookings', Icon: CalendarCheck, badge: '3' },
- { to: '/admin/students', label: 'Students', Icon: Users },
- { to: '/admin/teachers', label: 'Teachers', Icon: GraduationCap },
- { to: '/admin/courses', label: 'Courses', Icon: BookOpen },
- { to: '/admin/content', label: 'Knowledge hub', Icon: Newspaper },
- { to: '/admin/reports', label: 'Reports', Icon: BarChart3 },
- { to: '/admin/settings', label: 'Settings', Icon: Settings },
+ { to: '/admin/bookings', label: 'Demo bookings', Icon: CalendarCheck },
 ];
 
 export default function AdminLayout() {
  const [open, setOpen] = useState(false);
  const isDesktop = useMediaQuery('(min-width: 1024px)');
  const { pathname } = useLocation();
+ const navigate = useNavigate();
+ 
+ useEffect(() => {
+  if (!localStorage.getItem('tot_admin_token')) {
+   navigate('/admin/login');
+  }
+ }, [navigate]);
+
  useLockBody(open && !isDesktop);
 
  const current = NAV.find((n) => (n.end ? pathname === n.to : pathname.startsWith(n.to)));
@@ -163,12 +165,12 @@ export default function AdminLayout() {
       <div className="ml-auto flex items-center gap-2.5 md:ml-0">
        <span className="hidden text-right sm:block">
         <span className="block text-[13px] font-extrabold leading-tight text-navy-800">
-         Sanchit Goel
+         Admin
         </span>
         <span className="block text-[11px] font-bold text-navy-400">Academic Director</span>
        </span>
        <span className="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-amber-400 to-amber-600 font-display text-sm font-extrabold text-white ring-2 ring-amber-100">
-        SG
+        A
        </span>
       </div>
      </div>

@@ -11,6 +11,8 @@ export default function Login() {
  const navigate = useNavigate();
  const [email, setEmail] = useState('');
  const [password, setPassword] = useState('');
+ const [isSubmitting, setIsSubmitting] = useState(false);
+ const [error, setError] = useState<string | null>(null);
 
  return (
   <div className="relative grid min-h-screen lg:grid-cols-2">
@@ -22,7 +24,7 @@ export default function Login() {
      transition={{ duration: 0.5 }}
      className="w-full max-w-sm"
     >
-     <Logo />
+     <Logo className="h-24" />
 
      <h1 className="mt-9 font-display text-3xl font-extrabold leading-tight text-navy-700">
       Welcome back
@@ -33,9 +35,29 @@ export default function Login() {
 
      <form
       className="mt-8 space-y-4"
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
        e.preventDefault();
-       navigate('/admin');
+       setIsSubmitting(true);
+       setError(null);
+       try {
+        const response = await fetch('/api/auth/login', {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify({ username: email, password })
+        });
+        const data = await response.json();
+        if (data.success && data.data?.token) {
+         localStorage.setItem('tot_admin_token', data.data.token);
+         navigate('/admin');
+        } else {
+         setError(data.message || 'Login failed');
+        }
+       } catch (err) {
+        console.error(err);
+        setError('An error occurred during login.');
+       } finally {
+        setIsSubmitting(false);
+       }
       }}
      >
       <label className="block">
@@ -82,8 +104,9 @@ export default function Login() {
        </button>
       </div>
 
-      <Button type="submit" size="lg" full iconRight={<ArrowRight className="h-4.5 w-4.5" />}>
-       Sign in
+      {error && <p className="text-sm font-semibold text-red-500">{error}</p>}
+      <Button type="submit" size="lg" full iconRight={<ArrowRight className="h-4.5 w-4.5" />} disabled={isSubmitting}>
+       {isSubmitting ? 'Signing in...' : 'Sign in'}
       </Button>
      </form>
 
@@ -122,22 +145,7 @@ export default function Login() {
       Every Student Deserves the{' '}
       <span className="text-gradient-amber">Best Teacher</span>
      </h2>
-     <p className="mt-4 max-w-sm text-[16px] leading-relaxed text-navy-300">
-      12,500 students, 850 teachers and four countries managed from one console.
-     </p>
 
-     <div className="mt-10 grid max-w-md grid-cols-3 gap-3">
-      {[
-       ['12.5k+', 'Students'],
-       ['850+', 'Teachers'],
-       ['4', 'Countries'],
-      ].map(([v, l]) => (
-       <div key={l} className="rounded-2xl border border-white/10 bg-white/[0.06] p-4 backdrop-blur">
-        <p className="font-display text-2xl font-extrabold text-white">{v}</p>
-        <p className="text-[11.5px] font-extrabold uppercase tracking-wider text-navy-400">{l}</p>
-       </div>
-      ))}
-     </div>
     </div>
    </div>
   </div>

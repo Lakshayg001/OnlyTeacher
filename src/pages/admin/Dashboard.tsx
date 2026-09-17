@@ -1,60 +1,118 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Flag from '@/components/ui/Flag';
-import { motion } from 'framer-motion';
 import { ArrowUpRight, Plus } from 'lucide-react';
-import { ACTIVITY, BOARD_SPLIT, BOOKINGS, BOOKING_TREND, COUNTRY_SPLIT } from '@/data/admin';
-import { TEACHERS } from '@/data/site';
-import SmartImage from '@/components/ui/SmartImage';
-import ClayIcon from '@/components/clay/ClayIcon';
-import { Button, Stars } from '@/components/ui/Primitives';
+import { BOOKINGS } from '@/data/admin';
+import { Button } from '@/components/ui/Primitives';
 import { AreaChart, BarList, Donut, Kpi, Panel, StatusPill, Table } from './AdminKit';
-import { cn } from '@/lib/utils';
 
-const DOT = { amber: 'bg-amber-500', forest: 'bg-forest-500', navy: 'bg-navy-600' } as const;
+const COUNTRY_CONFIG: Record<string, { flag: string; color: string }> = {
+ 'India': { flag: 'IN', color: '#FF9B25' },
+ 'UAE': { flag: 'AE', color: '#478A58' },
+ 'United Kingdom': { flag: 'GB', color: '#1B2E54' },
+ 'Australia': { flag: 'AU', color: '#8B7BE8' },
+ 'USA': { flag: 'US', color: '#E2914F' },
+ 'Canada': { flag: 'CA', color: '#55C4A2' }
+};
+const DEFAULT_COLORS = ['#FF9B25', '#478A58', '#1B2E54', '#8B7BE8', '#E2914F', '#55C4A2'];
 
 export default function Dashboard() {
+ const [isLoading, setIsLoading] = useState(true);
+ const [bookingTrend, setBookingTrend] = useState<any[]>([]);
+ const [countrySplit, setCountrySplit] = useState<any[]>([]);
+ const [boardSplit, setBoardSplit] = useState<any[]>([]);
+ const [totalStudents, setTotalStudents] = useState(0);
+
+ useEffect(() => {
+  async function fetchData() {
+   try {
+    const token = localStorage.getItem('tot_admin_token');
+    if (!token) {
+      setIsLoading(false);
+      return;
+    }
+
+    const res = await fetch('/api/admin/contacts?size=10000', {
+     headers: { 'Authorization': `Bearer ${token}` }
+    });
+    
+    if (!res.ok) throw new Error('Failed to fetch');
+    const json = await res.json();
+    const contacts = json.data?.content || [];
+    
+    setTotalStudents(contacts.length);
+
+    // 1. Process Booking Trend
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const trendMap = new Map<string, number>();
+    
+    const now = new Date();
+    for (let i = 11; i >= 0; i--) {
+     const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+     trendMap.set(`${months[d.getMonth()]}`, 0);
+    }
+    
+    contacts.forEach((c: any) => {
+     if (c.createdAt) {
+      const d = new Date(c.createdAt);
+      const m = months[d.getMonth()];
+      if (trendMap.has(m)) {
+       trendMap.set(m, trendMap.get(m)! + 1);
+      }
+     }
+    });
+    
+    setBookingTrend(Array.from(trendMap.entries()).map(([m, v]) => ({ m, v })));
+
+    // 2. Process Country Split
+    const cMap = new Map<string, number>();
+    contacts.forEach((c: any) => {
+     if (c.country) cMap.set(c.country, (cMap.get(c.country) || 0) + 1);
+    });
+    
+    let colorIdx = 0;
+    const countries = Array.from(cMap.entries())
+     .sort((a, b) => b[1] - a[1])
+     .map(([label, value]) => {
+      const conf = COUNTRY_CONFIG[label];
+      const color = conf?.color || DEFAULT_COLORS[colorIdx++ % DEFAULT_COLORS.length];
+      const flag = conf?.flag || 'UN';
+      return { label, value, flag, color };
+     });
+    setCountrySplit(countries);
+
+    // 3. Process Board Split
+    const bMap = new Map<string, number>();
+    contacts.forEach((c: any) => {
+     if (c.board) bMap.set(c.board, (bMap.get(c.board) || 0) + 1);
+    });
+    
+    const totalBoards = Array.from(bMap.values()).reduce((a, b) => a + b, 0);
+    const boards = Array.from(bMap.entries())
+     .sort((a, b) => b[1] - a[1])
+     .map(([label, count]) => ({
+      label,
+      value: totalBoards > 0 ? Math.round((count / totalBoards) * 100) : 0
+     }));
+    setBoardSplit(boards);
+
+   } catch (err) {
+    console.error(err);
+   } finally {
+    setIsLoading(false);
+   }
+  }
+  
+  fetchData();
+ }, []);
+
+ if (isLoading) {
+  return <div className="flex items-center justify-center min-h-[50vh] text-navy-400 font-semibold text-sm">Fetching real-time data...</div>;
+ }
+
  return (
   <div className="space-y-5">
-   {/* greeting */}
-   <motion.div
-    initial={{ opacity: 0, y: 14 }}
-    animate={{ opacity: 1, y: 0 }}
-    className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-navy-700 to-navy-900 p-6 shadow-clay-navy sm:p-7"
-   >
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-     <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-amber-500/20 blur-3xl" />
-     <div className="wash wash-deep" />
-    </div>
-    <div className="relative flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-     <div className="flex items-center gap-4">
-      <ClayIcon name="graduation" size={64} />
-      <div>
-       <h2 className="font-display text-xl font-extrabold text-white sm:text-2xl">
-        Good afternoon Sanchit
-       </h2>
-       <p className="mt-1 text-[14px] font-semibold text-navy-300">
-        3 new demo requests are waiting to be matched to a teacher.
-       </p>
-      </div>
-     </div>
-     <div className="flex gap-2.5">
-      <Button to="/admin/bookings" size="sm" icon={<Plus className="h-4 w-4" />}>
-       Match a booking
-      </Button>
-      <Button to="/admin/reports" variant="white" size="sm">
-       View reports
-      </Button>
-     </div>
-    </div>
-   </motion.div>
 
-   {/* KPIs */}
-   <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-    <Kpi label="Active students" value={12500} suffix="+" delta={8.4} icon="student" tone="amber" />
-    <Kpi label="Demo bookings (Aug)" value={574} delta={12.1} icon="calendar" tone="forest" />
-    <Kpi label="Teachers on bench" value={850} suffix="+" delta={3.2} icon="teacher" tone="navy" />
-    <Kpi label="Demo → enrol rate" value={68} suffix="%" delta={-1.4} icon="target" tone="amber" />
-   </div>
 
    {/* charts */}
    <div className="grid gap-4 xl:grid-cols-[1.5fr_1fr]">
@@ -63,122 +121,27 @@ export default function Dashboard() {
      sub="Last 12 months all countries"
      action={
       <span className="rounded-full bg-forest-100 px-3 py-1.5 text-[11.5px] font-extrabold text-forest-700">
-       +173% YoY
+       Real-time
       </span>
      }
     >
-     <AreaChart data={BOOKING_TREND} />
+     <AreaChart data={bookingTrend} />
     </Panel>
 
     <Panel title="Students by country" sub="Learning without borders">
-     <Donut data={COUNTRY_SPLIT} />
+     <Donut data={countrySplit} />
     </Panel>
    </div>
 
    <div className="grid gap-4 xl:grid-cols-[1.5fr_1fr]">
-    {/* recent bookings */}
-    <Panel
-     title="Latest demo requests"
-     sub="Newest first"
-     action={
-      <Link to="/admin/bookings" className="inline-flex items-center gap-1 text-[12.5px] font-extrabold text-amber-600 hover:underline">
-       View all <ArrowUpRight className="h-3.5 w-3.5" />
-      </Link>
-     }
-    >
-     <Table head={['Student', 'Board · Grade', 'Subject', 'Teacher', 'Status']}>
-      {BOOKINGS.slice(0, 6).map((b) => (
-       <tr key={b.id} className="transition-colors hover:bg-navy-50/60">
-        <td className="px-3 py-3">
-         <div className="flex items-center gap-2.5">
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-navy-100 text-[13px] font-extrabold text-navy-700">
-           {b.student.split(' ').map((n) => n[0]).join('')}
-          </span>
-          <span className="min-w-0">
-           <span className="block truncate text-[13.5px] font-extrabold text-navy-800">
-            {b.student}
-           </span>
-           <span className="block text-[11.5px] font-bold text-navy-400">
-            <Flag code={b.flag} size={14} /> {b.country}
-           </span>
-          </span>
-         </div>
-        </td>
-        <td className="whitespace-nowrap px-3 py-3 text-[13px] font-bold text-navy-600">
-         {b.board} · G{b.grade}
-        </td>
-        <td className="whitespace-nowrap px-3 py-3 text-[13px] font-bold text-navy-600">{b.subject}</td>
-        <td className="whitespace-nowrap px-3 py-3 text-[13px] font-bold text-navy-600">{b.teacher}</td>
-        <td className="px-3 py-3"><StatusPill status={b.status} /></td>
-       </tr>
-      ))}
-     </Table>
-    </Panel>
+
 
     <div className="space-y-4">
      <Panel title="Enrolment by board" sub="Share of active students">
-      <BarList data={BOARD_SPLIT} />
-     </Panel>
-
-     <Panel title="Recent activity">
-      <ul className="space-y-3.5">
-       {ACTIVITY.map((a, i) => (
-        <li key={i} className="flex gap-3">
-         <span className="relative mt-1.5 flex">
-          <span className={cn('h-2.5 w-2.5 rounded-full', DOT[a.tone])} />
-          {i < ACTIVITY.length - 1 && (
-           <span className="absolute left-1/2 top-4 h-8 w-px -translate-x-1/2 bg-navy-100" />
-          )}
-         </span>
-         <span className="min-w-0 flex-1">
-          <span className="block text-[13px] leading-snug text-navy-600">
-           <span className="font-extrabold text-navy-800">{a.who}</span> {a.what}
-          </span>
-          <span className="block text-[11.5px] font-bold text-navy-400">{a.when}</span>
-         </span>
-        </li>
-       ))}
-      </ul>
+      <BarList data={boardSplit} />
      </Panel>
     </div>
    </div>
-
-   {/* top teachers */}
-   <Panel
-    title="Top rated teachers this month"
-    sub="Ranked by parent rating and completed lessons"
-    action={
-     <Link to="/admin/teachers" className="inline-flex items-center gap-1 text-[12.5px] font-extrabold text-amber-600 hover:underline">
-      Manage <ArrowUpRight className="h-3.5 w-3.5" />
-     </Link>
-    }
-   >
-    <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-     {TEACHERS.slice(0, 4).map((t) => (
-      <div
-       key={t.id}
-       className="flex items-center gap-3 rounded-2xl border border-navy-100 bg-navy-50/50 p-3 transition-all hover:-translate-y-1 hover:border-amber-200 hover:bg-white hover:shadow-clay"
-      >
-       <SmartImage
-        src={t.photo}
-        alt={t.name}
-        fallbackIcon="teacher"
-        className="h-12 w-12 shrink-0 rounded-2xl ring-2 ring-white"
-       />
-       <div className="min-w-0">
-        <p className="truncate text-[13.5px] font-extrabold text-navy-800">{t.name}</p>
-        <p className="truncate text-[11.5px] font-bold text-navy-400">
-         {t.subjects[0]} · <Flag code={t.flag} size={13} /> {t.country}
-        </p>
-        <div className="mt-0.5 flex items-center gap-1">
-         <Stars rating={t.rating} size={11} />
-         <span className="text-[11px] font-extrabold text-navy-600">{t.rating}</span>
-        </div>
-       </div>
-      </div>
-     ))}
-    </div>
-   </Panel>
   </div>
  );
 }

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Flag from '@/components/ui/Flag';
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Youtube } from 'lucide-react';
+import { Building2, Facebook, Instagram, Linkedin, Mail, MapPin, Youtube } from 'lucide-react';
 import { BRAND, COUNTRIES } from '@/data/site';
 import Logo from './Logo';
 
@@ -64,14 +64,30 @@ export function Footer() {
                             </a>
                         </li>
                         <li className="flex items-start gap-3">
-                            <Phone className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" />
-                            <a href={`tel:${BRAND.phone.replace(/\s/g, '')}`} className="link-underline font-semibold text-navy-100">
-                                {BRAND.phone}
-                            </a>
+                            <Building2 className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" />
+                            <span className="text-xs font-bold uppercase tracking-wide text-white">
+                                {BRAND.legalName}
+                            </span>
                         </li>
                         <li className="flex items-start gap-3">
-                            <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" />
-                            <span className="text-navy-300">{BRAND.address}</span>
+                            <MapPin className="mt-1 h-4 w-4 shrink-0 text-amber-400" />
+                            <div className="space-y-0.5">
+                                <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-amber-400">
+                                    <Flag code="IN" size={14} />
+                                    <span>India Office</span>
+                                </span>
+                                <p className="text-xs text-navy-300 leading-relaxed">{BRAND.indiaOffice}</p>
+                            </div>
+                        </li>
+                        <li className="flex items-start gap-3">
+                            <MapPin className="mt-1 h-4 w-4 shrink-0 text-amber-400" />
+                            <div className="space-y-0.5">
+                                <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-amber-400">
+                                    <Flag code="GB" size={14} />
+                                    <span>UK Office</span>
+                                </span>
+                                <p className="text-xs text-navy-300 leading-relaxed">{BRAND.ukOffice}</p>
+                            </div>
                         </li>
                     </ul>
 

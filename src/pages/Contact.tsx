@@ -3,6 +3,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Check, ChevronDown, ClipboardList, Mail, MapPin, PartyPopper, Phone } from 'lucide-react';
 import { BRAND, COUNTRIES, COURSES } from '@/data/site';
 import { IMG } from '@/data/images';
+import { auth } from '@/lib/firebase';
+import { RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult } from 'firebase/auth';
 
 import ClayIcon from '@/components/clay/ClayIcon';
 import SmartImage from '@/components/ui/SmartImage';
@@ -58,11 +60,11 @@ const EMPTY: FormState = {
 
 const STEP_META = [
  { key: 'Where & What', title: 'Where and what are you learning?', sub: 'Country, curriculum, grade, subject and a slot that works for you.' },
- { key: 'Who', title: 'How do we reach you?', sub: 'We confirm the class within 24 hours.' },
+ { key: 'Who', title: 'How do we reach you?', sub: 'We confirm the class within 48 hours.' },
 ];
 
 const NEXT_STEPS = [
- { icon: 'chat' as const, t: 'We call within 24 hours', b: 'To confirm the board, grade and slot.' },
+ { icon: 'chat' as const, t: 'We call within 48 hours', b: 'To confirm the board, grade and slot.' },
  { icon: 'teacher' as const, t: 'We shortlist teachers', b: 'Matched to your curriculum, not your postcode.' },
  { icon: 'rocket' as const, t: 'The demo runs', b: '50 real teaching minutes, then honest feedback.' },
 ];
@@ -74,12 +76,80 @@ export default function Contact() {
  const [isSubmitting, setIsSubmitting] = useState(false);
  const [error, setError] = useState<string | null>(null);
 
+ // OTP Verification State
+ const [otpRequested, setOtpRequested] = useState(false);
+ const [otpCode, setOtpCode] = useState('');
+ const [isPhoneVerified, setIsPhoneVerified] = useState(false);
+ const [confirmationResult, setConfirmationResult] = useState<ConfirmationResult | null>(null);
+ const [isSendingOtp, setIsSendingOtp] = useState(false);
+ const [isVerifyingOtp, setIsVerifyingOtp] = useState(false);
+ const [otpError, setOtpError] = useState<string | null>(null);
+
+ // Initialize RecaptchaVerifier
+ useEffect(() => {
+  if (!window.recaptchaVerifier) {
+   window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+    size: 'invisible',
+    callback: () => {
+     // reCAPTCHA solved, allow signInWithPhoneNumber.
+    }
+   });
+  }
+ }, []);
+
+ const sendOtp = async () => {
+  if (!form.phone || form.phone.length < 5) {
+   setOtpError("Please enter a valid phone number");
+   return;
+  }
+  setIsSendingOtp(true);
+  setOtpError(null);
+  try {
+   const phoneNumber = form.phoneCode + form.phone;
+   const appVerifier = window.recaptchaVerifier;
+   const confirmation = await signInWithPhoneNumber(auth, phoneNumber, appVerifier);
+   setConfirmationResult(confirmation);
+   setOtpRequested(true);
+  } catch (err: any) {
+   console.error("Error sending OTP", err);
+   setOtpError(err.message || "Failed to send OTP");
+   // Reset recaptcha if failed
+   if (window.recaptchaVerifier) {
+    window.recaptchaVerifier.render().then((widgetId: any) => {
+     window.grecaptcha.reset(widgetId);
+    });
+   }
+  } finally {
+   setIsSendingOtp(false);
+  }
+ };
+
+ const verifyOtp = async () => {
+  if (!otpCode || otpCode.length < 4) {
+   setOtpError("Please enter a valid OTP code");
+   return;
+  }
+  setIsVerifyingOtp(true);
+  setOtpError(null);
+  try {
+   if (confirmationResult) {
+    await confirmationResult.confirm(otpCode);
+    setIsPhoneVerified(true);
+   }
+  } catch (err: any) {
+   console.error("Error verifying OTP", err);
+   setOtpError("Invalid OTP code. Please try again.");
+  } finally {
+   setIsVerifyingOtp(false);
+  }
+ };
+
  const set = <K extends keyof FormState>(k: K, v: FormState[K]) =>
   setForm((f) => ({ ...f, [k]: v }));
 
  const valid = [
   Boolean(form.country && form.board && form.grade && form.day && form.slot && (form.subject || form.examEdge)),
-  Boolean(form.parent && form.student && form.email && form.phone && form.whatsapp && form.contactPref && form.agreeToTerms),
+  Boolean(form.parent && form.student && form.email && form.phone && form.whatsapp && form.contactPref && form.agreeToTerms && isPhoneVerified),
  ];
 
  const submit = async (e: React.FormEvent) => {
@@ -89,10 +159,16 @@ export default function Contact() {
   setError(null);
   
   try {
-   const response = await fetch(import.meta.env.PROD ? 'http://13.201.30.247/api/contact' : '/api/contact', {
+   const payload = {
+    ...form,
+    contactPref: form.contactPref === 'Meeting' ? 'Phone' : form.contactPref,
+    notes: form.contactPref === 'Meeting' ? (form.notes ? form.notes + '\n\n[Prefers Google Meet/Zoom meeting]' : '[Prefers Google Meet/Zoom meeting]') : form.notes
+   };
+
+   const response = await fetch(import.meta.env.PROD ? 'https://api.theonlyteacher.com/api/contact' : '/api/contact', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(form)
+    body: JSON.stringify(payload)
    });
 
    let data;
@@ -158,7 +234,7 @@ export default function Contact() {
          Request received {form.parent.split(' ')[0]}
         </h2>
         <p className="mt-2.5 max-w-md text-[15.5px] leading-relaxed text-navy-500">
-         An academic counsellor will call {form.phone} within 24 hours with a matched
+         An academic counsellor will call {form.phone} within 48 hours with a matched
          teacher for {form.student} {form.board}, Grade {form.grade}, {form.subject}.
         </p>
         <div className="mt-6 grid w-full max-w-md gap-2.5 text-left">
@@ -189,6 +265,7 @@ export default function Contact() {
        </motion.div>
       ) : (
        <form onSubmit={submit}>
+        <div id="recaptcha-container"></div>
         {/* progress */}
         <ol className="flex items-center gap-2">
          {STEP_META.map((s, i) => (
@@ -246,7 +323,17 @@ export default function Contact() {
            <>
             <CountryDropdown
              value={form.country}
-             onChange={(v) => set('country', v)}
+             onChange={(v) => {
+              set('country', v);
+              const c = COUNTRIES.find((x) => x.name === v);
+              if (c) {
+               const pc = PHONE_CODES.find((p) => p.flag === c.flag);
+               if (pc) {
+                set('phoneCode', pc.code);
+                set('whatsappCode', pc.code);
+               }
+              }
+             }}
              options={COUNTRIES.map((c) => ({ value: c.name, label: c.name, flag: c.flag }))}
             />
             <Field
@@ -305,7 +392,37 @@ export default function Contact() {
              <Field label="Parent name" value={form.parent} onChange={(v) => set('parent', v)} placeholder="Your full name" />
              <Field label="Student name" value={form.student} onChange={(v) => set('student', v)} placeholder="Your child's name" />
              <Field label="Email" type="email" value={form.email} onChange={(v) => set('email', v)} placeholder="you@example.com" />
-             <PhoneField label="Phone" codeValue={form.phoneCode} phoneValue={form.phone} onCodeChange={(v) => set('phoneCode', v)} onPhoneChange={(v) => set('phone', v)} placeholder="98765 43210" />
+             <div className="flex flex-col gap-2">
+              <PhoneField label="Phone" codeValue={form.phoneCode} phoneValue={form.phone} onCodeChange={(v) => set('phoneCode', v)} onPhoneChange={(v) => set('phone', v)} placeholder="98765 43210" disabled={otpRequested || isPhoneVerified} />
+              
+              {!isPhoneVerified && !otpRequested && (
+               <Button type="button" size="sm" variant="outline" onClick={sendOtp} disabled={isSendingOtp}>
+                {isSendingOtp ? "Sending OTP..." : "Send OTP to Verify"}
+               </Button>
+              )}
+              
+              {!isPhoneVerified && otpRequested && (
+               <div className="flex flex-col gap-2 rounded-2xl bg-forest-50 p-3">
+                <input
+                 type="text"
+                 placeholder="Enter 6-digit OTP"
+                 value={otpCode}
+                 onChange={(e) => setOtpCode(e.target.value)}
+                 className="w-full rounded-xl border border-navy-200 bg-white px-3 py-2 text-sm focus:border-forest-500 focus:outline-none"
+                />
+                <Button type="button" size="sm" onClick={verifyOtp} disabled={isVerifyingOtp}>
+                 {isVerifyingOtp ? "Verifying..." : "Verify OTP"}
+                </Button>
+               </div>
+              )}
+              
+              {isPhoneVerified && (
+               <div className="flex items-center gap-2 text-sm font-bold text-forest-600">
+                <Check className="h-4 w-4" /> Phone Verified
+               </div>
+              )}
+              {otpError && <p className="text-xs font-semibold text-red-500">{otpError}</p>}
+             </div>
              <PhoneField label="WhatsApp" codeValue={form.whatsappCode} phoneValue={form.whatsapp} onCodeChange={(v) => set('whatsappCode', v)} onPhoneChange={(v) => set('whatsapp', v)} placeholder="98765 43210" />
              <div className="sm:col-span-2">
               <DropdownField
@@ -313,8 +430,8 @@ export default function Contact() {
                value={form.contactPref}
                onChange={(v) => set('contactPref', v)}
                options={[
-                { value: 'WhatsApp', label: 'WhatsApp from our official number' },
-                { value: 'Meeting', label: 'Google Meet / Zoom meeting' },
+                 { value: 'WhatsApp', label: 'via WhatsApp from our official number' },
+                 { value: 'Meeting', label: 'through a Google Meet/Zoom meeting' },
                ]}
                placeholder="Please select one option"
               />
@@ -738,22 +855,7 @@ function PhoneCodeDropdown({
  );
 }
 
-function PhoneField({
- label,
- codeValue,
- phoneValue,
- onCodeChange,
- onPhoneChange,
- placeholder,
-}: {
- label: string;
- codeValue: string;
- phoneValue: string;
- onCodeChange: (v: string) => void;
- onPhoneChange: (v: string) => void;
- placeholder?: string;
-}) {
- const PHONE_CODES = [
+export const PHONE_CODES = [
   { code: '+91', flag: 'IN' },
   { code: '+44', flag: 'GB' },
   { code: '+1', flag: 'US' },
@@ -773,6 +875,23 @@ function PhoneField({
   { code: '+41', flag: 'CH' },
  ];
 
+function PhoneField({
+ label,
+ codeValue,
+ phoneValue,
+ onCodeChange,
+ onPhoneChange,
+ placeholder,
+ disabled,
+}: {
+ label: string;
+ codeValue: string;
+ phoneValue: string;
+ onCodeChange: (v: string) => void;
+ onPhoneChange: (v: string) => void;
+ placeholder?: string;
+ disabled?: boolean;
+}) {
  return (
   <label className="block">
    <span className="mb-2 block text-[11px] font-extrabold uppercase tracking-[0.16em] text-navy-400">
@@ -790,7 +909,8 @@ function PhoneField({
      value={phoneValue}
      placeholder={placeholder}
      onChange={(e) => onPhoneChange(e.target.value)}
-     className="h-13 flex-1 w-full rounded-2xl border-2 border-navy-100 bg-navy-50/50 px-4 text-[15px] font-semibold text-navy-700 outline-none transition-colors placeholder:font-medium placeholder:text-navy-300 focus:border-amber-300 focus:bg-white"
+     disabled={disabled}
+     className={cn("h-13 flex-1 w-full rounded-2xl border-2 border-navy-100 bg-navy-50/50 px-4 text-[15px] font-semibold text-navy-700 outline-none transition-colors placeholder:font-medium placeholder:text-navy-300 focus:border-amber-300 focus:bg-white", disabled && "opacity-50 cursor-not-allowed")}
     />
    </div>
   </label>

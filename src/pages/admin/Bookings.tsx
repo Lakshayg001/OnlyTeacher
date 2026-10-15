@@ -1,4 +1,5 @@
 import { useMemo, useState, useEffect } from 'react';
+import { COUNTRIES } from '@/data/site';
 import { useNavigate } from 'react-router-dom';
 import Flag from '@/components/ui/Flag';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -33,7 +34,7 @@ export default function Bookings() {
     return;
    }
    try {
-    const res = await fetch(import.meta.env.PROD ? 'http://13.201.30.247/api/admin/contacts?page=0&size=100&sort=createdAt,desc' : '/api/admin/contacts?page=0&size=100&sort=createdAt,desc', {
+    const res = await fetch(import.meta.env.PROD ? 'https://api.theonlyteacher.com/api/admin/contacts?page=0&size=100&sort=createdAt,desc' : '/api/admin/contacts?page=0&size=100&sort=createdAt,desc', {
      headers: { Authorization: `Bearer ${token}` },
     });
     if (res.status === 401 || res.status === 403) {
@@ -47,7 +48,7 @@ export default function Bookings() {
       ...b,
       status: 'new', // Using default since API doesn't provide it
       teacher: 'Pending',
-      flag: 'IN' // Mock flag
+      flag: COUNTRIES.find((c) => c.name === b.country)?.flag || 'UN' // Dynamically assign flag
      }));
      setBookings(mapped);
     }

@@ -104,10 +104,11 @@ export default function Settings() {
      <Panel title="Organisation">
       <dl className="space-y-2.5 text-[13.5px]">
        {[
-        ['Legal name', BRAND.full],
+        ['Legal name', BRAND.legalName],
         ['Support email', BRAND.email],
         ['Support line', BRAND.phone],
-        ['Registered office', BRAND.address],
+        ['India Office', BRAND.indiaOffice],
+        ['UK Office', BRAND.ukOffice],
        ].map(([k, v]) => (
         <div key={k} className="flex flex-col gap-0.5 rounded-2xl bg-navy-50/70 px-3.5 py-2.5 sm:flex-row sm:items-center sm:justify-between">
          <dt className="text-[11.5px] font-extrabold uppercase tracking-wider text-navy-400">{k}</dt>

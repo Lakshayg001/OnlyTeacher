@@ -18,6 +18,7 @@ const COLUMNS = [
         title: 'Company',
         links: [
             { label: 'About TOT', to: '/about' },
+            { label: 'Pricing Plans', to: '/pricing' },
             { label: 'Our Conviction', to: '/about' },
             { label: 'Teach with Us', to: '/contact' },
             { label: 'Contact', to: '/contact' },

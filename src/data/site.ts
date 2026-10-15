@@ -39,6 +39,7 @@ export const NAV: NavItem[] = [
    { label: 'Technology (Coming Soon)', href: '/courses?s=Technology', desc: 'Coding · AI · Computer Science', icon: 'technology' },
   ],
  },
+ { label: 'Pricing', href: '/pricing' },
  { label: 'Blog', href: '/blog' },
  { label: 'Contact', href: '/contact' },
 ];

@@ -11,6 +11,7 @@ const Blog = lazy(() => import('@/pages/Blog'));
 const Contact = lazy(() => import('@/pages/Contact'));
 const TermsOfUse = lazy(() => import('@/pages/TermsOfUse'));
 const PrivacyPolicy = lazy(() => import('@/pages/PrivacyPolicy'));
+const Pricing = lazy(() => import('@/pages/Pricing'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
 
 const AdminLayout = lazy(() => import('@/pages/admin/AdminLayout'));
@@ -35,6 +36,7 @@ export default function App() {
      <Route path="/courses" element={<Courses />} />
      <Route path="/blog" element={<Blog />} />
      <Route path="/contact" element={<Contact />} />
+     <Route path="/pricing" element={<Pricing />} />
      <Route path="/terms-of-use" element={<TermsOfUse />} />
      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
      <Route path="*" element={<NotFound />} />

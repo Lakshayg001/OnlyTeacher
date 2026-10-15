@@ -58,11 +58,11 @@ export default function Pricing() {
   const getSubPlanHeaderGradient = (color: SubPlan['color']) => {
     switch (color) {
       case 'amber':
-        return 'bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 text-white';
+        return 'bg-gradient-to-r from-[#F07C00] via-[#E06A00] to-[#C95900] text-white shadow-sm';
       case 'sky':
-        return 'bg-gradient-to-r from-sky-500 via-sky-600 to-blue-700 text-white';
+        return 'bg-gradient-to-r from-[#0284C7] via-[#0369A1] to-[#075985] text-white shadow-sm';
       case 'emerald':
-        return 'bg-gradient-to-r from-emerald-600 via-forest-600 to-forest-700 text-white';
+        return 'bg-gradient-to-r from-[#16A34A] via-[#15803D] to-[#166534] text-white shadow-sm';
       default:
         return 'bg-navy-700 text-white';
     }
@@ -71,11 +71,11 @@ export default function Pricing() {
   const getSubPlanBorderColor = (color: SubPlan['color']) => {
     switch (color) {
       case 'amber':
-        return 'border-amber-300 hover:border-amber-500';
+        return 'border-[#F07C00]/40 hover:border-[#F07C00] shadow-[0_4px_20px_rgba(240,124,0,0.07)]';
       case 'sky':
-        return 'border-sky-300 hover:border-sky-500';
+        return 'border-[#0284C7]/40 hover:border-[#0284C7] shadow-[0_4px_20px_rgba(2,132,199,0.08)]';
       case 'emerald':
-        return 'border-emerald-300 hover:border-emerald-500';
+        return 'border-[#16A34A]/40 hover:border-[#16A34A] shadow-[0_4px_20px_rgba(22,163,74,0.07)]';
       default:
         return 'border-navy-200';
     }
@@ -224,7 +224,7 @@ export default function Pricing() {
               <div
                 className={cn(
                   'pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full blur-3xl opacity-40',
-                  selectedPlanType === 'flexicarry' ? 'bg-amber-300' : 'bg-sky-200',
+                  selectedPlanType === 'flexicarry' ? 'bg-amber-300' : 'bg-[#0284C7]/20',
                 )}
               />
               <div className="pointer-events-none absolute -left-20 -bottom-20 h-80 w-80 rounded-full bg-navy-100 blur-3xl opacity-50" />
@@ -312,8 +312,8 @@ export default function Pricing() {
                     <p className="mt-2 text-lg font-extrabold text-navy-600 sm:text-xl md:text-2xl">
                       {country.standardSubtitle}
                     </p>
-                    <div className="mt-5 inline-flex items-center gap-3 rounded-2xl border border-sky-200 bg-sky-50 px-5 py-2.5 text-xs font-bold text-sky-950 sm:text-sm">
-                      <Sparkles className="h-4 w-4 text-sky-600 shrink-0" />
+                    <div className="mt-5 inline-flex items-center gap-3 rounded-2xl border border-[#0284C7]/30 bg-[#0284C7]/10 px-5 py-2.5 text-xs font-bold text-[#0369A1] sm:text-sm">
+                      <Sparkles className="h-4 w-4 text-[#0284C7] shrink-0" />
                       <span>{country.standardBanner}</span>
                     </div>
                   </>
@@ -494,7 +494,13 @@ export default function Pricing() {
                               variant={plan.color === 'amber' ? 'primary' : 'outline'}
                               full
                               size="sm"
-                              className="w-full text-xs"
+                              className={cn(
+                                'w-full text-xs font-extrabold transition-all duration-200',
+                                plan.color === 'sky' &&
+                                  'hover:border-[#0284C7] hover:text-[#0284C7] hover:bg-[#0284C7]/5',
+                                plan.color === 'emerald' &&
+                                  'hover:border-[#16A34A] hover:text-[#16A34A] hover:bg-[#16A34A]/5',
+                              )}
                             >
                               Book a Free Trial Class
                             </Button>

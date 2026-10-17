@@ -98,64 +98,54 @@ export default function Pricing() {
           {/* Controls Bar: Country Switcher & Plan Switcher */}
           <div className="mb-8 flex flex-col items-center justify-between gap-6 rounded-3xl border border-navy-100 bg-white/90 p-4 shadow-clay backdrop-blur-md lg:flex-row lg:p-6">
             {/* Country Selector */}
-            <div className="flex flex-col items-center gap-3 sm:flex-row">
-              <span className="text-xs font-black uppercase tracking-wider text-navy-400">
-                Country:
-              </span>
-              <div className="flex flex-wrap items-center justify-center gap-2">
-                {(['AU', 'GB', 'AE'] as CountryCode[]).map((cCode) => {
-                  const cData = PRICING_DATA[cCode];
-                  const isActive = selectedCountry === cCode;
-                  return (
-                    <button
-                      key={cCode}
-                      onClick={() => setSelectedCountry(cCode)}
-                      className={cn(
-                        'flex items-center gap-2.5 rounded-2xl px-4 py-2.5 text-sm font-extrabold transition-all duration-200',
-                        isActive
-                          ? 'bg-navy-800 text-white shadow-clay-navy scale-102 ring-2 ring-amber-400'
-                          : 'bg-navy-50/70 text-navy-700 hover:bg-navy-100/70 hover:text-navy-900',
-                      )}
-                    >
-                      <Flag code={cData.flagCode} size={20} />
-                      <span>{cData.countryName}</span>
-                    </button>
-                  );
-                })}
-              </div>
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              {(['AU', 'GB', 'AE'] as CountryCode[]).map((cCode) => {
+                const cData = PRICING_DATA[cCode];
+                const isActive = selectedCountry === cCode;
+                return (
+                  <button
+                    key={cCode}
+                    onClick={() => setSelectedCountry(cCode)}
+                    className={cn(
+                      'flex items-center gap-2.5 rounded-2xl px-4 py-2.5 text-sm font-extrabold transition-all duration-200',
+                      isActive
+                        ? 'bg-navy-800 text-white shadow-clay-navy scale-102 ring-2 ring-amber-400'
+                        : 'bg-navy-50/70 text-navy-700 hover:bg-navy-100/70 hover:text-navy-900',
+                    )}
+                  >
+                    <Flag code={cData.flagCode} size={20} />
+                    <span>{cData.countryName}</span>
+                  </button>
+                );
+              })}
             </div>
 
             {/* Plan Type Selector */}
-            <div className="flex flex-col items-center gap-3 sm:flex-row">
-              <span className="text-xs font-black uppercase tracking-wider text-navy-400">
-                Plan Type:
-              </span>
-              <div className="inline-flex rounded-2xl border-2 border-navy-100 bg-navy-50/60 p-1 shadow-inner">
-                <button
-                  onClick={() => setSelectedPlanType('standard')}
-                  className={cn(
-                    'flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-black transition-all duration-200',
-                    selectedPlanType === 'standard'
-                      ? 'bg-white text-navy-800 shadow-md ring-1 ring-black/5'
-                      : 'text-navy-500 hover:text-navy-800',
-                  )}
-                >
-                  <Award className="h-4 w-4 text-amber-500" />
-                  <span>TriOrbit</span>
-                </button>
-                <button
-                  onClick={() => setSelectedPlanType('flexicarry')}
-                  className={cn(
-                    'flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-black transition-all duration-200',
-                    selectedPlanType === 'flexicarry'
-                      ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-md'
-                      : 'text-navy-500 hover:text-navy-800',
-                  )}
-                >
-                  <Sparkles className="h-4 w-4 text-white" />
-                  <span>FlexiCarry Plan</span>
-                </button>
-              </div>
+            <div className="inline-flex rounded-2xl border-2 border-navy-100 bg-navy-50/60 p-1 shadow-inner">
+              <button
+                onClick={() => setSelectedPlanType('standard')}
+                className={cn(
+                  'flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-black transition-all duration-200',
+                  selectedPlanType === 'standard'
+                    ? 'bg-white text-navy-800 shadow-md ring-1 ring-black/5'
+                    : 'text-navy-500 hover:text-navy-800',
+                )}
+              >
+                <Award className="h-4 w-4 text-amber-500" />
+                <span>TriOrbit</span>
+              </button>
+              <button
+                onClick={() => setSelectedPlanType('flexicarry')}
+                className={cn(
+                  'flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-black transition-all duration-200',
+                  selectedPlanType === 'flexicarry'
+                    ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-md'
+                    : 'text-navy-500 hover:text-navy-800',
+                )}
+              >
+                <Sparkles className="h-4 w-4 text-white" />
+                <span>FlexiCarry</span>
+              </button>
             </div>
           </div>
 

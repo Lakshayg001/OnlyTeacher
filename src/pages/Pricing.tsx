@@ -85,7 +85,7 @@ export default function Pricing() {
     <>
       <PageHero
         crumb="Pricing"
-        eyebrow="Transparent & Flexible Tutoring"
+        eyebrow="Transparent & Flexible Tuition"
         title="More Learning."
         accent="Total Transparency."
         sub="Choose between our flexible Standard packages or our flagship FlexiCarry long-term learning plan. Available across Australia, the UK, and UAE."
@@ -119,14 +119,6 @@ export default function Pricing() {
                     >
                       <Flag code={cData.flagCode} size={20} />
                       <span>{cData.countryName}</span>
-                      <span
-                        className={cn(
-                          'text-[11px] px-1.5 py-0.5 rounded-full font-bold',
-                          isActive ? 'bg-amber-400 text-navy-900' : 'bg-navy-200 text-navy-700',
-                        )}
-                      >
-                        {cData.currencyCode}
-                      </span>
                     </button>
                   );
                 })}
@@ -149,7 +141,7 @@ export default function Pricing() {
                   )}
                 >
                   <Award className="h-4 w-4 text-amber-500" />
-                  <span>Standard Tutoring</span>
+                  <span>Standard Tuition</span>
                   <span className="hidden sm:inline-block rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-extrabold text-amber-800">
                     {selectedCountry === 'GB' ? '8+1 & 24+2' : '24+1 & 48+2'}
                   </span>
@@ -235,7 +227,7 @@ export default function Pricing() {
                   <Flag code={country.flagCode} size={18} />
                   <span className="text-xs font-black uppercase tracking-wider text-navy-700">
                     {country.countryName} ·{' '}
-                    {selectedPlanType === 'flexicarry' ? 'FlexiCarry' : 'Online Tutoring'}
+                    {selectedPlanType === 'flexicarry' ? 'FlexiCarry' : 'Online Tuition'}
                     {selectedCountry === 'AE' &&
                       ` (${uaeCurriculum === 'international' ? 'IB/British/American' : 'ICSE/CBSE'})`}
                   </span>
@@ -305,7 +297,7 @@ export default function Pricing() {
                       ) : (
                         <>
                           <span className="text-amber-600">{country.countryName.toUpperCase()}</span>{' '}
-                          ONLINE TUTORING PLANS
+                          ONLINE TUITION PLANS
                         </>
                       )}
                     </h1>
@@ -417,7 +409,7 @@ export default function Pricing() {
                                   </div>
                                 </div>
                               ) : (
-                                /* STANDARD TUTORING VIEW */
+                                /* STANDARD TUITION VIEW */
                                 <div className="space-y-3">
                                   {/* Standard Hourly Rate if available */}
                                   {plan.standardRate && (
@@ -453,7 +445,7 @@ export default function Pricing() {
                                             {pkg.sessions}
                                           </div>
                                           <div className="text-[10px] text-navy-400">
-                                            Live 1-on-1 / Group Tutoring
+                                            Live One-to-One / Group Tuition
                                           </div>
                                         </div>
                                         <div className="text-right">
@@ -586,7 +578,7 @@ export default function Pricing() {
                   )}
                 </h2>
                 <p className="mt-2 text-sm text-navy-200">
-                  Experience a 45-minute live 1-on-1 diagnostic lesson with our matched subject expert
+                  Experience a 45-minute live One-to-One diagnostic lesson with our matched subject expert
                   before deciding. No upfront card required.
                 </p>
               </div>

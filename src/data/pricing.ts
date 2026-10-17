@@ -13,7 +13,7 @@ export interface PlanPackage {
 export interface SubPlan {
   id: 'alpha' | 'horizon' | 'apex';
   name: string; // e.g. "ALPHA"
-  tagline: string; // e.g. "1-ON-1 CLASSES"
+  tagline: string; // e.g. "ONE-TO-ONE CLASSES"
   blurb: string; // e.g. "Personalised learning with individual attention."
   color: 'amber' | 'sky' | 'emerald';
   icon: 'user' | 'users' | 'group';
@@ -84,7 +84,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
     currency: 'A$',
     currencyCode: 'AUD',
     heroLandmark: 'Sydney Harbour & Opera House',
-    standardTitle: 'AUSTRALIA ONLINE TUTORING PLANS',
+    standardTitle: 'AUSTRALIA ONLINE TUITION PLANS',
     standardSubtitle: 'Personalised Learning. Clear Concepts. Confidence That Grows.',
     standardBanner: 'More Learning. Extra Classes Included. | Choose the learning format that works best for your child.',
     flexiTitle: 'INTRODUCING FLEXICARRY',
@@ -104,7 +104,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
           {
             id: 'alpha',
             name: 'ALPHA',
-            tagline: '1-ON-1 CLASSES',
+            tagline: 'ONE-TO-ONE CLASSES',
             blurb: 'Personalised learning with individual attention.',
             color: 'amber',
             icon: 'user',
@@ -152,7 +152,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
           {
             id: 'alpha',
             name: 'ALPHA',
-            tagline: '1-ON-1 CLASSES',
+            tagline: 'ONE-TO-ONE CLASSES',
             blurb: 'Personalised learning with individual attention.',
             color: 'amber',
             icon: 'user',
@@ -200,7 +200,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
           {
             id: 'alpha',
             name: 'ALPHA',
-            tagline: '1-ON-1 CLASSES',
+            tagline: 'ONE-TO-ONE CLASSES',
             blurb: 'Personalised learning with individual attention.',
             color: 'amber',
             icon: 'user',
@@ -239,7 +239,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
           {
             id: 'alpha',
             name: 'ALPHA',
-            tagline: '1-ON-1 CLASSES',
+            tagline: 'ONE-TO-ONE CLASSES',
             blurb: 'Personalised learning with individual attention.',
             color: 'amber',
             icon: 'user',
@@ -278,7 +278,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
           {
             id: 'alpha',
             name: 'ALPHA',
-            tagline: '1-ON-1 CLASSES',
+            tagline: 'ONE-TO-ONE CLASSES',
             blurb: 'Personalised learning with individual attention.',
             color: 'amber',
             icon: 'user',
@@ -317,7 +317,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
           {
             id: 'alpha',
             name: 'ALPHA',
-            tagline: '1-ON-1 CLASSES',
+            tagline: 'ONE-TO-ONE CLASSES',
             blurb: 'Personalised learning with individual attention.',
             color: 'amber',
             icon: 'user',
@@ -352,9 +352,9 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
     supportPhone: '+44 7741 271981',
 
     // Standard Plans UK (Image 3)
-    standardTitle: 'UK ONLINE TUTORING PLANS',
+    standardTitle: 'UK ONLINE TUITION PLANS',
     standardSubtitle: 'Personalised Learning. Exam Readiness. A Brighter Future.',
-    standardBanner: 'Expert online tutoring for UK GCSE and A Level students.',
+    standardBanner: 'Expert online tuition for UK GCSE and A Level students.',
     standardTiers: [
       {
         id: 'gcse',
@@ -366,7 +366,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
           {
             id: 'alpha',
             name: 'ALPHA',
-            tagline: '1-ON-1 CLASSES',
+            tagline: 'ONE-TO-ONE CLASSES',
             blurb: 'Personalised learning with individual attention.',
             color: 'amber',
             icon: 'user',
@@ -414,7 +414,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
           {
             id: 'alpha',
             name: 'ALPHA',
-            tagline: '1-ON-1 CLASSES',
+            tagline: 'ONE-TO-ONE CLASSES',
             blurb: 'Personalised learning with individual attention.',
             color: 'amber',
             icon: 'user',
@@ -548,7 +548,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
 
     // Standard Plans UAE (Image 2)
     standardTitle: 'FIND THE RIGHT LEARNING PLAN FOR YOUR CHILD',
-    standardSubtitle: 'Personalised Online Tutoring for UAE Families',
+    standardSubtitle: 'Personalised Online Tuition for UAE Families',
     standardBanner: 'Choose Your Plan. Build Understanding. Grow with Confidence.',
     standardTiers: [], // Handled dynamically via uaeCurriculumTiers below
 
@@ -573,7 +573,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
               {
                 id: 'alpha',
                 name: 'ALPHA',
-                tagline: '1-ON-1 CLASSES',
+                tagline: 'ONE-TO-ONE CLASSES',
                 blurb: 'One-to-One personalised learning with dedicated teacher attention.',
                 color: 'amber',
                 icon: 'user',
@@ -618,7 +618,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
               {
                 id: 'alpha',
                 name: 'ALPHA',
-                tagline: '1-ON-1 CLASSES',
+                tagline: 'ONE-TO-ONE CLASSES',
                 blurb: 'One-to-One personalised learning with dedicated teacher attention.',
                 color: 'amber',
                 icon: 'user',
@@ -663,7 +663,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
               {
                 id: 'alpha',
                 name: 'ALPHA',
-                tagline: '1-ON-1 CLASSES',
+                tagline: 'ONE-TO-ONE CLASSES',
                 blurb: 'One-to-One personalised learning with dedicated teacher attention.',
                 color: 'amber',
                 icon: 'user',
@@ -700,7 +700,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
               {
                 id: 'alpha',
                 name: 'ALPHA',
-                tagline: '1-ON-1 CLASSES',
+                tagline: 'ONE-TO-ONE CLASSES',
                 blurb: 'Dedicated teacher attention for ICSE/CBSE curriculum.',
                 color: 'amber',
                 icon: 'user',
@@ -745,7 +745,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
               {
                 id: 'alpha',
                 name: 'ALPHA',
-                tagline: '1-ON-1 CLASSES',
+                tagline: 'ONE-TO-ONE CLASSES',
                 blurb: 'Dedicated teacher attention for ICSE/CBSE curriculum.',
                 color: 'amber',
                 icon: 'user',
@@ -790,7 +790,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
               {
                 id: 'alpha',
                 name: 'ALPHA',
-                tagline: '1-ON-1 CLASSES',
+                tagline: 'ONE-TO-ONE CLASSES',
                 blurb: 'Dedicated teacher attention for ICSE/CBSE curriculum.',
                 color: 'amber',
                 icon: 'user',
@@ -829,7 +829,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
               {
                 id: 'alpha',
                 name: 'ALPHA',
-                tagline: '1-ON-1 CLASSES',
+                tagline: 'ONE-TO-ONE CLASSES',
                 blurb: 'Dedicated one-to-one learning support.',
                 color: 'amber',
                 icon: 'user',
@@ -868,7 +868,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
               {
                 id: 'alpha',
                 name: 'ALPHA',
-                tagline: '1-ON-1 CLASSES',
+                tagline: 'ONE-TO-ONE CLASSES',
                 blurb: 'Dedicated one-to-one learning support.',
                 color: 'amber',
                 icon: 'user',
@@ -907,7 +907,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
               {
                 id: 'alpha',
                 name: 'ALPHA',
-                tagline: '1-ON-1 CLASSES',
+                tagline: 'ONE-TO-ONE CLASSES',
                 blurb: 'Dedicated one-to-one learning support.',
                 color: 'amber',
                 icon: 'user',
@@ -940,7 +940,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
               {
                 id: 'alpha',
                 name: 'ALPHA',
-                tagline: '1-ON-1 CLASSES',
+                tagline: 'ONE-TO-ONE CLASSES',
                 blurb: 'Dedicated one-to-one learning support.',
                 color: 'amber',
                 icon: 'user',
@@ -979,7 +979,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
               {
                 id: 'alpha',
                 name: 'ALPHA',
-                tagline: '1-ON-1 CLASSES',
+                tagline: 'ONE-TO-ONE CLASSES',
                 blurb: 'Dedicated one-to-one learning support.',
                 color: 'amber',
                 icon: 'user',
@@ -1018,7 +1018,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
               {
                 id: 'alpha',
                 name: 'ALPHA',
-                tagline: '1-ON-1 CLASSES',
+                tagline: 'ONE-TO-ONE CLASSES',
                 blurb: 'Dedicated one-to-one learning support.',
                 color: 'amber',
                 icon: 'user',
@@ -1095,7 +1095,7 @@ export const FLEXICARRY_FEATURES = [
   {
     icon: 'user',
     title: 'Flexible Learning',
-    desc: 'Choose from personalised one-to-one learning or small-group formats depending on your child.',
+    desc: 'Choose from personalised One-to-One learning or small-group formats depending on your child.',
   },
   {
     icon: 'shield',

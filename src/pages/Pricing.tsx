@@ -88,7 +88,7 @@ export default function Pricing() {
         eyebrow="Transparent & Flexible Tuition"
         title="More Learning."
         accent="Total Transparency."
-        sub="Choose between our flexible Standard packages or our flagship FlexiCarry long-term learning plan. Available across Australia, the UK, and UAE."
+        sub="Choose between our flexible TriOrbit packages or our flagship FlexiCarry long-term learning plan. Available across Australia, the UK, and UAE."
         icons={['math', 'science', 'technology']}
         compact
       />
@@ -141,10 +141,7 @@ export default function Pricing() {
                   )}
                 >
                   <Award className="h-4 w-4 text-amber-500" />
-                  <span>Standard Tuition</span>
-                  <span className="hidden sm:inline-block rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-extrabold text-amber-800">
-                    {selectedCountry === 'GB' ? '8+1 & 24+2' : '24+1 & 48+2'}
-                  </span>
+                  <span>TriOrbit</span>
                 </button>
                 <button
                   onClick={() => setSelectedPlanType('flexicarry')}
@@ -157,9 +154,6 @@ export default function Pricing() {
                 >
                   <Sparkles className="h-4 w-4 text-white" />
                   <span>FlexiCarry Plan</span>
-                  <span className="rounded-full bg-white/20 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-white">
-                    {selectedCountry === 'GB' ? '96 Sessions' : '100 Sessions'}
-                  </span>
                 </button>
               </div>
             </div>
@@ -227,7 +221,7 @@ export default function Pricing() {
                   <Flag code={country.flagCode} size={18} />
                   <span className="text-xs font-black uppercase tracking-wider text-navy-700">
                     {country.countryName} ·{' '}
-                    {selectedPlanType === 'flexicarry' ? 'FlexiCarry' : 'Online Tuition'}
+                    {selectedPlanType === 'flexicarry' ? 'FlexiCarry' : 'TriOrbit'}
                     {selectedCountry === 'AE' &&
                       ` (${uaeCurriculum === 'international' ? 'IB/British/American' : 'ICSE/CBSE'})`}
                   </span>

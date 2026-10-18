@@ -248,20 +248,12 @@ export default function Pricing() {
                       <div className="flex items-center gap-2 font-display text-xl font-black text-navy-800 sm:text-2xl">
                         <Calendar className="h-6 w-6 text-amber-500 shrink-0" />
                         <span>
-                          {selectedCountry === 'GB' ? (
-                            '96 LEARNING SESSIONS'
-                          ) : (
-                            <>
-                              96 + <span className="text-amber-600">4 FREE</span> SESSIONS
-                            </>
-                          )}
+                          96 + <span className="text-amber-600">4 FREE</span> SESSIONS
                         </span>
                       </div>
                       <div className="hidden h-6 w-px bg-amber-300 sm:block" />
                       <div className="text-xs sm:text-sm font-extrabold text-navy-700">
-                        {selectedCountry === 'GB'
-                          ? 'Carry-Forward Flexibility | Price Protection'
-                          : '100 Learning Sessions. One Consistent Learning Journey.'}
+                        100 Learning Sessions. One Consistent Learning Journey.
                       </div>
                       <div className="hidden h-6 w-px bg-amber-300 sm:block" />
                       <div className="flex items-center gap-2 text-xs font-bold text-navy-600">

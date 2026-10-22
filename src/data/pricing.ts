@@ -1,6 +1,6 @@
 export type CountryCode = 'AU' | 'GB' | 'AE';
 
-export type PlanType = 'standard' | 'flexicarry';
+export type PlanType = 'standard' | 'flexicarry' | 'membership';
 
 export type UAECurriculum = 'international' | 'indian'; // International (IB / British / American) vs Indian (ICSE / CBSE)
 
@@ -1103,3 +1103,139 @@ export const FLEXICARRY_FEATURES = [
     desc: 'Receive free additional sessions (up to 4 free sessions) with your long-term FlexiCarry package.',
   },
 ];
+
+export interface MembershipBenefit {
+  title: string;
+  subtitle: string;
+  icon: 'headphones' | 'workshop' | 'calendar' | 'reports' | 'plan' | 'teacher' | 'message' | 'star';
+  color: 'amber' | 'emerald';
+}
+
+export interface MembershipTier {
+  years: string;
+  price: string;
+  duration: string;
+  color: 'amber' | 'emerald';
+}
+
+export interface UkMembershipData {
+  eyebrow: string;
+  brandTitle: string;
+  durationBadge: string;
+  originalPrice: string;
+  offerTagline: string;
+  tiers: MembershipTier[];
+  availabilityNote: string;
+  includedHeading: string;
+  benefits: MembershipBenefit[];
+  footerTagline: string;
+}
+
+export const UK_MEMBERSHIP_DATA: UkMembershipData = {
+  eyebrow: 'UK MEMBERSHIP · LIMITED AVAILABILITY',
+  brandTitle: 'TOT Privé',
+  durationBadge: '15-WEEK MEMBERSHIP',
+  originalPrice: '£99',
+  offerTagline: 'TOT PRIORITY OFFER',
+  tiers: [
+    {
+      years: 'YEARS 2–9',
+      price: '£65',
+      duration: 'for 15 weeks',
+      color: 'amber',
+    },
+    {
+      years: 'YEARS 10–13',
+      price: '£75',
+      duration: 'for 15 weeks',
+      color: 'emerald',
+    },
+  ],
+  availabilityNote: 'Limited availability: 50 families per tier',
+  includedHeading: 'Everything included for 15 weeks',
+  benefits: [
+    {
+      icon: 'headphones',
+      color: 'amber',
+      title: '5 live doubt-clearing sessions',
+      subtitle: 'Five 30-minute one-to-one sessions',
+    },
+    {
+      icon: 'workshop',
+      color: 'emerald',
+      title: '2 live revision workshops',
+      subtitle: '30 minutes each\nTeacher-led and matched to year group',
+    },
+    {
+      icon: 'calendar',
+      color: 'emerald',
+      title: 'Flexible rescheduling',
+      subtitle: 'Up to 10 eligible reschedules',
+    },
+    {
+      icon: 'reports',
+      color: 'amber',
+      title: '3 teacher progress reports',
+      subtitle: 'Monthly progress and next steps',
+    },
+    {
+      icon: 'plan',
+      color: 'amber',
+      title: 'Personalised 15-week study plan',
+      subtitle: "Shaped around your child's goals",
+    },
+    {
+      icon: 'teacher',
+      color: 'emerald',
+      title: 'Same teacher commitment',
+      subtitle: 'Continuity wherever possible',
+    },
+    {
+      icon: 'message',
+      color: 'emerald',
+      title: 'Teacher message support',
+      subtitle: 'Short questions between lessons',
+    },
+    {
+      icon: 'star',
+      color: 'amber',
+      title: 'Priority booking access',
+      subtitle: 'Earlier access to slots and workshops',
+    },
+  ],
+  footerTagline: 'The Only Teacher | One Platform. Every Subject. A Brighter Future.',
+};
+
+export const MEMBERSHIP_FEATURES = [
+  {
+    icon: 'star',
+    title: 'Priority Booking Access',
+    desc: 'Get first access to peak teaching slots and master workshops before general release.',
+  },
+  {
+    icon: 'user',
+    title: 'Dedicated Continuity',
+    desc: 'Same-teacher commitment ensuring consistent progress tracking across the 15 weeks.',
+  },
+  {
+    icon: 'calendar',
+    title: 'Generous Rescheduling',
+    desc: 'Up to 10 eligible lesson reschedules so learning fits smoothly into family schedules.',
+  },
+  {
+    icon: 'lightbulb',
+    title: '1-to-1 Doubt Resolution',
+    desc: 'Direct one-on-one sessions to rapidly clarify complex topics and homework challenges.',
+  },
+  {
+    icon: 'shield',
+    title: 'Comprehensive Reporting',
+    desc: '3 monthly teacher reports providing actionable insights and academic milestones.',
+  },
+  {
+    icon: 'gift',
+    title: 'Exclusive Workshops',
+    desc: 'Tailored live group revision workshops matched to your child’s exact UK year group.',
+  },
+];
+

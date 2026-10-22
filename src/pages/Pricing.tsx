@@ -373,18 +373,40 @@ export default function Pricing() {
           {/* Main Content Area: Membership View (UK only) OR Tier Grid Categories */}
           {selectedPlanType === 'membership' && selectedCountry === 'GB' ? (
             <div className="space-y-10">
-              {/* Image 3 on top of Membership Page */}
+              {/* Membership Top Promo Card - in clean text form matching other cards */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
-                className="overflow-hidden rounded-4xl border border-navy-100 bg-white p-2 shadow-clay-lg transition-all"
+                className="relative overflow-hidden rounded-4xl border border-navy-100 bg-white p-8 sm:p-12 lg:p-14 shadow-clay-lg text-center"
               >
-                <img
-                  src="/tot-prive-banner.png"
-                  alt="TOT Privé - A Little More for Your Learning Journey"
-                  className="w-full h-auto object-contain max-h-[360px] mx-auto block rounded-3xl"
-                />
+                {/* Decorative background glow blobs */}
+                <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-amber-300/30 blur-3xl" />
+                <div className="pointer-events-none absolute -left-20 -bottom-20 h-72 w-72 rounded-full bg-navy-200/40 blur-3xl" />
+
+                <div className="relative z-10 flex flex-col items-center max-w-3xl mx-auto">
+                  {/* Brand Title: TOT Privé */}
+                  <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-navy-900 leading-none">
+                    TOT <span className="text-[#F07C00]">Privé</span>
+                  </h1>
+
+                  {/* Subtitle: A Little More for Your Learning Journey. */}
+                  <h2 className="mt-4 font-display text-xl sm:text-2xl lg:text-3xl font-black text-navy-900 tracking-tight">
+                    <span className="text-[#F07C00]">A Little More</span> for Your Learning Journey.
+                  </h2>
+
+                  {/* Description text */}
+                  <p className="mt-3 max-w-2xl text-sm sm:text-base lg:text-lg font-medium text-navy-600 leading-relaxed">
+                    Extra focus and support, along with exclusive benefits, delivered at affordable prices.
+                  </p>
+
+                  {/* Limited Membership Available Pill Badge */}
+                  <div className="mt-7">
+                    <span className="inline-flex items-center justify-center rounded-full bg-[#F07C00] px-7 py-3 text-sm sm:text-base font-black text-white shadow-clay-amber transition-transform hover:scale-102 cursor-default">
+                      Limited Membership Available.
+                    </span>
+                  </div>
+                </div>
               </motion.div>
 
               {/* Main Membership Showcase Card - Exactly matching Image 1 with TOT Circle -> TOT Privé */}

@@ -127,7 +127,7 @@ export default function Pricing() {
                   </span>
                 </div>
                 <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-                  {(['AU', 'GB', 'AE'] as CountryCode[]).map((cCode) => {
+                  {(['AU', 'GB' /* , 'AE' - temp commented out */] as CountryCode[]).map((cCode) => {
                     const cData = PRICING_DATA[cCode];
                     const isActive = selectedCountry === cCode;
                     return (
@@ -227,8 +227,8 @@ export default function Pricing() {
             </div>
           </div>
 
-          {/* UAE Curriculum Sub-Switcher (when UAE is selected) */}
-          {selectedCountry === 'AE' && (
+          {/* UAE Curriculum Sub-Switcher (when UAE is selected) - Temporarily commented out */}
+          {/* {selectedCountry === 'AE' && (
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -262,7 +262,7 @@ export default function Pricing() {
                 </button>
               </div>
             </motion.div>
-          )}
+          )} */}
 
           {/* Dynamic Hero Promo Header (matches reference image banners) - shown for standard & flexicarry */}
           {selectedPlanType !== 'membership' && (

@@ -114,70 +114,116 @@ export default function Pricing() {
       <section className="relative overflow-hidden py-8 sm:py-14 bg-gradient-to-b from-white via-cloud to-white">
         <div className="container-tot">
           {/* Controls Bar: Country Switcher & Plan Switcher */}
-          <div className="mb-8 flex flex-col items-center justify-between gap-6 rounded-3xl border border-navy-100 bg-white/90 p-4 shadow-clay backdrop-blur-md lg:flex-row lg:p-6">
-            {/* Country Selector */}
-            <div className="flex flex-wrap items-center justify-center gap-2">
-              {(['AU', 'GB', 'AE'] as CountryCode[]).map((cCode) => {
-                const cData = PRICING_DATA[cCode];
-                const isActive = selectedCountry === cCode;
-                return (
+          <div className="mb-8 rounded-3xl border border-navy-100 bg-white/95 p-4 sm:p-5 lg:p-6 shadow-clay backdrop-blur-md">
+            <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-6 lg:gap-8">
+              {/* Step 1: Choose Your Country */}
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center gap-2.5">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#E97714] text-xs font-black text-white shadow-sm">
+                    1
+                  </span>
+                  <span className="text-xs sm:text-sm font-black uppercase tracking-wider text-navy-900">
+                    CHOOSE YOUR COUNTRY
+                  </span>
+                </div>
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                  {(['AU', 'GB', 'AE'] as CountryCode[]).map((cCode) => {
+                    const cData = PRICING_DATA[cCode];
+                    const isActive = selectedCountry === cCode;
+                    return (
+                      <button
+                        key={cCode}
+                        onClick={() => handleCountryChange(cCode)}
+                        className={cn(
+                          'flex items-center gap-2.5 rounded-2xl px-4 sm:px-5 py-2.5 text-sm font-extrabold transition-all duration-200 border-2',
+                          isActive
+                            ? 'bg-[#112340] text-white border-[#E97714] shadow-clay-navy scale-102'
+                            : 'bg-navy-50/70 text-navy-800 border-transparent hover:bg-navy-100/80 hover:text-navy-900',
+                        )}
+                      >
+                        <Flag code={cData.flagCode} size={20} />
+                        <span>{cData.countryName}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Vertical Divider (Desktop) / Horizontal Divider (Mobile) */}
+              <div className="hidden lg:block w-px self-stretch bg-navy-100 my-1" />
+              <div className="block lg:hidden h-px w-full bg-navy-100" />
+
+              {/* Step 2: Choose Your Plan */}
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center gap-2.5">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#E97714] text-xs font-black text-white shadow-sm">
+                    2
+                  </span>
+                  <span className="text-xs sm:text-sm font-black uppercase tracking-wider text-navy-900">
+                    CHOOSE YOUR PLAN
+                  </span>
+                </div>
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                  {/* TriOrbit Button - Solid Green when active */}
                   <button
-                    key={cCode}
-                    onClick={() => handleCountryChange(cCode)}
+                    onClick={() => setSelectedPlanType('standard')}
                     className={cn(
-                      'flex items-center gap-2.5 rounded-2xl px-4 py-2.5 text-sm font-extrabold transition-all duration-200',
-                      isActive
-                        ? 'bg-navy-800 text-white shadow-clay-navy scale-102 ring-2 ring-amber-400'
-                        : 'bg-navy-50/70 text-navy-700 hover:bg-navy-100/70 hover:text-navy-900',
+                      'flex items-center gap-2.5 rounded-2xl px-4 sm:px-5 py-2.5 text-sm font-extrabold transition-all duration-200 border-2',
+                      selectedPlanType === 'standard'
+                        ? 'bg-emerald-600 hover:bg-emerald-700 text-white border-emerald-500 shadow-md scale-102'
+                        : 'bg-navy-50/70 text-navy-800 border-transparent hover:bg-navy-100/80 hover:text-navy-900',
                     )}
                   >
-                    <Flag code={cData.flagCode} size={20} />
-                    <span>{cData.countryName}</span>
+                    <Award
+                      className={cn(
+                        'h-4.5 w-4.5 transition-colors',
+                        selectedPlanType === 'standard' ? 'text-white' : 'text-emerald-600',
+                      )}
+                    />
+                    <span>TriOrbit</span>
                   </button>
-                );
-              })}
-            </div>
 
-            {/* Plan Type Selector */}
-            <div className="inline-flex rounded-2xl border-2 border-navy-100 bg-navy-50/60 p-1 shadow-inner">
-              <button
-                onClick={() => setSelectedPlanType('standard')}
-                className={cn(
-                  'flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-black transition-all duration-200',
-                  selectedPlanType === 'standard'
-                    ? 'bg-white text-navy-800 shadow-md ring-1 ring-black/5'
-                    : 'text-navy-500 hover:text-navy-800',
-                )}
-              >
-                <Award className="h-4 w-4 text-amber-500" />
-                <span>TriOrbit</span>
-              </button>
-              <button
-                onClick={() => setSelectedPlanType('flexicarry')}
-                className={cn(
-                  'flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-black transition-all duration-200',
-                  selectedPlanType === 'flexicarry'
-                    ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-md'
-                    : 'text-navy-500 hover:text-navy-800',
-                )}
-              >
-                <Sparkles className="h-4 w-4 text-white" />
-                <span>FlexiCarry</span>
-              </button>
-              {selectedCountry === 'GB' && (
-                <button
-                  onClick={() => setSelectedPlanType('membership')}
-                  className={cn(
-                    'flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-black transition-all duration-200',
-                    selectedPlanType === 'membership'
-                      ? 'bg-navy-900 text-white shadow-md ring-2 ring-amber-400'
-                      : 'text-navy-500 hover:text-navy-800',
+                  {/* FlexiCarry Button */}
+                  <button
+                    onClick={() => setSelectedPlanType('flexicarry')}
+                    className={cn(
+                      'flex items-center gap-2.5 rounded-2xl px-4 sm:px-5 py-2.5 text-sm font-extrabold transition-all duration-200 border-2',
+                      selectedPlanType === 'flexicarry'
+                        ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white border-amber-400 shadow-clay-amber scale-102'
+                        : 'bg-navy-50/70 text-navy-800 border-transparent hover:bg-navy-100/80 hover:text-navy-900',
+                    )}
+                  >
+                    <Sparkles
+                      className={cn(
+                        'h-4.5 w-4.5 transition-colors',
+                        selectedPlanType === 'flexicarry' ? 'text-white' : 'text-[#E97714]',
+                      )}
+                    />
+                    <span>FlexiCarry</span>
+                  </button>
+
+                  {/* Membership Button (UK Only) */}
+                  {selectedCountry === 'GB' && (
+                    <button
+                      onClick={() => setSelectedPlanType('membership')}
+                      className={cn(
+                        'flex items-center gap-2.5 rounded-2xl px-4 sm:px-5 py-2.5 text-sm font-extrabold transition-all duration-200 border-2',
+                        selectedPlanType === 'membership'
+                          ? 'bg-[#112340] text-white border-amber-400 shadow-clay-navy scale-102'
+                          : 'bg-navy-50/70 text-navy-800 border-transparent hover:bg-navy-100/80 hover:text-navy-900',
+                      )}
+                    >
+                      <Crown
+                        className={cn(
+                          'h-4.5 w-4.5 transition-colors',
+                          selectedPlanType === 'membership' ? 'text-amber-400' : 'text-amber-500',
+                        )}
+                      />
+                      <span>Membership</span>
+                    </button>
                   )}
-                >
-                  <Crown className="h-4 w-4 text-amber-400" />
-                  <span>Membership</span>
-                </button>
-              )}
+                </div>
+              </div>
             </div>
           </div>
 

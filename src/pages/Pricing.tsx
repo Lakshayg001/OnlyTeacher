@@ -281,22 +281,20 @@ export default function Pricing() {
                     'pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full blur-3xl opacity-40',
                     selectedPlanType === 'flexicarry'
                       ? 'bg-amber-300'
-                      : selectedCountry === 'GB'
-                        ? 'bg-amber-300/40'
-                        : 'bg-[#0284C7]/20',
+                      : 'bg-amber-300/40',
                   )}
                 />
                 <div
                   className={cn(
                     'pointer-events-none absolute -left-20 -bottom-20 h-80 w-80 rounded-full blur-3xl opacity-50',
-                    selectedCountry === 'GB' && selectedPlanType === 'standard'
+                    selectedPlanType === 'standard' || (selectedPlanType === 'flexicarry' && selectedCountry === 'GB')
                       ? 'bg-sky/60'
                       : 'bg-navy-100',
                   )}
                 />
 
                 <div className="relative z-10 flex flex-col items-center text-center">
-                  {selectedCountry === 'GB' && selectedPlanType === 'standard' ? (
+                  {selectedPlanType === 'standard' && (selectedCountry === 'AU' || selectedCountry === 'GB') ? (
                     <>
                       {/* Top Eyebrow Badge (Image 2) */}
                       <div className="mb-5 inline-flex items-center justify-center rounded-full border border-amber-200/80 bg-white/90 px-6 py-2 shadow-sm backdrop-blur-sm">
@@ -312,10 +310,45 @@ export default function Pricing() {
                         and Achieve More
                       </h1>
 
-                      {/* Subtitle (Image 2) */}
-                      <p className="mt-4 text-base sm:text-lg md:text-xl font-bold text-navy-800 max-w-3xl mx-auto leading-relaxed">
-                        Online Tuition Designed for KS1 to KS5 GCSE and A Level Excellence
-                      </p>
+                      {/* Subtitle (Image 2 for AU vs GB) */}
+                      {selectedCountry === 'AU' ? (
+                        <div className="mt-4 max-w-3xl mx-auto space-y-2">
+                          <p className="text-base sm:text-lg md:text-xl font-bold text-navy-800 leading-relaxed">
+                            Australian Curriculum Support Kindergarten to Year 12
+                          </p>
+                          <p className="text-xs sm:text-sm md:text-base font-extrabold uppercase tracking-wider text-navy-800">
+                            ACT <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
+                            NSW <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
+                            NT <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
+                            QLD <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
+                            SA <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
+                            TAS <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
+                            VIC <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
+                            WA
+                          </p>
+                        </div>
+                      ) : (
+                        <p className="mt-4 text-base sm:text-lg md:text-xl font-bold text-navy-800 max-w-3xl mx-auto leading-relaxed">
+                          Online Tuition Designed for KS1 to KS5 GCSE and A Level Excellence
+                        </p>
+                      )}
+                    </>
+                  ) : selectedPlanType === 'flexicarry' && selectedCountry === 'GB' ? (
+                    <>
+                      {/* UK FlexiCarry (Image 2) */}
+                      <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-navy-900 leading-tight">
+                        96 Sessions One Smarter Learning{' '}
+                        <span className="text-[#F07C00]">Journey</span>
+                      </h1>
+
+                      <div className="mt-4 max-w-3xl mx-auto space-y-1.5">
+                        <p className="text-base sm:text-lg md:text-xl font-bold text-navy-800 leading-relaxed">
+                          Plan ahead for the current term and enjoy the benefit of eligible unused sessions carried forward to the next term
+                        </p>
+                        <p className="text-base sm:text-lg md:text-xl font-bold text-navy-800 leading-relaxed">
+                          Explore multiple subjects with one convenient learning plan
+                        </p>
+                      </div>
                     </>
                   ) : (
                     <>
@@ -333,21 +366,10 @@ export default function Pricing() {
                       {selectedPlanType === 'flexicarry' ? (
                         <>
                           <h1 className="font-display text-3xl font-extrabold uppercase tracking-tight text-navy-800 sm:text-4xl md:text-5xl lg:text-6xl">
-                            {selectedCountry === 'GB' ? (
-                              <>
-                                CONSISTENT LEARNING.{' '}
-                                <span className="bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 bg-clip-text text-transparent">
-                                  LASTING VALUE.
-                                </span>
-                              </>
-                            ) : (
-                              <>
-                                INTRODUCING{' '}
-                                <span className="bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 bg-clip-text text-transparent">
-                                  FLEXICARRY
-                                </span>
-                              </>
-                            )}
+                            INTRODUCING{' '}
+                            <span className="bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 bg-clip-text text-transparent">
+                              FLEXICARRY
+                            </span>
                           </h1>
                           <p className="mt-2 text-lg font-extrabold text-navy-600 sm:text-xl md:text-2xl">
                             {country.flexiSubtitle}

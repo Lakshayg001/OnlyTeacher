@@ -17,13 +17,13 @@ export default function PageHero({
  crumb,
  compact,
 }: {
- eyebrow?: string;
+ eyebrow?: ReactNode;
  title: ReactNode;
  accent?: string;
- sub?: string;
+ sub?: ReactNode;
  icons?: ClayIconName[];
  children?: ReactNode;
- crumb: string;
+ crumb?: string;
  compact?: boolean;
 }) {
  return (
@@ -38,13 +38,17 @@ export default function PageHero({
      </div>
 
      <div className="relative flex flex-col items-center text-center">
-      <nav className="mb-5 flex items-center gap-1.5 text-[12px] font-bold text-navy-400">
-       <Link to="/" className="hover:text-amber-600">Home</Link>
-       <ChevronRight className="h-3.5 w-3.5" />
-       <span className="text-navy-700">{crumb}</span>
-      </nav>
+      {crumb && (
+       <nav className="mb-5 flex items-center gap-1.5 text-[12px] font-bold text-navy-400">
+        <Link to="/" className="hover:text-amber-600">Home</Link>
+        <ChevronRight className="h-3.5 w-3.5" />
+        <span className="text-navy-700">{crumb}</span>
+       </nav>
+      )}
 
-      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+      {eyebrow && (
+       typeof eyebrow === 'string' ? <Eyebrow>{eyebrow}</Eyebrow> : eyebrow
+      )}
 
       <motion.h1
        initial={{ opacity: 0, y: 20 }}
@@ -57,30 +61,32 @@ export default function PageHero({
       </motion.h1>
 
       {sub && (
-       <motion.p
+       <motion.div
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.1 }}
         className="mt-5 max-w-2xl text-[16.5px] leading-relaxed text-navy-500"
        >
         {sub}
-       </motion.p>
+       </motion.div>
       )}
 
-      <div className="mt-7 flex items-center gap-4">
-       {icons.map((n, i) => (
-        <motion.div
-         key={n}
-         initial={{ opacity: 0, scale: 0.7 }}
-         animate={{ opacity: 1, scale: 1 }}
-         transition={{ duration: 0.5, delay: 0.2 + i * 0.09 }}
-         className="animate-float"
-         style={{ animationDelay: `${i * 0.8}s` }}
-        >
-         <ClayIcon name={n} size={54} />
-        </motion.div>
-       ))}
-      </div>
+      {icons && icons.length > 0 && (
+       <div className="mt-7 flex items-center gap-4">
+        {icons.map((n, i) => (
+         <motion.div
+          key={n}
+          initial={{ opacity: 0, scale: 0.7 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 + i * 0.09 }}
+          className="animate-float"
+          style={{ animationDelay: `${i * 0.8}s` }}
+         >
+          <ClayIcon name={n} size={54} />
+         </motion.div>
+        ))}
+       </div>
+      )}
 
       {children && <div className="mt-8 w-full">{children}</div>}
      </div>

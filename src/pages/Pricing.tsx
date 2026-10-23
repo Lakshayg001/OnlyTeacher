@@ -279,90 +279,126 @@ export default function Pricing() {
                 <div
                   className={cn(
                     'pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full blur-3xl opacity-40',
-                    selectedPlanType === 'flexicarry' ? 'bg-amber-300' : 'bg-[#0284C7]/20',
+                    selectedPlanType === 'flexicarry'
+                      ? 'bg-amber-300'
+                      : selectedCountry === 'GB'
+                        ? 'bg-amber-300/40'
+                        : 'bg-[#0284C7]/20',
                   )}
                 />
-                <div className="pointer-events-none absolute -left-20 -bottom-20 h-80 w-80 rounded-full bg-navy-100 blur-3xl opacity-50" />
+                <div
+                  className={cn(
+                    'pointer-events-none absolute -left-20 -bottom-20 h-80 w-80 rounded-full blur-3xl opacity-50',
+                    selectedCountry === 'GB' && selectedPlanType === 'standard'
+                      ? 'bg-sky/60'
+                      : 'bg-navy-100',
+                  )}
+                />
 
                 <div className="relative z-10 flex flex-col items-center text-center">
-                  {/* Country Pill badge with flag */}
-                  <div className="mb-4 inline-flex items-center gap-2.5 rounded-full border border-navy-200/80 bg-navy-50/80 px-4 py-1.5 shadow-sm">
-                    <Flag code={country.flagCode} size={18} />
-                    <span className="text-xs font-black uppercase tracking-wider text-navy-700">
-                      {country.countryName} ·{' '}
-                      {selectedPlanType === 'flexicarry' ? 'FlexiCarry' : 'TriOrbit'}
-                      {selectedCountry === 'AE' &&
-                        ` (${uaeCurriculum === 'international' ? 'IB/British/American' : 'ICSE/CBSE'})`}
-                    </span>
-                  </div>
-
-                  {selectedPlanType === 'flexicarry' ? (
+                  {selectedCountry === 'GB' && selectedPlanType === 'standard' ? (
                     <>
-                      <h1 className="font-display text-3xl font-extrabold uppercase tracking-tight text-navy-800 sm:text-4xl md:text-5xl lg:text-6xl">
-                        {selectedCountry === 'GB' ? (
-                          <>
-                            CONSISTENT LEARNING.{' '}
-                            <span className="bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 bg-clip-text text-transparent">
-                              LASTING VALUE.
-                            </span>
-                          </>
-                        ) : (
-                          <>
-                            INTRODUCING{' '}
-                            <span className="bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 bg-clip-text text-transparent">
-                              FLEXICARRY
-                            </span>
-                          </>
-                        )}
-                      </h1>
-                      <p className="mt-2 text-lg font-extrabold text-navy-600 sm:text-xl md:text-2xl">
-                        {country.flexiSubtitle}
-                      </p>
-                      <p className="mt-2 max-w-2xl text-sm font-medium text-navy-500 sm:text-base">
-                        {country.flexiDescription}
-                      </p>
-
-                      {/* Highlight Sessions Box (from reference) */}
-                      <div className="mt-6 flex flex-wrap items-center justify-center gap-4 rounded-2xl border-2 border-amber-200 bg-amber-50/70 px-5 py-3.5 shadow-sm sm:gap-6">
-                        <div className="flex items-center gap-2 font-display text-xl font-black text-navy-800 sm:text-2xl">
-                          <Calendar className="h-6 w-6 text-amber-500 shrink-0" />
-                          <span>
-                            96 + <span className="text-amber-600">4 FREE</span> SESSIONS
-                          </span>
-                        </div>
-                        <div className="hidden h-6 w-px bg-amber-300 sm:block" />
-                        <div className="text-xs sm:text-sm font-extrabold text-navy-700">
-                          100 Learning Sessions. One Consistent Learning Journey.
-                        </div>
-                        <div className="hidden h-6 w-px bg-amber-300 sm:block" />
-                        <div className="flex items-center gap-2 text-xs font-bold text-navy-600">
-                          <Flag code={country.flagCode} size={18} />
-                          <span>{country.countryName}</span>
-                        </div>
+                      {/* Top Eyebrow Badge (Image 2) */}
+                      <div className="mb-5 inline-flex items-center justify-center rounded-full border border-amber-200/80 bg-white/90 px-6 py-2 shadow-sm backdrop-blur-sm">
+                        <span className="text-xs sm:text-sm font-black uppercase tracking-widest text-[#F07C00]">
+                          TRANSPARENT &amp; FLEXIBLE TUITION
+                        </span>
                       </div>
+
+                      {/* Main Heading (Image 2) */}
+                      <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-navy-900 leading-[1.12]">
+                        Build Confidence<br />
+                        <span className="text-[#F07C00]">Strengthen Knowledge</span><br />
+                        and Achieve More
+                      </h1>
+
+                      {/* Subtitle (Image 2) */}
+                      <p className="mt-4 text-base sm:text-lg md:text-xl font-bold text-navy-800 max-w-3xl mx-auto leading-relaxed">
+                        Online Tuition Designed for KS1 to KS5 GCSE and A Level Excellence
+                      </p>
                     </>
                   ) : (
                     <>
-                      <h1 className="font-display text-3xl font-extrabold uppercase tracking-tight text-navy-800 sm:text-4xl md:text-5xl lg:text-6xl">
-                        {selectedCountry === 'AE' ? (
-                          <>
-                            FIND THE RIGHT{' '}
-                            <span className="text-amber-600">LEARNING PLAN</span> FOR YOUR CHILD
-                          </>
-                        ) : (
-                          <>
-                            <span className="text-amber-600">{country.countryName.toUpperCase()}</span>{' '}
-                            ONLINE TUITION PLANS
-                          </>
-                        )}
-                      </h1>
-                      <p className="mt-2 text-lg font-extrabold text-navy-600 sm:text-xl md:text-2xl">
-                        {country.standardSubtitle}
-                      </p>
-                      <div className="mt-5 inline-flex items-center gap-3 rounded-2xl border border-[#0284C7]/30 bg-[#0284C7]/10 px-5 py-2.5 text-xs font-bold text-[#0369A1] sm:text-sm">
-                        <Sparkles className="h-4 w-4 text-[#0284C7] shrink-0" />
-                        <span>{country.standardBanner}</span>
+                      {/* Country Pill badge with flag */}
+                      <div className="mb-4 inline-flex items-center gap-2.5 rounded-full border border-navy-200/80 bg-navy-50/80 px-4 py-1.5 shadow-sm">
+                        <Flag code={country.flagCode} size={18} />
+                        <span className="text-xs font-black uppercase tracking-wider text-navy-700">
+                          {country.countryName} ·{' '}
+                          {selectedPlanType === 'flexicarry' ? 'FlexiCarry' : 'TriOrbit'}
+                          {selectedCountry === 'AE' &&
+                            ` (${uaeCurriculum === 'international' ? 'IB/British/American' : 'ICSE/CBSE'})`}
+                        </span>
                       </div>
+
+                      {selectedPlanType === 'flexicarry' ? (
+                        <>
+                          <h1 className="font-display text-3xl font-extrabold uppercase tracking-tight text-navy-800 sm:text-4xl md:text-5xl lg:text-6xl">
+                            {selectedCountry === 'GB' ? (
+                              <>
+                                CONSISTENT LEARNING.{' '}
+                                <span className="bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 bg-clip-text text-transparent">
+                                  LASTING VALUE.
+                                </span>
+                              </>
+                            ) : (
+                              <>
+                                INTRODUCING{' '}
+                                <span className="bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 bg-clip-text text-transparent">
+                                  FLEXICARRY
+                                </span>
+                              </>
+                            )}
+                          </h1>
+                          <p className="mt-2 text-lg font-extrabold text-navy-600 sm:text-xl md:text-2xl">
+                            {country.flexiSubtitle}
+                          </p>
+                          <p className="mt-2 max-w-2xl text-sm font-medium text-navy-500 sm:text-base">
+                            {country.flexiDescription}
+                          </p>
+
+                          {/* Highlight Sessions Box (from reference) */}
+                          <div className="mt-6 flex flex-wrap items-center justify-center gap-4 rounded-2xl border-2 border-amber-200 bg-amber-50/70 px-5 py-3.5 shadow-sm sm:gap-6">
+                            <div className="flex items-center gap-2 font-display text-xl font-black text-navy-800 sm:text-2xl">
+                              <Calendar className="h-6 w-6 text-amber-500 shrink-0" />
+                              <span>
+                                96 + <span className="text-amber-600">4 FREE</span> SESSIONS
+                              </span>
+                            </div>
+                            <div className="hidden h-6 w-px bg-amber-300 sm:block" />
+                            <div className="text-xs sm:text-sm font-extrabold text-navy-700">
+                              100 Learning Sessions. One Consistent Learning Journey.
+                            </div>
+                            <div className="hidden h-6 w-px bg-amber-300 sm:block" />
+                            <div className="flex items-center gap-2 text-xs font-bold text-navy-600">
+                              <Flag code={country.flagCode} size={18} />
+                              <span>{country.countryName}</span>
+                            </div>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <h1 className="font-display text-3xl font-extrabold uppercase tracking-tight text-navy-800 sm:text-4xl md:text-5xl lg:text-6xl">
+                            {selectedCountry === 'AE' ? (
+                              <>
+                                FIND THE RIGHT{' '}
+                                <span className="text-amber-600">LEARNING PLAN</span> FOR YOUR CHILD
+                              </>
+                            ) : (
+                              <>
+                                <span className="text-amber-600">{country.countryName.toUpperCase()}</span>{' '}
+                                ONLINE TUITION PLANS
+                              </>
+                            )}
+                          </h1>
+                          <p className="mt-2 text-lg font-extrabold text-navy-600 sm:text-xl md:text-2xl">
+                            {country.standardSubtitle}
+                          </p>
+                          <div className="mt-5 inline-flex items-center gap-3 rounded-2xl border border-[#0284C7]/30 bg-[#0284C7]/10 px-5 py-2.5 text-xs font-bold text-[#0369A1] sm:text-sm">
+                            <Sparkles className="h-4 w-4 text-[#0284C7] shrink-0" />
+                            <span>{country.standardBanner}</span>
+                          </div>
+                        </>
+                      )}
                     </>
                   )}
                 </div>

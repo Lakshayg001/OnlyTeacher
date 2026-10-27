@@ -20,6 +20,7 @@ import type {
   tagline: 'Every Student Deserves the Best Teacher.',
   email: 'Info@theonlyteacher.com',
   phone: '+91 9898632990',
+  whatsapp: '+44 7884 981882',
   address: 'C30, C Block, Sector 63, Noida, UP, 201301',
   indiaOffice: 'C30, C Block, Sector 63, Noida, UP, 201301',
   ukOffice: '13, Chestnut Avenue, Leicester, LE5 1FE, United Kingdom',

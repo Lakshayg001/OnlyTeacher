@@ -145,7 +145,7 @@ export default function Pricing() {
                   </span>
                 </div>
                 <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-                  {(['AU', 'GB' /* , 'AE' - temp commented out */] as CountryCode[]).map((cCode) => {
+                  {(['AU', 'GB', 'NZ' /* , 'AE' - temp commented out */] as CountryCode[]).map((cCode) => {
                     const cData = PRICING_DATA[cCode];
                     const isActive = selectedCountry === cCode;
                     return (
@@ -312,48 +312,79 @@ export default function Pricing() {
                 />
 
                 <div className="relative z-10 flex flex-col items-center text-center">
-                  {selectedPlanType === 'standard' && (selectedCountry === 'AU' || selectedCountry === 'GB') ? (
+                  {selectedPlanType === 'standard' && (selectedCountry === 'AU' || selectedCountry === 'GB' || selectedCountry === 'NZ') ? (
                     <>
-                      {/* Top Eyebrow Badge (Image 2) */}
+                      {/* Top Eyebrow Badge */}
                       <div className="mb-5 inline-flex items-center justify-center rounded-full border border-amber-200/80 bg-white/90 px-6 py-2 shadow-sm backdrop-blur-sm">
                         <span className="text-xs sm:text-sm font-black uppercase tracking-widest text-[#F07C00]">
-                          TRANSPARENT &amp; FLEXIBLE TUITION
+                          {selectedCountry === 'NZ' ? 'TRANSPARENT & FLEXIBLE TUITION · NEW ZEALAND' : 'TRANSPARENT & FLEXIBLE TUITION'}
                         </span>
                       </div>
 
-                      {/* Main Heading (Image 2) */}
-                      <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-navy-900 leading-[1.12]">
-                        Build Confidence<br />
-                        <span className="text-[#F07C00]">Strengthen Knowledge</span><br />
-                        and Achieve More
-                      </h1>
-
-                      {/* Subtitle (Image 2 for AU vs GB) */}
-                      {selectedCountry === 'AU' ? (
-                        <div className="mt-4 max-w-3xl mx-auto space-y-2">
-                          <p className="text-base sm:text-lg md:text-xl font-bold text-navy-800 leading-relaxed">
-                            Australian Curriculum Support Kindergarten to Year 12
-                          </p>
-                          <p className="text-xs sm:text-sm md:text-base font-extrabold uppercase tracking-wider text-navy-800">
-                            ACT <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
-                            NSW <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
-                            NT <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
-                            QLD <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
-                            SA <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
-                            TAS <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
-                            VIC <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
-                            WA
-                          </p>
-                        </div>
+                      {/* Main Heading */}
+                      {selectedCountry === 'NZ' ? (
+                        <>
+                          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-navy-900 leading-[1.12]">
+                            Online Tuition for<br />
+                            <span className="text-[#F07C00]">New Zealand Students</span>
+                          </h1>
+                          <div className="mt-4 max-w-3xl mx-auto space-y-2">
+                            <p className="text-base sm:text-lg md:text-xl font-bold text-navy-800 leading-relaxed">
+                              Personalised Online Tuition for Primary, Intermediate &amp; High School
+                            </p>
+                            <p className="text-xs sm:text-sm md:text-base font-extrabold uppercase tracking-wider text-navy-800">
+                              NCEA Levels 1–3 <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
+                              Cambridge (CIE) <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
+                              International Baccalaureate (IB)
+                            </p>
+                          </div>
+                        </>
+                      ) : selectedCountry === 'AU' ? (
+                        <>
+                          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-navy-900 leading-[1.12]">
+                            Build Confidence<br />
+                            <span className="text-[#F07C00]">Strengthen Knowledge</span><br />
+                            and Achieve More
+                          </h1>
+                          <div className="mt-4 max-w-3xl mx-auto space-y-2">
+                            <p className="text-base sm:text-lg md:text-xl font-bold text-navy-800 leading-relaxed">
+                              Australian Curriculum Support Kindergarten to Year 12
+                            </p>
+                            <p className="text-xs sm:text-sm md:text-base font-extrabold uppercase tracking-wider text-navy-800">
+                              ACT <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
+                              NSW <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
+                              NT <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
+                              QLD <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
+                              SA <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
+                              TAS <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
+                              VIC <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
+                              WA
+                            </p>
+                          </div>
+                        </>
                       ) : (
-                        <p className="mt-4 text-base sm:text-lg md:text-xl font-bold text-navy-800 max-w-3xl mx-auto leading-relaxed">
-                          Online Tuition Designed for KS1 to KS5 GCSE and A Level Excellence
-                        </p>
+                        <>
+                          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-navy-900 leading-[1.12]">
+                            Build Confidence<br />
+                            <span className="text-[#F07C00]">Strengthen Knowledge</span><br />
+                            and Achieve More
+                          </h1>
+                          <p className="mt-4 text-base sm:text-lg md:text-xl font-bold text-navy-800 max-w-3xl mx-auto leading-relaxed">
+                            Online Tuition Designed for KS1 to KS5 GCSE and A Level Excellence
+                          </p>
+                        </>
                       )}
                     </>
                   ) : (
                     <>
-                      {/* FlexiCarry for AU and GB (Image 2) */}
+                      {/* FlexiCarry for AU, GB and NZ */}
+                      {selectedCountry === 'NZ' && (
+                        <div className="mb-4 inline-flex items-center justify-center rounded-full border border-amber-200/80 bg-white/90 px-6 py-2 shadow-sm backdrop-blur-sm">
+                          <span className="text-xs sm:text-sm font-black uppercase tracking-widest text-[#F07C00]">
+                            ONLINE TUITION FOR NEW ZEALAND STUDENTS · FLEXICARRY
+                          </span>
+                        </div>
+                      )}
                       <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-navy-900 leading-tight">
                         96 Sessions One Smarter Learning{' '}
                         <span className="text-[#F07C00]">Journey</span>
@@ -439,131 +470,185 @@ export default function Pricing() {
                   </div>
                 </div>
 
-                {/* 2-Column Section: Left Pricing Navy Box & Right 15-Week Benefits */}
-                <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-12 items-stretch">
-                  {/* Left Navy Pricing Box */}
-                  <div className="lg:col-span-5 flex flex-col justify-between rounded-3xl bg-[#08214D] p-6 sm:p-8 text-white shadow-clay-navy">
+                {/* TOP: Two Price Cards Side by Side */}
+                <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
+                  {/* Card 1: Years 2-9 */}
+                  <div className="relative flex flex-col justify-between rounded-3xl bg-[#08214D] p-6 sm:p-8 text-white shadow-clay-navy border-2 border-amber-500/30">
                     <div>
-                      {/* 15-WEEK MEMBERSHIP Badge */}
+                      {/* Header: "15-WEEK MEMBERSHIP" */}
                       <div className="text-center">
                         <span className="inline-block rounded-full bg-[#F07C00] px-6 py-2.5 text-xs sm:text-sm font-black uppercase tracking-wider text-white shadow-sm">
-                          {UK_MEMBERSHIP_DATA.durationBadge}
+                          15-WEEK MEMBERSHIP
                         </span>
                       </div>
 
-                      {/* £99 | TOT PRIORITY OFFER */}
+                      {/* Struck price £99 with the label "TOT Priority Offer" */}
                       <div className="mt-5 flex items-center justify-center gap-3 text-sm sm:text-base font-black">
-                        <span className="text-white/60 line-through text-lg font-bold">
-                          {UK_MEMBERSHIP_DATA.originalPrice}
+                        <span className="text-white/60 line-through text-lg sm:text-xl font-bold">
+                          £99
                         </span>
                         <span className="text-white/30 font-normal">|</span>
-                        <span className="text-[#F07C00] tracking-wider uppercase">
-                          {UK_MEMBERSHIP_DATA.offerTagline}
+                        <span className="text-[#F07C00] tracking-wider uppercase font-black">
+                          TOT Priority Offer
                         </span>
                       </div>
 
-                      {/* Years 2-9 and Years 10-13 Cards */}
-                      <div className="mt-6 space-y-4">
-                        {UK_MEMBERSHIP_DATA.tiers.map((tier, idx) => (
-                          <div
-                            key={idx}
-                            className="rounded-2xl bg-white p-5 sm:p-6 text-center shadow-sm transition-transform hover:scale-[1.02]"
-                          >
-                            <div className="text-xs sm:text-sm font-black uppercase tracking-wider text-navy-900">
-                              {tier.years}
-                            </div>
-                            <div
-                              className={cn(
-                                'my-1.5 font-display text-5xl sm:text-6xl font-black tracking-tight',
-                                tier.color === 'amber' ? 'text-[#F07C00]' : 'text-[#16A34A]',
-                              )}
-                            >
-                              {tier.price}
-                            </div>
-                            <div className="text-sm sm:text-base font-extrabold text-navy-800">
-                              {tier.duration}
-                            </div>
-                          </div>
-                        ))}
+                      {/* Price Body: Years 2-9: £65 for 15 weeks */}
+                      <div className="mt-6 rounded-2xl bg-white p-6 sm:p-8 text-center shadow-sm">
+                        <div className="text-xs sm:text-sm font-black uppercase tracking-wider text-navy-900">
+                          YEARS 2–9
+                        </div>
+                        <div className="my-2 font-display text-5xl sm:text-6xl font-black tracking-tight text-[#F07C00]">
+                          £65
+                        </div>
+                        <div className="text-sm sm:text-base font-extrabold text-navy-800">
+                          for 15 weeks
+                        </div>
                       </div>
                     </div>
 
-                    {/* Limited Availability Note & Button */}
+                    {/* Note: "Limited availability: 50 families per tier" & Button */}
                     <div className="mt-6 pt-2 text-center">
                       <p className="text-xs sm:text-sm font-bold text-[#F07C00]">
-                        {UK_MEMBERSHIP_DATA.availabilityNote}
+                        Limited availability: 50 families per tier
                       </p>
                       <Button
-                        to="/contact?country=United%20Kingdom&plan=TOT%20Priv%C3%A9&type=membership"
+                        to="/contact?country=United%20Kingdom&plan=TOT%20Priv%C3%A9%20(Years%202-9)&type=membership"
                         variant="primary"
                         full
                         size="md"
                         className="mt-4 bg-[#F07C00] hover:bg-[#d96e00] text-white font-black text-sm shadow-md"
                       >
-                        Enquire for TOT Privé
+                        Enquire for TOT Privé (Years 2–9)
                       </Button>
                     </div>
                   </div>
 
-                  {/* Right Column: Everything included for 15 weeks */}
-                  <div className="lg:col-span-7 flex flex-col justify-between">
+                  {/* Card 2: Years 10-13 */}
+                  <div className="relative flex flex-col justify-between rounded-3xl bg-[#08214D] p-6 sm:p-8 text-white shadow-clay-navy border-2 border-emerald-500/30">
+                    <div>
+                      {/* Header: "15-WEEK MEMBERSHIP" */}
+                      <div className="text-center">
+                        <span className="inline-block rounded-full bg-[#16A34A] px-6 py-2.5 text-xs sm:text-sm font-black uppercase tracking-wider text-white shadow-sm">
+                          15-WEEK MEMBERSHIP
+                        </span>
+                      </div>
+
+                      {/* Struck price £99 with the label "TOT Priority Offer" */}
+                      <div className="mt-5 flex items-center justify-center gap-3 text-sm sm:text-base font-black">
+                        <span className="text-white/60 line-through text-lg sm:text-xl font-bold">
+                          £99
+                        </span>
+                        <span className="text-white/30 font-normal">|</span>
+                        <span className="text-emerald-400 tracking-wider uppercase font-black">
+                          TOT Priority Offer
+                        </span>
+                      </div>
+
+                      {/* Price Body: Years 10-13: £75 for 15 weeks */}
+                      <div className="mt-6 rounded-2xl bg-white p-6 sm:p-8 text-center shadow-sm">
+                        <div className="text-xs sm:text-sm font-black uppercase tracking-wider text-navy-900">
+                          YEARS 10–13
+                        </div>
+                        <div className="my-2 font-display text-5xl sm:text-6xl font-black tracking-tight text-[#16A34A]">
+                          £75
+                        </div>
+                        <div className="text-sm sm:text-base font-extrabold text-navy-800">
+                          for 15 weeks
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Note: "Limited availability: 50 families per tier" & Button */}
+                    <div className="mt-6 pt-2 text-center">
+                      <p className="text-xs sm:text-sm font-bold text-emerald-400">
+                        Limited availability: 50 families per tier
+                      </p>
+                      <Button
+                        to="/contact?country=United%20Kingdom&plan=TOT%20Priv%C3%A9%20(Years%2010-13)&type=membership"
+                        variant="primary"
+                        full
+                        size="md"
+                        className="mt-4 bg-[#16A34A] hover:bg-[#13823b] text-white font-black text-sm shadow-md"
+                      >
+                        Enquire for TOT Privé (Years 10–13)
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* BELOW: One Benefits Card */}
+                <div className="mt-10 rounded-3xl border-2 border-navy-100 bg-white p-6 sm:p-8 lg:p-10 shadow-clay">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-navy-100 pb-6">
                     <div>
                       <h2 className="font-display text-2xl sm:text-3xl font-black tracking-tight text-navy-900">
                         {UK_MEMBERSHIP_DATA.includedHeading}
                       </h2>
+                      <p className="mt-1 text-xs sm:text-sm font-medium text-navy-600">
+                        Comprehensive academic support and priority privileges included across both membership tiers.
+                      </p>
+                    </div>
+                    <span className="rounded-full bg-navy-100 px-3.5 py-1.5 text-xs font-black text-navy-700 tracking-wider">
+                      T&amp;C apply
+                    </span>
+                  </div>
 
-                      <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {UK_MEMBERSHIP_DATA.benefits.map((benefit, idx) => {
-                          const isAmber = benefit.color === 'amber';
-                          return (
-                            <div
-                              key={idx}
-                              className="flex items-start gap-3.5 rounded-2xl border border-navy-100 bg-white p-4 sm:p-4.5 shadow-sm hover:border-navy-200 hover:shadow-md transition-all"
-                            >
-                              <div
-                                className={cn(
-                                  'flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-white shadow-sm',
-                                  isAmber ? 'bg-[#F07C00]' : 'bg-[#16A34A]',
-                                )}
-                              >
-                                {benefit.icon === 'headphones' && <Headphones className="h-6 w-6" />}
-                                {benefit.icon === 'workshop' && <Video className="h-6 w-6" />}
-                                {benefit.icon === 'calendar' && <Calendar className="h-6 w-6" />}
-                                {benefit.icon === 'reports' && <BarChart3 className="h-6 w-6" />}
-                                {benefit.icon === 'plan' && <FileText className="h-6 w-6" />}
-                                {benefit.icon === 'teacher' && <UserCheck className="h-6 w-6" />}
-                                {benefit.icon === 'message' && <MessageSquare className="h-6 w-6" />}
-                                {benefit.icon === 'star' && <Star className="h-6 w-6 fill-white" />}
-                              </div>
-                              <div className="min-w-0">
-                                <h3 className="text-sm sm:text-base font-extrabold text-navy-900 leading-snug">
-                                  {benefit.title}
-                                </h3>
-                                <p className="mt-1 text-xs sm:text-sm font-medium text-navy-500 whitespace-pre-line leading-relaxed">
-                                  {benefit.subtitle}
-                                </p>
-                              </div>
-                            </div>
-                          );
-                        })}
+                  {/* Exact List of 8 Benefits */}
+                  <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {UK_MEMBERSHIP_DATA.benefits.map((benefit, idx) => {
+                      const isAmber = benefit.color === 'amber';
+                      return (
+                        <div
+                          key={idx}
+                          className="flex items-start gap-3.5 rounded-2xl border border-navy-100 bg-navy-50/30 p-4 sm:p-4.5 shadow-sm hover:border-navy-200 hover:shadow-md transition-all"
+                        >
+                          <div
+                            className={cn(
+                              'flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-white shadow-sm',
+                              isAmber ? 'bg-[#F07C00]' : 'bg-[#16A34A]',
+                            )}
+                          >
+                            {benefit.icon === 'headphones' && <Headphones className="h-6 w-6" />}
+                            {benefit.icon === 'workshop' && <Video className="h-6 w-6" />}
+                            {benefit.icon === 'calendar' && <Calendar className="h-6 w-6" />}
+                            {benefit.icon === 'reports' && <BarChart3 className="h-6 w-6" />}
+                            {benefit.icon === 'plan' && <FileText className="h-6 w-6" />}
+                            {benefit.icon === 'teacher' && <UserCheck className="h-6 w-6" />}
+                            {benefit.icon === 'message' && <MessageSquare className="h-6 w-6" />}
+                            {benefit.icon === 'star' && <Star className="h-6 w-6 fill-white" />}
+                          </div>
+                          <div className="min-w-0">
+                            <h3 className="text-sm sm:text-base font-extrabold text-navy-900 leading-snug">
+                              {benefit.title}
+                            </h3>
+                            <p className="mt-1 text-xs sm:text-sm font-semibold text-navy-600 leading-relaxed">
+                              {benefit.subtitle}
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Bottom Reassurance Card with T&C apply */}
+                  <div className="mt-8 rounded-2xl bg-navy-50/70 border border-navy-100 p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-forest-100 text-forest-700">
+                        <ShieldCheck className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-black uppercase text-navy-800">
+                          Guaranteed Teacher Continuity
+                        </div>
+                        <div className="text-[11px] text-navy-500 font-medium">
+                          Dedicated educator assigned throughout your 15-week journey.
+                        </div>
                       </div>
                     </div>
-
-                    {/* Bottom reassurance card */}
-                    <div className="mt-6 rounded-2xl bg-navy-50/70 border border-navy-100 p-4 flex items-center justify-between gap-4">
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-forest-100 text-forest-700">
-                          <ShieldCheck className="h-5 w-5" />
-                        </div>
-                        <div>
-                          <div className="text-xs font-black uppercase text-navy-800">
-                            Guaranteed Teacher Continuity
-                          </div>
-                          <div className="text-[11px] text-navy-500 font-medium">
-                            Dedicated educator assigned throughout your 15-week journey.
-                          </div>
-                        </div>
-                      </div>
+                    <div className="flex items-center gap-3">
+                      <span className="text-xs font-bold text-navy-500">
+                        * T&amp;C apply
+                      </span>
                       <Link
                         to="/contact?country=United%20Kingdom&plan=TOT%20Priv%C3%A9&type=membership"
                         className="text-xs font-black text-amber-600 hover:text-amber-700 underline shrink-0"
@@ -574,19 +659,47 @@ export default function Pricing() {
                   </div>
                 </div>
 
-                {/* Footer line matching Image 1 */}
+                {/* Footer line */}
                 <div className="mt-10 border-t border-navy-100 pt-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-navy-500 font-medium">
-                  <p>{UK_MEMBERSHIP_DATA.footerTagline}</p>
+                  <p>{UK_MEMBERSHIP_DATA.footerTagline} · <span className="font-bold text-navy-700">T&amp;C apply</span></p>
                   <div className="flex items-center gap-2 text-navy-600 font-bold">
                     <Flag code="GB" size={16} />
-                    <span>Exclusive to United Kingdom Families</span>
+                    <span>Exclusive to United Kingdom Families · T&amp;C apply</span>
                   </div>
                 </div>
               </motion.div>
             </div>
           ) : (
-            /* Tier Grid Categories (for Standard & FlexiCarry) */
+            /* Tier Grid Categories (for Standard & FlexiCarry) OR NZ Dedicated View */
             <div className="space-y-12">
+              {/* New Zealand Section Header with Exact Wording */}
+              {selectedCountry === 'NZ' && (
+                <div className="rounded-3xl border border-navy-100 bg-white p-5 sm:p-6 shadow-clay">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                      <div className="inline-flex items-center gap-2 mb-1.5">
+                        <Flag code="NZ" size={20} />
+                        <span className="text-xs font-black uppercase tracking-widest text-[#F07C00]">
+                          NEW ZEALAND TUITION RATES
+                        </span>
+                      </div>
+                      <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-black text-navy-900 tracking-tight">
+                        Online Tuition for New Zealand Students
+                      </h2>
+                      <p className="mt-1 text-xs sm:text-sm text-navy-600 font-medium">
+                        {selectedPlanType === 'standard'
+                          ? 'TriOrbit (NZD) · Transparent per-class rates & discounted multi-session packages'
+                          : 'FlexiCarry (NZD) · 100 learning sessions designed for lasting academic consistency'}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-2 rounded-full bg-amber-50 border border-amber-200/80 px-4 py-2 text-xs font-black text-[#F07C00] shrink-0">
+                      <span>Prices in NZD (per student)</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {currentTiers.map((tier, idx) => (
                 <Reveal key={tier.id} delay={idx * 0.1}>
                   <div className="rounded-4xl border border-navy-100 bg-white p-5 shadow-clay md:p-8">
@@ -610,7 +723,7 @@ export default function Pricing() {
                       </div>
 
                       <div className="rounded-full bg-white/10 px-3.5 py-1 text-xs font-bold tracking-wider uppercase text-navy-200">
-                        {tier.plans.length} Learning Formats
+                        {tier.plans.length} {tier.plans.length === 1 ? 'Learning Format' : 'Learning Formats'}
                       </div>
                     </div>
 
@@ -618,7 +731,9 @@ export default function Pricing() {
                     <div
                       className={cn(
                         'grid gap-6',
-                        tier.plans.length === 2
+                        tier.plans.length === 1
+                          ? 'grid-cols-1 max-w-md mx-auto'
+                          : tier.plans.length === 2
                           ? 'grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto'
                           : 'grid-cols-1 md:grid-cols-3',
                       )}
@@ -715,8 +830,14 @@ export default function Pricing() {
                                             <div className="text-xs font-extrabold text-navy-700">
                                               {pkg.sessions}
                                             </div>
-                                            <div className="text-[10px] text-navy-400">
-                                              Live One-to-One / Group Tuition
+                                            <div className="text-[10px] text-navy-500 font-medium">
+                                              {pkg.rate ? (
+                                                <span>
+                                                  Rate: <strong className="text-navy-800 font-bold">{pkg.rate}</strong> · Live Tuition
+                                                </span>
+                                              ) : (
+                                                'Live One-to-One / Group Tuition'
+                                              )}
                                             </div>
                                           </div>
                                           <div className="text-right">
@@ -738,7 +859,7 @@ export default function Pricing() {
                                   </li>
                                   <li className="flex items-center gap-2">
                                     <Check className="h-3.5 w-3.5 text-forest-500 shrink-0" />
-                                    <span>Customised syllabus & school homework help</span>
+                                    <span>Customised syllabus &amp; school homework help</span>
                                   </li>
                                   {isFlexi && (
                                     <li className="flex items-center gap-2 text-amber-700 font-bold">
@@ -887,26 +1008,12 @@ export default function Pricing() {
                     href={`https://wa.me/${country.supportPhone.replace(/\D/g, '')}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full border border-forest-400/40 bg-forest-900/40 px-5 py-3 text-xs font-bold text-forest-300 hover:bg-forest-800/60 transition-colors"
+                    className="inline-flex h-14 items-center justify-center gap-2.5 rounded-full border border-forest-400/40 bg-forest-900/40 px-8 text-base font-extrabold tracking-tight text-forest-300 shadow-sm transition-all duration-200 will-change-transform hover:-translate-y-0.5 hover:bg-forest-800/60"
                   >
-                    <MessageCircle className="h-4 w-4 text-forest-400" />
+                    <MessageCircle className="h-5 w-5 text-forest-400 shrink-0" />
                     <span>WhatsApp: {country.supportPhone}</span>
                   </a>
                 )}
-              </div>
-            </div>
-
-            <div className="mt-8 border-t border-navy-700 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-navy-300">
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="h-4 w-4 text-amber-400" />
-                <span>The Only Teacher (TOT) · Connect. Learn. Grow.</span>
-              </div>
-              <div className="flex items-center gap-4">
-                <Link to="/about" className="hover:text-white transition-colors">About TOT</Link>
-                <span>·</span>
-                <Link to="/courses" className="hover:text-white transition-colors">Courses</Link>
-                <span>·</span>
-                <Link to="/terms-of-use" className="hover:text-white transition-colors">Terms of Use</Link>
               </div>
             </div>
           </div>

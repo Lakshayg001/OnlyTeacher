@@ -1,4 +1,4 @@
-export type CountryCode = 'AU' | 'GB' | 'AE';
+export type CountryCode = 'AU' | 'GB' | 'AE' | 'NZ';
 
 export type PlanType = 'standard' | 'flexicarry' | 'membership';
 
@@ -7,6 +7,7 @@ export type UAECurriculum = 'international' | 'indian'; // International (IB / B
 export interface PlanPackage {
   sessions: string; // e.g. "25 + 1 FREE" or "8 + 1 FREE"
   totalPrice: string; // e.g. "A$384" or "£168"
+  rate?: string; // e.g. "£16 / class"
   popular?: boolean;
 }
 
@@ -84,6 +85,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
     currency: 'A$',
     currencyCode: 'AUD',
     heroLandmark: 'Sydney Harbour & Opera House',
+    supportPhone: '+44 7884 981882',
     standardTitle: 'AUSTRALIA ONLINE TUITION PLANS',
     standardSubtitle: 'Personalised Learning. Clear Concepts. Confidence That Grows.',
     standardBanner: 'More Learning. Extra Classes Included. | Choose the learning format that works best for your child.',
@@ -108,36 +110,22 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
             blurb: 'Personalised learning with individual attention.',
             color: 'amber',
             icon: 'user',
-            standardRate: 'A$18/hour',
-            standardPackages: [
-              { sessions: '24 + 1 FREE sessions', totalPrice: 'A$432' },
-              { sessions: '48 + 2 FREE sessions', totalPrice: 'A$696', popular: true },
-            ],
-          },
-          {
-            id: 'horizon',
-            name: 'HORIZON',
-            tagline: 'MAX 2 KIDS',
-            blurb: 'Focused learning with a partner, encouraging discussion.',
-            color: 'sky',
-            icon: 'users',
-            standardRate: 'A$16.50/hour',
+            standardRate: 'A$18 / class',
             standardPackages: [
               { sessions: '24 + 1 FREE sessions', totalPrice: 'A$396' },
-              { sessions: '48 + 2 FREE sessions', totalPrice: 'A$648', popular: true },
+              { sessions: '48 + 2 FREE sessions', totalPrice: 'A$696', popular: true },
             ],
           },
           {
             id: 'apex',
             name: 'APEX',
-            tagline: 'MAX 4 KIDS',
+            tagline: 'UP TO 4 STUDENTS',
             blurb: 'Collaborative learning in a small group of up to four.',
             color: 'emerald',
             icon: 'group',
-            standardRate: 'A$14.50/hour',
             standardPackages: [
               { sessions: '24 + 1 FREE sessions', totalPrice: 'A$348' },
-              { sessions: '48 + 2 FREE sessions', totalPrice: 'A$480', popular: true },
+              { sessions: '48 + 2 FREE sessions', totalPrice: 'A$624', popular: true },
             ],
           },
         ],
@@ -156,36 +144,22 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
             blurb: 'Personalised learning with individual attention.',
             color: 'amber',
             icon: 'user',
-            standardRate: 'A$21/hour',
+            standardRate: 'A$24 / class',
             standardPackages: [
-              { sessions: '24 + 1 FREE sessions', totalPrice: 'A$504' },
-              { sessions: '48 + 2 FREE sessions', totalPrice: 'A$912', popular: true },
-            ],
-          },
-          {
-            id: 'horizon',
-            name: 'HORIZON',
-            tagline: 'MAX 2 KIDS',
-            blurb: 'Focused learning with a partner, encouraging discussion.',
-            color: 'sky',
-            icon: 'users',
-            standardRate: 'A$19/hour',
-            standardPackages: [
-              { sessions: '24 + 1 FREE sessions', totalPrice: 'A$456' },
-              { sessions: '48 + 2 FREE sessions', totalPrice: 'A$816', popular: true },
+              { sessions: '24 + 1 FREE sessions', totalPrice: 'A$528' },
+              { sessions: '48 + 2 FREE sessions', totalPrice: 'A$960', popular: true },
             ],
           },
           {
             id: 'apex',
             name: 'APEX',
-            tagline: 'MAX 4 KIDS',
+            tagline: 'UP TO 4 STUDENTS',
             blurb: 'Collaborative learning in a small group of up to four.',
             color: 'emerald',
             icon: 'group',
-            standardRate: 'A$16/hour',
             standardPackages: [
-              { sessions: '24 + 1 FREE sessions', totalPrice: 'A$384' },
-              { sessions: '48 + 2 FREE sessions', totalPrice: 'A$672', popular: true },
+              { sessions: '24 + 1 FREE sessions', totalPrice: 'A$456' },
+              { sessions: '48 + 2 FREE sessions', totalPrice: 'A$816', popular: true },
             ],
           },
         ],
@@ -204,7 +178,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
             blurb: 'Personalised learning with individual attention.',
             color: 'amber',
             icon: 'user',
-            standardRate: 'A$29/hour',
+            standardRate: 'A$32 / class',
             standardPackages: [
               { sessions: '24 + 1 FREE sessions', totalPrice: 'A$696' },
               { sessions: '48 + 2 FREE sessions', totalPrice: 'A$1,296', popular: true },
@@ -213,11 +187,10 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
           {
             id: 'horizon',
             name: 'HORIZON',
-            tagline: 'MAX 2 KIDS',
+            tagline: '2 STUDENTS',
             blurb: 'Focused learning with a partner, encouraging discussion.',
             color: 'sky',
             icon: 'users',
-            standardRate: 'A$26/hour',
             standardPackages: [
               { sessions: '24 + 1 FREE sessions', totalPrice: 'A$624' },
               { sessions: '48 + 2 FREE sessions', totalPrice: 'A$1,152', popular: true },
@@ -237,34 +210,14 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
         icon: 'book',
         plans: [
           {
-            id: 'alpha',
-            name: 'ALPHA',
-            tagline: 'ONE-TO-ONE CLASSES',
-            blurb: 'Personalised learning with individual attention.',
-            color: 'amber',
-            icon: 'user',
-            flexiSessions: '96 + 4 FREE SESSIONS',
-            flexiPrice: 'A$1,056',
-          },
-          {
-            id: 'horizon',
-            name: 'HORIZON',
-            tagline: 'MAX 2 KIDS',
-            blurb: 'Focused learning with a partner, encouraging discussion.',
-            color: 'sky',
-            icon: 'users',
-            flexiSessions: '96 + 4 FREE SESSIONS',
-            flexiPrice: 'A$1,104',
-          },
-          {
             id: 'apex',
-            name: 'APEX',
-            tagline: 'MAX 4 KIDS',
+            name: 'APEX FC100',
+            tagline: 'UP TO 4 STUDENTS',
             blurb: 'Collaborative learning in a small group of up to four.',
             color: 'emerald',
             icon: 'group',
             flexiSessions: '96 + 4 FREE SESSIONS',
-            flexiPrice: 'A$768',
+            flexiPrice: 'A$1,056',
           },
         ],
       },
@@ -276,34 +229,14 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
         icon: 'graduation',
         plans: [
           {
-            id: 'alpha',
-            name: 'ALPHA',
-            tagline: 'ONE-TO-ONE CLASSES',
-            blurb: 'Personalised learning with individual attention.',
-            color: 'amber',
-            icon: 'user',
-            flexiSessions: '96 + 4 FREE SESSIONS',
-            flexiPrice: 'A$1,344',
-          },
-          {
-            id: 'horizon',
-            name: 'HORIZON',
-            tagline: 'MAX 2 KIDS',
-            blurb: 'Focused learning with a partner, encouraging discussion.',
-            color: 'sky',
-            icon: 'users',
-            flexiSessions: '96 + 4 FREE SESSIONS',
-            flexiPrice: 'A$1,440',
-          },
-          {
             id: 'apex',
-            name: 'APEX',
-            tagline: 'MAX 4 KIDS',
+            name: 'APEX FC100',
+            tagline: 'UP TO 4 STUDENTS',
             blurb: 'Collaborative learning in a small group of up to four.',
             color: 'emerald',
             icon: 'group',
             flexiSessions: '96 + 4 FREE SESSIONS',
-            flexiPrice: 'A$1,152',
+            flexiPrice: 'A$1,344',
           },
         ],
       },
@@ -320,7 +253,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
     currency: '£',
     currencyCode: 'GBP',
     heroLandmark: 'London Westminster & Tower Bridge',
-    supportPhone: '+44 7741 271981',
+    supportPhone: '+44 7884 981882',
 
     // Standard Plans UK (Image 3)
     standardTitle: 'UK ONLINE TUITION PLANS',
@@ -330,8 +263,8 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
       {
         id: 'elementary',
         title: 'ELEMENTARY',
-        years: 'YEARS 3 - 9',
-        blurb: 'Build strong foundations for a brighter future.',
+        years: 'YEARS 2 - 9',
+        blurb: 'A strong foundation today for a brighter tomorrow. For Year 2 – Year 9 students.',
         icon: 'book',
         plans: [
           {
@@ -343,8 +276,8 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
             icon: 'user',
             standardRate: '£16 / Hour',
             standardPackages: [
-              { sessions: '24 + 1 FREE sessions', totalPrice: '£384' },
-              { sessions: '48 + 2 FREE sessions', totalPrice: '£624', popular: true },
+              { sessions: '24 + 1 FREE (25 sessions)', totalPrice: '£384', rate: '£16 / class' },
+              { sessions: '48 + 2 FREE (50 sessions)', totalPrice: '£624', rate: '£13 / class', popular: true },
             ],
           },
           {
@@ -356,21 +289,20 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
             icon: 'users',
             standardRate: '£13 / Hour',
             standardPackages: [
-              { sessions: '24 + 1 FREE sessions', totalPrice: '£312' },
-              { sessions: '48 + 2 FREE sessions', totalPrice: '£480', popular: true },
+              { sessions: '24 + 1 FREE (25 sessions)', totalPrice: '£312', rate: '£13 / class' },
+              { sessions: '48 + 2 FREE (50 sessions)', totalPrice: '£480', rate: '£10 / class', popular: true },
             ],
           },
           {
             id: 'apex',
             name: 'APEX',
-            tagline: 'MAX 4 KIDS',
+            tagline: 'UP TO 4 STUDENTS',
             blurb: 'Collaborative learning in a small group of up to four.',
             color: 'emerald',
             icon: 'group',
-            standardRate: '£11 / Hour',
+            standardRate: '£9 / Hour',
             standardPackages: [
-              { sessions: '24 + 1 FREE sessions', totalPrice: '£264' },
-              { sessions: '48 + 2 FREE sessions', totalPrice: '£432', popular: true },
+              { sessions: '48 + 2 FREE (50 sessions)', totalPrice: '£432', rate: '£9 / class', popular: true },
             ],
           },
         ],
@@ -391,8 +323,8 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
             icon: 'user',
             standardRate: '£21 / Hour',
             standardPackages: [
-              { sessions: '8 + 1 FREE sessions', totalPrice: '£168' },
-              { sessions: '24 + 1 FREE sessions', totalPrice: '£432', popular: true },
+              { sessions: '8 + 1 FREE (9 sessions)', totalPrice: '£168', rate: '£21 / class' },
+              { sessions: '24 + 1 FREE (25 sessions)', totalPrice: '£432', rate: '£18 / class', popular: true },
             ],
           },
           {
@@ -404,8 +336,20 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
             icon: 'users',
             standardRate: '£20 / Hour',
             standardPackages: [
-              { sessions: '8 + 1 FREE sessions', totalPrice: '£160' },
-              { sessions: '24 + 1 FREE sessions', totalPrice: '£408', popular: true },
+              { sessions: '8 + 1 FREE (9 sessions)', totalPrice: '£160', rate: '£20 / class' },
+              { sessions: '24 + 1 FREE (25 sessions)', totalPrice: '£408', rate: '£17 / class', popular: true },
+            ],
+          },
+          {
+            id: 'apex',
+            name: 'APEX',
+            tagline: 'UP TO 4 STUDENTS',
+            blurb: 'Collaborative learning in a small group of up to four.',
+            color: 'emerald',
+            icon: 'group',
+            standardRate: '£15 / Hour',
+            standardPackages: [
+              { sessions: '48 + 2 FREE (50 sessions)', totalPrice: '£720', rate: '£15 / class', popular: true },
             ],
           },
         ],
@@ -426,8 +370,8 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
             icon: 'user',
             standardRate: '£25 / Hour',
             standardPackages: [
-              { sessions: '8 + 1 FREE sessions', totalPrice: '£200' },
-              { sessions: '24 + 1 FREE sessions', totalPrice: '£528', popular: true },
+              { sessions: '8 + 1 FREE (9 sessions)', totalPrice: '£200', rate: '£25 / class' },
+              { sessions: '24 + 1 FREE (25 sessions)', totalPrice: '£528', rate: '£22 / class', popular: true },
             ],
           },
           {
@@ -439,8 +383,8 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
             icon: 'users',
             standardRate: '£21 / Hour',
             standardPackages: [
-              { sessions: '8 + 1 FREE sessions', totalPrice: '£168' },
-              { sessions: '24 + 1 FREE sessions', totalPrice: '£432', popular: true },
+              { sessions: '8 + 1 FREE (9 sessions)', totalPrice: '£168', rate: '£21 / class' },
+              { sessions: '24 + 1 FREE (25 sessions)', totalPrice: '£432', rate: '£18 / class', popular: true },
             ],
           },
         ],
@@ -456,32 +400,10 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
       {
         id: 'uk-flexi-elem',
         title: 'ELEMENTARY',
-        years: 'YEARS 3 - 9',
-        blurb: 'A strong foundation today for a brighter tomorrow. For Year 3 – Year 9 students.',
+        years: 'YEARS 2 - 9',
+        blurb: 'A strong foundation today for a brighter tomorrow. For Year 2 – Year 9 students.',
         icon: 'book',
         plans: [
-          {
-            id: 'alpha',
-            name: 'ALPHA',
-            tagline: 'ONE-TO-ONE LEARNING',
-            blurb: 'Dedicated one-to-one learning support for children who benefit from focused individual attention.',
-            color: 'amber',
-            icon: 'user',
-            flexiSessions: '96 + 4 FREE SESSIONS',
-            flexiPerSessionRate: '£11 per session',
-            flexiPrice: '£1,056',
-          },
-          {
-            id: 'horizon',
-            name: 'HORIZON',
-            tagline: 'FOCUSED DUO LEARNING',
-            blurb: 'A focused learning experience for two students, combining teacher guidance with collaborative learning.',
-            color: 'sky',
-            icon: 'users',
-            flexiSessions: '96 + 4 FREE SESSIONS',
-            flexiPerSessionRate: '£10 per session',
-            flexiPrice: '£960',
-          },
           {
             id: 'apex',
             name: 'APEX',
@@ -489,40 +411,9 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
             blurb: 'Learn alongside peers in a small group of up to four students.',
             color: 'emerald',
             icon: 'group',
-            flexiSessions: '96 + 4 FREE SESSIONS',
+            flexiSessions: '96 + 4 FREE (100 sessions)',
             flexiPerSessionRate: '£6 per session',
             flexiPrice: '£576',
-          },
-        ],
-      },
-      {
-        id: 'uk-flexi-gcse',
-        title: 'GCSE & A LEVEL',
-        years: 'YEARS 10 - 12',
-        blurb: 'A consistent learning plan to support GCSE & A Level success. For Year 10 – Year 12 students.',
-        icon: 'graduation',
-        plans: [
-          {
-            id: 'alpha',
-            name: 'ALPHA',
-            tagline: 'ONE-TO-ONE LEARNING',
-            blurb: 'Dedicated one-to-one learning support for GCSE & A Level students.',
-            color: 'amber',
-            icon: 'user',
-            flexiSessions: '96 + 4 FREE SESSIONS',
-            flexiPerSessionRate: '£17 per session',
-            flexiPrice: '£1,632',
-          },
-          {
-            id: 'horizon',
-            name: 'HORIZON',
-            tagline: 'GROUP OF 2',
-            blurb: 'Focused learning in a small group of two students, encouraging interaction and shared understanding.',
-            color: 'sky',
-            icon: 'users',
-            flexiSessions: '96 + 4 FREE SESSIONS',
-            flexiPerSessionRate: '£15 per session',
-            flexiPrice: '£1,440',
           },
         ],
       },
@@ -539,7 +430,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
     currency: 'AED ',
     currencyCode: 'AED',
     heroLandmark: 'Dubai Skyline & Burj Khalifa',
-    supportPhone: '+44 7741 271981',
+    supportPhone: '+44 7884 981882',
 
     // Standard Plans UAE (Image 2)
     standardTitle: 'FIND THE RIGHT LEARNING PLAN FOR YOUR CHILD',
@@ -1036,7 +927,243 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
       },
     },
   },
+
+  // -------------------------------------------------------------
+  // NEW ZEALAND (NZ)
+  // -------------------------------------------------------------
+  NZ: {
+    countryCode: 'NZ',
+    countryName: 'New Zealand',
+    flagCode: 'NZ',
+    currency: 'NZ$',
+    currencyCode: 'NZD',
+    heroLandmark: 'Auckland Sky Tower & Southern Alps',
+    supportPhone: '+44 7884 981882',
+
+    // Standard Plans (TriOrbit) Info
+    standardTitle: 'Online Tuition for New Zealand Students',
+    standardSubtitle: 'Personalised Learning. NCEA & Cambridge Excellence. Confidence That Grows.',
+    standardBanner: 'More Learning. Extra Classes Included. | Tailored 1-to-1 and Small Group Tuition in New Zealand.',
+    standardTiers: [
+      {
+        id: 'elementary',
+        title: 'ELEMENTARY',
+        years: 'YEARS 1 - 5',
+        blurb: 'Build strong foundations for a brighter future.',
+        icon: 'book',
+        plans: [
+          {
+            id: 'alpha',
+            name: 'ALPHA',
+            tagline: 'ONE-TO-ONE CLASSES',
+            blurb: 'Personalised learning with individual attention.',
+            color: 'amber',
+            icon: 'user',
+            standardRate: 'NZ$35 / class',
+            standardPackages: [
+              { sessions: '24 + 1 (25 sessions)', totalPrice: 'NZ$768' },
+              { sessions: '48 + 2 (50 sessions)', totalPrice: 'NZ$1,392', popular: true },
+            ],
+          },
+          {
+            id: 'apex',
+            name: 'APEX',
+            tagline: 'UP TO 4 STUDENTS',
+            blurb: 'Collaborative learning in a small group of up to four.',
+            color: 'emerald',
+            icon: 'group',
+            standardPackages: [
+              { sessions: '24 + 1 (25 sessions)', totalPrice: 'NZ$672' },
+              { sessions: '48 + 2 (50 sessions)', totalPrice: 'NZ$1,152', popular: true },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'intermediate',
+        title: 'INTERMEDIATE',
+        years: 'YEARS 6 - 10',
+        blurb: 'Strengthen concepts. Build skills. Prepare for higher learning.',
+        icon: 'graduation',
+        plans: [
+          {
+            id: 'alpha',
+            name: 'ALPHA',
+            tagline: 'ONE-TO-ONE CLASSES',
+            blurb: 'Personalised learning with individual attention.',
+            color: 'amber',
+            icon: 'user',
+            standardRate: 'NZ$42 / class',
+            standardPackages: [
+              { sessions: '24 + 1 (25 sessions)', totalPrice: 'NZ$936' },
+              { sessions: '48 + 2 (50 sessions)', totalPrice: 'NZ$1,680', popular: true },
+            ],
+          },
+          {
+            id: 'apex',
+            name: 'APEX',
+            tagline: 'UP TO 4 STUDENTS',
+            blurb: 'Collaborative learning in a small group of up to four.',
+            color: 'emerald',
+            icon: 'group',
+            standardPackages: [
+              { sessions: '24 + 1 (25 sessions)', totalPrice: 'NZ$840' },
+              { sessions: '48 + 2 (50 sessions)', totalPrice: 'NZ$1,488', popular: true },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'advanced',
+        title: 'ADVANCED',
+        years: 'YEARS 10 - 12',
+        blurb: 'Advanced learning. Deeper understanding. Prepare for NCEA and beyond.',
+        icon: 'chart',
+        plans: [
+          {
+            id: 'alpha',
+            name: 'ALPHA',
+            tagline: 'ONE-TO-ONE CLASSES',
+            blurb: 'Personalised learning with individual attention.',
+            color: 'amber',
+            icon: 'user',
+            standardRate: 'NZ$55 / class',
+            standardPackages: [
+              { sessions: '24 + 1 (25 sessions)', totalPrice: 'NZ$1,248' },
+              { sessions: '48 + 2 (50 sessions)', totalPrice: 'NZ$2,304', popular: true },
+            ],
+          },
+          {
+            id: 'horizon',
+            name: 'HORIZON',
+            tagline: '2 STUDENTS',
+            blurb: 'Focused learning with a partner, encouraging discussion.',
+            color: 'sky',
+            icon: 'users',
+            standardPackages: [
+              { sessions: '24 + 1 (25 sessions)', totalPrice: 'NZ$1,152' },
+              { sessions: '48 + 2 (50 sessions)', totalPrice: 'NZ$2,112', popular: true },
+            ],
+          },
+        ],
+      },
+    ],
+
+    // FlexiCarry Info
+    flexiTitle: 'INTRODUCING FLEXICARRY',
+    flexiSubtitle: 'More Learning. More Flexibility. More Possibilities.',
+    flexiDescription: "A long-term learning plan designed to support your child's progress, confidence and academic journey in New Zealand.",
+    flexiBanner: '96 + 4 FREE SESSIONS | 100 Learning Sessions. One Consistent Learning Journey.',
+    flexiTiers: [
+      {
+        id: 'elementary',
+        title: 'ELEMENTARY',
+        years: 'YEARS 1 - 5',
+        blurb: 'Build strong foundations for a brighter future.',
+        icon: 'book',
+        plans: [
+          {
+            id: 'apex',
+            name: 'APEX FLEXICARRY',
+            tagline: 'UP TO 4 STUDENTS',
+            blurb: 'Collaborative learning in a small group of up to four.',
+            color: 'emerald',
+            icon: 'group',
+            flexiSessions: '96 + 4 FREE SESSIONS (100 sessions)',
+            flexiPerSessionRate: 'NZ$19.20 per session',
+            flexiPrice: 'NZ$1,920',
+          },
+        ],
+      },
+      {
+        id: 'intermediate',
+        title: 'INTERMEDIATE',
+        years: 'YEARS 6 - 10',
+        blurb: 'Strengthen concepts. Build skills. Prepare for higher learning.',
+        icon: 'graduation',
+        plans: [
+          {
+            id: 'apex',
+            name: 'APEX FLEXICARRY',
+            tagline: 'UP TO 4 STUDENTS',
+            blurb: 'Collaborative learning in a small group of up to four.',
+            color: 'emerald',
+            icon: 'group',
+            flexiSessions: '96 + 4 FREE SESSIONS (100 sessions)',
+            flexiPerSessionRate: 'NZ$26.88 per session',
+            flexiPrice: 'NZ$2,688',
+          },
+        ],
+      },
+    ],
+  },
 };
+
+export interface NzTriOrbitRow {
+  plan: string;
+  years1_5: string;
+  years6_10: string;
+  years10_12: string;
+}
+
+export interface NzFlexiCarryRow {
+  plan: string;
+  years1_5: string;
+  years6_10: string;
+}
+
+export const NZ_TRIORBIT_TABLE: NzTriOrbitRow[] = [
+  {
+    plan: 'Alpha (One-to-One) - Standard per class',
+    years1_5: 'NZ$35',
+    years6_10: 'NZ$42',
+    years10_12: 'NZ$55',
+  },
+  {
+    plan: 'Alpha - 24+1 (25 sessions)',
+    years1_5: 'NZ$768',
+    years6_10: 'NZ$936',
+    years10_12: 'NZ$1,248',
+  },
+  {
+    plan: 'Alpha - 48+2 (50 sessions)',
+    years1_5: 'NZ$1,392',
+    years6_10: 'NZ$1,680',
+    years10_12: 'NZ$2,304',
+  },
+  {
+    plan: 'Apex (up to 4 students) - 24+1 (25 sessions)',
+    years1_5: 'NZ$672',
+    years6_10: 'NZ$840',
+    years10_12: 'Not offered',
+  },
+  {
+    plan: 'Apex - 48+2 (50 sessions)',
+    years1_5: 'NZ$1,152',
+    years6_10: 'NZ$1,488',
+    years10_12: 'Not offered',
+  },
+  {
+    plan: 'Horizon (2 students) - 24+1 (25 sessions)',
+    years1_5: 'Not offered',
+    years6_10: 'Not offered',
+    years10_12: 'NZ$1,152',
+  },
+  {
+    plan: 'Horizon - 48+2 (50 sessions)',
+    years1_5: 'Not offered',
+    years6_10: 'Not offered',
+    years10_12: 'NZ$2,112',
+  },
+];
+
+export const NZ_FLEXICARRY_TABLE: NzFlexiCarryRow[] = [
+  {
+    plan: 'Apex FlexiCarry - 96+4 (100 sessions)',
+    years1_5: 'NZ$1,920',
+    years6_10: 'NZ$2,688',
+  },
+];
 
 export const STANDARD_FEATURES = [
   {
@@ -1158,49 +1285,49 @@ export const UK_MEMBERSHIP_DATA: UkMembershipData = {
       icon: 'headphones',
       color: 'amber',
       title: '5 live doubt-clearing sessions',
-      subtitle: 'Five 30-minute one-to-one sessions',
+      subtitle: '(30-minute One-to-One sessions).',
     },
     {
       icon: 'workshop',
       color: 'emerald',
       title: '2 live revision workshops',
-      subtitle: '30 minutes each\nTeacher-led and matched to year group',
+      subtitle: '(30 minutes each, teacher-led and matched to year group).',
     },
     {
       icon: 'calendar',
       color: 'emerald',
       title: 'Flexible rescheduling',
-      subtitle: 'Up to 10 eligible reschedules',
+      subtitle: '(up to 10 eligible reschedules).',
     },
     {
       icon: 'reports',
       color: 'amber',
       title: '3 teacher progress reports',
-      subtitle: 'Monthly progress and next steps',
+      subtitle: '(monthly progress and next steps).',
     },
     {
       icon: 'plan',
       color: 'amber',
       title: 'Personalised 15-week study plan',
-      subtitle: "Shaped around your child's goals",
+      subtitle: "(shaped around your child's goals).",
     },
     {
       icon: 'teacher',
       color: 'emerald',
       title: 'Same teacher commitment',
-      subtitle: 'Continuity wherever possible',
+      subtitle: '(continuity wherever possible).',
     },
     {
       icon: 'message',
       color: 'emerald',
       title: 'Teacher message support',
-      subtitle: 'Short questions between lessons',
+      subtitle: '(short questions between lessons).',
     },
     {
       icon: 'star',
       color: 'amber',
       title: 'Priority booking access',
-      subtitle: 'Earlier access to slots and workshops',
+      subtitle: '(earlier access to slots and workshops).',
     },
   ],
   footerTagline: 'The Only Teacher | One Platform. Every Subject. A Brighter Future.',
@@ -1238,4 +1365,5 @@ export const MEMBERSHIP_FEATURES = [
     desc: 'Tailored live group revision workshops matched to your child’s exact UK year group.',
   },
 ];
+
 

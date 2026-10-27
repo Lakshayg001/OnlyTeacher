@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Flag from '@/components/ui/Flag';
-import { Building2, Facebook, Instagram, Linkedin, Mail, MapPin, Youtube } from 'lucide-react';
+import { Building2, Facebook, Instagram, Linkedin, Mail, MapPin, MessageCircle, Youtube } from 'lucide-react';
 import { BRAND, COUNTRIES } from '@/data/site';
 import Logo from './Logo';
 
@@ -36,10 +36,11 @@ const COLUMNS = [
 ];
 
 const SOCIALS = [
-    { Icon: Instagram, label: 'Instagram', href: '#' },
-    { Icon: Facebook, label: 'Facebook', href: '#' },
-    { Icon: Linkedin, label: 'LinkedIn', href: '#' },
-    { Icon: Youtube, label: 'YouTube', href: '#' },
+    { Icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/the.only.teacher' },
+    { Icon: Facebook, label: 'Facebook', href: 'https://www.facebook.com/share/1CMsWSWNZd/' },
+    // Temporarily removed - will be re-added later:
+    // { Icon: Linkedin, label: 'LinkedIn', href: '#' },
+    // { Icon: Youtube, label: 'YouTube', href: '#' },
 ];
 
 export function Footer() {
@@ -62,6 +63,17 @@ export function Footer() {
                             <Mail className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" />
                             <a href={`mailto:${BRAND.email}`} className="link-underline font-semibold text-navy-100">
                                 {BRAND.email}
+                            </a>
+                        </li>
+                        <li className="flex items-start gap-3">
+                            <MessageCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" />
+                            <a
+                                href={`https://wa.me/${BRAND.whatsapp.replace(/\D/g, '')}`}
+                                target="_blank"
+                                rel="noreferrer noopener"
+                                className="link-underline font-semibold text-navy-100"
+                            >
+                                WhatsApp Support: {BRAND.whatsapp}
                             </a>
                         </li>
                         <li className="flex items-start gap-3">
@@ -97,6 +109,8 @@ export function Footer() {
                             <a
                                 key={label}
                                 href={href}
+                                target="_blank"
+                                rel="noreferrer noopener"
                                 aria-label={label}
                                 className="grid h-10 w-10 place-items-center rounded-full border border-white/15 bg-white/5 text-navy-200 transition-all hover:-translate-y-0.5 hover:border-amber-400 hover:bg-amber-500 hover:text-white"
                             >

@@ -145,7 +145,7 @@ export default function Pricing() {
                   </span>
                 </div>
                 <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-                  {(['AU', 'GB', 'NZ' /* , 'AE' - temp commented out */] as CountryCode[]).map((cCode) => {
+                  {(['AU', 'GB', 'NZ', 'AE'] as CountryCode[]).map((cCode) => {
                     const cData = PRICING_DATA[cCode];
                     const isActive = selectedCountry === cCode;
                     return (
@@ -245,42 +245,42 @@ export default function Pricing() {
             </div>
           </div>
 
-          {/* UAE Curriculum Sub-Switcher (when UAE is selected) - Temporarily commented out */}
-          {/* {selectedCountry === 'AE' && (
+          {/* UAE Curriculum Sub-Switcher (when UAE is selected) */}
+          {selectedCountry === 'AE' && (
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               className="mb-8 flex flex-col sm:flex-row items-center justify-center gap-3 rounded-2xl border border-navy-200 bg-white p-3 shadow-sm"
             >
               <span className="text-xs font-black uppercase tracking-wider text-navy-500">
-                UAE Curriculum Track:
+                Curriculum Track:
               </span>
               <div className="inline-flex rounded-xl bg-navy-50 p-1">
                 <button
                   onClick={() => setUaeCurriculum('international')}
                   className={cn(
-                    'rounded-lg px-4 py-1.5 text-xs font-black transition-all',
+                    'rounded-lg px-4 py-2 text-xs sm:text-sm font-black transition-all',
                     uaeCurriculum === 'international'
                       ? 'bg-navy-800 text-white shadow-sm'
                       : 'text-navy-600 hover:text-navy-900',
                   )}
                 >
-                  IB / British / American Curriculum
+                  Track 1: IB / British / American Curriculum
                 </button>
                 <button
                   onClick={() => setUaeCurriculum('indian')}
                   className={cn(
-                    'rounded-lg px-4 py-1.5 text-xs font-black transition-all',
+                    'rounded-lg px-4 py-2 text-xs sm:text-sm font-black transition-all',
                     uaeCurriculum === 'indian'
                       ? 'bg-navy-800 text-white shadow-sm'
                       : 'text-navy-600 hover:text-navy-900',
                   )}
                 >
-                  ICSE / CBSE Curriculum
+                  Track 2: ICSE / CBSE Curriculum
                 </button>
               </div>
             </motion.div>
-          )} */}
+          )}
 
           {/* Dynamic Hero Promo Header (matches reference image banners) - shown for standard & flexicarry */}
           {selectedPlanType !== 'membership' && (
@@ -312,12 +312,16 @@ export default function Pricing() {
                 />
 
                 <div className="relative z-10 flex flex-col items-center text-center">
-                  {selectedPlanType === 'standard' && (selectedCountry === 'AU' || selectedCountry === 'GB' || selectedCountry === 'NZ') ? (
+                  {selectedPlanType === 'standard' && (selectedCountry === 'AU' || selectedCountry === 'GB' || selectedCountry === 'NZ' || selectedCountry === 'AE') ? (
                     <>
                       {/* Top Eyebrow Badge */}
                       <div className="mb-5 inline-flex items-center justify-center rounded-full border border-amber-200/80 bg-white/90 px-6 py-2 shadow-sm backdrop-blur-sm">
                         <span className="text-xs sm:text-sm font-black uppercase tracking-widest text-[#F07C00]">
-                          {selectedCountry === 'NZ' ? 'TRANSPARENT & FLEXIBLE TUITION · NEW ZEALAND' : 'TRANSPARENT & FLEXIBLE TUITION'}
+                          {selectedCountry === 'NZ'
+                            ? 'TRANSPARENT & FLEXIBLE TUITION · NEW ZEALAND'
+                            : selectedCountry === 'AE'
+                            ? `TRANSPARENT & FLEXIBLE TUITION · UAE (${uaeCurriculum === 'international' ? 'TRACK 1: IB / BRITISH / AMERICAN' : 'TRACK 2: ICSE / CBSE'})`
+                            : 'TRANSPARENT & FLEXIBLE TUITION'}
                         </span>
                       </div>
 
@@ -336,6 +340,26 @@ export default function Pricing() {
                               NCEA Levels 1–3 <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
                               Cambridge (CIE) <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
                               International Baccalaureate (IB)
+                            </p>
+                          </div>
+                        </>
+                      ) : selectedCountry === 'AE' ? (
+                        <>
+                          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-navy-900 leading-[1.12]">
+                            Online Tuition for<br />
+                            <span className="text-[#F07C00]">UAE Students</span>
+                          </h1>
+                          <div className="mt-4 max-w-3xl mx-auto space-y-2">
+                            <p className="text-base sm:text-lg md:text-xl font-bold text-navy-800 leading-relaxed">
+                              {uaeCurriculum === 'international'
+                                ? 'Track 1: IB, British & American Curriculum Excellence'
+                                : 'Track 2: Dedicated ICSE & CBSE Curriculum Support'}
+                            </p>
+                            <p className="text-xs sm:text-sm md:text-base font-extrabold uppercase tracking-wider text-navy-800">
+                              Dubai <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
+                              Abu Dhabi <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
+                              Sharjah <span className="text-[#F07C00] font-black mx-1.5">•</span>{' '}
+                              All Emirates
                             </p>
                           </div>
                         </>
@@ -377,11 +401,13 @@ export default function Pricing() {
                     </>
                   ) : (
                     <>
-                      {/* FlexiCarry for AU, GB and NZ */}
-                      {selectedCountry === 'NZ' && (
+                      {/* FlexiCarry for AU, GB, NZ and AE */}
+                      {(selectedCountry === 'NZ' || selectedCountry === 'AE') && (
                         <div className="mb-4 inline-flex items-center justify-center rounded-full border border-amber-200/80 bg-white/90 px-6 py-2 shadow-sm backdrop-blur-sm">
                           <span className="text-xs sm:text-sm font-black uppercase tracking-widest text-[#F07C00]">
-                            ONLINE TUITION FOR NEW ZEALAND STUDENTS · FLEXICARRY
+                            {selectedCountry === 'NZ'
+                              ? 'ONLINE TUITION FOR NEW ZEALAND STUDENTS · FLEXICARRY'
+                              : `ONLINE TUITION FOR UAE STUDENTS · FLEXICARRY (${uaeCurriculum === 'international' ? 'TRACK 1' : 'TRACK 2'})`}
                           </span>
                         </div>
                       )}
@@ -700,6 +726,34 @@ export default function Pricing() {
                 </div>
               )}
 
+              {/* UAE Section Header with Exact Wording */}
+              {selectedCountry === 'AE' && (
+                <div className="rounded-3xl border border-navy-100 bg-white p-5 sm:p-6 shadow-clay">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                      <div className="inline-flex items-center gap-2 mb-1.5">
+                        <Flag code="AE" size={20} />
+                        <span className="text-xs font-black uppercase tracking-widest text-[#F07C00]">
+                          UAE TUITION RATES · {uaeCurriculum === 'international' ? 'TRACK 1 (IB / BRITISH / AMERICAN)' : 'TRACK 2 (ICSE / CBSE)'}
+                        </span>
+                      </div>
+                      <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-black text-navy-900 tracking-tight">
+                        Online Tuition for UAE Students
+                      </h2>
+                      <p className="mt-1 text-xs sm:text-sm text-navy-600 font-medium">
+                        {uaeCurriculum === 'international'
+                          ? 'Track 1: IB / British / American curriculum'
+                          : 'Track 2: ICSE / CBSE curriculum'} · {selectedPlanType === 'standard' ? 'TriOrbit (AED) plans' : 'FlexiCarry (AED) long-term plans'}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-2 rounded-full bg-amber-50 border border-amber-200/80 px-4 py-2 text-xs font-black text-[#F07C00] shrink-0">
+                      <span>Prices in AED (per student)</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {currentTiers.map((tier, idx) => (
                 <Reveal key={tier.id} delay={idx * 0.1}>
                   <div className="rounded-4xl border border-navy-100 bg-white p-5 shadow-clay md:p-8">
@@ -893,13 +947,6 @@ export default function Pricing() {
                         );
                       })}
                     </div>
-
-                    {/* Note for ICSE/CBSE mapping */}
-                    {selectedCountry === 'AE' && uaeCurriculum === 'indian' && (
-                      <div className="mt-4 rounded-xl bg-amber-50/70 border border-amber-200 p-3 text-center text-xs font-semibold text-amber-900">
-                        ℹ️ Academic level mapping for ICSE / CBSE packages is to be confirmed.
-                      </div>
-                    )}
                   </div>
                 </Reveal>
               ))}

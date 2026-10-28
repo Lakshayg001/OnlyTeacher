@@ -1,5 +1,6 @@
+import { Link } from 'react-router-dom';
 import PageHero from '@/components/layout/PageHero';
-import { Mail, Phone, MapPin, Building2, Globe, FileText, ShieldAlert } from 'lucide-react';
+import { Mail, Phone, MapPin, Building2, Globe, FileText, ShieldAlert, ArrowUpRight } from 'lucide-react';
 
 export default function TermsOfUse() {
 	return (
@@ -177,11 +178,19 @@ export default function TermsOfUse() {
 					</div>
 
 					{/* 9. Refunds and cancellations */}
-					<div className="rounded-3xl border border-navy-100 bg-white p-6 sm:p-8 shadow-clay space-y-3">
-						<h2 className="font-display text-xl sm:text-2xl font-extrabold text-navy-800 mb-4 flex items-center gap-3">
-							<span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-amber-100 font-display text-sm font-bold text-amber-800">9</span>
-							Refunds and cancellations
-						</h2>
+					<div id="refunds" className="rounded-3xl border border-navy-100 bg-white p-6 sm:p-8 shadow-clay space-y-3">
+						<div className="flex flex-wrap items-center justify-between gap-3 mb-2">
+							<h2 className="font-display text-xl sm:text-2xl font-extrabold text-navy-800 flex items-center gap-3">
+								<span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-amber-100 font-display text-sm font-bold text-amber-800">9</span>
+								Refunds and cancellations
+							</h2>
+							<Link
+								to="/refund-policy"
+								className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1 text-xs font-bold text-amber-700 hover:bg-amber-100 transition-colors"
+							>
+								View Dedicated Policy <ArrowUpRight className="h-3.5 w-3.5" />
+							</Link>
+						</div>
 						<p className="text-[15px] leading-relaxed text-navy-600">
 							<strong>Changed your mind early?</strong> If you cancel within the first 2 sessions or within 7 days of purchase (whichever comes first), we refund what you paid minus a small processing fee charged by the payment gateway.
 						</p>
@@ -192,8 +201,27 @@ export default function TermsOfUse() {
 							Refunds are processed within 7 to 10 working days to your original payment method.
 						</p>
 						<p className="text-[15px] leading-relaxed text-navy-600">
-							Full details are in our Refund and Cancellation Policy, which forms part of these terms.
+							Full details are in our{' '}
+							<Link
+								to="/refund-policy"
+								className="text-amber-600 font-bold hover:underline inline-flex items-center gap-1"
+							>
+								Refund and Cancellation Policy
+								<ArrowUpRight className="h-3.5 w-3.5 inline" />
+							</Link>
+							, which forms part of these terms.
 						</p>
+						<div className="mt-4 pt-4 border-t border-navy-100 flex flex-wrap items-center justify-between gap-3">
+							<span className="text-xs font-semibold text-navy-500">
+								One unified policy applies in the UK, UAE, Australia, New Zealand and India.
+							</span>
+							<Link
+								to="/refund-policy"
+								className="inline-flex items-center gap-2 rounded-xl bg-amber-500 px-4 py-2 text-xs font-bold text-white transition-all hover:bg-amber-600 shadow-sm"
+							>
+								Read Full Refund &amp; Cancellation Policy →
+							</Link>
+						</div>
 					</div>
 
 					{/* 10. Our content and intellectual property */}

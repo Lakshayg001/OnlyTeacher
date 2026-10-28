@@ -20,7 +20,6 @@ const COLUMNS = [
             { label: 'About TOT', to: '/about' },
             { label: 'Pricing Plans', to: '/pricing' },
             { label: 'Our Conviction', to: '/about' },
-            { label: 'Teach with Us', to: '/contact' },
             { label: 'Contact', to: '/contact' },
         ],
     },
@@ -28,7 +27,7 @@ const COLUMNS = [
         title: 'Support',
         links: [
             { label: '24×7 Support', to: '/contact' },
-            { label: 'Reschedule a Class', to: '/contact' },
+            { label: 'Refund & Cancellation Policy', to: '/refund-policy' },
             { label: 'Privacy Policy', to: '/privacy-policy' },
             { label: 'Terms of Use', to: '/terms-of-use' },
         ],

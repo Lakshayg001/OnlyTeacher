@@ -41,6 +41,7 @@ import {
   FLEXICARRY_FEATURES,
   MEMBERSHIP_FEATURES,
   UK_MEMBERSHIP_DATA,
+  AUNZ_MEMBERSHIP_DATA,
   SubPlan,
   TierCategory,
 } from '@/data/pricing';
@@ -54,7 +55,7 @@ export default function Pricing() {
 
   const handleCountryChange = (cCode: CountryCode) => {
     setSelectedCountry(cCode);
-    if (cCode !== 'GB' && selectedPlanType === 'membership') {
+    if (cCode === 'AE' && selectedPlanType === 'membership') {
       setSelectedPlanType('flexicarry');
     }
   };
@@ -220,8 +221,8 @@ export default function Pricing() {
                     <span>FlexiCarry</span>
                   </button>
 
-                  {/* Membership Button (UK Only) */}
-                  {selectedCountry === 'GB' && (
+                  {/* Membership Button (UK, Australia & New Zealand) */}
+                  {(selectedCountry === 'GB' || selectedCountry === 'AU' || selectedCountry === 'NZ') && (
                     <button
                       onClick={() => setSelectedPlanType('membership')}
                       className={cn(
@@ -431,270 +432,698 @@ export default function Pricing() {
             </AnimatePresence>
           )}
 
-          {/* Main Content Area: Membership View (UK only) OR Tier Grid Categories */}
-          {selectedPlanType === 'membership' && selectedCountry === 'GB' ? (
-            <div className="space-y-10">
-              {/* Membership Top Promo Card - in clean text form matching other cards */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-                className="relative overflow-hidden rounded-4xl border border-navy-100 bg-white p-8 sm:p-12 lg:p-14 shadow-clay-lg text-center"
-              >
-                {/* Decorative background glow blobs */}
-                <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-amber-300/30 blur-3xl" />
-                <div className="pointer-events-none absolute -left-20 -bottom-20 h-72 w-72 rounded-full bg-navy-200/40 blur-3xl" />
+          {/* Main Content Area: Membership View (UK / AU / NZ) OR Tier Grid Categories */}
+          {selectedPlanType === 'membership' && (selectedCountry === 'GB' || selectedCountry === 'AU' || selectedCountry === 'NZ') ? (
+            selectedCountry === 'GB' ? (
+              <div className="space-y-10">
+                {/* Membership Top Promo Card - in clean text form matching other cards */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="relative overflow-hidden rounded-4xl border border-navy-100 bg-white p-8 sm:p-12 lg:p-14 shadow-clay-lg text-center"
+                >
+                  {/* Decorative background glow blobs */}
+                  <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-amber-300/30 blur-3xl" />
+                  <div className="pointer-events-none absolute -left-20 -bottom-20 h-72 w-72 rounded-full bg-navy-200/40 blur-3xl" />
 
-                <div className="relative z-10 flex flex-col items-center max-w-3xl mx-auto">
-                  {/* Brand Title: TOT Privé */}
-                  <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-navy-900 leading-none">
-                    TOT <span className="text-[#F07C00]">Privé</span>
-                  </h1>
-
-                  {/* Subtitle: A Little More for Your Learning Journey. */}
-                  <h2 className="mt-4 font-display text-xl sm:text-2xl lg:text-3xl font-black text-navy-900 tracking-tight">
-                    <span className="text-[#F07C00]">A Little More</span> for Your Learning Journey.
-                  </h2>
-
-                  {/* Description text */}
-                  <p className="mt-3 max-w-2xl text-sm sm:text-base lg:text-lg font-medium text-navy-600 leading-relaxed">
-                    Extra focus and support, along with exclusive benefits, delivered at affordable prices.
-                  </p>
-
-                  {/* Limited Membership Available Pill Badge */}
-                  <div className="mt-7">
-                    <span className="inline-flex items-center justify-center rounded-full bg-[#F07C00] px-7 py-3 text-sm sm:text-base font-black text-white shadow-clay-amber transition-transform hover:scale-102 cursor-default">
-                      Limited Membership Available.
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Main Membership Showcase Card - Exactly matching Image 1 with TOT Circle -> TOT Privé */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45, delay: 0.1 }}
-                className="relative overflow-hidden rounded-4xl border-2 border-navy-100 bg-white p-6 sm:p-10 lg:p-12 shadow-clay-lg"
-              >
-                {/* Top Row: Eyebrow + Title (left) & Logo (right) */}
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between border-b border-navy-100 pb-8">
-                  <div>
-                    <span className="text-xs sm:text-sm font-black tracking-widest uppercase text-[#F07C00]">
-                      {UK_MEMBERSHIP_DATA.eyebrow}
-                    </span>
-                    <h1 className="mt-1 font-display text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-navy-900">
-                      {UK_MEMBERSHIP_DATA.brandTitle}
+                  <div className="relative z-10 flex flex-col items-center max-w-3xl mx-auto">
+                    {/* Brand Title: TOT Privé */}
+                    <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-navy-900 leading-none">
+                      TOT <span className="text-[#F07C00]">Privé</span>
                     </h1>
-                  </div>
-                  <div className="shrink-0 pt-1">
-                    <img
-                      src="/TOT New l.png"
-                      alt="The Only Teacher - Connect. Learn. Grow."
-                      className="h-14 sm:h-16 md:h-20 w-auto object-contain"
-                    />
-                  </div>
-                </div>
 
-                {/* TOP: Two Price Cards Side by Side */}
-                <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
-                  {/* Card 1: Years 2-9 */}
-                  <div className="relative flex flex-col justify-between rounded-3xl bg-[#08214D] p-6 sm:p-8 text-white shadow-clay-navy border-2 border-amber-500/30">
+                    {/* Subtitle: A Little More for Your Learning Journey. */}
+                    <h2 className="mt-4 font-display text-xl sm:text-2xl lg:text-3xl font-black text-navy-900 tracking-tight">
+                      <span className="text-[#F07C00]">A Little More</span> for Your Learning Journey.
+                    </h2>
+
+                    {/* Description text */}
+                    <p className="mt-3 max-w-2xl text-sm sm:text-base lg:text-lg font-medium text-navy-600 leading-relaxed">
+                      Extra focus and support, along with exclusive benefits, delivered at affordable prices.
+                    </p>
+
+                    {/* Limited Membership Available Pill Badge */}
+                    <div className="mt-7">
+                      <span className="inline-flex items-center justify-center rounded-full bg-[#F07C00] px-7 py-3 text-sm sm:text-base font-black text-white shadow-clay-amber transition-transform hover:scale-102 cursor-default">
+                        Limited Membership Available.
+                      </span>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Main Membership Showcase Card - Exactly matching Image 1 with TOT Circle -> TOT Privé */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45, delay: 0.1 }}
+                  className="relative overflow-hidden rounded-4xl border-2 border-navy-100 bg-white p-6 sm:p-10 lg:p-12 shadow-clay-lg"
+                >
+                  {/* Top Row: Eyebrow + Title (left) & Logo (right) */}
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between border-b border-navy-100 pb-8">
                     <div>
-                      {/* Header: "15-WEEK MEMBERSHIP" */}
-                      <div className="text-center">
-                        <span className="inline-block rounded-full bg-[#F07C00] px-6 py-2.5 text-xs sm:text-sm font-black uppercase tracking-wider text-white shadow-sm">
-                          15-WEEK MEMBERSHIP
-                        </span>
-                      </div>
-
-                      {/* Struck price £99 with the label "TOT Priority Offer" */}
-                      <div className="mt-5 flex items-center justify-center gap-3 text-sm sm:text-base font-black">
-                        <span className="text-white/60 line-through text-lg sm:text-xl font-bold">
-                          £99
-                        </span>
-                        <span className="text-white/30 font-normal">|</span>
-                        <span className="text-[#F07C00] tracking-wider uppercase font-black">
-                          TOT Priority Offer
-                        </span>
-                      </div>
-
-                      {/* Price Body: Years 2-9: £65 for 15 weeks */}
-                      <div className="mt-6 rounded-2xl bg-white p-6 sm:p-8 text-center shadow-sm">
-                        <div className="text-xs sm:text-sm font-black uppercase tracking-wider text-navy-900">
-                          YEARS 2–9
-                        </div>
-                        <div className="my-2 font-display text-5xl sm:text-6xl font-black tracking-tight text-[#F07C00]">
-                          £65
-                        </div>
-                        <div className="text-sm sm:text-base font-extrabold text-navy-800">
-                          for 15 weeks
-                        </div>
-                      </div>
+                      <span className="text-xs sm:text-sm font-black tracking-widest uppercase text-[#F07C00]">
+                        {UK_MEMBERSHIP_DATA.eyebrow}
+                      </span>
+                      <h1 className="mt-1 font-display text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-navy-900">
+                        {UK_MEMBERSHIP_DATA.brandTitle}
+                      </h1>
                     </div>
-
-                    {/* Note: "Limited availability: 50 families per tier" & Button */}
-                    <div className="mt-6 pt-2 text-center">
-                      <p className="text-xs sm:text-sm font-bold text-[#F07C00]">
-                        Limited availability: 50 families per tier
-                      </p>
-                      <Button
-                        to="/contact?country=United%20Kingdom&plan=TOT%20Priv%C3%A9%20(Years%202-9)&type=membership"
-                        variant="primary"
-                        full
-                        size="md"
-                        className="mt-4 bg-[#F07C00] hover:bg-[#d96e00] text-white font-black text-sm shadow-md"
-                      >
-                        Enquire for TOT Privé (Years 2–9)
-                      </Button>
+                    <div className="shrink-0 pt-1">
+                      <img
+                        src="/TOT New l.png"
+                        alt="The Only Teacher - Connect. Learn. Grow."
+                        className="h-14 sm:h-16 md:h-20 w-auto object-contain"
+                      />
                     </div>
                   </div>
 
-                  {/* Card 2: Years 10-13 */}
-                  <div className="relative flex flex-col justify-between rounded-3xl bg-[#08214D] p-6 sm:p-8 text-white shadow-clay-navy border-2 border-emerald-500/30">
-                    <div>
-                      {/* Header: "15-WEEK MEMBERSHIP" */}
-                      <div className="text-center">
-                        <span className="inline-block rounded-full bg-[#16A34A] px-6 py-2.5 text-xs sm:text-sm font-black uppercase tracking-wider text-white shadow-sm">
-                          15-WEEK MEMBERSHIP
-                        </span>
-                      </div>
-
-                      {/* Struck price £99 with the label "TOT Priority Offer" */}
-                      <div className="mt-5 flex items-center justify-center gap-3 text-sm sm:text-base font-black">
-                        <span className="text-white/60 line-through text-lg sm:text-xl font-bold">
-                          £99
-                        </span>
-                        <span className="text-white/30 font-normal">|</span>
-                        <span className="text-emerald-400 tracking-wider uppercase font-black">
-                          TOT Priority Offer
-                        </span>
-                      </div>
-
-                      {/* Price Body: Years 10-13: £75 for 15 weeks */}
-                      <div className="mt-6 rounded-2xl bg-white p-6 sm:p-8 text-center shadow-sm">
-                        <div className="text-xs sm:text-sm font-black uppercase tracking-wider text-navy-900">
-                          YEARS 10–13
+                  {/* TOP: Two Price Cards Side by Side */}
+                  <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
+                    {/* Card 1: Years 2-9 */}
+                    <div className="relative flex flex-col justify-between rounded-3xl bg-[#08214D] p-6 sm:p-8 text-white shadow-clay-navy border-2 border-amber-500/30">
+                      <div>
+                        {/* Header: "15-WEEK MEMBERSHIP" */}
+                        <div className="text-center">
+                          <span className="inline-block rounded-full bg-[#F07C00] px-6 py-2.5 text-xs sm:text-sm font-black uppercase tracking-wider text-white shadow-sm">
+                            15-WEEK MEMBERSHIP
+                          </span>
                         </div>
-                        <div className="my-2 font-display text-5xl sm:text-6xl font-black tracking-tight text-[#16A34A]">
-                          £75
+
+                        {/* Struck price £99 with the label "TOT Priority Offer" */}
+                        <div className="mt-5 flex items-center justify-center gap-3 text-sm sm:text-base font-black">
+                          <span className="text-white/60 line-through text-lg sm:text-xl font-bold">
+                            £99
+                          </span>
+                          <span className="text-white/30 font-normal">|</span>
+                          <span className="text-[#F07C00] tracking-wider uppercase font-black">
+                            TOT Priority Offer
+                          </span>
                         </div>
-                        <div className="text-sm sm:text-base font-extrabold text-navy-800">
-                          for 15 weeks
-                        </div>
-                      </div>
-                    </div>
 
-                    {/* Note: "Limited availability: 50 families per tier" & Button */}
-                    <div className="mt-6 pt-2 text-center">
-                      <p className="text-xs sm:text-sm font-bold text-emerald-400">
-                        Limited availability: 50 families per tier
-                      </p>
-                      <Button
-                        to="/contact?country=United%20Kingdom&plan=TOT%20Priv%C3%A9%20(Years%2010-13)&type=membership"
-                        variant="primary"
-                        full
-                        size="md"
-                        className="mt-4 bg-[#16A34A] hover:bg-[#13823b] text-white font-black text-sm shadow-md"
-                      >
-                        Enquire for TOT Privé (Years 10–13)
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-
-                {/* BELOW: One Benefits Card */}
-                <div className="mt-10 rounded-3xl border-2 border-navy-100 bg-white p-6 sm:p-8 lg:p-10 shadow-clay">
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-navy-100 pb-6">
-                    <div>
-                      <h2 className="font-display text-2xl sm:text-3xl font-black tracking-tight text-navy-900">
-                        {UK_MEMBERSHIP_DATA.includedHeading}
-                      </h2>
-                      <p className="mt-1 text-xs sm:text-sm font-medium text-navy-600">
-                        Comprehensive academic support and priority privileges included across both membership tiers.
-                      </p>
-                    </div>
-                    <span className="rounded-full bg-navy-100 px-3.5 py-1.5 text-xs font-black text-navy-700 tracking-wider">
-                      T&amp;C apply
-                    </span>
-                  </div>
-
-                  {/* Exact List of 8 Benefits */}
-                  <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {UK_MEMBERSHIP_DATA.benefits.map((benefit, idx) => {
-                      const isAmber = benefit.color === 'amber';
-                      return (
-                        <div
-                          key={idx}
-                          className="flex items-start gap-3.5 rounded-2xl border border-navy-100 bg-navy-50/30 p-4 sm:p-4.5 shadow-sm hover:border-navy-200 hover:shadow-md transition-all"
-                        >
-                          <div
-                            className={cn(
-                              'flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-white shadow-sm',
-                              isAmber ? 'bg-[#F07C00]' : 'bg-[#16A34A]',
-                            )}
-                          >
-                            {benefit.icon === 'headphones' && <Headphones className="h-6 w-6" />}
-                            {benefit.icon === 'workshop' && <Video className="h-6 w-6" />}
-                            {benefit.icon === 'calendar' && <Calendar className="h-6 w-6" />}
-                            {benefit.icon === 'reports' && <BarChart3 className="h-6 w-6" />}
-                            {benefit.icon === 'plan' && <FileText className="h-6 w-6" />}
-                            {benefit.icon === 'teacher' && <UserCheck className="h-6 w-6" />}
-                            {benefit.icon === 'message' && <MessageSquare className="h-6 w-6" />}
-                            {benefit.icon === 'star' && <Star className="h-6 w-6 fill-white" />}
+                        {/* Price Body: Years 2-9: £65 for 15 weeks */}
+                        <div className="mt-6 rounded-2xl bg-white p-6 sm:p-8 text-center shadow-sm">
+                          <div className="text-xs sm:text-sm font-black uppercase tracking-wider text-navy-900">
+                            YEARS 2–9
                           </div>
-                          <div className="min-w-0">
-                            <h3 className="text-sm sm:text-base font-extrabold text-navy-900 leading-snug">
-                              {benefit.title}
-                            </h3>
-                            <p className="mt-1 text-xs sm:text-sm font-semibold text-navy-600 leading-relaxed">
-                              {benefit.subtitle}
+                          <div className="my-2 font-display text-5xl sm:text-6xl font-black tracking-tight text-[#F07C00]">
+                            £65
+                          </div>
+                          <div className="text-sm sm:text-base font-extrabold text-navy-800">
+                            for 15 weeks
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Note: "Limited availability: 50 families per tier" & Button */}
+                      <div className="mt-6 pt-2 text-center">
+                        <p className="text-xs sm:text-sm font-bold text-[#F07C00]">
+                          Limited availability: 50 families per tier
+                        </p>
+                        <Button
+                          to="/contact?country=United%20Kingdom&plan=TOT%20Priv%C3%A9%20(Years%202-9)&type=membership"
+                          variant="primary"
+                          full
+                          size="md"
+                          className="mt-4 bg-[#F07C00] hover:bg-[#d96e00] text-white font-black text-sm shadow-md"
+                        >
+                          Enquire for TOT Privé (Years 2–9)
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* Card 2: Years 10-13 */}
+                    <div className="relative flex flex-col justify-between rounded-3xl bg-[#08214D] p-6 sm:p-8 text-white shadow-clay-navy border-2 border-emerald-500/30">
+                      <div>
+                        {/* Header: "15-WEEK MEMBERSHIP" */}
+                        <div className="text-center">
+                          <span className="inline-block rounded-full bg-[#16A34A] px-6 py-2.5 text-xs sm:text-sm font-black uppercase tracking-wider text-white shadow-sm">
+                            15-WEEK MEMBERSHIP
+                          </span>
+                        </div>
+
+                        {/* Struck price £99 with the label "TOT Priority Offer" */}
+                        <div className="mt-5 flex items-center justify-center gap-3 text-sm sm:text-base font-black">
+                          <span className="text-white/60 line-through text-lg sm:text-xl font-bold">
+                            £99
+                          </span>
+                          <span className="text-white/30 font-normal">|</span>
+                          <span className="text-emerald-400 tracking-wider uppercase font-black">
+                            TOT Priority Offer
+                          </span>
+                        </div>
+
+                        {/* Price Body: Years 10-13: £75 for 15 weeks */}
+                        <div className="mt-6 rounded-2xl bg-white p-6 sm:p-8 text-center shadow-sm">
+                          <div className="text-xs sm:text-sm font-black uppercase tracking-wider text-navy-900">
+                            YEARS 10–13
+                          </div>
+                          <div className="my-2 font-display text-5xl sm:text-6xl font-black tracking-tight text-[#16A34A]">
+                            £75
+                          </div>
+                          <div className="text-sm sm:text-base font-extrabold text-navy-800">
+                            for 15 weeks
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Note: "Limited availability: 50 families per tier" & Button */}
+                      <div className="mt-6 pt-2 text-center">
+                        <p className="text-xs sm:text-sm font-bold text-emerald-400">
+                          Limited availability: 50 families per tier
+                        </p>
+                        <Button
+                          to="/contact?country=United%20Kingdom&plan=TOT%20Priv%C3%A9%20(Years%2010-13)&type=membership"
+                          variant="primary"
+                          full
+                          size="md"
+                          className="mt-4 bg-[#16A34A] hover:bg-[#13823b] text-white font-black text-sm shadow-md"
+                        >
+                          Enquire for TOT Privé (Years 10–13)
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* BELOW: One Benefits Card */}
+                  <div className="mt-10 rounded-3xl border-2 border-navy-100 bg-white p-6 sm:p-8 lg:p-10 shadow-clay">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-navy-100 pb-6">
+                      <div>
+                        <h2 className="font-display text-2xl sm:text-3xl font-black tracking-tight text-navy-900">
+                          {UK_MEMBERSHIP_DATA.includedHeading}
+                        </h2>
+                        <p className="mt-1 text-xs sm:text-sm font-medium text-navy-600">
+                          Comprehensive academic support and priority privileges included across both membership tiers.
+                        </p>
+                      </div>
+                      <span className="rounded-full bg-navy-100 px-3.5 py-1.5 text-xs font-black text-navy-700 tracking-wider">
+                        T&amp;C apply
+                      </span>
+                    </div>
+
+                    {/* Exact List of 8 Benefits */}
+                    <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {UK_MEMBERSHIP_DATA.benefits.map((benefit, idx) => {
+                        const isAmber = benefit.color === 'amber';
+                        return (
+                          <div
+                            key={idx}
+                            className="flex items-start gap-3.5 rounded-2xl border border-navy-100 bg-navy-50/30 p-4 sm:p-4.5 shadow-sm hover:border-navy-200 hover:shadow-md transition-all"
+                          >
+                            <div
+                              className={cn(
+                                'flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-white shadow-sm',
+                                isAmber ? 'bg-[#F07C00]' : 'bg-[#16A34A]',
+                              )}
+                            >
+                              {benefit.icon === 'headphones' && <Headphones className="h-6 w-6" />}
+                              {benefit.icon === 'workshop' && <Video className="h-6 w-6" />}
+                              {benefit.icon === 'calendar' && <Calendar className="h-6 w-6" />}
+                              {benefit.icon === 'reports' && <BarChart3 className="h-6 w-6" />}
+                              {benefit.icon === 'plan' && <FileText className="h-6 w-6" />}
+                              {benefit.icon === 'teacher' && <UserCheck className="h-6 w-6" />}
+                              {benefit.icon === 'message' && <MessageSquare className="h-6 w-6" />}
+                              {benefit.icon === 'star' && <Star className="h-6 w-6 fill-white" />}
+                            </div>
+                            <div className="min-w-0">
+                              <h3 className="text-sm sm:text-base font-extrabold text-navy-900 leading-snug">
+                                {benefit.title}
+                              </h3>
+                              <p className="mt-1 text-xs sm:text-sm font-semibold text-navy-600 leading-relaxed">
+                                {benefit.subtitle}
+                              </p>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    {/* Bottom Reassurance Card with T&C apply */}
+                    <div className="mt-8 rounded-2xl bg-navy-50/70 border border-navy-100 p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                      <div className="flex items-center gap-3">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-forest-100 text-forest-700">
+                          <ShieldCheck className="h-5 w-5" />
+                        </div>
+                        <div>
+                          <div className="text-xs font-black uppercase text-navy-800">
+                            Guaranteed Teacher Continuity
+                          </div>
+                          <div className="text-[11px] text-navy-500 font-medium">
+                            Dedicated educator assigned throughout your 15-week journey.
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className="text-xs font-bold text-navy-500">
+                          * T&amp;C apply
+                        </span>
+                        <Link
+                          to="/contact?country=United%20Kingdom&plan=TOT%20Priv%C3%A9&type=membership"
+                          className="text-xs font-black text-amber-600 hover:text-amber-700 underline shrink-0"
+                        >
+                          Learn More →
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Footer line */}
+                  <div className="mt-10 border-t border-navy-100 pt-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-navy-500 font-medium">
+                    <p>{UK_MEMBERSHIP_DATA.footerTagline} · <span className="font-bold text-navy-700">T&amp;C apply</span></p>
+                    <div className="flex items-center gap-2 text-navy-600 font-bold">
+                      <Flag code="GB" size={16} />
+                      <span>Exclusive to United Kingdom Families · T&amp;C apply</span>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            ) : (
+              /* AUSTRALIA & NEW ZEALAND MEMBERSHIP VIEW (Item 6 format) */
+              <div className="space-y-10">
+                {/* AU/NZ Top Promo Card */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="relative overflow-hidden rounded-4xl border border-navy-100 bg-white p-8 sm:p-12 lg:p-14 shadow-clay-lg text-center"
+                >
+                  {/* Decorative background glow blobs */}
+                  <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-amber-300/30 blur-3xl" />
+                  <div className="pointer-events-none absolute -left-20 -bottom-20 h-72 w-72 rounded-full bg-navy-200/40 blur-3xl" />
+
+                  <div className="relative z-10 flex flex-col items-center max-w-3xl mx-auto">
+                    {/* Active Country Pill */}
+                    <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-navy-50/90 border border-navy-200/80 px-4 py-1.5 text-xs font-black text-navy-800 shadow-xs">
+                      <Flag code={selectedCountry === 'NZ' ? 'NZ' : 'AU'} size={16} />
+                      <span>{selectedCountry === 'NZ' ? 'New Zealand (NZ$)' : 'Australia (A$)'}</span>
+                    </div>
+
+                    {/* Brand Title: TOT Privé */}
+                    <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-navy-900 leading-none">
+                      TOT <span className="text-[#F07C00]">Privé</span>
+                    </h1>
+
+                    {/* Subtitle: Country-Specific Membership Plan */}
+                    <div className="mt-3 text-xs sm:text-sm font-black uppercase tracking-widest text-[#F07C00]">
+                      TOT Privé - Membership Plan, {selectedCountry === 'NZ' ? 'New Zealand' : 'Australia'}
+                    </div>
+
+                    {/* Tagline: A Little More for Your Learning Journey. */}
+                    <h2 className="mt-2 font-display text-xl sm:text-2xl lg:text-3xl font-black text-navy-900 tracking-tight">
+                      <span className="text-[#F07C00]">A Little More</span> for Your Learning Journey.
+                    </h2>
+
+                    {/* Description text */}
+                    <p className="mt-3 max-w-2xl text-sm sm:text-base lg:text-lg font-medium text-navy-600 leading-relaxed">
+                      {AUNZ_MEMBERSHIP_DATA.description}
+                    </p>
+
+                    {/* Launch Notice Pill */}
+                    <div className="mt-7">
+                      <span className="inline-flex items-center justify-center rounded-full bg-[#F07C00] px-6 sm:px-8 py-3 text-xs sm:text-sm font-black text-white shadow-clay-amber transition-transform hover:scale-102 cursor-default text-center">
+                        {AUNZ_MEMBERSHIP_DATA.launchNotice}
+                      </span>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Main Membership Showcase Card - Two Price Cards Top, Benefits Card Below, Terms Apply */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45, delay: 0.1 }}
+                  className="relative overflow-hidden rounded-4xl border-2 border-navy-100 bg-white p-6 sm:p-10 lg:p-12 shadow-clay-lg"
+                >
+                  {/* Top Row: Eyebrow + Title (left) & Logo + Region toggle (right) */}
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between border-b border-navy-100 pb-8">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <Flag code={selectedCountry === 'NZ' ? 'NZ' : 'AU'} size={20} />
+                        <span className="text-xs sm:text-sm font-black tracking-widest uppercase text-[#F07C00]">
+                          {selectedCountry === 'NZ'
+                            ? AUNZ_MEMBERSHIP_DATA.regions.NZ.eyebrow
+                            : AUNZ_MEMBERSHIP_DATA.regions.AU.eyebrow}
+                        </span>
+                      </div>
+                      <h1 className="mt-1 font-display text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-navy-900">
+                        TOT Privé
+                      </h1>
+                      <p className="mt-1 text-sm sm:text-base font-extrabold text-navy-600">
+                        {AUNZ_MEMBERSHIP_DATA.tagline}
+                      </p>
+                    </div>
+                    <div className="shrink-0 pt-1">
+                      <img
+                        src="/TOT New l.png"
+                        alt="The Only Teacher - Connect. Learn. Grow."
+                        className="h-14 sm:h-16 md:h-20 w-auto object-contain"
+                      />
+                    </div>
+                  </div>
+
+                  {/* TOP: Two Price Cards Side by Side */}
+                  <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
+                    {/* Card 1: Years 1–6 */}
+                    {(() => {
+                      const rData =
+                        selectedCountry === 'NZ'
+                          ? AUNZ_MEMBERSHIP_DATA.regions.NZ
+                          : AUNZ_MEMBERSHIP_DATA.regions.AU;
+                      const tier1 = rData.tiers[0];
+                      const countryName =
+                        selectedCountry === 'NZ' ? 'New Zealand' : 'Australia';
+                      return (
+                        <div className="relative flex flex-col justify-between rounded-3xl bg-[#08214D] p-6 sm:p-8 text-white shadow-clay-navy border-2 border-amber-500/30">
+                          <div>
+                            {/* Header: "15-WEEK MEMBERSHIP" */}
+                            <div className="text-center">
+                              <span className="inline-block rounded-full bg-[#F07C00] px-6 py-2.5 text-xs sm:text-sm font-black uppercase tracking-wider text-white shadow-sm">
+                                {AUNZ_MEMBERSHIP_DATA.durationBadge}
+                              </span>
+                            </div>
+
+                            {/* Struck regular price with Launch Price tag */}
+                            <div className="mt-5 flex items-center justify-center gap-3 text-sm sm:text-base font-black">
+                              <span className="text-white/60 line-through text-lg sm:text-xl font-bold">
+                                {tier1.regularPrice}
+                              </span>
+                              <span className="text-white/30 font-normal">|</span>
+                              <span className="text-[#F07C00] tracking-wider uppercase font-black">
+                                Launch Price
+                              </span>
+                            </div>
+
+                            {/* Price Body: Years 1–6 */}
+                            <div className="mt-6 rounded-2xl bg-white p-6 sm:p-8 text-center shadow-sm">
+                              <div className="text-xs sm:text-sm font-black uppercase tracking-wider text-navy-900">
+                                {tier1.years}
+                              </div>
+                              <div className="my-2 font-display text-5xl sm:text-6xl font-black tracking-tight text-[#F07C00]">
+                                {tier1.price}
+                              </div>
+                              <div className="text-sm sm:text-base font-extrabold text-navy-800">
+                                {tier1.duration}
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Note: "Limited availability: 50 families per tier" & Button */}
+                          <div className="mt-6 pt-2 text-center">
+                            <p className="text-xs sm:text-sm font-bold text-[#F07C00]">
+                              {AUNZ_MEMBERSHIP_DATA.availabilityNote}
                             </p>
+                            <Button
+                              to={`/contact?country=${encodeURIComponent(countryName)}&plan=TOT%20Priv%C3%A9%20(Years%201-6)&type=membership`}
+                              variant="primary"
+                              full
+                              size="md"
+                              className="mt-4 bg-[#F07C00] hover:bg-[#d96e00] text-white font-black text-sm shadow-md"
+                            >
+                              Enquire for TOT Privé (Years 1–6)
+                            </Button>
                           </div>
                         </div>
                       );
-                    })}
+                    })()}
+
+                    {/* Card 2: Years 7–12 */}
+                    {(() => {
+                      const rData =
+                        selectedCountry === 'NZ'
+                          ? AUNZ_MEMBERSHIP_DATA.regions.NZ
+                          : AUNZ_MEMBERSHIP_DATA.regions.AU;
+                      const tier2 = rData.tiers[1];
+                      const countryName =
+                        selectedCountry === 'NZ' ? 'New Zealand' : 'Australia';
+                      return (
+                        <div className="relative flex flex-col justify-between rounded-3xl bg-[#08214D] p-6 sm:p-8 text-white shadow-clay-navy border-2 border-emerald-500/30">
+                          <div>
+                            {/* Header: "15-WEEK MEMBERSHIP" */}
+                            <div className="text-center">
+                              <span className="inline-block rounded-full bg-[#16A34A] px-6 py-2.5 text-xs sm:text-sm font-black uppercase tracking-wider text-white shadow-sm">
+                                {AUNZ_MEMBERSHIP_DATA.durationBadge}
+                              </span>
+                            </div>
+
+                            {/* Struck regular price with Launch Price tag */}
+                            <div className="mt-5 flex items-center justify-center gap-3 text-sm sm:text-base font-black">
+                              <span className="text-white/60 line-through text-lg sm:text-xl font-bold">
+                                {tier2.regularPrice}
+                              </span>
+                              <span className="text-white/30 font-normal">|</span>
+                              <span className="text-emerald-400 tracking-wider uppercase font-black">
+                                Launch Price
+                              </span>
+                            </div>
+
+                            {/* Price Body: Years 7–12 */}
+                            <div className="mt-6 rounded-2xl bg-white p-6 sm:p-8 text-center shadow-sm">
+                              <div className="text-xs sm:text-sm font-black uppercase tracking-wider text-navy-900">
+                                {tier2.years}
+                              </div>
+                              <div className="my-2 font-display text-5xl sm:text-6xl font-black tracking-tight text-[#16A34A]">
+                                {tier2.price}
+                              </div>
+                              <div className="text-sm sm:text-base font-extrabold text-navy-800">
+                                {tier2.duration}
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Note: "Limited availability: 50 families per tier" & Button */}
+                          <div className="mt-6 pt-2 text-center">
+                            <p className="text-xs sm:text-sm font-bold text-emerald-400">
+                              {AUNZ_MEMBERSHIP_DATA.availabilityNote}
+                            </p>
+                            <Button
+                              to={`/contact?country=${encodeURIComponent(countryName)}&plan=TOT%20Priv%C3%A9%20(Years%207-12)&type=membership`}
+                              variant="primary"
+                              full
+                              size="md"
+                              className="mt-4 bg-[#16A34A] hover:bg-[#13823b] text-white font-black text-sm shadow-md"
+                            >
+                              Enquire for TOT Privé (Years 7–12)
+                            </Button>
+                          </div>
+                        </div>
+                      );
+                    })()}
                   </div>
 
-                  {/* Bottom Reassurance Card with T&C apply */}
-                  <div className="mt-8 rounded-2xl bg-navy-50/70 border border-navy-100 p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-forest-100 text-forest-700">
-                        <ShieldCheck className="h-5 w-5" />
-                      </div>
+                  {/* 2. Membership Prices Full Table */}
+                  <div className="mt-10 rounded-3xl border border-navy-100 bg-navy-50/40 p-6 sm:p-8">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-navy-200/70 pb-4 mb-4">
                       <div>
-                        <div className="text-xs font-black uppercase text-navy-800">
-                          Guaranteed Teacher Continuity
+                        <h3 className="font-display text-lg sm:text-xl font-extrabold text-navy-900">
+                          2. Membership prices
+                        </h3>
+                        <p className="text-xs sm:text-sm text-navy-600 mt-0.5">
+                          {AUNZ_MEMBERSHIP_DATA.launchNotice}
+                        </p>
+                      </div>
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-forest-50 px-3 py-1 text-xs font-bold text-forest-700">
+                        <Check className="h-3.5 w-3.5" /> Launch Rates Active
+                      </span>
+                    </div>
+
+                    <div className="overflow-x-auto rounded-2xl border border-navy-100 bg-white">
+                      <table className="w-full text-left text-xs sm:text-sm">
+                        <thead className="bg-navy-800 text-white font-bold">
+                          <tr>
+                            <th className="py-3 px-4">Region</th>
+                            <th className="py-3 px-4">Tier</th>
+                            <th className="py-3 px-4 text-center">Regular price</th>
+                            <th className="py-3 px-4 text-right">Launch price</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-navy-100 font-semibold text-navy-700">
+                          {selectedCountry === 'AU' ? (
+                            <>
+                              <tr className="hover:bg-amber-50/30 transition-colors">
+                                <td className="py-3.5 px-4 flex items-center gap-2">
+                                  <Flag code="AU" size={16} />
+                                  <span className="font-bold text-navy-900">Australia</span>
+                                </td>
+                                <td className="py-3.5 px-4 font-bold text-navy-900">Years 1–6</td>
+                                <td className="py-3.5 px-4 text-center text-navy-400 line-through">A$169</td>
+                                <td className="py-3.5 px-4 text-right font-display text-base font-extrabold text-[#F07C00]">
+                                  A$129
+                                </td>
+                              </tr>
+                              <tr className="hover:bg-amber-50/30 transition-colors">
+                                <td className="py-3.5 px-4 flex items-center gap-2">
+                                  <Flag code="AU" size={16} />
+                                  <span className="font-bold text-navy-900">Australia</span>
+                                </td>
+                                <td className="py-3.5 px-4 font-bold text-navy-900">Years 7–12</td>
+                                <td className="py-3.5 px-4 text-center text-navy-400 line-through">A$199</td>
+                                <td className="py-3.5 px-4 text-right font-display text-base font-extrabold text-[#16A34A]">
+                                  A$149
+                                </td>
+                              </tr>
+                            </>
+                          ) : (
+                            <>
+                              <tr className="hover:bg-amber-50/30 transition-colors">
+                                <td className="py-3.5 px-4 flex items-center gap-2">
+                                  <Flag code="NZ" size={16} />
+                                  <span className="font-bold text-navy-900">New Zealand</span>
+                                </td>
+                                <td className="py-3.5 px-4 font-bold text-navy-900">Years 1–6</td>
+                                <td className="py-3.5 px-4 text-center text-navy-400 line-through">NZ$169</td>
+                                <td className="py-3.5 px-4 text-right font-display text-base font-extrabold text-[#F07C00]">
+                                  NZ$129
+                                </td>
+                              </tr>
+                              <tr className="hover:bg-amber-50/30 transition-colors">
+                                <td className="py-3.5 px-4 flex items-center gap-2">
+                                  <Flag code="NZ" size={16} />
+                                  <span className="font-bold text-navy-900">New Zealand</span>
+                                </td>
+                                <td className="py-3.5 px-4 font-bold text-navy-900">Years 7–12</td>
+                                <td className="py-3.5 px-4 text-center text-navy-400 line-through">NZ$199</td>
+                                <td className="py-3.5 px-4 text-right font-display text-base font-extrabold text-[#16A34A]">
+                                  NZ$149
+                                </td>
+                              </tr>
+                            </>
+                          )}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  {/* BELOW: 1. What your family gets (Benefits Card) */}
+                  <div className="mt-10 rounded-3xl border-2 border-navy-100 bg-white p-6 sm:p-8 lg:p-10 shadow-clay">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-navy-100 pb-6">
+                      <div>
+                        <h2 className="font-display text-2xl sm:text-3xl font-black tracking-tight text-navy-900">
+                          {AUNZ_MEMBERSHIP_DATA.includedHeading}
+                        </h2>
+                        <p className="mt-1 text-xs sm:text-sm font-medium text-navy-600">
+                          Comprehensive academic support and priority privileges included across both membership tiers.
+                        </p>
+                      </div>
+                      <span className="rounded-full bg-navy-100 px-3.5 py-1.5 text-xs font-black text-navy-700 tracking-wider">
+                        T&amp;C apply
+                      </span>
+                    </div>
+
+                    {/* Exact List of 8 Benefits */}
+                    <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {AUNZ_MEMBERSHIP_DATA.benefits.map((benefit, idx) => {
+                        const isAmber = benefit.color === 'amber';
+                        return (
+                          <div
+                            key={idx}
+                            className="flex items-start gap-3.5 rounded-2xl border border-navy-100 bg-navy-50/30 p-4 sm:p-4.5 shadow-sm hover:border-navy-200 hover:shadow-md transition-all"
+                          >
+                            <div
+                              className={cn(
+                                'flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-white shadow-sm',
+                                isAmber ? 'bg-[#F07C00]' : 'bg-[#16A34A]',
+                              )}
+                            >
+                              {benefit.icon === 'headphones' && <Headphones className="h-6 w-6" />}
+                              {benefit.icon === 'workshop' && <Video className="h-6 w-6" />}
+                              {benefit.icon === 'calendar' && <Calendar className="h-6 w-6" />}
+                              {benefit.icon === 'reports' && <BarChart3 className="h-6 w-6" />}
+                              {benefit.icon === 'plan' && <FileText className="h-6 w-6" />}
+                              {benefit.icon === 'teacher' && <UserCheck className="h-6 w-6" />}
+                              {benefit.icon === 'message' && <MessageSquare className="h-6 w-6" />}
+                              {benefit.icon === 'star' && <Star className="h-6 w-6 fill-white" />}
+                            </div>
+                            <div className="min-w-0">
+                              <h3 className="text-sm sm:text-base font-extrabold text-navy-900 leading-snug">
+                                {benefit.title}
+                              </h3>
+                              <p className="mt-1 text-xs sm:text-sm font-semibold text-navy-600 leading-relaxed">
+                                {benefit.subtitle}
+                              </p>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* 3. Terms Card (T&C apply) */}
+                  <div className="mt-10 rounded-3xl border-2 border-navy-100 bg-white p-6 sm:p-8 lg:p-10 shadow-clay space-y-5">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-navy-100 pb-5">
+                      <div>
+                        <h2 className="font-display text-xl sm:text-2xl font-black text-navy-900 flex items-center gap-2.5">
+                          <ShieldCheck className="h-6 w-6 text-amber-500" />
+                          3. Terms &amp; Conditions
+                        </h2>
+                        <p className="text-xs sm:text-sm text-navy-500 mt-1">
+                          Clear, straightforward conditions for {selectedCountry === 'NZ' ? 'New Zealand' : 'Australia'} membership.
+                        </p>
+                      </div>
+                      <span className="rounded-full bg-forest-50 border border-forest-200/60 px-3.5 py-1 text-xs font-bold text-forest-700">
+                        Transparent Terms
+                      </span>
+                    </div>
+
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      {AUNZ_MEMBERSHIP_DATA.terms.map((term, tIdx) => (
+                        <div
+                          key={tIdx}
+                          className="flex items-start gap-3 rounded-2xl border border-navy-100 bg-navy-50/50 p-4"
+                        >
+                          <div className="grid h-6 w-6 shrink-0 place-items-center rounded-lg bg-forest-100 text-forest-700 mt-0.5">
+                            <Check className="h-4 w-4" />
+                          </div>
+                          <p className="text-xs sm:text-sm font-semibold text-navy-700 leading-relaxed">
+                            {term}
+                          </p>
                         </div>
-                        <div className="text-[11px] text-navy-500 font-medium">
-                          Dedicated educator assigned throughout your 15-week journey.
+                      ))}
+                    </div>
+
+                    {/* Bottom Reassurance Bar */}
+                    <div className="rounded-2xl bg-navy-50/70 border border-navy-100 p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                      <div className="flex items-center gap-3">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-forest-100 text-forest-700">
+                          <ShieldCheck className="h-5 w-5" />
+                        </div>
+                        <div>
+                          <div className="text-xs font-black uppercase text-navy-800">
+                            Guaranteed Teacher Continuity
+                          </div>
+                          <div className="text-[11px] text-navy-500 font-medium">
+                            Dedicated educator assigned throughout your 15-week journey.
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <span className="text-xs font-bold text-navy-500">
-                        * T&amp;C apply
-                      </span>
-                      <Link
-                        to="/contact?country=United%20Kingdom&plan=TOT%20Priv%C3%A9&type=membership"
-                        className="text-xs font-black text-amber-600 hover:text-amber-700 underline shrink-0"
-                      >
-                        Learn More →
-                      </Link>
+                      <div className="flex items-center gap-3">
+                        <span className="text-xs font-bold text-navy-500">
+                          * T&amp;C apply
+                        </span>
+                        <Link
+                          to={`/contact?country=${encodeURIComponent(selectedCountry === 'NZ' ? 'New Zealand' : 'Australia')}&plan=TOT%20Priv%C3%A9&type=membership`}
+                          className="text-xs font-black text-amber-600 hover:text-amber-700 underline shrink-0"
+                        >
+                          Enquire for Membership →
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Footer line */}
-                <div className="mt-10 border-t border-navy-100 pt-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-navy-500 font-medium">
-                  <p>{UK_MEMBERSHIP_DATA.footerTagline} · <span className="font-bold text-navy-700">T&amp;C apply</span></p>
-                  <div className="flex items-center gap-2 text-navy-600 font-bold">
-                    <Flag code="GB" size={16} />
-                    <span>Exclusive to United Kingdom Families · T&amp;C apply</span>
+                  {/* Footer line */}
+                  <div className="mt-10 border-t border-navy-100 pt-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-navy-500 font-medium">
+                    <p>
+                      {AUNZ_MEMBERSHIP_DATA.footerTagline} · <span className="font-bold text-navy-700">T&amp;C apply</span>
+                    </p>
+                    <div className="flex items-center gap-2 text-navy-600 font-bold">
+                      <Flag code={selectedCountry === 'NZ' ? 'NZ' : 'AU'} size={16} />
+                      <span>
+                        Exclusive to {selectedCountry === 'NZ' ? 'New Zealand' : 'Australia'} Families · T&amp;C apply
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            </div>
+                </motion.div>
+              </div>
+            )
           ) : (
             /* Tier Grid Categories (for Standard & FlexiCarry) OR NZ Dedicated View */
             <div className="space-y-12">
@@ -1041,7 +1470,11 @@ export default function Pricing() {
                 <Button
                   to={
                     selectedPlanType === 'membership'
-                      ? '/contact?country=United%20Kingdom&plan=TOT%20Priv%C3%A9&type=membership'
+                      ? selectedCountry === 'GB'
+                        ? '/contact?country=United%20Kingdom&plan=TOT%20Priv%C3%A9&type=membership'
+                        : selectedCountry === 'NZ'
+                        ? '/contact?country=New%20Zealand&plan=TOT%20Priv%C3%A9&type=membership'
+                        : '/contact?country=Australia&plan=TOT%20Priv%C3%A9&type=membership'
                       : '/contact'
                   }
                   variant="primary"

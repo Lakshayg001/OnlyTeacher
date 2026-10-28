@@ -1084,6 +1084,7 @@ export interface MembershipBenefit {
 export interface MembershipTier {
   years: string;
   price: string;
+  regularPrice?: string;
   duration: string;
   color: 'amber' | 'emerald';
 }
@@ -1174,6 +1175,161 @@ export const UK_MEMBERSHIP_DATA: UkMembershipData = {
     },
   ],
   footerTagline: 'The Only Teacher | One Platform. Every Subject. A Brighter Future.',
+};
+
+export interface AunzMembershipData {
+  title: string;
+  subtitle: string;
+  tagline: string;
+  description: string;
+  launchNotice: string;
+  durationBadge: string;
+  availabilityNote: string;
+  includedHeading: string;
+  benefits: MembershipBenefit[];
+  terms: string[];
+  footerTagline: string;
+  regions: {
+    AU: {
+      name: string;
+      code: 'AU';
+      flag: string;
+      currencyCode: string;
+      currencySymbol: string;
+      eyebrow: string;
+      tiers: MembershipTier[];
+    };
+    NZ: {
+      name: string;
+      code: 'NZ';
+      flag: string;
+      currencyCode: string;
+      currencySymbol: string;
+      eyebrow: string;
+      tiers: MembershipTier[];
+    };
+  };
+}
+
+export const AUNZ_MEMBERSHIP_DATA: AunzMembershipData = {
+  title: 'TOT Privé - Membership Plan, Australia & New Zealand',
+  subtitle: 'Australia & New Zealand',
+  tagline: 'A Little More for Your Learning Journey.',
+  description:
+    'TOT Privé is a 15-week membership that sits on top of any Alpha (One-to-One), Horizon (two-student) or Apex (small group) base plan. It adds the extra layer busy parents ask for most: quick doubt help, exam-time revision, and total flexibility around the family schedule.',
+  launchNotice:
+    'Launch prices apply with a base plan purchase of 24 sessions or more. One child per membership.',
+  durationBadge: '15-WEEK MEMBERSHIP',
+  availabilityNote: 'Limited availability: 50 families per tier',
+  includedHeading: 'What your family gets (every 15 weeks)',
+  benefits: [
+    {
+      icon: 'headphones',
+      color: 'amber',
+      title: '5 live doubt-clearing sessions',
+      subtitle: 'Five 30-minute One-to-One sessions, book anytime a tricky topic comes up.',
+    },
+    {
+      icon: 'workshop',
+      color: 'emerald',
+      title: '2 live revision workshops',
+      subtitle: '30 minutes each, teacher-led and matched to year group.',
+    },
+    {
+      icon: 'calendar',
+      color: 'emerald',
+      title: 'Flexible rescheduling',
+      subtitle: 'Up to 10 eligible reschedules across the 15 weeks.',
+    },
+    {
+      icon: 'reports',
+      color: 'amber',
+      title: '3 teacher progress reports',
+      subtitle: 'Monthly progress and next steps.',
+    },
+    {
+      icon: 'plan',
+      color: 'amber',
+      title: 'Personalised 15-week study plan',
+      subtitle: "Shaped around your child's goals.",
+    },
+    {
+      icon: 'teacher',
+      color: 'emerald',
+      title: 'Same teacher commitment',
+      subtitle: 'Continuity wherever possible.',
+    },
+    {
+      icon: 'message',
+      color: 'emerald',
+      title: 'Teacher message support',
+      subtitle: 'Short questions between lessons.',
+    },
+    {
+      icon: 'star',
+      color: 'amber',
+      title: 'Priority booking access',
+      subtitle: 'Earlier access to slots and workshops.',
+    },
+  ],
+  terms: [
+    'Valid only with a regular Tuition plan purchase of 24 sessions or more.',
+    'Limited availability: 50 families per tier.',
+    'One child per membership. Unused benefits do not roll over.',
+    'No lock-in: cancel anytime. No automatic renewal.',
+    'No joining fee and no cancellation fee.',
+  ],
+  footerTagline: 'The Only Teacher | One Platform. Every Subject. A Brighter Future.',
+  regions: {
+    AU: {
+      name: 'Australia',
+      code: 'AU',
+      flag: 'AU',
+      currencyCode: 'AUD',
+      currencySymbol: 'A$',
+      eyebrow: 'AUSTRALIA MEMBERSHIP · LIMITED AVAILABILITY',
+      tiers: [
+        {
+          years: 'YEARS 1–6',
+          regularPrice: 'A$169',
+          price: 'A$129',
+          duration: 'for 15 weeks',
+          color: 'amber',
+        },
+        {
+          years: 'YEARS 7–12',
+          regularPrice: 'A$199',
+          price: 'A$149',
+          duration: 'for 15 weeks',
+          color: 'emerald',
+        },
+      ],
+    },
+    NZ: {
+      name: 'New Zealand',
+      code: 'NZ',
+      flag: 'NZ',
+      currencyCode: 'NZD',
+      currencySymbol: 'NZ$',
+      eyebrow: 'NEW ZEALAND MEMBERSHIP · LIMITED AVAILABILITY',
+      tiers: [
+        {
+          years: 'YEARS 1–6',
+          regularPrice: 'NZ$169',
+          price: 'NZ$129',
+          duration: 'for 15 weeks',
+          color: 'amber',
+        },
+        {
+          years: 'YEARS 7–12',
+          regularPrice: 'NZ$199',
+          price: 'NZ$149',
+          duration: 'for 15 weeks',
+          color: 'emerald',
+        },
+      ],
+    },
+  },
 };
 
 export const MEMBERSHIP_FEATURES = [

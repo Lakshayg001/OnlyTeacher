@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { BookOpen, Clock3 } from 'lucide-react';
 import { COURSES, COURSE_SPECS, TRACKS } from '@/data/site';
@@ -35,8 +35,21 @@ export default function Courses() {
   [],
  );
 
+ const normalize = (str: string) => str.toLowerCase().replace(/[\s\-_]+/g, '');
+
  const results = COURSES.slice(0, 4).filter((c) => {
-  if (subject !== 'all' && c.subject !== subject) return false;
+  if (subject !== 'all') {
+   const normSubject = normalize(subject);
+   const normCourseSubject = normalize(c.subject);
+   const normCourseTitle = normalize(c.title);
+   const matches =
+    normCourseSubject === normSubject ||
+    normCourseTitle === normSubject ||
+    normCourseSubject.includes(normSubject) ||
+    normSubject.includes(normCourseSubject);
+   if (!matches) return false;
+  }
+
   if (track !== 'all' && c.track !== track) return false;
 
   if (query && !`${c.title} ${c.subject} ${c.blurb}`.toLowerCase().includes(query.toLowerCase()))
@@ -65,6 +78,26 @@ export default function Courses() {
    {/* results */}
    <section className="pb-14">
     <div className="container-tot">
+     {subject !== 'all' && (
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-amber-50/80 border border-amber-200/70 px-4 py-3 text-sm font-semibold text-navy-800">
+       <div className="flex items-center gap-2">
+        <span className="text-navy-500">Filter applied:</span>
+        <span className="rounded-full bg-amber-500 text-white font-bold px-3 py-0.5 text-xs shadow-xs">
+         {subject}
+        </span>
+        <span className="text-xs text-navy-400">
+         ({results.length} {results.length === 1 ? 'course' : 'courses'} found)
+        </span>
+       </div>
+       <Link
+        to="/courses"
+        className="text-xs font-bold text-amber-700 hover:text-amber-800 hover:underline"
+       >
+        Clear Filter (View All Courses)
+       </Link>
+      </div>
+     )}
+
      {results.length === 0 ? (
       <div className="rounded-4xl border-2 border-dashed border-navy-200 p-14 text-center">
        <ClayIcon name="puzzle" size={72} className="mx-auto" />
@@ -74,9 +107,14 @@ export default function Courses() {
        <p className="mt-1.5 text-[15px] text-navy-500">
         We can still match a teacher tell us the board and subject.
        </p>
-       <Button to="/contact" className="mt-6">
-        Ask for a custom match
-       </Button>
+       <div className="mt-6 flex flex-wrap justify-center gap-3">
+        <Button to="/courses" variant="outline">
+         View All Courses
+        </Button>
+        <Button to="/contact">
+         Ask for a custom match
+        </Button>
+       </div>
       </div>
      ) : (
       <div className="grid gap-5 sm:grid-cols-2">

@@ -101,6 +101,16 @@ export function Footer() {
                                 <p className="text-xs text-navy-300 leading-relaxed">{BRAND.ukOffice}</p>
                             </div>
                         </li>
+                        <li className="flex items-start gap-3">
+                            <MapPin className="mt-1 h-4 w-4 shrink-0 text-amber-400" />
+                            <div className="space-y-0.5">
+                                <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-amber-400">
+                                    <Flag code="NZ" size={14} />
+                                    <span>New Zealand Office</span>
+                                </span>
+                                <p className="text-xs text-navy-300 leading-relaxed">{BRAND.nzOffice}</p>
+                            </div>
+                        </li>
                     </ul>
 
                     <div className="mt-6 flex gap-2.5">

@@ -24,6 +24,7 @@ import type {
   address: 'C30, C Block, Sector 63, Noida, UP, 201301',
   indiaOffice: 'C30, C Block, Sector 63, Noida, UP, 201301',
   ukOffice: '13, Chestnut Avenue, Leicester, LE5 1FE, United Kingdom',
+  nzOffice: '23 Mark Road, Mount Albert, Auckland 1025',
 };
 
 export const NAV: NavItem[] = [

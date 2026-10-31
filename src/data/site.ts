@@ -294,9 +294,9 @@ export const MANIFESTO = [
 ];
 
 export const TRACKS: Track[] = [
- { id: 'elementary', label: 'Elementary', grades: 'Grades 1–5', icon: 'puzzle' },
- { id: 'intermediate', label: 'Intermediate', grades: 'Grades 6–9', icon: 'book' },
- { id: 'advanced', label: 'Advanced', grades: 'Grades 10–12', icon: 'target' },
+ { id: 'elementary', label: 'Elementary', grades: 'Year 1–5', icon: 'puzzle' },
+ { id: 'intermediate', label: 'Intermediate', grades: 'Year 6–9', icon: 'book' },
+ { id: 'advanced', label: 'Advanced', grades: 'Year 10–13', icon: 'target' },
 ];
 
 export const COURSE_SPECS: Spec[] = [

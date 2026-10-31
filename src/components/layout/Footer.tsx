@@ -67,12 +67,25 @@ export function Footer() {
                         <li className="flex items-start gap-3">
                             <MessageCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" />
                             <a
-                                href={`https://wa.me/${BRAND.whatsapp.replace(/\D/g, '')}`}
+                                href={`https://wa.me/${BRAND.whatsappUk.replace(/\D/g, '')}`}
                                 target="_blank"
                                 rel="noreferrer noopener"
-                                className="link-underline font-semibold text-navy-100"
+                                className="link-underline font-semibold text-navy-100 inline-flex items-center gap-1.5"
                             >
-                                WhatsApp Support: {BRAND.whatsapp}
+                                <Flag code="GB" size={14} />
+                                <span>WhatsApp (UK): {BRAND.whatsappUk}</span>
+                            </a>
+                        </li>
+                        <li className="flex items-start gap-3">
+                            <MessageCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" />
+                            <a
+                                href={`https://wa.me/${BRAND.whatsappNz.replace(/\D/g, '')}`}
+                                target="_blank"
+                                rel="noreferrer noopener"
+                                className="link-underline font-semibold text-navy-100 inline-flex items-center gap-1.5"
+                            >
+                                <Flag code="NZ" size={14} />
+                                <span>WhatsApp (NZ): {BRAND.whatsappNz}</span>
                             </a>
                         </li>
                         <li className="flex items-start gap-3">

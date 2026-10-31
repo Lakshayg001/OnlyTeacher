@@ -783,7 +783,7 @@ export const PRICING_DATA: Record<CountryCode, CountryPricingData> = {
     currency: 'NZ$',
     currencyCode: 'NZD',
     heroLandmark: 'Auckland Sky Tower & Southern Alps',
-    supportPhone: '+44 7884 981882',
+    supportPhone: '+64 21 148 1882',
 
     // Standard Plans (TriOrbit) Info
     standardTitle: 'Online Tuition for New Zealand Students',

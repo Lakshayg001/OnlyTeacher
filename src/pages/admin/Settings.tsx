@@ -107,6 +107,8 @@ export default function Settings() {
         ['Legal name', BRAND.legalName],
         ['Support email', BRAND.email],
         ['Support line', BRAND.phone],
+        ['WhatsApp (UK)', BRAND.whatsappUk],
+        ['WhatsApp (NZ)', BRAND.whatsappNz],
         ['India Office', BRAND.indiaOffice],
         ['UK Office', BRAND.ukOffice],
         ['New Zealand Office', BRAND.nzOffice],

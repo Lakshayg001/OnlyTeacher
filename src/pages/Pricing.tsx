@@ -1394,13 +1394,6 @@ export default function Pricing() {
                   </div>
                 </Reveal>
               ))}
-
-              {/* Terms and conditions notice below tier cards */}
-              <div className="pt-2 text-center">
-                <p className="text-xs font-semibold text-navy-500">
-                  *Terms and conditions apply. Please refer to terms and conditions below.
-                </p>
-              </div>
             </div>
           )}
 

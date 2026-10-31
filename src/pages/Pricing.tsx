@@ -549,6 +549,9 @@ export default function Pricing() {
                         >
                           Enquire for TOT Privé (Years 2–9)
                         </Button>
+                        <p className="mt-2.5 text-center text-[10px] font-semibold text-white/60 select-none">
+                          *Terms and conditions apply
+                        </p>
                       </div>
                     </div>
 
@@ -601,6 +604,9 @@ export default function Pricing() {
                         >
                           Enquire for TOT Privé (Years 10–13)
                         </Button>
+                        <p className="mt-2.5 text-center text-[10px] font-semibold text-white/60 select-none">
+                          *Terms and conditions apply
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -841,6 +847,9 @@ export default function Pricing() {
                             >
                               Enquire for TOT Privé (Years 1–6)
                             </Button>
+                            <p className="mt-2.5 text-center text-[10px] font-semibold text-white/60 select-none">
+                              *Terms and conditions apply
+                            </p>
                           </div>
                         </div>
                       );
@@ -904,6 +913,9 @@ export default function Pricing() {
                             >
                               Enquire for TOT Privé (Years 7–12)
                             </Button>
+                            <p className="mt-2.5 text-center text-[10px] font-semibold text-white/60 select-none">
+                              *Terms and conditions apply
+                            </p>
                           </div>
                         </div>
                       );
@@ -1371,6 +1383,9 @@ export default function Pricing() {
                               >
                                 Book a Free Trial Class
                               </Button>
+                              <p className="mt-2.5 text-center text-[10px] font-semibold text-navy-400 select-none">
+                                *Terms and conditions apply
+                              </p>
                             </div>
                           </div>
                         );
@@ -1379,6 +1394,13 @@ export default function Pricing() {
                   </div>
                 </Reveal>
               ))}
+
+              {/* Terms and conditions notice below tier cards */}
+              <div className="pt-2 text-center">
+                <p className="text-xs font-semibold text-navy-500">
+                  *Terms and conditions apply. Please refer to terms and conditions below.
+                </p>
+              </div>
             </div>
           )}
 
@@ -1496,6 +1518,13 @@ export default function Pricing() {
                 )}
               </div>
             </div>
+          </div>
+
+          {/* Bottom disclaimer line */}
+          <div className="mt-8 text-center">
+            <p className="text-xs font-medium text-navy-400">
+              *Terms and conditions apply. Please refer to terms and conditions below.
+            </p>
           </div>
         </div>
       </section>

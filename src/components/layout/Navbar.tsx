@@ -28,7 +28,7 @@ export function Navbar() {
     )}
    >
     <div className="container-tot flex h-20 items-center justify-between gap-4 sm:h-24">
-     <Logo className="shrink-0 h-16 sm:h-20 lg:h-24" />
+     <Logo className="shrink-0 h-14 sm:h-16 lg:h-18" />
 
      {/* Desktop nav */}
      <ul className="hidden items-center gap-1 lg:flex">
@@ -143,7 +143,7 @@ export function Navbar() {
        className="fixed right-0 top-0 z-[61] flex h-full w-[86%] max-w-sm flex-col bg-white shadow-clay-lg lg:hidden"
       >
        <div className="flex items-center justify-between border-b border-navy-100 p-5">
-        <Logo />
+        <Logo className="h-12" />
         <button
          onClick={() => setOpen(false)}
          className="grid h-10 w-10 place-items-center rounded-full bg-navy-50 text-navy-700"

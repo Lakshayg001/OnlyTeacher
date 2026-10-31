@@ -1316,10 +1316,10 @@ export default function Pricing() {
                                             <div className="text-[10px] text-navy-500 font-medium">
                                               {pkg.rate ? (
                                                 <span>
-                                                  Rate: <strong className="text-navy-800 font-bold">{pkg.rate}</strong> · Live Tuition
+                                                  Rate: <strong className="text-navy-800 font-bold">{pkg.rate}</strong> · {plan.id === 'alpha' ? 'Live One-to-One' : 'Group Tuition'}
                                                 </span>
                                               ) : (
-                                                'Live One-to-One / Group Tuition'
+                                                plan.id === 'alpha' ? 'Live One-to-One' : 'Group Tuition'
                                               )}
                                             </div>
                                           </div>

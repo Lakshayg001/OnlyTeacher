@@ -55,7 +55,10 @@ export function Footer() {
             {/* Main */}
             <div className="container-tot relative grid gap-10 py-14 lg:grid-cols-[1.4fr_3fr]">
                 <div>
-                    <Logo className="h-56" />
+                    <Logo
+                        className="h-40 w-40 sm:h-44 sm:w-44 rounded-full overflow-hidden bg-white shadow-xl flex items-center justify-center"
+                        imgClassName="h-full w-full object-cover rounded-full"
+                    />
 
                     <ul className="mt-6 space-y-3 text-sm">
                         <li className="flex items-start gap-3">

@@ -68,7 +68,7 @@ export default function AdminLayout() {
        )}
       >
        <div className="flex items-center justify-between px-5 py-5">
-        <Logo to="/admin" />
+        <Logo to="/admin" className="h-12 w-12 rounded-full overflow-hidden bg-white shadow-sm flex items-center justify-center p-0.5" imgClassName="h-full w-full object-cover rounded-full" />
         {!isDesktop && (
          <button
           onClick={() => setOpen(false)}

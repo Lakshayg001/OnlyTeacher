@@ -315,7 +315,7 @@ export default function BuyNowModal({
                       <span>Parent's Details</span>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <div>
+                      <div className="min-w-0">
                         <label className="block text-[11px] font-bold text-navy-600 mb-1">
                           Parent First Name <span className="text-rose-500">*</span>
                         </label>
@@ -325,7 +325,7 @@ export default function BuyNowModal({
                           onChange={(e) => setFormData({ ...formData, parentFirstName: e.target.value })}
                           placeholder="e.g. David"
                           className={cn(
-                            'w-full rounded-xl border bg-navy-50/50 px-3.5 py-2.5 text-sm font-semibold text-navy-800 outline-none transition-all focus:border-amber-500 focus:bg-white focus:ring-2 focus:ring-amber-500/20',
+                            'w-full min-w-0 rounded-xl border bg-navy-50/50 px-3.5 py-2.5 text-sm font-semibold text-navy-800 outline-none transition-all focus:border-amber-500 focus:bg-white focus:ring-2 focus:ring-amber-500/20',
                             errors.parentFirstName ? 'border-rose-400 bg-rose-50/30' : 'border-navy-200',
                           )}
                         />
@@ -334,7 +334,7 @@ export default function BuyNowModal({
                         )}
                       </div>
 
-                      <div>
+                      <div className="min-w-0">
                         <label className="block text-[11px] font-bold text-navy-600 mb-1">
                           Parent Last Name <span className="text-rose-500">*</span>
                         </label>
@@ -344,7 +344,7 @@ export default function BuyNowModal({
                           onChange={(e) => setFormData({ ...formData, parentLastName: e.target.value })}
                           placeholder="e.g. Miller"
                           className={cn(
-                            'w-full rounded-xl border bg-navy-50/50 px-3.5 py-2.5 text-sm font-semibold text-navy-800 outline-none transition-all focus:border-amber-500 focus:bg-white focus:ring-2 focus:ring-amber-500/20',
+                            'w-full min-w-0 rounded-xl border bg-navy-50/50 px-3.5 py-2.5 text-sm font-semibold text-navy-800 outline-none transition-all focus:border-amber-500 focus:bg-white focus:ring-2 focus:ring-amber-500/20',
                             errors.parentLastName ? 'border-rose-400 bg-rose-50/30' : 'border-navy-200',
                           )}
                         />
@@ -363,7 +363,7 @@ export default function BuyNowModal({
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
-                      <div>
+                      <div className="min-w-0">
                         <label className="block text-[11px] font-bold text-navy-600 mb-1">
                           Student First Name <span className="text-rose-500">*</span>
                         </label>
@@ -373,7 +373,7 @@ export default function BuyNowModal({
                           onChange={(e) => setFormData({ ...formData, studentFirstName: e.target.value })}
                           placeholder="e.g. Leo"
                           className={cn(
-                            'w-full rounded-xl border bg-navy-50/50 px-3.5 py-2.5 text-sm font-semibold text-navy-800 outline-none transition-all focus:border-amber-500 focus:bg-white focus:ring-2 focus:ring-amber-500/20',
+                            'w-full min-w-0 rounded-xl border bg-navy-50/50 px-3.5 py-2.5 text-sm font-semibold text-navy-800 outline-none transition-all focus:border-amber-500 focus:bg-white focus:ring-2 focus:ring-amber-500/20',
                             errors.studentFirstName ? 'border-rose-400 bg-rose-50/30' : 'border-navy-200',
                           )}
                         />
@@ -382,7 +382,7 @@ export default function BuyNowModal({
                         )}
                       </div>
 
-                      <div>
+                      <div className="min-w-0">
                         <label className="block text-[11px] font-bold text-navy-600 mb-1">
                           Student Last Name <span className="text-rose-500">*</span>
                         </label>
@@ -392,7 +392,7 @@ export default function BuyNowModal({
                           onChange={(e) => setFormData({ ...formData, studentLastName: e.target.value })}
                           placeholder="e.g. Miller"
                           className={cn(
-                            'w-full rounded-xl border bg-navy-50/50 px-3.5 py-2.5 text-sm font-semibold text-navy-800 outline-none transition-all focus:border-amber-500 focus:bg-white focus:ring-2 focus:ring-amber-500/20',
+                            'w-full min-w-0 rounded-xl border bg-navy-50/50 px-3.5 py-2.5 text-sm font-semibold text-navy-800 outline-none transition-all focus:border-amber-500 focus:bg-white focus:ring-2 focus:ring-amber-500/20',
                             errors.studentLastName ? 'border-rose-400 bg-rose-50/30' : 'border-navy-200',
                           )}
                         />
@@ -459,17 +459,22 @@ export default function BuyNowModal({
                       <span>Contact Details</span>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
                       {/* WhatsApp Number with Country Code */}
-                      <div>
+                      <div className="min-w-0">
                         <label className="block text-[11px] font-bold text-navy-600 mb-1">
                           WhatsApp Number <span className="text-rose-500">*</span>
                         </label>
-                        <div className="flex gap-1.5">
+                        <div
+                          className={cn(
+                            'flex rounded-xl border bg-navy-50/50 overflow-hidden transition-all focus-within:border-amber-500 focus-within:bg-white focus-within:ring-2 focus-within:ring-amber-500/20',
+                            errors.whatsappNumber ? 'border-rose-400 bg-rose-50/30' : 'border-navy-200',
+                          )}
+                        >
                           <select
                             value={formData.whatsappCode}
                             onChange={(e) => setFormData({ ...formData, whatsappCode: e.target.value })}
-                            className="w-[110px] shrink-0 rounded-xl border border-navy-200 bg-navy-50/50 px-2 py-2.5 text-xs font-bold text-navy-800 outline-none focus:border-amber-500 focus:bg-white"
+                            className="w-[95px] shrink-0 border-r border-navy-200 bg-transparent px-2.5 py-2.5 text-xs font-bold text-navy-800 outline-none cursor-pointer"
                           >
                             {COUNTRY_DIAL_CODES.map((c) => (
                               <option key={c.code} value={c.dial}>
@@ -483,10 +488,7 @@ export default function BuyNowModal({
                             value={formData.whatsappNumber}
                             onChange={(e) => setFormData({ ...formData, whatsappNumber: e.target.value })}
                             placeholder="e.g. 7884 981882"
-                            className={cn(
-                              'flex-1 rounded-xl border bg-navy-50/50 px-3.5 py-2.5 text-sm font-semibold text-navy-800 outline-none transition-all focus:border-amber-500 focus:bg-white focus:ring-2 focus:ring-amber-500/20',
-                              errors.whatsappNumber ? 'border-rose-400 bg-rose-50/30' : 'border-navy-200',
-                            )}
+                            className="w-full min-w-0 flex-1 bg-transparent px-3 py-2.5 text-sm font-semibold text-navy-800 outline-none placeholder:text-navy-400"
                           />
                         </div>
                         {errors.whatsappNumber && (
@@ -495,18 +497,18 @@ export default function BuyNowModal({
                       </div>
 
                       {/* Email */}
-                      <div>
+                      <div className="min-w-0">
                         <label className="block text-[11px] font-bold text-navy-600 mb-1">
                           Email Address <span className="text-rose-500">*</span>
                         </label>
-                        <div className="relative">
+                        <div className="relative min-w-0">
                           <input
                             type="email"
                             value={formData.email}
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                             placeholder="e.g. parent@example.com"
                             className={cn(
-                              'w-full rounded-xl border bg-navy-50/50 pl-9 pr-3.5 py-2.5 text-sm font-semibold text-navy-800 outline-none transition-all focus:border-amber-500 focus:bg-white focus:ring-2 focus:ring-amber-500/20',
+                              'w-full min-w-0 rounded-xl border bg-navy-50/50 pl-9 pr-3.5 py-2.5 text-sm font-semibold text-navy-800 outline-none transition-all focus:border-amber-500 focus:bg-white focus:ring-2 focus:ring-amber-500/20',
                               errors.email ? 'border-rose-400 bg-rose-50/30' : 'border-navy-200',
                             )}
                           />
@@ -528,14 +530,14 @@ export default function BuyNowModal({
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {/* Year */}
-                      <div>
+                      <div className="min-w-0">
                         <label className="block text-[11px] font-bold text-navy-600 mb-1">
                           Student Year / Grade <span className="text-rose-500">*</span>
                         </label>
                         <select
                           value={formData.year}
                           onChange={(e) => setFormData({ ...formData, year: e.target.value })}
-                          className="w-full rounded-xl border border-navy-200 bg-navy-50/50 px-3.5 py-2.5 text-sm font-semibold text-navy-800 outline-none focus:border-amber-500 focus:bg-white"
+                          className="w-full min-w-0 rounded-xl border border-navy-200 bg-navy-50/50 px-3.5 py-2.5 text-sm font-semibold text-navy-800 outline-none focus:border-amber-500 focus:bg-white"
                         >
                           {planContext?.years && (
                             <option value={planContext.years}>Selected Tier: {planContext.years}</option>
@@ -549,14 +551,14 @@ export default function BuyNowModal({
                       </div>
 
                       {/* Subject */}
-                      <div>
+                      <div className="min-w-0">
                         <label className="block text-[11px] font-bold text-navy-600 mb-1">
                           Primary Subject <span className="text-rose-500">*</span>
                         </label>
                         <select
                           value={formData.subject}
                           onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                          className="w-full rounded-xl border border-navy-200 bg-navy-50/50 px-3.5 py-2.5 text-sm font-semibold text-navy-800 outline-none focus:border-amber-500 focus:bg-white"
+                          className="w-full min-w-0 rounded-xl border border-navy-200 bg-navy-50/50 px-3.5 py-2.5 text-sm font-semibold text-navy-800 outline-none focus:border-amber-500 focus:bg-white"
                         >
                           {POPULAR_SUBJECTS.map((s) => (
                             <option key={s} value={s}>

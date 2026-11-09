@@ -31,6 +31,7 @@ import {
 import Flag from '@/components/ui/Flag';
 import PageHero from '@/components/layout/PageHero';
 import { Button, Reveal } from '@/components/ui/Primitives';
+import BuyNowModal, { BuyNowPlanContext } from '@/components/pricing/BuyNowModal';
 import { cn } from '@/lib/utils';
 import {
   CountryCode,
@@ -50,6 +51,8 @@ export default function Pricing() {
   const [selectedCountry, setSelectedCountry] = useState<CountryCode>('AU');
   const [selectedPlanType, setSelectedPlanType] = useState<PlanType>('flexicarry');
   const [uaeCurriculum, setUaeCurriculum] = useState<UAECurriculum>('international');
+  const [isBuyNowOpen, setIsBuyNowOpen] = useState(false);
+  const [selectedBuyNowPlan, setSelectedBuyNowPlan] = useState<BuyNowPlanContext | null>(null);
 
   const country = PRICING_DATA[selectedCountry];
 
@@ -1369,7 +1372,20 @@ export default function Pricing() {
                             {/* Card Footer Button */}
                             <div className="p-5 pt-0">
                               <Button
-                                to={`/contact?country=${encodeURIComponent(country.countryName)}&plan=${plan.name}&type=${selectedPlanType}`}
+                                onClick={() => {
+                                  setSelectedBuyNowPlan({
+                                    planName: plan.name,
+                                    tierTitle: tier.title,
+                                    years: tier.years,
+                                    price: isFlexi
+                                      ? plan.flexiPrice || ''
+                                      : plan.standardPackages?.[0]?.totalPrice || plan.standardRate || '',
+                                    planType: selectedPlanType,
+                                    countryName: country.countryName,
+                                    countryCode: country.countryCode,
+                                  });
+                                  setIsBuyNowOpen(true);
+                                }}
                                 variant={plan.color === 'amber' ? 'primary' : 'outline'}
                                 full
                                 size="sm"
@@ -1521,6 +1537,13 @@ export default function Pricing() {
           </div>
         </div>
       </section>
+
+      {/* Buy Now Enrolment Modal */}
+      <BuyNowModal
+        isOpen={isBuyNowOpen}
+        onClose={() => setIsBuyNowOpen(false)}
+        planContext={selectedBuyNowPlan}
+      />
     </>
   );
 }

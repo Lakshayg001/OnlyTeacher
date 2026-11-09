@@ -1381,7 +1381,7 @@ export default function Pricing() {
                                     'hover:border-[#16A34A] hover:text-[#16A34A] hover:bg-[#16A34A]/5',
                                 )}
                               >
-                                Book a Free Trial Class
+                                Buy Now
                               </Button>
                               <p className="mt-2.5 text-center text-[10px] font-semibold text-navy-400 select-none">
                                 *Terms and conditions apply

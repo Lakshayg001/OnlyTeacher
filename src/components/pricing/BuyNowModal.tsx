@@ -50,16 +50,131 @@ const SCHOOL_YEARS = [
   'Year 11', 'Year 12', 'Year 13',
 ];
 
-const POPULAR_SUBJECTS = [
-  'Mathematics',
-  'English (Language & Literature)',
-  'Science (Combined)',
-  'Physics',
-  'Chemistry',
-  'Biology',
-  'Economics & Business',
-  'ExamEdge / 11+ / Entrance',
-  'Other / Multiple Subjects',
+export interface SubjectSection {
+  category: string;
+  options: string[];
+}
+
+export const SUBJECT_SECTIONS: SubjectSection[] = [
+  {
+    category: '1. Common Subjects (All Ages & Curricula)',
+    options: [
+      'Maths: Maths (General / Core)',
+      'Maths: Further Maths',
+      'Maths: Statistics',
+      'Maths: Mental Maths',
+      'Maths: Vedic Maths',
+      'English: Language',
+      'English: Literature',
+      'English: Creative Writing',
+      'English: Reading & Comprehension',
+      'English: Phonics (Early Years)',
+      'Science: Physics',
+      'Science: Chemistry',
+      'Science: Biology',
+      'Science: General / Combined Science',
+      'Science: Environmental Science',
+      'Computing: Computer Science',
+      'Computing: Coding (Python, Java, Scratch)',
+      'Computing: Web Development',
+      'Computing: AI Basics',
+      'Computing: Robotics',
+      'Commerce: Economics',
+      'Commerce: Business Studies',
+      'Commerce: Accounting',
+      'Humanities: History',
+      'Humanities: Geography',
+      'Humanities: Social Studies',
+      'Humanities: Civics / Global Politics',
+      'Humanities: Psychology',
+      'Humanities: Sociology',
+      'Creative: Art & Design',
+      'Creative: Music Theory (ABRSM, Trinity)',
+    ],
+  },
+  {
+    category: '2. 🎯 Exam Preparation',
+    options: [
+      'International: IB (PYP, MYP, DP)',
+      'International: Cambridge (IGCSE, AS & A Level)',
+      'International: Pearson Edexcel',
+      'International: Advanced Placement (AP)',
+      'UK: KS1–KS3 SATs',
+      'UK: 11+ & 13+ Entrance Exams',
+      'UK: GCSE / IGCSE',
+      'UK: A Level',
+      'UK: University Admissions (UCAT, LNAT, TMUA, MAT, STEP)',
+      'USA/Canada: SAT, PSAT & ACT',
+      'USA/Canada: SSAT & ISEE',
+      'USA/Canada: AMC Maths',
+      'Canada: Provincial Exams (Ontario, BC, Alberta)',
+      'Australia: NAPLAN & Selective School Tests',
+      'Australia: HSC, VCE, QCE, WACE (ATAR)',
+      'Australia/NZ: UCAT ANZ',
+      'New Zealand: NCEA & NZ Scholarship',
+      'India: CBSE Board',
+      'India: ICSE / ISC Board',
+      'India: State Boards',
+      'India: JEE Main & Advanced',
+      'India: NEET',
+      'India: CUET & CLAT',
+      'India: Olympiads (Maths / Science)',
+      'Singapore: PSLE, O/N Level, SEC, A Level',
+      'Malaysia: SPM, STPM, UEC',
+      'Japan: Eiken',
+      'China: Gaokao Support',
+      'Germany: Abitur',
+      'English Test: IELTS (Academic / General)',
+      'English Test: TOEFL',
+      'English Test: PTE Academic',
+      'English Test: Duolingo English Test (DET)',
+      'English Test: TOEIC',
+      'English Test: Cambridge English (A2 Key to C1 Advanced)',
+      'Higher Studies: GRE',
+      'Higher Studies: GMAT',
+      'Higher Studies: CAT',
+    ],
+  },
+  {
+    category: '3. 🗣️ Language Learning',
+    options: [
+      'French (DELF / DALF, TEF / TCF)',
+      'German (Goethe-Zertifikat, TestDaF)',
+      'Japanese (JLPT N5–N1)',
+      'Chinese / Mandarin (HSK, YCT for Kids)',
+      'Spanish (DELE, SIELE)',
+      'Arabic (Conversational, Quranic, GCSE/IB)',
+      'Hindi (School-level & Heritage Classes)',
+      'Punjabi (School-level & Heritage Classes)',
+      'Korean (TOPIK)',
+      'Italian',
+      'Portuguese',
+      'Russian',
+      'Urdu',
+      'Tamil',
+      'Gujarati',
+      'Sanskrit',
+    ],
+  },
+  {
+    category: '4. 🌟 Personality Development & Life Skills',
+    options: [
+      'Spoken English & Fluency',
+      'English Grammar (Beginner to Advanced)',
+      'Accent & Pronunciation',
+      'Public Speaking & Presentation Skills',
+      'Interview Cracking (School, University, Job)',
+      'Debate & Elocution',
+      'Confidence Building',
+      'Communication & Soft Skills',
+      'Leadership',
+      'Study Skills & Time Management',
+      'Critical Thinking',
+      'Etiquette & Body Language',
+      'CV / Resume & LinkedIn Profile Writing',
+      'Other / Custom Subject Requirement',
+    ],
+  },
 ];
 
 interface BuyNowModalProps {
@@ -94,7 +209,7 @@ export default function BuyNowModal({
     whatsappNumber: '',
     email: '',
     year: planContext?.years || 'Year 1',
-    subject: 'Mathematics',
+    subject: SUBJECT_SECTIONS[0].options[0],
     planContext: planContext || undefined,
   });
 
@@ -558,12 +673,24 @@ export default function BuyNowModal({
                         <select
                           value={formData.subject}
                           onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                          className="w-full min-w-0 rounded-xl border border-navy-200 bg-navy-50/50 px-3.5 py-2.5 text-sm font-semibold text-navy-800 outline-none focus:border-amber-500 focus:bg-white"
+                          className="w-full min-w-0 rounded-xl border border-navy-200 bg-navy-50/50 px-3 py-2.5 text-xs sm:text-sm font-semibold text-navy-800 outline-none transition-all focus:border-amber-500 focus:bg-white focus:ring-2 focus:ring-amber-500/20 truncate"
                         >
-                          {POPULAR_SUBJECTS.map((s) => (
-                            <option key={s} value={s}>
-                              {s}
-                            </option>
+                          {SUBJECT_SECTIONS.map((section) => (
+                            <optgroup
+                              key={section.category}
+                              label={section.category}
+                              className="font-bold text-navy-900 bg-navy-50"
+                            >
+                              {section.options.map((s) => (
+                                <option
+                                  key={s}
+                                  value={s}
+                                  className="font-normal text-navy-700 bg-white py-1"
+                                >
+                                  {s}
+                                </option>
+                              ))}
+                            </optgroup>
                           ))}
                         </select>
                       </div>

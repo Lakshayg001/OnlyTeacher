@@ -21,8 +21,11 @@ export interface BuyNowFormData {
   studentFirstName: string;
   studentLastName: string;
   studentRelation: 'Son' | 'Daughter' | '';
+  nationality: string;
   whatsappCode: string;
   whatsappNumber: string;
+  phoneCode: string;
+  phoneNumber: string;
   email: string;
   year: string;
   subject: string;
@@ -30,19 +33,33 @@ export interface BuyNowFormData {
   planContext?: BuyNowPlanContext;
 }
 
-const COUNTRY_DIAL_CODES = [
-  { code: 'GB', dial: '+44', label: 'UK (+44)' },
-  { code: 'AU', dial: '+61', label: 'Australia (+61)' },
-  { code: 'NZ', dial: '+64', label: 'New Zealand (+64)' },
-  { code: 'AE', dial: '+971', label: 'UAE (+971)' },
-  { code: 'IN', dial: '+91', label: 'India (+91)' },
-  { code: 'US', dial: '+1', label: 'USA / Canada (+1)' },
-  { code: 'SG', dial: '+65', label: 'Singapore (+65)' },
-  { code: 'QA', dial: '+974', label: 'Qatar (+974)' },
-  { code: 'SA', dial: '+966', label: 'Saudi Arabia (+966)' },
-  { code: 'OM', dial: '+968', label: 'Oman (+968)' },
-  { code: 'KW', dial: '+965', label: 'Kuwait (+965)' },
-  { code: 'OTHER', dial: '+', label: 'Other (+)' },
+export interface CountryOption {
+  code: string;
+  name: string;
+  dial: string;
+  flag: string;
+}
+
+export const FORM_COUNTRIES: CountryOption[] = [
+  { code: 'IN', name: 'India', dial: '+91', flag: '🇮🇳' },
+  { code: 'GB', name: 'United Kingdom', dial: '+44', flag: '🇬🇧' },
+  { code: 'AE', name: 'UAE', dial: '+971', flag: '🇦🇪' },
+  { code: 'AU', name: 'Australia', dial: '+61', flag: '🇦🇺' },
+  { code: 'US', name: 'USA', dial: '+1', flag: '🇺🇸' },
+  { code: 'CA', name: 'Canada', dial: '+1', flag: '🇨🇦' },
+  { code: 'SG', name: 'Singapore', dial: '+65', flag: '🇸🇬' },
+  { code: 'NZ', name: 'New Zealand', dial: '+64', flag: '🇳🇿' },
+  { code: 'QA', name: 'Qatar', dial: '+974', flag: '🇶🇦' },
+  { code: 'SA', name: 'Saudi Arabia', dial: '+966', flag: '🇸🇦' },
+  { code: 'OM', name: 'Oman', dial: '+968', flag: '🇴🇲' },
+  { code: 'KW', name: 'Kuwait', dial: '+965', flag: '🇰🇼' },
+  { code: 'MY', name: 'Malaysia', dial: '+60', flag: '🇲🇾' },
+  { code: 'BR', name: 'Brazil', dial: '+55', flag: '🇧🇷' },
+  { code: 'MX', name: 'Mexico', dial: '+52', flag: '🇲🇽' },
+  { code: 'JP', name: 'Japan', dial: '+81', flag: '🇯🇵' },
+  { code: 'BH', name: 'Bahrain', dial: '+973', flag: '🇧🇭' },
+  { code: 'CH', name: 'Switzerland', dial: '+41', flag: '🇨🇭' },
+  { code: 'OTHER', name: 'Other', dial: '+', flag: '🌐' },
 ];
 
 const SCHOOL_YEARS = [
@@ -196,8 +213,19 @@ export default function BuyNowModal({
   // Default dial code based on country
   const getDefaultDialCode = () => {
     if (!planContext?.countryCode) return '+44';
-    const match = COUNTRY_DIAL_CODES.find((c) => c.code === planContext.countryCode);
+    const match = FORM_COUNTRIES.find((c) => c.code === planContext.countryCode);
     return match ? match.dial : '+44';
+  };
+
+  // Default nationality based on country context
+  const getDefaultNationality = () => {
+    if (!planContext?.countryName) return 'India';
+    const match = FORM_COUNTRIES.find(
+      (c) =>
+        c.name.toLowerCase() === planContext.countryName?.toLowerCase() ||
+        c.code === planContext.countryCode,
+    );
+    return match ? match.name : 'India';
   };
 
   const [formData, setFormData] = useState<BuyNowFormData>({
@@ -206,8 +234,11 @@ export default function BuyNowModal({
     studentFirstName: '',
     studentLastName: '',
     studentRelation: '',
+    nationality: getDefaultNationality(),
     whatsappCode: getDefaultDialCode(),
     whatsappNumber: '',
+    phoneCode: getDefaultDialCode(),
+    phoneNumber: '',
     email: '',
     year: planContext?.years || 'Year 1',
     subject: SUBJECT_SECTIONS[0].options[0],
@@ -224,7 +255,9 @@ export default function BuyNowModal({
     if (planContext) {
       setFormData((prev) => ({
         ...prev,
+        nationality: prev.nationality || getDefaultNationality(),
         whatsappCode: getDefaultDialCode(),
+        phoneCode: getDefaultDialCode(),
         year: planContext.years || prev.year || 'Year 1',
         planContext,
       }));
@@ -250,10 +283,16 @@ export default function BuyNowModal({
     if (!formData.studentFirstName.trim()) newErrors.studentFirstName = 'Student first name is required';
     if (!formData.studentLastName.trim()) newErrors.studentLastName = 'Student last name is required';
     if (!formData.studentRelation) newErrors.studentRelation = 'Please select Son or Daughter';
+    if (!formData.nationality.trim()) newErrors.nationality = 'Please select nationality';
     if (!formData.whatsappNumber.trim()) {
       newErrors.whatsappNumber = 'WhatsApp number is required';
     } else if (formData.whatsappNumber.replace(/\D/g, '').length < 6) {
       newErrors.whatsappNumber = 'Please enter a valid phone number';
+    }
+    if (!formData.phoneNumber.trim()) {
+      newErrors.phoneNumber = 'Phone number is required';
+    } else if (formData.phoneNumber.replace(/\D/g, '').length < 6) {
+      newErrors.phoneNumber = 'Please enter a valid phone number';
     }
     if (!formData.email.trim()) {
       newErrors.email = 'Email address is required';
@@ -522,53 +561,84 @@ export default function BuyNowModal({
                       </div>
                     </div>
 
-                    {/* Son / Daughter Selector */}
-                    <div>
-                      <label className="block text-[11px] font-bold text-navy-600 mb-1.5">
-                        Child is your <span className="text-rose-500">*</span>
-                      </label>
-                      <div className="grid grid-cols-2 gap-3">
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setFormData({ ...formData, studentRelation: 'Son' });
-                            if (errors.studentRelation) {
-                              setErrors((prev) => ({ ...prev, studentRelation: '' }));
-                            }
-                          }}
-                          className={cn(
-                            'flex items-center justify-center gap-2 rounded-xl py-2.5 px-4 text-xs font-black transition-all border-2',
-                            formData.studentRelation === 'Son'
-                              ? 'border-[#0284C7] bg-[#0284C7]/10 text-[#0284C7] shadow-sm'
-                              : 'border-navy-200 bg-white text-navy-600 hover:border-navy-300',
-                          )}
-                        >
-                          <span className="text-base">👦</span>
-                          <span>Son</span>
-                        </button>
+                    {/* Son / Daughter Selector & Nationality */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-[11px] font-bold text-navy-600 mb-1.5">
+                          Child is your <span className="text-rose-500">*</span>
+                        </label>
+                        <div className="grid grid-cols-2 gap-2">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setFormData({ ...formData, studentRelation: 'Son' });
+                              if (errors.studentRelation) {
+                                setErrors((prev) => ({ ...prev, studentRelation: '' }));
+                              }
+                            }}
+                            className={cn(
+                              'flex items-center justify-center gap-1.5 rounded-xl py-2.5 px-3 text-xs font-black transition-all border-2',
+                              formData.studentRelation === 'Son'
+                                ? 'border-[#0284C7] bg-[#0284C7]/10 text-[#0284C7] shadow-sm'
+                                : 'border-navy-200 bg-white text-navy-600 hover:border-navy-300',
+                            )}
+                          >
+                            <span className="text-base">👦</span>
+                            <span>Son</span>
+                          </button>
 
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setFormData({ ...formData, studentRelation: 'Daughter' });
-                            if (errors.studentRelation) {
-                              setErrors((prev) => ({ ...prev, studentRelation: '' }));
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setFormData({ ...formData, studentRelation: 'Daughter' });
+                              if (errors.studentRelation) {
+                                setErrors((prev) => ({ ...prev, studentRelation: '' }));
+                              }
+                            }}
+                            className={cn(
+                              'flex items-center justify-center gap-1.5 rounded-xl py-2.5 px-3 text-xs font-black transition-all border-2',
+                              formData.studentRelation === 'Daughter'
+                                ? 'border-[#D946EF] bg-[#D946EF]/10 text-[#D946EF] shadow-sm'
+                                : 'border-navy-200 bg-white text-navy-600 hover:border-navy-300',
+                            )}
+                          >
+                            <span className="text-base">👧</span>
+                            <span>Daughter</span>
+                          </button>
+                        </div>
+                        {errors.studentRelation && (
+                          <p className="mt-1 text-[11px] text-rose-500 font-medium">{errors.studentRelation}</p>
+                        )}
+                      </div>
+
+                      <div className="min-w-0">
+                        <label className="block text-[11px] font-bold text-navy-600 mb-1.5">
+                          Nationality <span className="text-rose-500">*</span>
+                        </label>
+                        <select
+                          value={formData.nationality}
+                          onChange={(e) => {
+                            setFormData({ ...formData, nationality: e.target.value });
+                            if (errors.nationality) {
+                              setErrors((prev) => ({ ...prev, nationality: '' }));
                             }
                           }}
                           className={cn(
-                            'flex items-center justify-center gap-2 rounded-xl py-2.5 px-4 text-xs font-black transition-all border-2',
-                            formData.studentRelation === 'Daughter'
-                              ? 'border-[#D946EF] bg-[#D946EF]/10 text-[#D946EF] shadow-sm'
-                              : 'border-navy-200 bg-white text-navy-600 hover:border-navy-300',
+                            'w-full min-w-0 rounded-xl border bg-navy-50/50 px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-navy-800 outline-none transition-all focus:border-amber-500 focus:bg-white focus:ring-2 focus:ring-amber-500/20 truncate cursor-pointer',
+                            errors.nationality ? 'border-rose-400 bg-rose-50/30' : 'border-navy-200',
                           )}
                         >
-                          <span className="text-base">👧</span>
-                          <span>Daughter</span>
-                        </button>
+                          <option value="">Select Nationality</option>
+                          {FORM_COUNTRIES.map((c) => (
+                            <option key={c.code} value={c.name}>
+                              {c.flag} {c.name}
+                            </option>
+                          ))}
+                        </select>
+                        {errors.nationality && (
+                          <p className="mt-1 text-[11px] text-rose-500 font-medium">{errors.nationality}</p>
+                        )}
                       </div>
-                      {errors.studentRelation && (
-                        <p className="mt-1 text-[11px] text-rose-500 font-medium">{errors.studentRelation}</p>
-                      )}
                     </div>
                   </div>
 
@@ -579,7 +649,7 @@ export default function BuyNowModal({
                       <span>Contact Details</span>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
                       {/* WhatsApp Number with Country Code */}
                       <div className="min-w-0">
                         <label className="block text-[11px] font-bold text-navy-600 mb-1">
@@ -594,11 +664,11 @@ export default function BuyNowModal({
                           <select
                             value={formData.whatsappCode}
                             onChange={(e) => setFormData({ ...formData, whatsappCode: e.target.value })}
-                            className="w-[95px] shrink-0 border-r border-navy-200 bg-transparent px-2.5 py-2.5 text-xs font-bold text-navy-800 outline-none cursor-pointer"
+                            className="w-[105px] shrink-0 border-r border-navy-200 bg-transparent px-2 py-2.5 text-xs font-bold text-navy-800 outline-none cursor-pointer"
                           >
-                            {COUNTRY_DIAL_CODES.map((c) => (
+                            {FORM_COUNTRIES.map((c) => (
                               <option key={c.code} value={c.dial}>
-                                {c.dial} ({c.code})
+                                {c.flag} {c.dial} ({c.code})
                               </option>
                             ))}
                           </select>
@@ -616,28 +686,82 @@ export default function BuyNowModal({
                         )}
                       </div>
 
-                      {/* Email */}
+                      {/* Phone Number with Country Code */}
                       <div className="min-w-0">
-                        <label className="block text-[11px] font-bold text-navy-600 mb-1">
-                          Email Address <span className="text-rose-500">*</span>
-                        </label>
-                        <div className="relative min-w-0">
-                          <input
-                            type="email"
-                            value={formData.email}
-                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                            placeholder="e.g. parent@example.com"
-                            className={cn(
-                              'w-full min-w-0 rounded-xl border bg-navy-50/50 pl-9 pr-3.5 py-2.5 text-sm font-semibold text-navy-800 outline-none transition-all focus:border-amber-500 focus:bg-white focus:ring-2 focus:ring-amber-500/20',
-                              errors.email ? 'border-rose-400 bg-rose-50/30' : 'border-navy-200',
-                            )}
-                          />
-                          <Mail className="absolute left-3 top-3 h-4 w-4 text-navy-400 pointer-events-none" />
+                        <div className="flex items-center justify-between mb-1">
+                          <label className="block text-[11px] font-bold text-navy-600">
+                            Phone Number <span className="text-rose-500">*</span>
+                          </label>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setFormData((prev) => ({
+                                ...prev,
+                                phoneCode: prev.whatsappCode,
+                                phoneNumber: prev.whatsappNumber,
+                              }));
+                              if (errors.phoneNumber) {
+                                setErrors((prev) => ({ ...prev, phoneNumber: '' }));
+                              }
+                            }}
+                            className="text-[10px] font-bold text-amber-600 hover:text-amber-700 transition-colors"
+                          >
+                            Same as WhatsApp
+                          </button>
                         </div>
-                        {errors.email && (
-                          <p className="mt-1 text-[11px] text-rose-500 font-medium">{errors.email}</p>
+                        <div
+                          className={cn(
+                            'flex rounded-xl border bg-navy-50/50 overflow-hidden transition-all focus-within:border-amber-500 focus-within:bg-white focus-within:ring-2 focus-within:ring-amber-500/20',
+                            errors.phoneNumber ? 'border-rose-400 bg-rose-50/30' : 'border-navy-200',
+                          )}
+                        >
+                          <select
+                            value={formData.phoneCode}
+                            onChange={(e) => setFormData({ ...formData, phoneCode: e.target.value })}
+                            className="w-[105px] shrink-0 border-r border-navy-200 bg-transparent px-2 py-2.5 text-xs font-bold text-navy-800 outline-none cursor-pointer"
+                          >
+                            {FORM_COUNTRIES.map((c) => (
+                              <option key={c.code} value={c.dial}>
+                                {c.flag} {c.dial} ({c.code})
+                              </option>
+                            ))}
+                          </select>
+
+                          <input
+                            type="tel"
+                            value={formData.phoneNumber}
+                            onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
+                            placeholder="e.g. 7884 981882"
+                            className="w-full min-w-0 flex-1 bg-transparent px-3 py-2.5 text-sm font-semibold text-navy-800 outline-none placeholder:text-navy-400"
+                          />
+                        </div>
+                        {errors.phoneNumber && (
+                          <p className="mt-1 text-[11px] text-rose-500 font-medium">{errors.phoneNumber}</p>
                         )}
                       </div>
+                    </div>
+
+                    {/* Email */}
+                    <div className="min-w-0">
+                      <label className="block text-[11px] font-bold text-navy-600 mb-1">
+                        Email Address <span className="text-rose-500">*</span>
+                      </label>
+                      <div className="relative min-w-0">
+                        <input
+                          type="email"
+                          value={formData.email}
+                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                          placeholder="e.g. parent@example.com"
+                          className={cn(
+                            'w-full min-w-0 rounded-xl border bg-navy-50/50 pl-9 pr-3.5 py-2.5 text-sm font-semibold text-navy-800 outline-none transition-all focus:border-amber-500 focus:bg-white focus:ring-2 focus:ring-amber-500/20',
+                            errors.email ? 'border-rose-400 bg-rose-50/30' : 'border-navy-200',
+                          )}
+                        />
+                        <Mail className="absolute left-3 top-3 h-4 w-4 text-navy-400 pointer-events-none" />
+                      </div>
+                      {errors.email && (
+                        <p className="mt-1 text-[11px] text-rose-500 font-medium">{errors.email}</p>
+                      )}
                     </div>
                   </div>
 

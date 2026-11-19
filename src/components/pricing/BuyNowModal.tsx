@@ -12,11 +12,14 @@ import {
   ChevronDown,
   Globe,
   Check,
+  ShieldCheck,
 } from 'lucide-react';
 import { useLockBody } from '@/lib/hooks';
 import { Button } from '@/components/ui/Primitives';
 import Flag from '@/components/ui/Flag';
 import { cn } from '@/lib/utils';
+import { auth } from '@/lib/firebase';
+import { RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult } from 'firebase/auth';
 
 export interface BuyNowPlanContext {
   planName: string;
@@ -509,6 +512,92 @@ export default function BuyNowModal({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  // OTP Verification State
+  const [otpRequested, setOtpRequested] = useState(false);
+  const [otpCode, setOtpCode] = useState('');
+  const [isPhoneVerified, setIsPhoneVerified] = useState(false);
+  const [confirmationResult, setConfirmationResult] = useState<ConfirmationResult | null>(null);
+  const [isSendingOtp, setIsSendingOtp] = useState(false);
+  const [isVerifyingOtp, setIsVerifyingOtp] = useState(false);
+  const [otpError, setOtpError] = useState<string | null>(null);
+
+  // Reset OTP state when modal opens/closes
+  useEffect(() => {
+    if (!isOpen) {
+      setIsPhoneVerified(false);
+      setOtpRequested(false);
+      setOtpCode('');
+      setOtpError(null);
+      setConfirmationResult(null);
+    }
+  }, [isOpen]);
+
+  const sendOtp = async () => {
+    const rawNumber = formData.phoneNumber.replace(/\D/g, '');
+    if (!formData.phoneNumber || rawNumber.length < 6) {
+      setOtpError('Please enter a valid phone number before requesting OTP');
+      return;
+    }
+    setIsSendingOtp(true);
+    setOtpError(null);
+
+    try {
+      const fullPhoneNumber = formData.phoneCode + rawNumber;
+
+      if (!window.recaptchaVerifier) {
+        window.recaptchaVerifier = new RecaptchaVerifier(auth, 'buynow-recaptcha-container', {
+          size: 'invisible',
+          callback: () => {
+            // reCAPTCHA solved
+          },
+        });
+      }
+
+      const appVerifier = window.recaptchaVerifier;
+      const confirmation = await signInWithPhoneNumber(auth, fullPhoneNumber, appVerifier);
+      setConfirmationResult(confirmation);
+      setOtpRequested(true);
+    } catch (err: any) {
+      console.error('Error sending OTP', err);
+      setOtpError(err.message || 'Failed to send OTP. Please check the number and try again.');
+      if (window.recaptchaVerifier) {
+        try {
+          const widgetId = await window.recaptchaVerifier.render();
+          if (window.grecaptcha) {
+            window.grecaptcha.reset(widgetId);
+          }
+        } catch {}
+      }
+    } finally {
+      setIsSendingOtp(false);
+    }
+  };
+
+  const verifyOtp = async () => {
+    if (!otpCode || otpCode.trim().length < 4) {
+      setOtpError('Please enter a valid OTP code');
+      return;
+    }
+    setIsVerifyingOtp(true);
+    setOtpError(null);
+
+    try {
+      if (confirmationResult) {
+        await confirmationResult.confirm(otpCode.trim());
+        setIsPhoneVerified(true);
+        setOtpError(null);
+        if (errors.phoneNumber) {
+          setErrors((prev) => ({ ...prev, phoneNumber: '' }));
+        }
+      }
+    } catch (err: any) {
+      console.error('Error verifying OTP', err);
+      setOtpError('Invalid OTP code. Please check and try again.');
+    } finally {
+      setIsVerifyingOtp(false);
+    }
+  };
+
   // Sync default country code when context changes
   useEffect(() => {
     if (planContext) {
@@ -555,6 +644,8 @@ export default function BuyNowModal({
       newErrors.phoneNumber = 'Phone number is required';
     } else if (formData.phoneNumber.replace(/\D/g, '').length < 6) {
       newErrors.phoneNumber = 'Please enter a valid phone number';
+    } else if (!isPhoneVerified) {
+      newErrors.phoneNumber = 'Please verify your phone number via OTP';
     }
     if (!formData.email.trim()) {
       newErrors.email = 'Email address is required';
@@ -729,6 +820,8 @@ export default function BuyNowModal({
               ) : (
                 /* Form View */
                 <form onSubmit={handleSubmit} className="space-y-5">
+                  {/* Invisible Recaptcha Container for Phone OTP */}
+                  <div id="buynow-recaptcha-container"></div>
                   {/* Section 1: Parents Details */}
                   <div>
                     <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-navy-700 mb-2.5">
@@ -921,51 +1014,127 @@ export default function BuyNowModal({
                         error={errors.whatsappNumber}
                       />
 
-                      {/* Phone Number with Country Code */}
-                      <CountryCodeInput
-                        label="Phone Number"
-                        required
-                        countryCode={formData.phoneCountryCode}
-                        dialCode={formData.phoneCode}
-                        numberValue={formData.phoneNumber}
-                        onCountryChange={(country) => {
-                          setFormData((prev) => ({
-                            ...prev,
-                            phoneCountryCode: country.code,
-                            phoneCode: country.dial,
-                          }));
-                          if (errors.phoneNumber) {
-                            setErrors((prev) => ({ ...prev, phoneNumber: '' }));
+                      {/* Phone Number with Country Code & OTP Verification */}
+                      <div className="flex flex-col">
+                        <CountryCodeInput
+                          label="Phone Number"
+                          required
+                          countryCode={formData.phoneCountryCode}
+                          dialCode={formData.phoneCode}
+                          numberValue={formData.phoneNumber}
+                          onCountryChange={(country) => {
+                            setFormData((prev) => ({
+                              ...prev,
+                              phoneCountryCode: country.code,
+                              phoneCode: country.dial,
+                            }));
+                            setIsPhoneVerified(false);
+                            setOtpRequested(false);
+                            setOtpCode('');
+                            setOtpError(null);
+                          }}
+                          onNumberChange={(num) => {
+                            setFormData((prev) => ({ ...prev, phoneNumber: num }));
+                            setIsPhoneVerified(false);
+                            setOtpRequested(false);
+                            setOtpCode('');
+                            setOtpError(null);
+                            if (errors.phoneNumber) {
+                              setErrors((prev) => ({ ...prev, phoneNumber: '' }));
+                            }
+                          }}
+                          placeholder="e.g. 7884 981882"
+                          error={errors.phoneNumber}
+                          rightAction={
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  phoneCountryCode: prev.whatsappCountryCode,
+                                  phoneCode: prev.whatsappCode,
+                                  phoneNumber: prev.whatsappNumber,
+                                }));
+                                setIsPhoneVerified(false);
+                                setOtpRequested(false);
+                                setOtpCode('');
+                                setOtpError(null);
+                                if (errors.phoneNumber) {
+                                  setErrors((prev) => ({ ...prev, phoneNumber: '' }));
+                                }
+                              }}
+                              className="text-[10px] font-bold text-amber-600 hover:text-amber-700 transition-colors cursor-pointer"
+                            >
+                              Same as WhatsApp
+                            </button>
                           }
-                        }}
-                        onNumberChange={(num) => {
-                          setFormData((prev) => ({ ...prev, phoneNumber: num }));
-                          if (errors.phoneNumber) {
-                            setErrors((prev) => ({ ...prev, phoneNumber: '' }));
-                          }
-                        }}
-                        placeholder="e.g. 7884 981882"
-                        error={errors.phoneNumber}
-                        rightAction={
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setFormData((prev) => ({
-                                ...prev,
-                                phoneCountryCode: prev.whatsappCountryCode,
-                                phoneCode: prev.whatsappCode,
-                                phoneNumber: prev.whatsappNumber,
-                              }));
-                              if (errors.phoneNumber) {
-                                setErrors((prev) => ({ ...prev, phoneNumber: '' }));
-                              }
-                            }}
-                            className="text-[10px] font-bold text-amber-600 hover:text-amber-700 transition-colors cursor-pointer"
-                          >
-                            Same as WhatsApp
-                          </button>
-                        }
-                      />
+                        />
+
+                        {/* OTP Verification UI */}
+                        <div className="mt-1.5">
+                          {!isPhoneVerified && !otpRequested && (
+                            <button
+                              type="button"
+                              onClick={sendOtp}
+                              disabled={isSendingOtp || !formData.phoneNumber.trim()}
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 text-xs font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                            >
+                              <ShieldCheck className="h-3.5 w-3.5 text-amber-600 shrink-0" />
+                              <span>{isSendingOtp ? 'Sending OTP...' : 'Send OTP to Verify'}</span>
+                            </button>
+                          )}
+
+                          {!isPhoneVerified && otpRequested && (
+                            <div className="rounded-xl border border-amber-200 bg-amber-50/70 p-2.5 space-y-2 mt-1">
+                              <div className="flex items-center justify-between text-xs font-bold text-amber-950">
+                                <span className="flex items-center gap-1.5 text-[11px]">
+                                  <ShieldCheck className="h-3.5 w-3.5 text-amber-600 shrink-0" />
+                                  <span>Enter OTP sent to phone</span>
+                                </span>
+                                <button
+                                  type="button"
+                                  onClick={sendOtp}
+                                  disabled={isSendingOtp}
+                                  className="text-[11px] font-bold text-amber-700 underline hover:text-amber-800 disabled:opacity-50 cursor-pointer"
+                                >
+                                  {isSendingOtp ? 'Sending...' : 'Resend OTP'}
+                                </button>
+                              </div>
+                              <div className="flex gap-2">
+                                <input
+                                  type="text"
+                                  maxLength={6}
+                                  value={otpCode}
+                                  onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, ''))}
+                                  placeholder="6-digit OTP"
+                                  className="w-full min-w-0 rounded-lg border border-navy-200 bg-white px-2.5 py-1.5 text-xs font-bold text-navy-900 tracking-wider placeholder:tracking-normal placeholder:font-normal focus:border-amber-500 focus:outline-none"
+                                />
+                                <Button
+                                  type="button"
+                                  size="sm"
+                                  variant="primary"
+                                  onClick={verifyOtp}
+                                  disabled={isVerifyingOtp || otpCode.length < 4}
+                                  className="shrink-0 px-3 py-1.5 text-xs font-bold"
+                                >
+                                  {isVerifyingOtp ? 'Verifying...' : 'Verify OTP'}
+                                </Button>
+                              </div>
+                            </div>
+                          )}
+
+                          {isPhoneVerified && (
+                            <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-600">
+                              <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
+                              <span>Phone Number Verified</span>
+                            </div>
+                          )}
+
+                          {otpError && (
+                            <p className="mt-1 text-[11px] font-semibold text-rose-500">{otpError}</p>
+                          )}
+                        </div>
+                      </div>
                     </div>
 
                     {/* Email */}

@@ -1,8 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, CheckCircle2, User, Mail, MessageCircle, BookOpen, GraduationCap, Sparkles } from 'lucide-react';
+import {
+  X,
+  CheckCircle2,
+  User,
+  Mail,
+  MessageCircle,
+  BookOpen,
+  GraduationCap,
+  Sparkles,
+  ChevronDown,
+  Globe,
+  Check,
+} from 'lucide-react';
 import { useLockBody } from '@/lib/hooks';
 import { Button } from '@/components/ui/Primitives';
+import Flag from '@/components/ui/Flag';
 import { cn } from '@/lib/utils';
 
 export interface BuyNowPlanContext {
@@ -23,8 +36,10 @@ export interface BuyNowFormData {
   studentRelation: 'Son' | 'Daughter' | '';
   nationality: string;
   whatsappCode: string;
+  whatsappCountryCode: string;
   whatsappNumber: string;
   phoneCode: string;
+  phoneCountryCode: string;
   phoneNumber: string;
   email: string;
   year: string;
@@ -37,29 +52,28 @@ export interface CountryOption {
   code: string;
   name: string;
   dial: string;
-  flag: string;
 }
 
 export const FORM_COUNTRIES: CountryOption[] = [
-  { code: 'IN', name: 'India', dial: '+91', flag: '🇮🇳' },
-  { code: 'GB', name: 'United Kingdom', dial: '+44', flag: '🇬🇧' },
-  { code: 'AE', name: 'UAE', dial: '+971', flag: '🇦🇪' },
-  { code: 'AU', name: 'Australia', dial: '+61', flag: '🇦🇺' },
-  { code: 'US', name: 'USA', dial: '+1', flag: '🇺🇸' },
-  { code: 'CA', name: 'Canada', dial: '+1', flag: '🇨🇦' },
-  { code: 'SG', name: 'Singapore', dial: '+65', flag: '🇸🇬' },
-  { code: 'NZ', name: 'New Zealand', dial: '+64', flag: '🇳🇿' },
-  { code: 'QA', name: 'Qatar', dial: '+974', flag: '🇶🇦' },
-  { code: 'SA', name: 'Saudi Arabia', dial: '+966', flag: '🇸🇦' },
-  { code: 'OM', name: 'Oman', dial: '+968', flag: '🇴🇲' },
-  { code: 'KW', name: 'Kuwait', dial: '+965', flag: '🇰🇼' },
-  { code: 'MY', name: 'Malaysia', dial: '+60', flag: '🇲🇾' },
-  { code: 'BR', name: 'Brazil', dial: '+55', flag: '🇧🇷' },
-  { code: 'MX', name: 'Mexico', dial: '+52', flag: '🇲🇽' },
-  { code: 'JP', name: 'Japan', dial: '+81', flag: '🇯🇵' },
-  { code: 'BH', name: 'Bahrain', dial: '+973', flag: '🇧🇭' },
-  { code: 'CH', name: 'Switzerland', dial: '+41', flag: '🇨🇭' },
-  { code: 'OTHER', name: 'Other', dial: '+', flag: '🌐' },
+  { code: 'IN', name: 'India', dial: '+91' },
+  { code: 'GB', name: 'United Kingdom', dial: '+44' },
+  { code: 'AE', name: 'UAE', dial: '+971' },
+  { code: 'AU', name: 'Australia', dial: '+61' },
+  { code: 'US', name: 'USA', dial: '+1' },
+  { code: 'CA', name: 'Canada', dial: '+1' },
+  { code: 'SG', name: 'Singapore', dial: '+65' },
+  { code: 'NZ', name: 'New Zealand', dial: '+64' },
+  { code: 'QA', name: 'Qatar', dial: '+974' },
+  { code: 'SA', name: 'Saudi Arabia', dial: '+966' },
+  { code: 'OM', name: 'Oman', dial: '+968' },
+  { code: 'KW', name: 'Kuwait', dial: '+965' },
+  { code: 'MY', name: 'Malaysia', dial: '+60' },
+  { code: 'BR', name: 'Brazil', dial: '+55' },
+  { code: 'MX', name: 'Mexico', dial: '+52' },
+  { code: 'JP', name: 'Japan', dial: '+81' },
+  { code: 'BH', name: 'Bahrain', dial: '+973' },
+  { code: 'CH', name: 'Switzerland', dial: '+41' },
+  { code: 'OTHER', name: 'Other', dial: '+' },
 ];
 
 const SCHOOL_YEARS = [
@@ -195,6 +209,239 @@ export const SUBJECT_SECTIONS: SubjectSection[] = [
   },
 ];
 
+interface NationalitySelectorProps {
+  value: string;
+  onChange: (countryName: string) => void;
+  error?: string;
+}
+
+function NationalitySelector({ value, onChange, error }: NationalitySelectorProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent | TouchEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener('touchstart', handleOutsideClick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('touchstart', handleOutsideClick);
+    };
+  }, []);
+
+  const selectedCountry =
+    FORM_COUNTRIES.find((c) => c.name.toLowerCase() === value.toLowerCase()) || FORM_COUNTRIES[0];
+
+  return (
+    <div className="relative min-w-0" ref={containerRef}>
+      <label className="block text-[11px] font-bold text-navy-600 mb-1.5">
+        Nationality <span className="text-rose-500">*</span>
+      </label>
+      <button
+        type="button"
+        onClick={() => setIsOpen((prev) => !prev)}
+        className={cn(
+          'flex items-center justify-between w-full min-w-0 rounded-xl border bg-navy-50/50 px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-navy-800 outline-none transition-all cursor-pointer',
+          isOpen
+            ? 'border-amber-500 bg-white ring-2 ring-amber-500/20'
+            : 'border-navy-200 hover:border-navy-300',
+          error ? 'border-rose-400 bg-rose-50/30' : '',
+        )}
+        aria-expanded={isOpen}
+      >
+        <div className="flex items-center gap-2 min-w-0 truncate">
+          {selectedCountry.code === 'OTHER' ? (
+            <Globe className="h-4 w-4 text-navy-600 shrink-0" />
+          ) : (
+            <Flag code={selectedCountry.code} size={18} className="rounded-[2px] shrink-0" />
+          )}
+          <span className="truncate">{selectedCountry.name}</span>
+        </div>
+        <ChevronDown
+          className={cn(
+            'h-4 w-4 text-navy-400 shrink-0 ml-1 transition-transform duration-200',
+            isOpen && 'rotate-180',
+          )}
+        />
+      </button>
+
+      {isOpen && (
+        <div className="absolute top-full left-0 mt-1 w-full max-h-56 overflow-y-auto rounded-xl bg-white shadow-2xl border border-navy-100 z-50 py-1 divide-y divide-navy-50">
+          {FORM_COUNTRIES.map((c) => {
+            const isSelected = c.name === selectedCountry.name;
+            return (
+              <button
+                key={c.code}
+                type="button"
+                onClick={() => {
+                  onChange(c.name);
+                  setIsOpen(false);
+                }}
+                className={cn(
+                  'flex w-full items-center gap-2.5 px-3 py-2 text-left text-xs transition-colors cursor-pointer',
+                  isSelected
+                    ? 'bg-amber-500/10 text-amber-950 font-black'
+                    : 'text-navy-800 font-semibold hover:bg-navy-50',
+                )}
+              >
+                {c.code === 'OTHER' ? (
+                  <Globe className="h-4 w-4 text-navy-600 shrink-0" />
+                ) : (
+                  <Flag code={c.code} size={18} className="rounded-[2px] shrink-0" />
+                )}
+                <span className="flex-1 truncate">{c.name}</span>
+                {isSelected && <Check className="h-3.5 w-3.5 text-amber-600 shrink-0 ml-1" />}
+              </button>
+            );
+          })}
+        </div>
+      )}
+
+      {error && <p className="mt-1 text-[11px] text-rose-500 font-medium">{error}</p>}
+    </div>
+  );
+}
+
+interface CountryCodeInputProps {
+  label: string;
+  required?: boolean;
+  countryCode: string;
+  dialCode: string;
+  numberValue: string;
+  onCountryChange: (country: CountryOption) => void;
+  onNumberChange: (number: string) => void;
+  placeholder?: string;
+  error?: string;
+  rightAction?: React.ReactNode;
+}
+
+function CountryCodeInput({
+  label,
+  required,
+  countryCode,
+  dialCode,
+  numberValue,
+  onCountryChange,
+  onNumberChange,
+  placeholder,
+  error,
+  rightAction,
+}: CountryCodeInputProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent | TouchEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener('touchstart', handleOutsideClick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('touchstart', handleOutsideClick);
+    };
+  }, []);
+
+  const selectedCountry =
+    FORM_COUNTRIES.find((c) => c.code === countryCode) ||
+    FORM_COUNTRIES.find((c) => c.dial === dialCode) ||
+    FORM_COUNTRIES[0];
+
+  return (
+    <div className="min-w-0" ref={containerRef}>
+      <div className="flex items-center justify-between mb-1">
+        <label className="block text-[11px] font-bold text-navy-600">
+          {label} {required && <span className="text-rose-500">*</span>}
+        </label>
+        {rightAction}
+      </div>
+
+      <div className="relative">
+        <div
+          className={cn(
+            'flex items-center rounded-xl border bg-navy-50/50 transition-all focus-within:border-amber-500 focus-within:bg-white focus-within:ring-2 focus-within:ring-amber-500/20',
+            error ? 'border-rose-400 bg-rose-50/30' : 'border-navy-200',
+          )}
+        >
+          {/* Country Dial Code Trigger Button */}
+          <button
+            type="button"
+            onClick={() => setIsOpen((prev) => !prev)}
+            className="flex items-center gap-1.5 px-2.5 py-2.5 bg-navy-50/80 hover:bg-navy-100/80 border-r border-navy-200 text-xs font-bold text-navy-800 shrink-0 transition-colors select-none rounded-l-xl cursor-pointer"
+            aria-expanded={isOpen}
+          >
+            {selectedCountry.code === 'OTHER' ? (
+              <Globe className="h-4 w-4 text-navy-600 shrink-0" />
+            ) : (
+              <Flag code={selectedCountry.code} size={18} className="rounded-[2px] shrink-0" />
+            )}
+            <span className="font-extrabold text-navy-900">{selectedCountry.dial}</span>
+            <ChevronDown
+              className={cn(
+                'h-3 w-3 text-navy-400 transition-transform duration-200',
+                isOpen && 'rotate-180',
+              )}
+            />
+          </button>
+
+          {/* Number Input */}
+          <input
+            type="tel"
+            value={numberValue}
+            onChange={(e) => onNumberChange(e.target.value)}
+            placeholder={placeholder || 'e.g. 7884 981882'}
+            className="min-w-0 flex-1 bg-transparent px-3 py-2.5 text-sm font-semibold text-navy-800 outline-none placeholder:text-navy-400"
+          />
+        </div>
+
+        {/* Dropdown Menu */}
+        {isOpen && (
+          <div className="absolute top-full left-0 mt-1 w-60 max-h-56 overflow-y-auto rounded-xl bg-white shadow-2xl border border-navy-100 z-50 py-1 divide-y divide-navy-50">
+            {FORM_COUNTRIES.map((c) => {
+              const isSelected = c.code === selectedCountry.code;
+              return (
+                <button
+                  key={c.code}
+                  type="button"
+                  onClick={() => {
+                    onCountryChange(c);
+                    setIsOpen(false);
+                  }}
+                  className={cn(
+                    'flex w-full items-center gap-2.5 px-3 py-2 text-left text-xs transition-colors cursor-pointer',
+                    isSelected
+                      ? 'bg-amber-500/10 text-amber-950 font-black'
+                      : 'text-navy-800 font-semibold hover:bg-navy-50',
+                  )}
+                >
+                  {c.code === 'OTHER' ? (
+                    <Globe className="h-4 w-4 text-navy-600 shrink-0" />
+                  ) : (
+                    <Flag code={c.code} size={18} className="rounded-[2px] shrink-0" />
+                  )}
+                  <span className="flex-1 truncate">{c.name}</span>
+                  <span className="text-navy-400 font-mono text-[11px] font-bold shrink-0">
+                    {c.dial}
+                  </span>
+                  {isSelected && <Check className="h-3.5 w-3.5 text-amber-600 shrink-0 ml-1" />}
+                </button>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      {error && <p className="mt-1 text-[11px] text-rose-500 font-medium">{error}</p>}
+    </div>
+  );
+}
+
 interface BuyNowModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -210,23 +457,20 @@ export default function BuyNowModal({
 }: BuyNowModalProps) {
   useLockBody(isOpen);
 
-  // Default dial code based on country
-  const getDefaultDialCode = () => {
-    if (!planContext?.countryCode) return '+44';
-    const match = FORM_COUNTRIES.find((c) => c.code === planContext.countryCode);
-    return match ? match.dial : '+44';
-  };
-
-  // Default nationality based on country context
-  const getDefaultNationality = () => {
-    if (!planContext?.countryName) return 'India';
+  // Default country context resolution
+  const getDefaultCountry = (): CountryOption => {
+    if (!planContext?.countryCode && !planContext?.countryName) {
+      return FORM_COUNTRIES[0]; // India
+    }
     const match = FORM_COUNTRIES.find(
       (c) =>
-        c.name.toLowerCase() === planContext.countryName?.toLowerCase() ||
-        c.code === planContext.countryCode,
+        c.code.toUpperCase() === planContext.countryCode?.toUpperCase() ||
+        c.name.toLowerCase() === planContext.countryName?.toLowerCase(),
     );
-    return match ? match.name : 'India';
+    return match || FORM_COUNTRIES[0];
   };
+
+  const defaultCountry = getDefaultCountry();
 
   const [formData, setFormData] = useState<BuyNowFormData>({
     parentFirstName: '',
@@ -234,10 +478,12 @@ export default function BuyNowModal({
     studentFirstName: '',
     studentLastName: '',
     studentRelation: '',
-    nationality: getDefaultNationality(),
-    whatsappCode: getDefaultDialCode(),
+    nationality: defaultCountry.name,
+    whatsappCode: defaultCountry.dial,
+    whatsappCountryCode: defaultCountry.code,
     whatsappNumber: '',
-    phoneCode: getDefaultDialCode(),
+    phoneCode: defaultCountry.dial,
+    phoneCountryCode: defaultCountry.code,
     phoneNumber: '',
     email: '',
     year: planContext?.years || 'Year 1',
@@ -253,11 +499,14 @@ export default function BuyNowModal({
   // Sync default country code when context changes
   useEffect(() => {
     if (planContext) {
+      const country = getDefaultCountry();
       setFormData((prev) => ({
         ...prev,
-        nationality: prev.nationality || getDefaultNationality(),
-        whatsappCode: getDefaultDialCode(),
-        phoneCode: getDefaultDialCode(),
+        nationality: prev.nationality || country.name,
+        whatsappCode: prev.whatsappNumber ? prev.whatsappCode : country.dial,
+        whatsappCountryCode: prev.whatsappNumber ? prev.whatsappCountryCode : country.code,
+        phoneCode: prev.phoneNumber ? prev.phoneCode : country.dial,
+        phoneCountryCode: prev.phoneNumber ? prev.phoneCountryCode : country.code,
         year: planContext.years || prev.year || 'Year 1',
         planContext,
       }));
@@ -611,34 +860,16 @@ export default function BuyNowModal({
                         )}
                       </div>
 
-                      <div className="min-w-0">
-                        <label className="block text-[11px] font-bold text-navy-600 mb-1.5">
-                          Nationality <span className="text-rose-500">*</span>
-                        </label>
-                        <select
-                          value={formData.nationality}
-                          onChange={(e) => {
-                            setFormData({ ...formData, nationality: e.target.value });
-                            if (errors.nationality) {
-                              setErrors((prev) => ({ ...prev, nationality: '' }));
-                            }
-                          }}
-                          className={cn(
-                            'w-full min-w-0 rounded-xl border bg-navy-50/50 px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-navy-800 outline-none transition-all focus:border-amber-500 focus:bg-white focus:ring-2 focus:ring-amber-500/20 truncate cursor-pointer',
-                            errors.nationality ? 'border-rose-400 bg-rose-50/30' : 'border-navy-200',
-                          )}
-                        >
-                          <option value="">Select Nationality</option>
-                          {FORM_COUNTRIES.map((c) => (
-                            <option key={c.code} value={c.name}>
-                              {c.flag} {c.name}
-                            </option>
-                          ))}
-                        </select>
-                        {errors.nationality && (
-                          <p className="mt-1 text-[11px] text-rose-500 font-medium">{errors.nationality}</p>
-                        )}
-                      </div>
+                      <NationalitySelector
+                        value={formData.nationality}
+                        onChange={(nationality) => {
+                          setFormData((prev) => ({ ...prev, nationality }));
+                          if (errors.nationality) {
+                            setErrors((prev) => ({ ...prev, nationality: '' }));
+                          }
+                        }}
+                        error={errors.nationality}
+                      />
                     </div>
                   </div>
 
@@ -651,52 +882,64 @@ export default function BuyNowModal({
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
                       {/* WhatsApp Number with Country Code */}
-                      <div className="min-w-0">
-                        <label className="block text-[11px] font-bold text-navy-600 mb-1">
-                          WhatsApp Number <span className="text-rose-500">*</span>
-                        </label>
-                        <div
-                          className={cn(
-                            'flex rounded-xl border bg-navy-50/50 overflow-hidden transition-all focus-within:border-amber-500 focus-within:bg-white focus-within:ring-2 focus-within:ring-amber-500/20',
-                            errors.whatsappNumber ? 'border-rose-400 bg-rose-50/30' : 'border-navy-200',
-                          )}
-                        >
-                          <select
-                            value={formData.whatsappCode}
-                            onChange={(e) => setFormData({ ...formData, whatsappCode: e.target.value })}
-                            className="w-[105px] shrink-0 border-r border-navy-200 bg-transparent px-2 py-2.5 text-xs font-bold text-navy-800 outline-none cursor-pointer"
-                          >
-                            {FORM_COUNTRIES.map((c) => (
-                              <option key={c.code} value={c.dial}>
-                                {c.flag} {c.dial} ({c.code})
-                              </option>
-                            ))}
-                          </select>
-
-                          <input
-                            type="tel"
-                            value={formData.whatsappNumber}
-                            onChange={(e) => setFormData({ ...formData, whatsappNumber: e.target.value })}
-                            placeholder="e.g. 7884 981882"
-                            className="w-full min-w-0 flex-1 bg-transparent px-3 py-2.5 text-sm font-semibold text-navy-800 outline-none placeholder:text-navy-400"
-                          />
-                        </div>
-                        {errors.whatsappNumber && (
-                          <p className="mt-1 text-[11px] text-rose-500 font-medium">{errors.whatsappNumber}</p>
-                        )}
-                      </div>
+                      <CountryCodeInput
+                        label="WhatsApp Number"
+                        required
+                        countryCode={formData.whatsappCountryCode}
+                        dialCode={formData.whatsappCode}
+                        numberValue={formData.whatsappNumber}
+                        onCountryChange={(country) => {
+                          setFormData((prev) => ({
+                            ...prev,
+                            whatsappCountryCode: country.code,
+                            whatsappCode: country.dial,
+                          }));
+                          if (errors.whatsappNumber) {
+                            setErrors((prev) => ({ ...prev, whatsappNumber: '' }));
+                          }
+                        }}
+                        onNumberChange={(num) => {
+                          setFormData((prev) => ({ ...prev, whatsappNumber: num }));
+                          if (errors.whatsappNumber) {
+                            setErrors((prev) => ({ ...prev, whatsappNumber: '' }));
+                          }
+                        }}
+                        placeholder="e.g. 7884 981882"
+                        error={errors.whatsappNumber}
+                      />
 
                       {/* Phone Number with Country Code */}
-                      <div className="min-w-0">
-                        <div className="flex items-center justify-between mb-1">
-                          <label className="block text-[11px] font-bold text-navy-600">
-                            Phone Number <span className="text-rose-500">*</span>
-                          </label>
+                      <CountryCodeInput
+                        label="Phone Number"
+                        required
+                        countryCode={formData.phoneCountryCode}
+                        dialCode={formData.phoneCode}
+                        numberValue={formData.phoneNumber}
+                        onCountryChange={(country) => {
+                          setFormData((prev) => ({
+                            ...prev,
+                            phoneCountryCode: country.code,
+                            phoneCode: country.dial,
+                          }));
+                          if (errors.phoneNumber) {
+                            setErrors((prev) => ({ ...prev, phoneNumber: '' }));
+                          }
+                        }}
+                        onNumberChange={(num) => {
+                          setFormData((prev) => ({ ...prev, phoneNumber: num }));
+                          if (errors.phoneNumber) {
+                            setErrors((prev) => ({ ...prev, phoneNumber: '' }));
+                          }
+                        }}
+                        placeholder="e.g. 7884 981882"
+                        error={errors.phoneNumber}
+                        rightAction={
                           <button
                             type="button"
                             onClick={() => {
                               setFormData((prev) => ({
                                 ...prev,
+                                phoneCountryCode: prev.whatsappCountryCode,
                                 phoneCode: prev.whatsappCode,
                                 phoneNumber: prev.whatsappNumber,
                               }));
@@ -704,41 +947,12 @@ export default function BuyNowModal({
                                 setErrors((prev) => ({ ...prev, phoneNumber: '' }));
                               }
                             }}
-                            className="text-[10px] font-bold text-amber-600 hover:text-amber-700 transition-colors"
+                            className="text-[10px] font-bold text-amber-600 hover:text-amber-700 transition-colors cursor-pointer"
                           >
                             Same as WhatsApp
                           </button>
-                        </div>
-                        <div
-                          className={cn(
-                            'flex rounded-xl border bg-navy-50/50 overflow-hidden transition-all focus-within:border-amber-500 focus-within:bg-white focus-within:ring-2 focus-within:ring-amber-500/20',
-                            errors.phoneNumber ? 'border-rose-400 bg-rose-50/30' : 'border-navy-200',
-                          )}
-                        >
-                          <select
-                            value={formData.phoneCode}
-                            onChange={(e) => setFormData({ ...formData, phoneCode: e.target.value })}
-                            className="w-[105px] shrink-0 border-r border-navy-200 bg-transparent px-2 py-2.5 text-xs font-bold text-navy-800 outline-none cursor-pointer"
-                          >
-                            {FORM_COUNTRIES.map((c) => (
-                              <option key={c.code} value={c.dial}>
-                                {c.flag} {c.dial} ({c.code})
-                              </option>
-                            ))}
-                          </select>
-
-                          <input
-                            type="tel"
-                            value={formData.phoneNumber}
-                            onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
-                            placeholder="e.g. 7884 981882"
-                            className="w-full min-w-0 flex-1 bg-transparent px-3 py-2.5 text-sm font-semibold text-navy-800 outline-none placeholder:text-navy-400"
-                          />
-                        </div>
-                        {errors.phoneNumber && (
-                          <p className="mt-1 text-[11px] text-rose-500 font-medium">{errors.phoneNumber}</p>
-                        )}
-                      </div>
+                        }
+                      />
                     </div>
 
                     {/* Email */}

@@ -3,6 +3,7 @@ import Flag from '@/components/ui/Flag';
 import { Building2, Facebook, Instagram, Linkedin, Mail, MapPin, MessageCircle, Youtube } from 'lucide-react';
 import { BRAND, COUNTRIES } from '@/data/site';
 import Logo from './Logo';
+import { useFreeTrialModal } from '@/context/FreeTrialModalContext';
 
 const COLUMNS = [
     {
@@ -43,6 +44,7 @@ const SOCIALS = [
 ];
 
 export function Footer() {
+    const { openFreeTrial } = useFreeTrialModal();
     return (
         <footer className="relative mt-8 overflow-hidden bg-navy-800 text-navy-200">
             <div aria-hidden="true" className="pointer-events-none absolute inset-0">
@@ -155,12 +157,22 @@ export function Footer() {
                                 <ul className="mt-4 space-y-2.5">
                                     {col.links.map((l) => (
                                         <li key={l.label}>
-                                            <Link
-                                                to={l.to}
-                                                className="link-underline text-[14.5px] font-semibold text-navy-300 transition-colors hover:text-white"
-                                            >
-                                                {l.label}
-                                            </Link>
+                                            {l.to === '/contact' ? (
+                                                <button
+                                                    type="button"
+                                                    onClick={() => openFreeTrial()}
+                                                    className="link-underline text-[14.5px] font-semibold text-navy-300 transition-colors hover:text-white text-left cursor-pointer"
+                                                >
+                                                    {l.label}
+                                                </button>
+                                            ) : (
+                                                <Link
+                                                    to={l.to}
+                                                    className="link-underline text-[14.5px] font-semibold text-navy-300 transition-colors hover:text-white"
+                                                >
+                                                    {l.label}
+                                                </Link>
+                                            )}
                                         </li>
                                     ))}
                                 </ul>

@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import ScrollTop from './ScrollTop';
 import RouteFallback from './RouteFallback';
+import { FreeTrialModalProvider } from '@/context/FreeTrialModalContext';
 
 export default function SiteLayout() {
  const { pathname } = useLocation();
@@ -13,17 +14,19 @@ export default function SiteLayout() {
  }, [pathname]);
 
  return (
-  <div className="flex min-h-screen flex-col bg-white">
-   <Navbar />
-   {/* Suspense sits inside the shell so the nav and footer never flash away
-     while a route chunk is fetched. */}
-   <main className="flex-1">
-    <Suspense fallback={<RouteFallback />}>
-     <Outlet />
-    </Suspense>
-   </main>
-   <Footer />
-   <ScrollTop />
-  </div>
+  <FreeTrialModalProvider>
+   <div className="flex min-h-screen flex-col bg-white">
+    <Navbar />
+    {/* Suspense sits inside the shell so the nav and footer never flash away
+      while a route chunk is fetched. */}
+    <main className="flex-1">
+     <Suspense fallback={<RouteFallback />}>
+      <Outlet />
+     </Suspense>
+    </main>
+    <Footer />
+    <ScrollTop />
+   </div>
+  </FreeTrialModalProvider>
  );
 }

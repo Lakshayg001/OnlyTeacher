@@ -4,6 +4,7 @@ import SmartImage from '@/components/ui/SmartImage';
 import { Button } from '@/components/ui/Primitives';
 import { Doodles, FloatIcon } from '@/components/ui/Decor';
 import ClayIcon from '@/components/clay/ClayIcon';
+import { useFreeTrialModal } from '@/context/FreeTrialModalContext';
 
 const FLOATERS = [
     { name: 'math', cls: 'left-[-4%] top-[8%]', size: 66, delay: 0 },
@@ -15,6 +16,7 @@ const FLOATERS = [
 ] as const;
 
 export function Hero() {
+    const { openFreeTrial } = useFreeTrialModal();
     return (
         <section className="relative pb-6 pt-4 sm:pt-6">
             <div className="container-tot">
@@ -91,7 +93,7 @@ export function Hero() {
                                 transition={{ duration: 0.6, delay: 0.26 }}
                                 className="mt-8 flex flex-wrap items-center gap-3"
                             >
-                                <Button to="/contact" size="lg" iconRight={<ArrowRight className="h-4.5 w-4.5" />}>
+                                <Button onClick={() => openFreeTrial()} size="lg" iconRight={<ArrowRight className="h-4.5 w-4.5" />}>
                                     Book a Free Class
                                 </Button>
 

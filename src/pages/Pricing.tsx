@@ -31,7 +31,7 @@ import {
 import Flag from '@/components/ui/Flag';
 import PageHero from '@/components/layout/PageHero';
 import { Button, Reveal } from '@/components/ui/Primitives';
-import BuyNowModal, { BuyNowPlanContext } from '@/components/pricing/BuyNowModal';
+import { useFreeTrialModal } from '@/context/FreeTrialModalContext';
 import { cn } from '@/lib/utils';
 import {
   CountryCode,
@@ -51,8 +51,7 @@ export default function Pricing() {
   const [selectedCountry, setSelectedCountry] = useState<CountryCode>('AU');
   const [selectedPlanType, setSelectedPlanType] = useState<PlanType>('flexicarry');
   const [uaeCurriculum, setUaeCurriculum] = useState<UAECurriculum>('international');
-  const [isBuyNowOpen, setIsBuyNowOpen] = useState(false);
-  const [selectedBuyNowPlan, setSelectedBuyNowPlan] = useState<BuyNowPlanContext | null>(null);
+  const { openFreeTrial } = useFreeTrialModal();
 
   const country = PRICING_DATA[selectedCountry];
 
@@ -544,7 +543,14 @@ export default function Pricing() {
                           Limited availability: 50 families per tier
                         </p>
                         <Button
-                          to="/contact?country=United%20Kingdom&plan=TOT%20Priv%C3%A9%20(Years%202-9)&type=membership"
+                          onClick={() => {
+                            openFreeTrial({
+                              planName: 'TOT Privé (Years 2-9)',
+                              countryName: 'United Kingdom',
+                              countryCode: 'GB',
+                              planType: 'membership',
+                            });
+                          }}
                           variant="primary"
                           full
                           size="md"
@@ -599,7 +605,14 @@ export default function Pricing() {
                           Limited availability: 50 families per tier
                         </p>
                         <Button
-                          to="/contact?country=United%20Kingdom&plan=TOT%20Priv%C3%A9%20(Years%2010-13)&type=membership"
+                          onClick={() => {
+                            openFreeTrial({
+                              planName: 'TOT Privé (Years 10-13)',
+                              countryName: 'United Kingdom',
+                              countryCode: 'GB',
+                              planType: 'membership',
+                            });
+                          }}
                           variant="primary"
                           full
                           size="md"
@@ -686,12 +699,20 @@ export default function Pricing() {
                         <span className="text-xs font-bold text-navy-500">
                           * T&amp;C apply
                         </span>
-                        <Link
-                          to="/contact?country=United%20Kingdom&plan=TOT%20Priv%C3%A9&type=membership"
-                          className="text-xs font-black text-amber-600 hover:text-amber-700 underline shrink-0"
+                        <button
+                          type="button"
+                          onClick={() => {
+                            openFreeTrial({
+                              planName: 'TOT Privé',
+                              countryName: 'United Kingdom',
+                              countryCode: 'GB',
+                              planType: 'membership',
+                            });
+                          }}
+                          className="text-xs font-black text-amber-600 hover:text-amber-700 underline shrink-0 cursor-pointer"
                         >
                           Learn More →
-                        </Link>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -842,7 +863,14 @@ export default function Pricing() {
                               {AUNZ_MEMBERSHIP_DATA.availabilityNote}
                             </p>
                             <Button
-                              to={`/contact?country=${encodeURIComponent(countryName)}&plan=TOT%20Priv%C3%A9%20(Years%201-6)&type=membership`}
+                              onClick={() => {
+                                openFreeTrial({
+                                  planName: 'TOT Privé (Years 1-6)',
+                                  countryName: countryName,
+                                  countryCode: selectedCountry,
+                                  planType: 'membership',
+                                });
+                              }}
                               variant="primary"
                               full
                               size="md"
@@ -908,7 +936,14 @@ export default function Pricing() {
                               {AUNZ_MEMBERSHIP_DATA.availabilityNote}
                             </p>
                             <Button
-                              to={`/contact?country=${encodeURIComponent(countryName)}&plan=TOT%20Priv%C3%A9%20(Years%207-12)&type=membership`}
+                              onClick={() => {
+                                openFreeTrial({
+                                  planName: 'TOT Privé (Years 7-12)',
+                                  countryName: countryName,
+                                  countryCode: selectedCountry,
+                                  planType: 'membership',
+                                });
+                              }}
                               variant="primary"
                               full
                               size="md"
@@ -1114,12 +1149,20 @@ export default function Pricing() {
                         <span className="text-xs font-bold text-navy-500">
                           * T&amp;C apply
                         </span>
-                        <Link
-                          to={`/contact?country=${encodeURIComponent(selectedCountry === 'NZ' ? 'New Zealand' : 'Australia')}&plan=TOT%20Priv%C3%A9&type=membership`}
-                          className="text-xs font-black text-amber-600 hover:text-amber-700 underline shrink-0"
+                        <button
+                          type="button"
+                          onClick={() => {
+                            openFreeTrial({
+                              planName: 'TOT Privé',
+                              countryName: selectedCountry === 'NZ' ? 'New Zealand' : 'Australia',
+                              countryCode: selectedCountry,
+                              planType: 'membership',
+                            });
+                          }}
+                          className="text-xs font-black text-amber-600 hover:text-amber-700 underline shrink-0 cursor-pointer"
                         >
                           Enquire for Membership →
-                        </Link>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -1373,7 +1416,7 @@ export default function Pricing() {
                             <div className="p-5 pt-0">
                               <Button
                                 onClick={() => {
-                                  setSelectedBuyNowPlan({
+                                  openFreeTrial({
                                     planName: plan.name,
                                     tierTitle: tier.title,
                                     years: tier.years,
@@ -1384,7 +1427,6 @@ export default function Pricing() {
                                     countryName: country.countryName,
                                     countryCode: country.countryCode,
                                   });
-                                  setIsBuyNowOpen(true);
                                 }}
                                 variant={plan.color === 'amber' ? 'primary' : 'outline'}
                                 full
@@ -1499,15 +1541,14 @@ export default function Pricing() {
 
               <div className="flex flex-col items-center gap-3 sm:flex-row shrink-0">
                 <Button
-                  to={
-                    selectedPlanType === 'membership'
-                      ? selectedCountry === 'GB'
-                        ? '/contact?country=United%20Kingdom&plan=TOT%20Priv%C3%A9&type=membership'
-                        : selectedCountry === 'NZ'
-                        ? '/contact?country=New%20Zealand&plan=TOT%20Priv%C3%A9&type=membership'
-                        : '/contact?country=Australia&plan=TOT%20Priv%C3%A9&type=membership'
-                      : '/contact'
-                  }
+                  onClick={() => {
+                    openFreeTrial({
+                      planName: selectedPlanType === 'membership' ? 'TOT Privé' : 'Trial Class',
+                      countryName: country.countryName,
+                      countryCode: country.countryCode,
+                      planType: selectedPlanType,
+                    });
+                  }}
                   variant="primary"
                   size="lg"
                   iconRight={<ChevronRight className="h-5 w-5" />}
@@ -1537,13 +1578,6 @@ export default function Pricing() {
           </div>
         </div>
       </section>
-
-      {/* Buy Now Enrolment Modal */}
-      <BuyNowModal
-        isOpen={isBuyNowOpen}
-        onClose={() => setIsBuyNowOpen(false)}
-        planContext={selectedBuyNowPlan}
-      />
     </>
   );
 }

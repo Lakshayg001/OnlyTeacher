@@ -5,6 +5,7 @@ import { BOARDS } from '@/data/site';
 import ClayIcon from '@/components/clay/ClayIcon';
 import { Button, Reveal, SectionHeading } from '@/components/ui/Primitives';
 import { cn } from '@/lib/utils';
+import { useFreeTrialModal } from '@/context/FreeTrialModalContext';
 
 const TONE = {
  amber: {
@@ -28,6 +29,7 @@ const TONE = {
 } as const;
 
 export function BoardsCurricula() {
+ const { openFreeTrial } = useFreeTrialModal();
  const [active, setActive] = useState<string | null>(null);
 
  return (
@@ -127,7 +129,7 @@ export function BoardsCurricula() {
         </p>
        </div>
       </div>
-      <Button to="/contact" variant="dark" className="shrink-0">
+      <Button onClick={() => openFreeTrial()} variant="dark" className="shrink-0">
        Ask about your board
       </Button>
      </div>

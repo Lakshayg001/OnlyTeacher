@@ -1,5 +1,5 @@
 import { Suspense, lazy } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import SiteLayout from '@/components/layout/SiteLayout';
 import Home from '@/pages/Home';
 import RouteFallback from '@/components/layout/RouteFallback';
@@ -8,7 +8,7 @@ import RouteFallback from '@/components/layout/RouteFallback';
 const About = lazy(() => import('@/pages/About'));
 const Courses = lazy(() => import('@/pages/Courses'));
 const Blog = lazy(() => import('@/pages/Blog'));
-const Contact = lazy(() => import('@/pages/Contact'));
+// const Contact = lazy(() => import('@/pages/Contact'));
 const TermsOfUse = lazy(() => import('@/pages/TermsOfUse'));
 const PrivacyPolicy = lazy(() => import('@/pages/PrivacyPolicy'));
 const RefundPolicy = lazy(() => import('@/pages/RefundPolicy'));
@@ -36,7 +36,8 @@ export default function App() {
      <Route path="/about" element={<About />} />
      <Route path="/courses" element={<Courses />} />
      <Route path="/blog" element={<Blog />} />
-     <Route path="/contact" element={<Contact />} />
+     {/* <Route path="/contact" element={<Contact />} /> */}
+     <Route path="/contact" element={<Navigate to="/pricing" replace />} />
      <Route path="/pricing" element={<Pricing />} />
      <Route path="/terms-of-use" element={<TermsOfUse />} />
      <Route path="/privacy-policy" element={<PrivacyPolicy />} />

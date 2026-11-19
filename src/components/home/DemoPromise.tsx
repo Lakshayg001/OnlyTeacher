@@ -6,6 +6,7 @@ import ClayIcon from '@/components/clay/ClayIcon';
 import SmartImage from '@/components/ui/SmartImage';
 import { Button, Reveal } from '@/components/ui/Primitives';
 import { cn } from '@/lib/utils';
+import { useFreeTrialModal } from '@/context/FreeTrialModalContext';
 
 const NUMBER = {
  amber: 'text-amber-500/90',
@@ -20,6 +21,7 @@ const PROMISES = [
 ];
 
 export function DemoPromise() {
+ const { openFreeTrial } = useFreeTrialModal();
  return (
   <section id="demo" className="relative py-14 sm:py-18">
    <div className="container-tot">
@@ -116,7 +118,7 @@ export function DemoPromise() {
          </div>
 
          <div className="pt-2">
-          <Button to="/contact" size="lg" full iconRight={<ArrowRight className="h-5 w-5" />} className="shadow-lg shadow-amber-500/20">
+          <Button onClick={() => openFreeTrial()} size="lg" full iconRight={<ArrowRight className="h-5 w-5" />} className="shadow-lg shadow-amber-500/20">
            Book a Free Class
           </Button>
          </div>

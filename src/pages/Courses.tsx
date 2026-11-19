@@ -9,6 +9,7 @@ import FilterBar from '@/components/ui/FilterBar';
 import PageHero from '@/components/layout/PageHero';
 import { Button, Reveal, SectionHeading, Stars } from '@/components/ui/Primitives';
 import { cn } from '@/lib/utils';
+import { useFreeTrialModal } from '@/context/FreeTrialModalContext';
 
 const ACCENT_TEXT = {
  amber: 'text-amber-700 bg-amber-100',
@@ -23,6 +24,7 @@ const SPEC_TONE = {
 } as const;
 
 export default function Courses() {
+ const { openFreeTrial } = useFreeTrialModal();
  const [params, setParams] = useSearchParams();
  const [query, setQuery] = useState('');
  const [track, setTrack] = useState<string>('all');
@@ -111,7 +113,7 @@ export default function Courses() {
         <Button to="/courses" variant="outline">
          View All Courses
         </Button>
-        <Button to="/contact">
+        <Button onClick={() => openFreeTrial()}>
          Ask for a custom match
         </Button>
        </div>
@@ -158,7 +160,7 @@ export default function Courses() {
            </p>
           )}
 
-          <Button to="/contact" variant="outline" size="sm" full className="mt-4">
+          <Button onClick={() => openFreeTrial({ planName: c.title })} variant="outline" size="sm" full className="mt-4">
            Book A Free Class
           </Button>
          </div>

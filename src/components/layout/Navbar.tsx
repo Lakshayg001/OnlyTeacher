@@ -8,11 +8,13 @@ import { useLockBody, useScrolled } from '@/lib/hooks';
 import ClayIcon from '@/components/clay/ClayIcon';
 import { Button } from '@/components/ui/Primitives';
 import Logo from './Logo';
+import { useFreeTrialModal } from '@/context/FreeTrialModalContext';
 
 export function Navbar() {
  const scrolled = useScrolled(20);
  const [open, setOpen] = useState(false);
  const [openMenu, setOpenMenu] = useState<string | null>(null);
+ const { openFreeTrial } = useFreeTrialModal();
  const { pathname } = useLocation();
  useLockBody(open);
 
@@ -40,36 +42,46 @@ export function Navbar() {
          onMouseEnter={() => setOpenMenu(item.children ? item.label : null)}
          onMouseLeave={() => setOpenMenu(null)}
         >
-         <NavLink
-          to={item.href}
-          className={({ isActive }) =>
-           cn(
-            'relative inline-flex items-center gap-1.5 px-4 py-3 text-[15px] font-bold transition-colors',
-            isActive ? 'text-navy-800' : 'text-navy-500 hover:text-navy-800',
-           )
-          }
-         >
-          {({ isActive }) => (
-           <>
-            {item.label}
-            {item.children && (
-             <ChevronDown
-              className={cn(
-               'h-4 w-4 opacity-50 transition-transform duration-200',
-               openMenu === item.label && 'rotate-180',
-              )}
-             />
-            )}
-            {isActive && (
-             <motion.span
-              layoutId="nav-underline"
-              className="absolute inset-x-2 -bottom-0.5 h-[3px] rounded-full bg-amber-400"
-              transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-             />
-            )}
-           </>
-          )}
-         </NavLink>
+         {item.href === '/contact' ? (
+          <button
+           type="button"
+           onClick={() => openFreeTrial()}
+           className="relative inline-flex items-center gap-1.5 px-4 py-3 text-[15px] font-bold text-navy-500 hover:text-navy-800 transition-colors cursor-pointer"
+          >
+           {item.label}
+          </button>
+         ) : (
+          <NavLink
+           to={item.href}
+           className={({ isActive }) =>
+            cn(
+             'relative inline-flex items-center gap-1.5 px-4 py-3 text-[15px] font-bold transition-colors',
+             isActive ? 'text-navy-800' : 'text-navy-500 hover:text-navy-800',
+            )
+           }
+          >
+           {({ isActive }) => (
+            <>
+             {item.label}
+             {item.children && (
+              <ChevronDown
+               className={cn(
+                'h-4 w-4 opacity-50 transition-transform duration-200',
+                openMenu === item.label && 'rotate-180',
+               )}
+              />
+             )}
+             {isActive && (
+              <motion.span
+               layoutId="nav-underline"
+               className="absolute inset-x-2 -bottom-0.5 h-[3px] rounded-full bg-amber-400"
+               transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+              />
+             )}
+            </>
+           )}
+          </NavLink>
+         )}
 
          <AnimatePresence>
           {item.children && openMenu === item.label && (
@@ -104,7 +116,11 @@ export function Navbar() {
      </ul>
 
      <div className="flex shrink-0 items-center gap-3">
-      <Button to="/contact" size="md" className="hidden sm:inline-flex rounded-full bg-amber-500 hover:bg-amber-600 text-white border-0 shadow-md">
+      <Button
+       onClick={() => openFreeTrial()}
+       size="md"
+       className="hidden sm:inline-flex rounded-full bg-amber-500 hover:bg-amber-600 text-white border-0 shadow-md cursor-pointer"
+      >
        Try a Free Class! 🚀
       </Button>
       <button
@@ -162,19 +178,38 @@ export function Navbar() {
            animate={{ opacity: 1, x: 0 }}
            transition={{ delay: 0.05 + i * 0.045 }}
           >
-           <Link
-            to={item.href}
-            onClick={() => setOpen(false)}
-            className={cn(
-             'flex items-center justify-between rounded-2xl px-4 py-3.5 text-lg font-extrabold transition-colors',
-             pathname === item.href
-              ? 'bg-amber-50 text-amber-700'
-              : 'text-navy-700 hover:bg-navy-50',
-            )}
-           >
-            {item.label}
-            <ChevronDown className="h-4 w-4 -rotate-90 opacity-40" />
-           </Link>
+           {item.href === '/contact' ? (
+            <button
+             type="button"
+             onClick={() => {
+              setOpen(false);
+              openFreeTrial();
+             }}
+             className={cn(
+              'flex w-full items-center justify-between rounded-2xl px-4 py-3.5 text-lg font-extrabold transition-colors text-left',
+              pathname === item.href
+               ? 'bg-amber-50 text-amber-700'
+               : 'text-navy-700 hover:bg-navy-50',
+             )}
+            >
+             {item.label}
+             <ChevronDown className="h-4 w-4 -rotate-90 opacity-40" />
+            </button>
+           ) : (
+            <Link
+             to={item.href}
+             onClick={() => setOpen(false)}
+             className={cn(
+              'flex items-center justify-between rounded-2xl px-4 py-3.5 text-lg font-extrabold transition-colors',
+              pathname === item.href
+               ? 'bg-amber-50 text-amber-700'
+               : 'text-navy-700 hover:bg-navy-50',
+             )}
+            >
+             {item.label}
+             <ChevronDown className="h-4 w-4 -rotate-90 opacity-40" />
+            </Link>
+           )}
            {item.children && (
             <div className="mb-1 ml-3 mt-1 space-y-1 border-l-2 border-navy-100 pl-3">
              {item.children.map((c) => (
@@ -200,7 +235,14 @@ export function Navbar() {
           Every student deserves the best teacher.
          </p>
          <p className="mt-1 text-sm text-navy-200">Meet yours in a free 50-minute lesson.</p>
-         <Button to="/contact" full className="mt-4" onClick={() => setOpen(false)}>
+         <Button
+          full
+          className="mt-4"
+          onClick={() => {
+           setOpen(false);
+           openFreeTrial();
+          }}
+         >
           Try a Free Class! 🚀
          </Button>
         </div>

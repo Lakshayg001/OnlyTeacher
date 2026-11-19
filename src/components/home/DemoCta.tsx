@@ -4,6 +4,7 @@ import ClayIcon from '@/components/clay/ClayIcon';
 import { Button } from '@/components/ui/Primitives';
 import { FloatIcon } from '@/components/ui/Decor';
 import type { ClayIconName } from '@/types';
+import { useFreeTrialModal } from '@/context/FreeTrialModalContext';
 
 const PROMISES: { icon: ClayIconName; title: string; sub: string }[] = [
     { icon: 'student', title: '1. Personalised One-to-One Learning', sub: 'Every lesson is tailored to your child\'s pace, strengths and goals for better results.' },
@@ -12,6 +13,7 @@ const PROMISES: { icon: ClayIconName; title: string; sub: string }[] = [
 ];
 
 export function DemoCta() {
+    const { openFreeTrial } = useFreeTrialModal();
     return (
         <section id="book-demo" className="relative py-14 sm:py-18">
             <div className="container-tot">
@@ -56,7 +58,7 @@ export function DemoCta() {
                                 className="mt-8 flex flex-wrap items-center gap-3"
                             >
                                 <Button
-                                    to="/contact"
+                                    onClick={() => openFreeTrial()}
                                     variant="dark"
                                     size="lg"
                                     iconRight={<ArrowRight className="h-4.5 w-4.5" />}

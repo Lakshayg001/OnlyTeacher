@@ -125,7 +125,7 @@ export const SUBJECT_SECTIONS: SubjectSection[] = [
     ],
   },
   {
-    category: '2. 🎯 Exam Preparation',
+    category: '2. Exam Preparation',
     options: [
       'International: IB (PYP, MYP, DP)',
       'International: Cambridge (IGCSE, AS & A Level)',
@@ -168,7 +168,7 @@ export const SUBJECT_SECTIONS: SubjectSection[] = [
     ],
   },
   {
-    category: '3. 🗣️ Language Learning',
+    category: '3. Language Learning',
     options: [
       'French (DELF / DALF, TEF / TCF)',
       'German (Goethe-Zertifikat, TestDaF)',
@@ -189,7 +189,7 @@ export const SUBJECT_SECTIONS: SubjectSection[] = [
     ],
   },
   {
-    category: '4. 🌟 Personality Development & Life Skills',
+    category: '4. Personality Development & Life Skills',
     options: [
       'Spoken English & Fluency',
       'English Grammar (Beginner to Advanced)',
@@ -470,6 +470,19 @@ export default function BuyNowModal({
     return match || FORM_COUNTRIES[0];
   };
 
+  // Resolve default school year from tier
+  const resolveDefaultYear = (yearsStr?: string) => {
+    if (!yearsStr) return 'Year 1';
+    if (SCHOOL_YEARS.includes(yearsStr)) return yearsStr;
+    const match = yearsStr.match(/(\d+)/);
+    if (match) {
+      const yearNum = match[1];
+      const found = SCHOOL_YEARS.find((y) => y === `Year ${yearNum}`);
+      if (found) return found;
+    }
+    return 'Year 1';
+  };
+
   const defaultCountry = getDefaultCountry();
 
   const [formData, setFormData] = useState<BuyNowFormData>({
@@ -486,7 +499,7 @@ export default function BuyNowModal({
     phoneCountryCode: defaultCountry.code,
     phoneNumber: '',
     email: '',
-    year: planContext?.years || 'Year 1',
+    year: resolveDefaultYear(planContext?.years),
     subject: SUBJECT_SECTIONS[0].options[0],
     termsAccepted: false,
     planContext: planContext || undefined,
@@ -507,7 +520,7 @@ export default function BuyNowModal({
         whatsappCountryCode: prev.whatsappNumber ? prev.whatsappCountryCode : country.code,
         phoneCode: prev.phoneNumber ? prev.phoneCode : country.dial,
         phoneCountryCode: prev.phoneNumber ? prev.phoneCountryCode : country.code,
-        year: planContext.years || prev.year || 'Year 1',
+        year: resolveDefaultYear(planContext.years) || prev.year || 'Year 1',
         planContext,
       }));
     }
@@ -997,9 +1010,6 @@ export default function BuyNowModal({
                           onChange={(e) => setFormData({ ...formData, year: e.target.value })}
                           className="w-full min-w-0 rounded-xl border border-navy-200 bg-navy-50/50 px-3.5 py-2.5 text-sm font-semibold text-navy-800 outline-none focus:border-amber-500 focus:bg-white"
                         >
-                          {planContext?.years && (
-                            <option value={planContext.years}>Selected Tier: {planContext.years}</option>
-                          )}
                           {SCHOOL_YEARS.map((y) => (
                             <option key={y} value={y}>
                               {y}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, CheckCircle2, User, Mail, MessageCircle, BookOpen, GraduationCap, Sparkles, AlertCircle } from 'lucide-react';
+import { X, CheckCircle2, User, Mail, MessageCircle, BookOpen, GraduationCap, Sparkles } from 'lucide-react';
 import { useLockBody } from '@/lib/hooks';
 import { Button } from '@/components/ui/Primitives';
 import { cn } from '@/lib/utils';
@@ -26,6 +26,7 @@ export interface BuyNowFormData {
   email: string;
   year: string;
   subject: string;
+  termsAccepted: boolean;
   planContext?: BuyNowPlanContext;
 }
 
@@ -210,6 +211,7 @@ export default function BuyNowModal({
     email: '',
     year: planContext?.years || 'Year 1',
     subject: SUBJECT_SECTIONS[0].options[0],
+    termsAccepted: false,
     planContext: planContext || undefined,
   });
 
@@ -260,6 +262,9 @@ export default function BuyNowModal({
     }
     if (!formData.year.trim()) newErrors.year = 'Please select a Year';
     if (!formData.subject.trim()) newErrors.subject = 'Please select or enter a subject';
+    if (!formData.termsAccepted) {
+      newErrors.termsAccepted = 'Please accept the Terms & Conditions to proceed';
+    }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -347,11 +352,11 @@ export default function BuyNowModal({
 
               <div className="flex items-center gap-2 text-amber-400 text-xs font-black uppercase tracking-wider">
                 <Sparkles className="h-4 w-4" />
-                <span>Complete Your Enrolment</span>
+                <span>Book Your Free Trial</span>
               </div>
 
               <h3 className="mt-1 font-display text-xl sm:text-2xl font-black text-white">
-                Buy Now — {planContext?.planName || 'Tuition Package'}
+                Book a Free Trial — {planContext?.planName || 'Tuition Package'}
               </h3>
 
               {/* Plan context pill */}
@@ -385,10 +390,10 @@ export default function BuyNowModal({
                     <CheckCircle2 className="h-10 w-10" />
                   </div>
                   <h4 className="mt-5 font-display text-2xl font-black text-navy-800">
-                    Order Request Received!
+                    Free Trial Request Received!
                   </h4>
                   <p className="mt-2 text-sm text-navy-600 max-w-md mx-auto leading-relaxed">
-                    Thank you, <strong className="text-navy-800">{formData.parentFirstName}</strong>! We have received your purchase request for{' '}
+                    Thank you, <strong className="text-navy-800">{formData.parentFirstName}</strong>! We have received your free trial booking for{' '}
                     <strong className="text-navy-800">{planContext?.planName || 'Tuition Plan'}</strong> for{' '}
                     <strong className="text-navy-800">{formData.studentFirstName}</strong> ({formData.year}).
                   </p>
@@ -402,10 +407,10 @@ export default function BuyNowModal({
                       <span className="font-extrabold text-navy-900">
                         {formData.whatsappCode} {formData.whatsappNumber}
                       </span>{' '}
-                      within a few hours.
+                      within a few hours to schedule your free trial session.
                     </p>
                     <p className="text-amber-800">
-                      2. We will confirm your schedule and teacher match before sending the secure payment link.
+                      2. We will match the specialist tutor according to your preferred timing and subject.
                     </p>
                   </div>
 
@@ -697,8 +702,52 @@ export default function BuyNowModal({
                     </div>
                   </div>
 
-                  {/* Submission note & submit button */}
-                  <div className="pt-3">
+                  {/* Terms & Conditions Checkbox */}
+                  <div className="pt-2">
+                    <label className="flex items-start gap-2.5 cursor-pointer select-none group">
+                      <input
+                        type="checkbox"
+                        checked={formData.termsAccepted}
+                        onChange={(e) => {
+                          const checked = e.target.checked;
+                          setFormData((prev) => ({ ...prev, termsAccepted: checked }));
+                          if (checked && errors.termsAccepted) {
+                            setErrors((prev) => ({ ...prev, termsAccepted: '' }));
+                          }
+                        }}
+                        className="mt-0.5 h-4 w-4 shrink-0 rounded border-navy-300 text-amber-500 focus:ring-amber-400 accent-amber-500 cursor-pointer"
+                      />
+                      <span className="text-xs text-navy-600 font-medium leading-relaxed">
+                        I agree to the{' '}
+                        <a
+                          href="/terms-of-use"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="font-bold text-navy-800 underline hover:text-amber-600 transition-colors"
+                        >
+                          Terms &amp; Conditions
+                        </a>{' '}
+                        and{' '}
+                        <a
+                          href="/privacy-policy"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="font-bold text-navy-800 underline hover:text-amber-600 transition-colors"
+                        >
+                          Privacy Policy
+                        </a>
+                        . <span className="text-rose-500 font-bold">*</span>
+                      </span>
+                    </label>
+                    {errors.termsAccepted && (
+                      <p className="mt-1 text-[11px] text-rose-500 font-semibold pl-6.5">
+                        {errors.termsAccepted}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Submit Button */}
+                  <div className="pt-2">
                     <Button
                       type="submit"
                       disabled={isSubmitting}
@@ -707,15 +756,8 @@ export default function BuyNowModal({
                       size="md"
                       className="font-black text-sm shadow-md"
                     >
-                      {isSubmitting ? 'Submitting Details...' : 'Confirm & Buy Now 🚀'}
+                      {isSubmitting ? 'Booking Free Trial...' : 'Book a Free Trial 🚀'}
                     </Button>
-
-                    <div className="mt-3 flex items-start gap-1.5 text-center justify-center text-[11px] text-navy-400">
-                      <AlertCircle className="h-3.5 w-3.5 shrink-0 mt-0.5 text-amber-500" />
-                      <span>
-                        No immediate card payment needed. Our academic coordinator will verify your teacher match &amp; timetable before sending your official enrollment invoice.
-                      </span>
-                    </div>
                   </div>
                 </form>
               )}

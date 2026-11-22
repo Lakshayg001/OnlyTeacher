@@ -258,10 +258,14 @@ export function BarList({ data }: { data: { label: string; value: number }[] }) 
 /* -------------------------------- badges --------------------------------- */
 
 export function StatusPill({ status }: { status: string }) {
+ const s = (status || '').toLowerCase();
  const map: Record<string, string> = {
   new: 'bg-amber-100 text-amber-700',
+  pending: 'bg-amber-100 text-amber-700',
   scheduled: 'bg-sky text-navy-700',
+  accepted: 'bg-emerald-100 text-emerald-700',
   completed: 'bg-forest-100 text-forest-700',
+  rejected: 'bg-rose-100 text-rose-700',
   cancelled: 'bg-red-100 text-red-600',
   active: 'bg-forest-100 text-forest-700',
   trial: 'bg-amber-100 text-amber-700',
@@ -270,8 +274,8 @@ export function StatusPill({ status }: { status: string }) {
  return (
   <span
    className={cn(
-    'inline-flex rounded-full px-2.5 py-1 text-[11px] font-extrabold capitalize',
-    map[status] ?? 'bg-navy-100 text-navy-600',
+    'inline-flex rounded-full px-2.5 py-1 text-[11px] font-extrabold uppercase tracking-wide',
+    map[s] ?? 'bg-navy-100 text-navy-600',
    )}
   >
    {status}

@@ -32,11 +32,17 @@ export default function Dashboard() {
       return;
     }
 
-    const res = await fetch(import.meta.env.PROD ? 'https://api.theonlyteacher.com/api/admin/contacts?size=10000' : '/api/admin/contacts?size=10000', {
+    let res = await fetch(import.meta.env.PROD ? 'https://api.theonlyteacher.com/api/admin/demo-bookings?size=10000' : '/api/admin/demo-bookings?size=10000', {
      headers: { 'Authorization': `Bearer ${token}` }
     });
     
-    if (!res.ok) throw new Error('Failed to fetch');
+    if (!res.ok) {
+     res = await fetch(import.meta.env.PROD ? 'https://api.theonlyteacher.com/api/admin/contacts?size=10000' : '/api/admin/contacts?size=10000', {
+      headers: { 'Authorization': `Bearer ${token}` }
+     });
+    }
+
+    if (!res.ok) throw new Error('Failed to fetch dashboard data');
     const json = await res.json();
     const contacts = json.data?.content || [];
     
@@ -67,7 +73,8 @@ export default function Dashboard() {
     // 2. Process Country Split
     const cMap = new Map<string, number>();
     contacts.forEach((c: any) => {
-     if (c.country) cMap.set(c.country, (cMap.get(c.country) || 0) + 1);
+     const countryKey = c.nationality || c.country;
+     if (countryKey) cMap.set(countryKey, (cMap.get(countryKey) || 0) + 1);
     });
     
     let colorIdx = 0;

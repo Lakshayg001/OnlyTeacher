@@ -13,6 +13,7 @@ import {
   Globe,
   Check,
   ShieldCheck,
+  AlertCircle,
 } from 'lucide-react';
 import { useLockBody } from '@/lib/hooks';
 import { Button } from '@/components/ui/Primitives';
@@ -511,6 +512,8 @@ export default function BuyNowModal({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [bookedStudentId, setBookedStudentId] = useState<string | null>(null);
 
   // OTP Verification State
   const [otpRequested, setOtpRequested] = useState(false);
@@ -664,40 +667,96 @@ export default function BuyNowModal({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError(null);
     if (!validate()) return;
 
     setIsSubmitting(true);
 
     try {
-      // Prepared payload for the backend team
-      const payload: BuyNowFormData = {
-        ...formData,
-        planContext: planContext || undefined,
+      const resolvedPlanContext = {
+        planName: planContext?.planName || 'Free Trial Class',
+        tierTitle: planContext?.tierTitle || '',
+        years: planContext?.years || formData.year,
+        price: planContext?.price || 'Free Trial',
+        planType: planContext?.planType || 'trial',
+        countryName: planContext?.countryName || formData.nationality || 'India',
+        countryCode: planContext?.countryCode || formData.phoneCountryCode || 'IN',
       };
 
-      console.log('[Buy Now Form Submission Payload]:', payload);
+      const payload = {
+        parentFirstName: formData.parentFirstName.trim(),
+        parentLastName: formData.parentLastName.trim(),
+        studentFirstName: formData.studentFirstName.trim(),
+        studentLastName: formData.studentLastName.trim(),
+        studentRelation: formData.studentRelation,
+        nationality: formData.nationality,
+        whatsappCode: formData.whatsappCode,
+        whatsappCountryCode: formData.whatsappCountryCode,
+        whatsappNumber: formData.whatsappNumber.replace(/\D/g, ''),
+        phoneCode: formData.phoneCode,
+        phoneCountryCode: formData.phoneCountryCode,
+        phoneNumber: formData.phoneNumber.replace(/\D/g, ''),
+        email: formData.email.trim(),
+        year: formData.year,
+        subject: formData.subject,
+        termsAccepted: formData.termsAccepted,
+        planContext: resolvedPlanContext,
+      };
 
-      // =========================================================================
-      // TODO: BACKEND TEAM INTEGRATION
-      // Once the backend API endpoint is ready, uncomment and plug in endpoint:
-      //
-      // const response = await fetch('/api/orders/buy-now', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(payload),
-      // });
-      // if (!response.ok) throw new Error('Failed to submit order request');
-      // =========================================================================
+      const endpoint = import.meta.env.PROD
+        ? 'https://api.theonlyteacher.com/api/demo-bookings'
+        : '/api/demo-bookings';
 
-      // Simulate a brief network call for UX
-      await new Promise((resolve) => setTimeout(resolve, 600));
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      let data: any = null;
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
+        data = await response.json();
+      }
+
+      if (!response.ok || (data && data.success === false)) {
+        if (data && data.errors && Array.isArray(data.errors) && data.errors.length > 0) {
+          const backendFieldErrors: Record<string, string> = {};
+          let generalMsg = '';
+          data.errors.forEach((err: { field?: string; message?: string }) => {
+            if (err.field && err.message) {
+              backendFieldErrors[err.field] = err.message;
+            } else if (err.message) {
+              generalMsg = err.message;
+            }
+          });
+          if (Object.keys(backendFieldErrors).length > 0) {
+            setErrors((prev) => ({ ...prev, ...backendFieldErrors }));
+          }
+          throw new Error(generalMsg || data.message || 'Validation failed. Please check the entered fields.');
+        }
+
+        if (response.status === 429) {
+          throw new Error('Too many booking requests. Please wait a moment and try again.');
+        }
+
+        throw new Error(data?.message || `Booking failed with status ${response.status}. Please try again.`);
+      }
+
+      if (data?.data?.studentId) {
+        setBookedStudentId(data.data.studentId);
+      }
 
       setIsSubmitted(true);
       if (onSubmitSuccess) {
-        onSubmitSuccess(payload);
+        onSubmitSuccess(payload as unknown as BuyNowFormData);
       }
-    } catch (err) {
-      console.error('Error submitting form:', err);
+    } catch (err: any) {
+      console.error('Error submitting free trial booking:', err);
+      setSubmitError(err?.message || 'Failed to submit the booking. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -705,6 +764,8 @@ export default function BuyNowModal({
 
   const handleResetAndClose = () => {
     setIsSubmitted(false);
+    setSubmitError(null);
+    setBookedStudentId(null);
     setErrors({});
     onClose();
   };
@@ -789,6 +850,13 @@ export default function BuyNowModal({
                     <strong className="text-navy-800">{planContext?.planName || 'Tuition Plan'}</strong> for{' '}
                     <strong className="text-navy-800">{formData.studentFirstName}</strong> ({formData.year}).
                   </p>
+
+                  {bookedStudentId && (
+                    <div className="mt-3 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-bold text-emerald-800">
+                      <span>Booking Reference ID:</span>
+                      <span className="font-mono font-black text-emerald-950">{bookedStudentId}</span>
+                    </div>
+                  )}
 
                   <div className="mt-5 rounded-2xl bg-amber-50/70 border border-amber-200 p-4 text-xs font-semibold text-amber-900 text-left space-y-1.5 max-w-md mx-auto">
                     <p className="flex items-center gap-2 font-bold text-amber-950">
@@ -1262,6 +1330,14 @@ export default function BuyNowModal({
                       </p>
                     )}
                   </div>
+
+                  {/* Error Alert */}
+                  {submitError && (
+                    <div className="flex items-start gap-2.5 rounded-2xl bg-rose-50 border border-rose-200 p-3.5 text-xs font-semibold text-rose-700">
+                      <AlertCircle className="h-4 w-4 shrink-0 text-rose-500 mt-0.5" />
+                      <p>{submitError}</p>
+                    </div>
+                  )}
 
                   {/* Submit Button */}
                   <div className="pt-2">

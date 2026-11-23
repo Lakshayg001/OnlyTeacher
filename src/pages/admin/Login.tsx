@@ -42,19 +42,30 @@ export default function Login() {
        try {
         const response = await fetch(import.meta.env.PROD ? 'https://api.theonlyteacher.com/api/auth/login' : '/api/auth/login', {
          method: 'POST',
-         headers: { 'Content-Type': 'application/json' },
-         body: JSON.stringify({ username: email, password })
+         headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+         },
+         body: JSON.stringify({
+          email: email.trim(),
+          username: email.trim(),
+          password,
+         })
         });
-        const data = await response.json();
-        if (data.success && data.data?.token) {
+        const data = await response.json().catch(() => null);
+        if (response.ok && data?.success && data.data?.token) {
          localStorage.setItem('tot_admin_token', data.data.token);
          navigate('/admin');
         } else {
-         setError(data.message || 'Login failed');
+         if (data?.errors && data.errors.length > 0) {
+          setError(data.errors[0].message || data.message || 'Login failed');
+         } else {
+          setError(data?.message || 'Invalid email or password');
+         }
         }
        } catch (err) {
         console.error(err);
-        setError('An error occurred during login.');
+        setError('An error occurred during login. Please try again.');
        } finally {
         setIsSubmitting(false);
        }

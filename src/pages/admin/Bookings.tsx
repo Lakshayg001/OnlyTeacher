@@ -17,7 +17,13 @@ import {
   AlertCircle,
   ExternalLink,
   RefreshCw,
+  CreditCard,
+  Link2,
+  Copy,
+  Check,
+  Share2,
 } from 'lucide-react';
+import { formatMoney } from '@/pages/Payment';
 import ClayIcon from '@/components/clay/ClayIcon';
 import { Button } from '@/components/ui/Primitives';
 import { Panel, StatusPill, Table } from './AdminKit';
@@ -90,6 +96,139 @@ export default function Bookings() {
   const [actionMessage, setActionMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [showRejectInput, setShowRejectInput] = useState(false);
   const [rejectReason, setRejectReason] = useState('Subject not offered for this year group.');
+
+  // Payment link generation states
+  const [plans, setPlans] = useState<any[]>([]);
+  const [plansLoading, setPlansLoading] = useState(false);
+  const [selectedPlanId, setSelectedPlanId] = useState('');
+  const [showPaymentLinkSection, setShowPaymentLinkSection] = useState(false);
+  const [generatedPaymentLink, setGeneratedPaymentLink] = useState<any | null>(null);
+  const [linkLoading, setLinkLoading] = useState(false);
+  const [linkError, setLinkError] = useState<string | null>(null);
+  const [copiedLink, setCopiedLink] = useState(false);
+
+  const closeBookingModal = () => {
+    setSelectedBooking(null);
+    setShowRejectInput(false);
+    setActionMessage(null);
+    setShowPaymentLinkSection(false);
+    setGeneratedPaymentLink(null);
+    setLinkError(null);
+    setCopiedLink(false);
+  };
+
+  // Fetch plans from GET /api/admin/plans
+  const fetchPlans = async () => {
+    const token = localStorage.getItem('tot_admin_token');
+    if (!token) return;
+    setPlansLoading(true);
+    try {
+      const endpoint = import.meta.env.PROD
+        ? 'https://api.theonlyteacher.com/api/admin/plans'
+        : '/api/admin/plans';
+
+      const res = await fetch(endpoint, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+        },
+      });
+
+      if (res.ok) {
+        const json = await res.json();
+        if (json.success && json.data) {
+          const activePlans = json.data.filter((p: any) => p.active !== false);
+          setPlans(activePlans);
+          if (activePlans.length > 0 && !selectedPlanId) {
+            setSelectedPlanId(activePlans[0].planId);
+          }
+        }
+      }
+    } catch (e) {
+      console.error('Failed to fetch admin plans:', e);
+    } finally {
+      setPlansLoading(false);
+    }
+  };
+
+  // Generate / Assign Plan Payment Link
+  const handleGeneratePaymentLink = async (studentId: string) => {
+    const token = localStorage.getItem('tot_admin_token');
+    if (!token) return;
+
+    if (!selectedPlanId) {
+      setLinkError('Please select a plan to assign.');
+      return;
+    }
+
+    setLinkLoading(true);
+    setLinkError(null);
+
+    try {
+      // 1. Try assigning plan
+      const assignEndpoint = import.meta.env.PROD
+        ? `https://api.theonlyteacher.com/api/admin/students/${studentId}/assign-plan`
+        : `/api/admin/students/${studentId}/assign-plan`;
+
+      let res = await fetch(assignEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({ planId: selectedPlanId }),
+      });
+
+      let json = await res.json().catch(() => null);
+
+      // If 409 (a plan already assigned or demo not accepted), try generating a fresh link
+      if (res.status === 409 || !res.ok) {
+        const linkEndpoint = import.meta.env.PROD
+          ? `https://api.theonlyteacher.com/api/admin/students/${studentId}/payment-link`
+          : `/api/admin/students/${studentId}/payment-link`;
+
+        const linkRes = await fetch(linkEndpoint, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: 'application/json',
+          },
+        });
+
+        if (linkRes.ok) {
+          json = await linkRes.json().catch(() => null);
+        } else {
+          const errData = await linkRes.json().catch(() => null);
+          throw new Error(errData?.message || json?.message || 'Failed to generate payment link.');
+        }
+      }
+
+      if (json && json.success && json.data) {
+        // Normalize paymentUrl to ensure it points to frontend domain /payment?student_id=...&token=...
+        let finalUrl = json.data.paymentUrl || '';
+        if (finalUrl) {
+          try {
+            const parsed = new URL(finalUrl);
+            finalUrl = `${window.location.origin}/payment${parsed.search}`;
+          } catch {
+            finalUrl = finalUrl.startsWith('http') ? finalUrl : `${window.location.origin}${finalUrl}`;
+          }
+        }
+        setGeneratedPaymentLink({
+          ...json.data,
+          paymentUrl: finalUrl,
+        });
+      } else {
+        setLinkError(json?.message || 'Could not generate payment link.');
+      }
+    } catch (err: any) {
+      console.error('Error generating payment link:', err);
+      setLinkError(err?.message || 'Error communicating with server.');
+    } finally {
+      setLinkLoading(false);
+    }
+  };
 
   // Fetch all bookings or filtered by status using GET /api/admin/demo-bookings
   const fetchBookings = async (statusFilter?: FilterTab) => {
@@ -484,7 +623,7 @@ export default function Bookings() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 z-40 bg-navy-900/60 backdrop-blur-sm"
-              onClick={() => setSelectedBooking(null)}
+              onClick={closeBookingModal}
             />
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
               <motion.div
@@ -511,7 +650,7 @@ export default function Bookings() {
                     </p>
                   </div>
                   <button
-                    onClick={() => setSelectedBooking(null)}
+                    onClick={closeBookingModal}
                     className="grid h-10 w-10 place-items-center rounded-full bg-white text-navy-400 shadow-sm transition-colors hover:bg-navy-50 hover:text-navy-700"
                   >
                     <X size={20} />
@@ -696,6 +835,199 @@ export default function Bookings() {
                       </div>
                     </div>
                   )}
+
+                  {/* Payment Link Generator Section */}
+                  {selectedBooking.status === 'ACCEPTED' && (
+                    <div className="rounded-2xl border border-amber-300 bg-amber-50/50 p-5 space-y-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <CreditCard className="w-5 h-5 text-amber-600" />
+                          <h3 className="font-display text-base font-extrabold text-navy-800">
+                            Student Enrollment &amp; Payment Link
+                          </h3>
+                        </div>
+                        {!showPaymentLinkSection && !generatedPaymentLink && (
+                          <Button
+                            size="sm"
+                            onClick={() => {
+                              setShowPaymentLinkSection(true);
+                              fetchPlans();
+                            }}
+                            className="bg-amber-500 hover:bg-amber-600 text-white font-extrabold"
+                            icon={<Link2 className="w-4 h-4" />}
+                          >
+                            Assign Plan &amp; Generate Link
+                          </Button>
+                        )}
+                      </div>
+
+                      {linkError && (
+                        <div className="rounded-xl bg-rose-100 p-3 text-xs font-bold text-rose-800 flex items-center gap-2">
+                          <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+                          <span>{linkError}</span>
+                        </div>
+                      )}
+
+                      {/* Plan Selection Form */}
+                      {showPaymentLinkSection && !generatedPaymentLink && (
+                        <div className="space-y-3 pt-2">
+                          <label className="block text-xs font-bold text-navy-700">
+                            Select Academic Plan / Package to Assign:
+                          </label>
+                          {plansLoading ? (
+                            <div className="flex items-center gap-2 text-xs font-semibold text-navy-400 py-2">
+                              <RefreshCw className="w-4 h-4 animate-spin text-amber-500" />
+                              Loading available plans…
+                            </div>
+                          ) : plans.length === 0 ? (
+                            <div className="text-xs text-navy-500">
+                              No active plans found on the server.
+                            </div>
+                          ) : (
+                            <div className="space-y-2">
+                              <select
+                                value={selectedPlanId}
+                                onChange={(e) => setSelectedPlanId(e.target.value)}
+                                className="w-full rounded-xl border border-navy-200 bg-white p-2.5 text-xs font-semibold text-navy-800 outline-none focus:border-amber-400"
+                              >
+                                {plans.map((p) => (
+                                  <option key={p.planId} value={p.planId}>
+                                    {p.name} — {formatMoney(p.finalAmount, p.currency)} ({p.durationMonths || 1} mo)
+                                  </option>
+                                ))}
+                              </select>
+
+                              {/* Selected Plan Details preview */}
+                              {(() => {
+                                const activeP = plans.find((p) => p.planId === selectedPlanId);
+                                if (!activeP) return null;
+                                return (
+                                  <div className="rounded-xl bg-white p-3 border border-navy-100 text-xs flex items-center justify-between">
+                                    <div>
+                                      <span className="font-extrabold text-navy-800">{activeP.name}</span>
+                                      {activeP.description && (
+                                        <p className="text-[11px] text-navy-400 mt-0.5">{activeP.description}</p>
+                                      )}
+                                    </div>
+                                    <div className="text-right">
+                                      <span className="font-display font-extrabold text-amber-600 text-sm">
+                                        {formatMoney(activeP.finalAmount, activeP.currency)}
+                                      </span>
+                                    </div>
+                                  </div>
+                                );
+                              })()}
+
+                              <div className="flex justify-end gap-2 pt-1">
+                                <Button
+                                  size="sm"
+                                  variant="outline"
+                                  onClick={() => setShowPaymentLinkSection(false)}
+                                  disabled={linkLoading}
+                                >
+                                  Cancel
+                                </Button>
+                                <Button
+                                  size="sm"
+                                  onClick={() => handleGeneratePaymentLink(selectedBooking.studentId)}
+                                  disabled={linkLoading || !selectedPlanId}
+                                  className="bg-amber-500 hover:bg-amber-600 text-white font-extrabold"
+                                  icon={linkLoading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Link2 className="w-4 h-4" />}
+                                >
+                                  {linkLoading ? 'Generating…' : 'Generate Secure Payment Link'}
+                                </Button>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Generated Link Display & Share Actions */}
+                      {generatedPaymentLink && (
+                        <div className="rounded-2xl bg-white p-4 border border-emerald-200 space-y-3">
+                          <div className="flex items-center justify-between">
+                            <span className="inline-flex items-center gap-1.5 text-xs font-extrabold text-emerald-800">
+                              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                              Payment Link Ready
+                            </span>
+                            <span className="text-[11px] font-bold text-navy-400">
+                              Plan: {generatedPaymentLink.planName} · {formatMoney(generatedPaymentLink.finalAmount, generatedPaymentLink.currency)}
+                            </span>
+                          </div>
+
+                          <div className="flex items-center gap-2">
+                            <input
+                              type="text"
+                              readOnly
+                              value={generatedPaymentLink.paymentUrl}
+                              className="flex-1 rounded-xl border border-navy-200 bg-navy-50/70 px-3 py-2 text-xs font-mono font-semibold text-navy-800 outline-none"
+                            />
+                            <Button
+                              size="sm"
+                              onClick={() => {
+                                navigator.clipboard.writeText(generatedPaymentLink.paymentUrl);
+                                setCopiedLink(true);
+                                setTimeout(() => setCopiedLink(false), 2000);
+                              }}
+                              className={cn(
+                                'font-bold shrink-0',
+                                copiedLink ? 'bg-emerald-600 text-white' : 'bg-navy-800 text-white hover:bg-navy-900',
+                              )}
+                              icon={copiedLink ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                            >
+                              {copiedLink ? 'Copied!' : 'Copy Link'}
+                            </Button>
+                          </div>
+
+                          {/* Quick Share buttons */}
+                          <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-navy-100">
+                            {/* Email Mailto */}
+                            {selectedBooking.email && (
+                              <a
+                                href={`mailto:${selectedBooking.email}?subject=${encodeURIComponent(
+                                  `Enrollment & Secure Payment Link — The Only Teacher (${selectedBooking.student})`,
+                                )}&body=${encodeURIComponent(
+                                  `Dear ${selectedBooking.parent},\n\nThank you for completing the demo session with The Only Teacher. We are pleased to confirm ${selectedBooking.student}'s admission for ${selectedBooking.subject} (${selectedBooking.year}).\n\nPlease use the secure link below to review your enrollment plan (${generatedPaymentLink.planName}) and complete the tuition fee payment:\n\n${generatedPaymentLink.paymentUrl}\n\nIf you have any questions, feel free to reply to this email or reach us on WhatsApp.\n\nWarm regards,\nAdmissions Team\nThe Only Teacher`,
+                                )}`}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                <Button size="sm" variant="outline" className="text-xs font-bold gap-1.5" icon={<Mail className="w-3.5 h-3.5" />}>
+                                  Email to Parent
+                                </Button>
+                              </a>
+                            )}
+
+                            {/* WhatsApp share */}
+                            {selectedBooking.whatsapp && (
+                              <a
+                                href={`https://wa.me/${(selectedBooking.whatsappCode + selectedBooking.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent(
+                                  `Hi ${selectedBooking.parent}, here is your secure enrollment & payment link for ${selectedBooking.student} at The Only Teacher:\n\nPlan: ${generatedPaymentLink.planName}\nLink: ${generatedPaymentLink.paymentUrl}\n\nPlease click to complete the enrollment payment.`,
+                                )}`}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                <Button size="sm" variant="outline" className="text-xs font-bold gap-1.5 border-emerald-300 text-emerald-700 hover:bg-emerald-50" icon={<MessageCircle className="w-3.5 h-3.5 text-emerald-600" />}>
+                                  Send on WhatsApp
+                                </Button>
+                              </a>
+                            )}
+
+                            {/* Open in new tab */}
+                            <a
+                              href={generatedPaymentLink.paymentUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              <Button size="sm" variant="outline" className="text-xs font-bold gap-1.5" icon={<ExternalLink className="w-3.5 h-3.5" />}>
+                                Open Link
+                              </Button>
+                            </a>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 {/* Modal Footer Actions */}
@@ -736,7 +1068,7 @@ export default function Bookings() {
                     )}
                   </div>
 
-                  <Button size="sm" variant="dark" onClick={() => setSelectedBooking(null)}>
+                  <Button size="sm" variant="dark" onClick={closeBookingModal}>
                     Close
                   </Button>
                 </div>

@@ -270,6 +270,12 @@ export function StatusPill({ status }: { status: string }) {
   active: 'bg-forest-100 text-forest-700',
   trial: 'bg-amber-100 text-amber-700',
   paused: 'bg-navy-100 text-navy-500',
+  success: 'bg-emerald-100 text-emerald-700',
+  initiated: 'bg-sky text-navy-700',
+  expired: 'bg-gray-100 text-gray-600',
+  refunded: 'bg-purple-100 text-purple-700',
+  refund_pending: 'bg-amber-100 text-amber-700',
+  refund_failed: 'bg-rose-100 text-rose-700',
  };
  return (
   <span

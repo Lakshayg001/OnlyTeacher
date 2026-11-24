@@ -5,6 +5,7 @@ import {
  BarChart3,
  BookOpen,
  CalendarCheck,
+ CreditCard,
  ExternalLink,
  GraduationCap,
  LayoutDashboard,
@@ -24,6 +25,7 @@ import RouteFallback from '@/components/layout/RouteFallback';
 const NAV: { to: string; label: string; Icon: any; end?: boolean; badge?: string }[] = [
  { to: '/admin', label: 'Dashboard', Icon: LayoutDashboard, end: true },
  { to: '/admin/bookings', label: 'Demo bookings', Icon: CalendarCheck },
+ { to: '/admin/payments', label: 'Payments', Icon: CreditCard },
 ];
 
 export default function AdminLayout() {

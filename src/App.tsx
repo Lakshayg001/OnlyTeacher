@@ -13,11 +13,13 @@ const TermsOfUse = lazy(() => import('@/pages/TermsOfUse'));
 const PrivacyPolicy = lazy(() => import('@/pages/PrivacyPolicy'));
 const RefundPolicy = lazy(() => import('@/pages/RefundPolicy'));
 const Pricing = lazy(() => import('@/pages/Pricing'));
+const Payment = lazy(() => import('@/pages/Payment'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
 
 const AdminLayout = lazy(() => import('@/pages/admin/AdminLayout'));
 const Dashboard = lazy(() => import('@/pages/admin/Dashboard'));
 const Bookings = lazy(() => import('@/pages/admin/Bookings'));
+const Payments = lazy(() => import('@/pages/admin/Payments'));
 const Students = lazy(() => import('@/pages/admin/Students'));
 const ManageTeachers = lazy(() => import('@/pages/admin/ManageTeachers'));
 const ManageCourses = lazy(() => import('@/pages/admin/ManageCourses'));
@@ -39,6 +41,8 @@ export default function App() {
      {/* <Route path="/contact" element={<Contact />} /> */}
      <Route path="/contact" element={<Navigate to="/pricing" replace />} />
      <Route path="/pricing" element={<Pricing />} />
+     <Route path="/payment" element={<Payment />} />
+     <Route path="/pay" element={<Payment />} />
      <Route path="/terms-of-use" element={<TermsOfUse />} />
      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
      <Route path="/refund-policy" element={<RefundPolicy />} />
@@ -51,6 +55,7 @@ export default function App() {
     <Route path="/admin" element={<AdminLayout />}>
      <Route index element={<Dashboard />} />
      <Route path="bookings" element={<Bookings />} />
+     <Route path="payments" element={<Payments />} />
      <Route path="students" element={<Students />} />
      <Route path="teachers" element={<ManageTeachers />} />
      <Route path="courses" element={<ManageCourses />} />

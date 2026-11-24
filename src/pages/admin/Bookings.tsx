@@ -16,6 +16,7 @@ import {
   Phone,
   AlertCircle,
   ExternalLink,
+  RefreshCw,
 } from 'lucide-react';
 import ClayIcon from '@/components/clay/ClayIcon';
 import { Button } from '@/components/ui/Primitives';
@@ -31,6 +32,50 @@ const TABS: { id: FilterTab; label: string }[] = [
   { id: 'REJECTED', label: 'Rejected' },
 ];
 
+function mapBooking(b: any) {
+  return {
+    id: b.studentId || b.id,
+    studentId: b.studentId || b.id,
+    student: `${b.studentFirstName || ''} ${b.studentLastName || ''}`.trim() || 'Unknown Student',
+    studentFirstName: b.studentFirstName || '',
+    studentLastName: b.studentLastName || '',
+    parent: `${b.parentFirstName || ''} ${b.parentLastName || ''}`.trim() || 'Unknown Parent',
+    parentFirstName: b.parentFirstName || '',
+    parentLastName: b.parentLastName || '',
+    studentRelation: b.studentRelation || 'Child',
+    nationality: b.nationality || 'International',
+    grade: b.year || '-',
+    year: b.year || '-',
+    subject: b.subject || '-',
+    planName: b.planContext?.planName || '-',
+    planPrice: b.planContext?.price || '-',
+    planTier: b.planContext?.tierTitle || '',
+    planType: b.planContext?.planType || '',
+    status: (b.bookingStatus || b.status || 'PENDING').toUpperCase(),
+    phoneCode: b.phoneCode || '',
+    phone: b.phoneNumber || b.phone || '',
+    whatsappCode: b.whatsappCode || '',
+    whatsapp: b.whatsappNumber || b.whatsapp || '',
+    email: b.email || '',
+    createdAt: b.createdAt,
+    termsAcceptedAt: b.termsAcceptedAt,
+    termsVersion: b.termsVersion,
+    acceptedBy: b.acceptedBy,
+    acceptedAt: b.acceptedAt,
+    rejectedBy: b.rejectedBy,
+    rejectedAt: b.rejectedAt,
+    rejectionReason: b.rejectionReason,
+    flag:
+      COUNTRIES.find(
+        (c) => c.name.toLowerCase() === (b.nationality || '').toLowerCase()
+      )?.flag ||
+      b.phoneCountryCode ||
+      b.whatsappCountryCode ||
+      'UN',
+    raw: b,
+  };
+}
+
 export default function Bookings() {
   const navigate = useNavigate();
   const [tab, setTab] = useState<FilterTab>('all');
@@ -38,6 +83,7 @@ export default function Bookings() {
   const [bookings, setBookings] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedBooking, setSelectedBooking] = useState<any | null>(null);
+  const [isDetailLoading, setIsDetailLoading] = useState(false);
 
   // Accept / Reject Action States
   const [actionLoading, setActionLoading] = useState(false);
@@ -45,7 +91,8 @@ export default function Bookings() {
   const [showRejectInput, setShowRejectInput] = useState(false);
   const [rejectReason, setRejectReason] = useState('Subject not offered for this year group.');
 
-  const fetchBookings = async () => {
+  // Fetch all bookings or filtered by status using GET /api/admin/demo-bookings
+  const fetchBookings = async (statusFilter?: FilterTab) => {
     const token = localStorage.getItem('tot_admin_token');
     if (!token) {
       navigate('/admin/login');
@@ -53,9 +100,17 @@ export default function Bookings() {
     }
     setIsLoading(true);
     try {
+      const activeTab = statusFilter !== undefined ? statusFilter : tab;
+      const params = new URLSearchParams();
+      params.append('page', '0');
+      params.append('size', '200');
+      if (activeTab && activeTab !== 'all') {
+        params.append('status', activeTab);
+      }
+
       const endpoint = import.meta.env.PROD
-        ? 'https://api.theonlyteacher.com/api/admin/demo-bookings?page=0&size=200'
-        : '/api/admin/demo-bookings?page=0&size=200';
+        ? `https://api.theonlyteacher.com/api/admin/demo-bookings?${params.toString()}`
+        : `/api/admin/demo-bookings?${params.toString()}`;
 
       const res = await fetch(endpoint, {
         headers: {
@@ -74,46 +129,7 @@ export default function Bookings() {
       if (res.ok) {
         const json = await res.json();
         if (json.success && json.data?.content) {
-          items = json.data.content.map((b: any) => ({
-            id: b.studentId || b.id,
-            studentId: b.studentId || b.id,
-            student: `${b.studentFirstName || ''} ${b.studentLastName || ''}`.trim() || 'Unknown Student',
-            studentFirstName: b.studentFirstName || '',
-            studentLastName: b.studentLastName || '',
-            parent: `${b.parentFirstName || ''} ${b.parentLastName || ''}`.trim() || 'Unknown Parent',
-            parentFirstName: b.parentFirstName || '',
-            parentLastName: b.parentLastName || '',
-            studentRelation: b.studentRelation || 'Child',
-            nationality: b.nationality || 'International',
-            grade: b.year || '-',
-            year: b.year || '-',
-            subject: b.subject || '-',
-            planName: b.planContext?.planName || '-',
-            planPrice: b.planContext?.price || '-',
-            planTier: b.planContext?.tierTitle || '',
-            planType: b.planContext?.planType || '',
-            status: (b.bookingStatus || b.status || 'PENDING').toUpperCase(),
-            phoneCode: b.phoneCode || '',
-            phone: b.phoneNumber || b.phone || '',
-            whatsappCode: b.whatsappCode || '',
-            whatsapp: b.whatsappNumber || b.whatsapp || '',
-            email: b.email || '',
-            createdAt: b.createdAt,
-            termsAcceptedAt: b.termsAcceptedAt,
-            acceptedBy: b.acceptedBy,
-            acceptedAt: b.acceptedAt,
-            rejectedBy: b.rejectedBy,
-            rejectedAt: b.rejectedAt,
-            rejectionReason: b.rejectionReason,
-            flag:
-              COUNTRIES.find(
-                (c) => c.name.toLowerCase() === (b.nationality || '').toLowerCase()
-              )?.flag ||
-              b.phoneCountryCode ||
-              b.whatsappCountryCode ||
-              'UN',
-            raw: b,
-          }));
+          items = json.data.content.map(mapBooking);
         }
       } else {
         // Fallback to legacy contacts if demo-bookings endpoint is unavailable
@@ -145,11 +161,52 @@ export default function Bookings() {
     }
   };
 
+  // Fetch full details of one demo booking using GET /api/admin/demo-bookings/{studentId}
+  const fetchSingleBooking = async (studentId: string) => {
+    const token = localStorage.getItem('tot_admin_token');
+    if (!token) return;
+
+    setIsDetailLoading(true);
+    try {
+      const endpoint = import.meta.env.PROD
+        ? `https://api.theonlyteacher.com/api/admin/demo-bookings/${studentId}`
+        : `/api/admin/demo-bookings/${studentId}`;
+
+      const res = await fetch(endpoint, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+        },
+      });
+
+      if (res.ok) {
+        const json = await res.json();
+        if (json.success && json.data) {
+          const fresh = mapBooking(json.data);
+          setSelectedBooking(fresh);
+          // Also update in list if present
+          setBookings((prev) =>
+            prev.map((b) => (b.studentId === studentId ? { ...b, ...fresh } : b))
+          );
+        }
+      }
+    } catch (e) {
+      console.error(`Failed to fetch details for student ${studentId}:`, e);
+    } finally {
+      setIsDetailLoading(false);
+    }
+  };
+
   useEffect(() => {
-    fetchBookings();
+    fetchBookings('all');
   }, [navigate]);
 
-  // Handle Accept Booking
+  const handleTabChange = (newTab: FilterTab) => {
+    setTab(newTab);
+    fetchBookings(newTab);
+  };
+
+  // Handle Accept Booking via POST /api/admin/demo-bookings/{studentId}/accept
   const handleAcceptBooking = async (studentId: string) => {
     const token = localStorage.getItem('tot_admin_token');
     if (!token) return;
@@ -192,6 +249,8 @@ export default function Bookings() {
       }
 
       setActionMessage({ type: 'success', text: 'Booking successfully ACCEPTED!' });
+      // Refresh single booking record
+      fetchSingleBooking(studentId);
     } catch (err: any) {
       console.error('Error accepting booking:', err);
       setActionMessage({ type: 'error', text: err.message || 'Could not accept booking.' });
@@ -200,7 +259,7 @@ export default function Bookings() {
     }
   };
 
-  // Handle Reject Booking
+  // Handle Reject Booking via POST /api/admin/demo-bookings/{studentId}/reject
   const handleRejectBooking = async (studentId: string) => {
     const token = localStorage.getItem('tot_admin_token');
     if (!token) return;
@@ -249,6 +308,8 @@ export default function Bookings() {
 
       setShowRejectInput(false);
       setActionMessage({ type: 'success', text: 'Booking status set to REJECTED.' });
+      // Refresh single booking record
+      fetchSingleBooking(studentId);
     } catch (err: any) {
       console.error('Error rejecting booking:', err);
       setActionMessage({ type: 'error', text: err.message || 'Could not reject booking.' });
@@ -282,13 +343,13 @@ export default function Bookings() {
     <div className="space-y-5">
       <Panel
         title="Demo Bookings & Enrolments"
-        sub={`${rows.length} of ${bookings.length} total demo requests`}
+        sub={`${rows.length} of ${bookings.length} demo requests listed`}
         action={
           <Button
             variant="outline"
             size="sm"
-            onClick={fetchBookings}
-            icon={<Download className="h-4 w-4" />}
+            onClick={() => fetchBookings(tab)}
+            icon={<RefreshCw className={cn('h-4 w-4', isLoading && 'animate-spin')} />}
           >
             Refresh
           </Button>
@@ -299,11 +360,11 @@ export default function Bookings() {
             {TABS.map((t) => (
               <button
                 key={t.id}
-                onClick={() => setTab(t.id)}
+                onClick={() => handleTabChange(t.id)}
                 className={cn(
                   'inline-flex shrink-0 items-center gap-1.5 rounded-full px-3.5 py-2 text-[12.5px] font-extrabold transition-all',
                   tab === t.id
-                    ? 'bg-navy-700 text-white'
+                    ? 'bg-navy-700 text-white shadow-sm'
                     : 'border border-navy-100 text-navy-500 hover:border-amber-300 hover:text-amber-600',
                 )}
               >
@@ -325,7 +386,7 @@ export default function Bookings() {
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search by student, parent, ref ID..."
+              placeholder="Search student, parent, ID..."
               className="h-11 w-full rounded-full border border-navy-100 bg-navy-50/70 pl-10 pr-4 text-[13.5px] font-semibold text-navy-700 outline-none transition-colors focus:border-amber-300 focus:bg-white"
             />
           </div>
@@ -339,11 +400,13 @@ export default function Bookings() {
         ) : rows.length === 0 ? (
           <div className="flex flex-col items-center py-14 text-center">
             <ClayIcon name="calendar" size={64} />
-            <p className="mt-3 font-display text-lg font-extrabold text-navy-700">No demo bookings match</p>
-            <p className="text-[13.5px] font-semibold text-navy-400">Try a different filter or search term.</p>
+            <p className="mt-3 font-display text-lg font-extrabold text-navy-700">No demo bookings found</p>
+            <p className="text-[13.5px] font-semibold text-navy-400">
+              {tab !== 'all' ? `No bookings with status ${tab}.` : 'There are no demo bookings in the system yet.'}
+            </p>
           </div>
         ) : (
-          <Table head={['Ref ID', 'Student & Parent', 'Year · Subject', 'Plan / Price', 'Status', 'Contact', 'Created', '']}>
+          <Table head={['Ref ID', 'Student & Parent', 'Year · Subject', 'Plan / Price', 'Status', 'Contact Info', 'Created', 'Actions']}>
             {rows.map((b) => (
               <tr key={b.id} className="transition-colors hover:bg-navy-50/60">
                 <td className="whitespace-nowrap px-3 py-3 font-mono text-[12px] font-bold text-navy-500">
@@ -394,6 +457,7 @@ export default function Bookings() {
                       setSelectedBooking(b);
                       setActionMessage(null);
                       setShowRejectInput(false);
+                      fetchSingleBooking(b.studentId || b.id);
                     }}
                     className="rounded-full border border-navy-100 px-3 py-1.5 text-[12px] font-extrabold text-navy-600 transition-colors hover:border-amber-300 hover:text-amber-600"
                   >
@@ -407,11 +471,11 @@ export default function Bookings() {
 
         <p className="mt-4 flex items-center gap-1.5 text-[12px] font-semibold text-navy-400">
           <Filter className="h-3.5 w-3.5" />
-          Review and approve demo booking requests. Coordinators can assign specialized teachers upon acceptance.
+          Live queue connected with GET /api/admin/demo-bookings. Review requests, inspect details, accept or reject.
         </p>
       </Panel>
 
-      {/* Booking Detail Modal */}
+      {/* Booking Detail Modal (Inspect GET /api/admin/demo-bookings/{studentId}) */}
       <AnimatePresence>
         {selectedBooking && (
           <>
@@ -437,6 +501,9 @@ export default function Bookings() {
                         {selectedBooking.student}
                       </h2>
                       <StatusPill status={selectedBooking.status} />
+                      {isDetailLoading && (
+                        <RefreshCw className="h-3.5 w-3.5 animate-spin text-amber-500" />
+                      )}
                     </div>
                     <p className="mt-1 flex items-center gap-2 text-sm font-bold text-navy-500">
                       <Flag code={selectedBooking.flag || 'UN'} size={14} />
@@ -536,13 +603,9 @@ export default function Bookings() {
                     {/* Metadata & Audit */}
                     <div className="col-span-full space-y-3 rounded-2xl border border-navy-100 bg-white p-5 text-xs">
                       <h3 className="font-extrabold uppercase tracking-wider text-navy-400">
-                        Booking Record & Audit
+                        Booking Record &amp; Audit (ID: {selectedBooking.studentId || selectedBooking.id})
                       </h3>
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                        <div>
-                          <span className="font-bold text-navy-400">Student Ref ID:</span>
-                          <span className="ml-1 font-mono font-bold text-navy-800">{selectedBooking.studentId || selectedBooking.id}</span>
-                        </div>
                         <div>
                           <span className="font-bold text-navy-400">Booked On:</span>
                           <span className="ml-1 font-bold text-navy-800">
@@ -550,11 +613,17 @@ export default function Bookings() {
                           </span>
                         </div>
                         <div>
-                          <span className="font-bold text-navy-400">T&C Agreed:</span>
+                          <span className="font-bold text-navy-400">T&amp;C Agreed:</span>
                           <span className="ml-1 font-bold text-navy-800">
                             {selectedBooking.termsAcceptedAt ? new Date(selectedBooking.termsAcceptedAt).toLocaleString() : '-'}
                           </span>
                         </div>
+                        {selectedBooking.termsVersion && (
+                          <div>
+                            <span className="font-bold text-navy-400">Terms Version:</span>
+                            <span className="ml-1 font-bold text-navy-800">{selectedBooking.termsVersion}</span>
+                          </div>
+                        )}
                         {selectedBooking.acceptedBy && (
                           <div>
                             <span className="font-bold text-emerald-600">Accepted By:</span>
@@ -573,6 +642,14 @@ export default function Bookings() {
                           <div>
                             <span className="font-bold text-rose-600">Rejected By:</span>
                             <span className="ml-1 font-bold text-navy-800">{selectedBooking.rejectedBy}</span>
+                          </div>
+                        )}
+                        {selectedBooking.rejectedAt && (
+                          <div>
+                            <span className="font-bold text-rose-600">Rejected At:</span>
+                            <span className="ml-1 font-bold text-navy-800">
+                              {new Date(selectedBooking.rejectedAt).toLocaleString()}
+                            </span>
                           </div>
                         )}
                         {selectedBooking.rejectionReason && (

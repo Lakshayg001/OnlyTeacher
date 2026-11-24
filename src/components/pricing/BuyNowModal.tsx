@@ -673,12 +673,16 @@ export default function BuyNowModal({
     setIsSubmitting(true);
 
     try {
+      const allowedPlanTypes = ['standard', 'flexicarry', 'membership'];
+      const rawPlanType = (planContext?.planType || '').toLowerCase().trim();
+      const normalizedPlanType = allowedPlanTypes.includes(rawPlanType) ? rawPlanType : 'standard';
+
       const resolvedPlanContext = {
         planName: planContext?.planName || 'Free Trial Class',
         tierTitle: planContext?.tierTitle || '',
         years: planContext?.years || formData.year,
         price: planContext?.price || 'Free Trial',
-        planType: planContext?.planType || 'trial',
+        planType: normalizedPlanType,
         countryName: planContext?.countryName || formData.nationality || 'India',
         countryCode: planContext?.countryCode || formData.phoneCountryCode || 'IN',
       };
@@ -725,18 +729,22 @@ export default function BuyNowModal({
       if (!response.ok || (data && data.success === false)) {
         if (data && data.errors && Array.isArray(data.errors) && data.errors.length > 0) {
           const backendFieldErrors: Record<string, string> = {};
-          let generalMsg = '';
+          const msgList: string[] = [];
           data.errors.forEach((err: { field?: string; message?: string }) => {
             if (err.field && err.message) {
               backendFieldErrors[err.field] = err.message;
+              msgList.push(err.message);
             } else if (err.message) {
-              generalMsg = err.message;
+              msgList.push(err.message);
             }
           });
           if (Object.keys(backendFieldErrors).length > 0) {
             setErrors((prev) => ({ ...prev, ...backendFieldErrors }));
           }
-          throw new Error(generalMsg || data.message || 'Validation failed. Please check the entered fields.');
+          const finalMsg = msgList.length > 0
+            ? msgList.join(' · ')
+            : (data.message || 'Validation failed. Please check the entered fields.');
+          throw new Error(finalMsg);
         }
 
         if (response.status === 429) {

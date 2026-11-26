@@ -111,6 +111,114 @@ export default function Bookings() {
   const [existingAssignments, setExistingAssignments] = useState<any[]>([]);
   const [assignmentsLoading, setAssignmentsLoading] = useState(false);
 
+  // Inline Plan Creation states
+  const [showCreatePlanForm, setShowCreatePlanForm] = useState(false);
+  const [createPlanLoading, setCreatePlanLoading] = useState(false);
+  const [createPlanError, setCreatePlanError] = useState<string | null>(null);
+  const [newPlanForm, setNewPlanForm] = useState({
+    code: '',
+    name: '',
+    description: '',
+    durationMonths: '12',
+    currency: 'INR',
+    price: '100000',
+    discountAmount: '0',
+  });
+
+  const PRESET_PLANS = [
+    {
+      code: 'TOT-ANNUAL-INR',
+      name: 'Standard 1-on-1 Tuition (Annual)',
+      description: 'Comprehensive 1-on-1 personalized academic tuition with dedicated mentor.',
+      durationMonths: '12',
+      currency: 'INR',
+      price: '120000',
+      discountAmount: '20000',
+    },
+    {
+      code: 'TOT-TERM-INR',
+      name: 'TriOrbit Term Package (4 Months)',
+      description: '4-month intensive syllabus coverage & exam preparation.',
+      durationMonths: '4',
+      currency: 'INR',
+      price: '45000',
+      discountAmount: '5000',
+    },
+    {
+      code: 'TOT-GLOBAL-USD',
+      name: 'Global International Tuition (Annual)',
+      description: 'IB / Cambridge international curriculum 1-on-1 online tutoring.',
+      durationMonths: '12',
+      currency: 'USD',
+      price: '1800',
+      discountAmount: '200',
+    },
+  ];
+
+  const handleCreatePlan = async () => {
+    const token = localStorage.getItem('tot_admin_token');
+    if (!token) return;
+
+    if (!newPlanForm.code.trim()) {
+      setCreatePlanError('Please enter a unique plan code (e.g. APEX-FC100).');
+      return;
+    }
+    if (!newPlanForm.name.trim()) {
+      setCreatePlanError('Please enter a plan name.');
+      return;
+    }
+    if (!newPlanForm.price || Number(newPlanForm.price) <= 0) {
+      setCreatePlanError('Please enter a valid price.');
+      return;
+    }
+
+    setCreatePlanLoading(true);
+    setCreatePlanError(null);
+
+    try {
+      const endpoint = import.meta.env.PROD
+        ? 'https://api.theonlyteacher.com/api/admin/plans'
+        : '/api/admin/plans';
+
+      const payload = {
+        code: newPlanForm.code.trim().toUpperCase(),
+        name: newPlanForm.name.trim(),
+        description: newPlanForm.description.trim() || undefined,
+        durationMonths: parseInt(newPlanForm.durationMonths, 10) || 12,
+        price: Math.round(Number(newPlanForm.price) * 100),
+        discountAmount: Math.round(Number(newPlanForm.discountAmount || 0) * 100),
+        currency: newPlanForm.currency.toUpperCase(),
+      };
+
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const json = await res.json().catch(() => null);
+
+      if (!res.ok || !json?.success) {
+        throw new Error(json?.message || `Failed to create plan (${res.status})`);
+      }
+
+      await fetchPlans();
+      if (json.data?.planId) {
+        setSelectedPlanId(json.data.planId);
+      }
+      setShowCreatePlanForm(false);
+    } catch (err: any) {
+      console.error('Error creating plan:', err);
+      setCreatePlanError(err?.message || 'Error communicating with server.');
+    } finally {
+      setCreatePlanLoading(false);
+    }
+  };
+
   const closeBookingModal = () => {
     setSelectedBooking(null);
     setShowRejectInput(false);
@@ -120,6 +228,8 @@ export default function Bookings() {
     setLinkError(null);
     setCopiedLink(false);
     setExistingAssignments([]);
+    setShowCreatePlanForm(false);
+    setCreatePlanError(null);
   };
 
   // Fetch plans from GET /api/admin/plans
@@ -1035,23 +1145,224 @@ export default function Bookings() {
                         </div>
                       ) : null}
 
-                      {/* Plan Selection Form */}
+                      {/* Plan Selection or Creation Form */}
                       {showPaymentLinkSection && !generatedPaymentLink && (
-                        <div className="space-y-3 pt-2">
-                          <label className="block text-xs font-bold text-navy-700">
-                            Select Academic Plan / Package to Assign:
-                          </label>
+                        <div className="space-y-4 pt-2">
                           {plansLoading ? (
-                            <div className="flex items-center gap-2 text-xs font-semibold text-navy-400 py-2">
+                            <div className="flex items-center gap-2 text-xs font-semibold text-navy-400 py-3">
                               <RefreshCw className="w-4 h-4 animate-spin text-amber-500" />
                               Loading available plans…
                             </div>
-                          ) : plans.length === 0 ? (
-                            <div className="text-xs text-navy-500">
-                              No active plans found on the server.
+                          ) : plans.length === 0 || showCreatePlanForm ? (
+                            /* Create Plan Form */
+                            <div className="rounded-2xl border border-amber-300 bg-white p-4 space-y-4 shadow-sm">
+                              <div className="flex items-center justify-between border-b border-navy-100 pb-2">
+                                <div>
+                                  <h4 className="font-display font-extrabold text-navy-800 text-sm">
+                                    {plans.length === 0 ? 'Create Your First Academic Plan' : 'Create a New Academic Plan'}
+                                  </h4>
+                                  <p className="text-[11px] font-semibold text-navy-400">
+                                    Adds an assignable package to the server database.
+                                  </p>
+                                </div>
+                                {plans.length > 0 && (
+                                  <button
+                                    onClick={() => setShowCreatePlanForm(false)}
+                                    className="text-xs font-bold text-navy-400 hover:text-navy-700"
+                                  >
+                                    Back to Plans List
+                                  </button>
+                                )}
+                              </div>
+
+                              {createPlanError && (
+                                <div className="rounded-xl bg-rose-50 border border-rose-200 p-2.5 text-xs font-bold text-rose-800 flex items-center gap-1.5">
+                                  <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+                                  <span>{createPlanError}</span>
+                                </div>
+                              )}
+
+                              {/* Quick Presets */}
+                              <div>
+                                <span className="block text-[11px] font-extrabold uppercase text-navy-400 mb-1.5">
+                                  Quick Fill from Template:
+                                </span>
+                                <div className="flex flex-wrap gap-1.5">
+                                  {PRESET_PLANS.map((preset) => (
+                                    <button
+                                      key={preset.code}
+                                      type="button"
+                                      onClick={() => {
+                                        setNewPlanForm({
+                                          code: preset.code,
+                                          name: preset.name,
+                                          description: preset.description,
+                                          durationMonths: preset.durationMonths,
+                                          currency: preset.currency,
+                                          price: preset.price,
+                                          discountAmount: preset.discountAmount,
+                                        });
+                                      }}
+                                      className="rounded-lg border border-navy-200 bg-navy-50/60 px-2.5 py-1 text-[11px] font-bold text-navy-700 hover:border-amber-400 hover:bg-amber-50 hover:text-amber-800 transition-colors"
+                                    >
+                                      {preset.currency === 'INR' ? '🇮🇳' : '🌍'} {preset.name}
+                                    </button>
+                                  ))}
+                                </div>
+                              </div>
+
+                              <div className="grid grid-cols-2 gap-3 text-xs">
+                                <div>
+                                  <label className="block font-bold text-navy-700 mb-1">
+                                    Plan Code (Unique ID) *
+                                  </label>
+                                  <input
+                                    type="text"
+                                    value={newPlanForm.code}
+                                    onChange={(e) =>
+                                      setNewPlanForm((prev) => ({
+                                        ...prev,
+                                        code: e.target.value.toUpperCase().replace(/[^A-Z0-9_-]/g, ''),
+                                      }))
+                                    }
+                                    placeholder="e.g. APEX-FC100"
+                                    className="w-full rounded-xl border border-navy-200 bg-white p-2.5 font-mono font-bold text-navy-800 outline-none focus:border-amber-400"
+                                  />
+                                </div>
+
+                                <div>
+                                  <label className="block font-bold text-navy-700 mb-1">
+                                    Plan Name *
+                                  </label>
+                                  <input
+                                    type="text"
+                                    value={newPlanForm.name}
+                                    onChange={(e) =>
+                                      setNewPlanForm((prev) => ({ ...prev, name: e.target.value }))
+                                    }
+                                    placeholder="e.g. Year 9 IGCSE Mathematics"
+                                    className="w-full rounded-xl border border-navy-200 bg-white p-2.5 font-semibold text-navy-800 outline-none focus:border-amber-400"
+                                  />
+                                </div>
+
+                                <div className="col-span-2">
+                                  <label className="block font-bold text-navy-700 mb-1">
+                                    Plan Description
+                                  </label>
+                                  <input
+                                    type="text"
+                                    value={newPlanForm.description}
+                                    onChange={(e) =>
+                                      setNewPlanForm((prev) => ({ ...prev, description: e.target.value }))
+                                    }
+                                    placeholder="e.g. Comprehensive 1-on-1 tutoring with personal mentor"
+                                    className="w-full rounded-xl border border-navy-200 bg-white p-2.5 font-semibold text-navy-800 outline-none focus:border-amber-400"
+                                  />
+                                </div>
+
+                                <div>
+                                  <label className="block font-bold text-navy-700 mb-1">
+                                    Duration (Months) *
+                                  </label>
+                                  <input
+                                    type="number"
+                                    min="1"
+                                    max="120"
+                                    value={newPlanForm.durationMonths}
+                                    onChange={(e) =>
+                                      setNewPlanForm((prev) => ({ ...prev, durationMonths: e.target.value }))
+                                    }
+                                    className="w-full rounded-xl border border-navy-200 bg-white p-2.5 font-semibold text-navy-800 outline-none focus:border-amber-400"
+                                  />
+                                </div>
+
+                                <div>
+                                  <label className="block font-bold text-navy-700 mb-1">
+                                    Currency *
+                                  </label>
+                                  <select
+                                    value={newPlanForm.currency}
+                                    onChange={(e) =>
+                                      setNewPlanForm((prev) => ({ ...prev, currency: e.target.value }))
+                                    }
+                                    className="w-full rounded-xl border border-navy-200 bg-white p-2.5 font-semibold text-navy-800 outline-none focus:border-amber-400"
+                                  >
+                                    <option value="INR">INR (₹ - Cashfree)</option>
+                                    <option value="USD">USD ($ - PayPal)</option>
+                                  </select>
+                                </div>
+
+                                <div>
+                                  <label className="block font-bold text-navy-700 mb-1">
+                                    Standard List Price ({newPlanForm.currency}) *
+                                  </label>
+                                  <input
+                                    type="number"
+                                    min="1"
+                                    value={newPlanForm.price}
+                                    onChange={(e) =>
+                                      setNewPlanForm((prev) => ({ ...prev, price: e.target.value }))
+                                    }
+                                    placeholder="e.g. 100000"
+                                    className="w-full rounded-xl border border-navy-200 bg-white p-2.5 font-semibold text-navy-800 outline-none focus:border-amber-400"
+                                  />
+                                </div>
+
+                                <div>
+                                  <label className="block font-bold text-navy-700 mb-1">
+                                    Discount Amount ({newPlanForm.currency})
+                                  </label>
+                                  <input
+                                    type="number"
+                                    min="0"
+                                    value={newPlanForm.discountAmount}
+                                    onChange={(e) =>
+                                      setNewPlanForm((prev) => ({ ...prev, discountAmount: e.target.value }))
+                                    }
+                                    placeholder="0"
+                                    className="w-full rounded-xl border border-navy-200 bg-white p-2.5 font-semibold text-navy-800 outline-none focus:border-amber-400"
+                                  />
+                                </div>
+                              </div>
+
+                              <div className="flex justify-end gap-2 pt-2 border-t border-navy-100">
+                                {plans.length > 0 && (
+                                  <Button
+                                    size="sm"
+                                    variant="outline"
+                                    onClick={() => setShowCreatePlanForm(false)}
+                                    disabled={createPlanLoading}
+                                  >
+                                    Cancel
+                                  </Button>
+                                )}
+                                <Button
+                                  size="sm"
+                                  onClick={handleCreatePlan}
+                                  disabled={createPlanLoading}
+                                  className="bg-amber-500 hover:bg-amber-600 text-white font-extrabold"
+                                  icon={createPlanLoading ? <RefreshCw className="w-4 h-4 animate-spin" /> : undefined}
+                                >
+                                  {createPlanLoading ? 'Saving Plan…' : 'Save & Select Plan'}
+                                </Button>
+                              </div>
                             </div>
                           ) : (
-                            <div className="space-y-2">
+                            /* Existing Plans Select Dropdown */
+                            <div className="space-y-3">
+                              <div className="flex items-center justify-between">
+                                <label className="block text-xs font-bold text-navy-700">
+                                  Select Academic Plan / Package to Assign:
+                                </label>
+                                <button
+                                  type="button"
+                                  onClick={() => setShowCreatePlanForm(true)}
+                                  className="text-xs font-bold text-amber-600 hover:text-amber-800 underline"
+                                >
+                                  + Create New Plan
+                                </button>
+                              </div>
+
                               <select
                                 value={selectedPlanId}
                                 onChange={(e) => setSelectedPlanId(e.target.value)}

@@ -97,7 +97,7 @@ export default function Bookings() {
   const [showRejectInput, setShowRejectInput] = useState(false);
   const [rejectReason, setRejectReason] = useState('Subject not offered for this year group.');
 
-  // Payment link generation states
+  // Payment link generation & plan assignment states
   const [plans, setPlans] = useState<any[]>([]);
   const [plansLoading, setPlansLoading] = useState(false);
   const [selectedPlanId, setSelectedPlanId] = useState('');
@@ -107,6 +107,10 @@ export default function Bookings() {
   const [linkError, setLinkError] = useState<string | null>(null);
   const [copiedLink, setCopiedLink] = useState(false);
 
+  // Existing assignments for current selected student
+  const [existingAssignments, setExistingAssignments] = useState<any[]>([]);
+  const [assignmentsLoading, setAssignmentsLoading] = useState(false);
+
   const closeBookingModal = () => {
     setSelectedBooking(null);
     setShowRejectInput(false);
@@ -115,6 +119,7 @@ export default function Bookings() {
     setGeneratedPaymentLink(null);
     setLinkError(null);
     setCopiedLink(false);
+    setExistingAssignments([]);
   };
 
   // Fetch plans from GET /api/admin/plans
@@ -151,8 +156,93 @@ export default function Bookings() {
     }
   };
 
-  // Generate / Assign Plan Payment Link
-  const handleGeneratePaymentLink = async (studentId: string) => {
+  // Fetch student's plan assignments from GET /api/admin/students/{studentId}/plan-assignments
+  const fetchPlanAssignments = async (studentId: string) => {
+    const token = localStorage.getItem('tot_admin_token');
+    if (!token) return;
+    setAssignmentsLoading(true);
+    try {
+      const endpoint = import.meta.env.PROD
+        ? `https://api.theonlyteacher.com/api/admin/students/${studentId}/plan-assignments`
+        : `/api/admin/students/${studentId}/plan-assignments`;
+
+      const res = await fetch(endpoint, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+        },
+      });
+
+      if (res.ok) {
+        const json = await res.json();
+        if (json.success && Array.isArray(json.data)) {
+          setExistingAssignments(json.data);
+        } else {
+          setExistingAssignments([]);
+        }
+      }
+    } catch (e) {
+      console.error('Failed to fetch student plan assignments:', e);
+      setExistingAssignments([]);
+    } finally {
+      setAssignmentsLoading(false);
+    }
+  };
+
+  // Generate / Refresh a payment link for current plan assignment via POST /api/admin/students/{studentId}/payment-link
+  const handleRefreshPaymentLink = async (studentId: string) => {
+    const token = localStorage.getItem('tot_admin_token');
+    if (!token) return;
+
+    setLinkLoading(true);
+    setLinkError(null);
+
+    try {
+      const endpoint = import.meta.env.PROD
+        ? `https://api.theonlyteacher.com/api/admin/students/${studentId}/payment-link`
+        : `/api/admin/students/${studentId}/payment-link`;
+
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+        },
+      });
+
+      const json = await res.json().catch(() => null);
+
+      if (!res.ok || !json?.success) {
+        throw new Error(json?.message || `Failed to generate payment link (${res.status})`);
+      }
+
+      let rawUrl = json.data.paymentUrl || '';
+      let finalUrl = rawUrl;
+      if (rawUrl) {
+        try {
+          const parsed = new URL(rawUrl);
+          finalUrl = `${window.location.origin}/payment${parsed.search}`;
+        } catch {
+          finalUrl = rawUrl.startsWith('http') ? rawUrl : `${window.location.origin}${rawUrl}`;
+        }
+      }
+
+      setGeneratedPaymentLink({
+        ...json.data,
+        paymentUrl: finalUrl,
+      });
+
+      fetchPlanAssignments(studentId);
+    } catch (err: any) {
+      console.error('Error refreshing payment link:', err);
+      setLinkError(err?.message || 'Failed to refresh payment link.');
+    } finally {
+      setLinkLoading(false);
+    }
+  };
+
+  // Assign a new plan via POST /api/admin/students/{studentId}/assign-plan
+  const handleAssignPlan = async (studentId: string) => {
     const token = localStorage.getItem('tot_admin_token');
     if (!token) return;
 
@@ -165,12 +255,11 @@ export default function Bookings() {
     setLinkError(null);
 
     try {
-      // 1. Try assigning plan
-      const assignEndpoint = import.meta.env.PROD
+      const endpoint = import.meta.env.PROD
         ? `https://api.theonlyteacher.com/api/admin/students/${studentId}/assign-plan`
         : `/api/admin/students/${studentId}/assign-plan`;
 
-      let res = await fetch(assignEndpoint, {
+      const res = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -182,48 +271,35 @@ export default function Bookings() {
 
       let json = await res.json().catch(() => null);
 
-      // If 409 (a plan already assigned or demo not accepted), try generating a fresh link
-      if (res.status === 409 || !res.ok) {
-        const linkEndpoint = import.meta.env.PROD
-          ? `https://api.theonlyteacher.com/api/admin/students/${studentId}/payment-link`
-          : `/api/admin/students/${studentId}/payment-link`;
+      // If already assigned (409), automatically generate a fresh payment link
+      if (res.status === 409) {
+        return await handleRefreshPaymentLink(studentId);
+      }
 
-        const linkRes = await fetch(linkEndpoint, {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            Accept: 'application/json',
-          },
-        });
+      if (!res.ok || !json?.success) {
+        throw new Error(json?.message || `Failed to assign plan (${res.status})`);
+      }
 
-        if (linkRes.ok) {
-          json = await linkRes.json().catch(() => null);
-        } else {
-          const errData = await linkRes.json().catch(() => null);
-          throw new Error(errData?.message || json?.message || 'Failed to generate payment link.');
+      let rawUrl = json.data.paymentUrl || '';
+      let finalUrl = rawUrl;
+      if (rawUrl) {
+        try {
+          const parsed = new URL(rawUrl);
+          finalUrl = `${window.location.origin}/payment${parsed.search}`;
+        } catch {
+          finalUrl = rawUrl.startsWith('http') ? rawUrl : `${window.location.origin}${rawUrl}`;
         }
       }
 
-      if (json && json.success && json.data) {
-        // Normalize paymentUrl to ensure it points to frontend domain /payment?student_id=...&token=...
-        let finalUrl = json.data.paymentUrl || '';
-        if (finalUrl) {
-          try {
-            const parsed = new URL(finalUrl);
-            finalUrl = `${window.location.origin}/payment${parsed.search}`;
-          } catch {
-            finalUrl = finalUrl.startsWith('http') ? finalUrl : `${window.location.origin}${finalUrl}`;
-          }
-        }
-        setGeneratedPaymentLink({
-          ...json.data,
-          paymentUrl: finalUrl,
-        });
-      } else {
-        setLinkError(json?.message || 'Could not generate payment link.');
-      }
+      setGeneratedPaymentLink({
+        ...json.data,
+        paymentUrl: finalUrl,
+      });
+
+      setShowPaymentLinkSection(false);
+      fetchPlanAssignments(studentId);
     } catch (err: any) {
-      console.error('Error generating payment link:', err);
+      console.error('Error assigning plan:', err);
       setLinkError(err?.message || 'Error communicating with server.');
     } finally {
       setLinkLoading(false);
@@ -327,6 +403,8 @@ export default function Bookings() {
           setBookings((prev) =>
             prev.map((b) => (b.studentId === studentId ? { ...b, ...fresh } : b))
           );
+          // Fetch existing plan assignments for this student
+          fetchPlanAssignments(studentId);
         }
       }
     } catch (e) {
@@ -836,7 +914,7 @@ export default function Bookings() {
                     </div>
                   )}
 
-                  {/* Payment Link Generator Section */}
+                  {/* Plan Assignment & Payment Link Section */}
                   {selectedBooking.status === 'ACCEPTED' && (
                     <div className="rounded-2xl border border-amber-300 bg-amber-50/50 p-5 space-y-4">
                       <div className="flex items-center justify-between">
@@ -846,7 +924,7 @@ export default function Bookings() {
                             Student Enrollment &amp; Payment Link
                           </h3>
                         </div>
-                        {!showPaymentLinkSection && !generatedPaymentLink && (
+                        {!showPaymentLinkSection && !generatedPaymentLink && existingAssignments.length === 0 && (
                           <Button
                             size="sm"
                             onClick={() => {
@@ -859,6 +937,19 @@ export default function Bookings() {
                             Assign Plan &amp; Generate Link
                           </Button>
                         )}
+                        {!showPaymentLinkSection && existingAssignments.length > 0 && (
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => {
+                              setShowPaymentLinkSection(true);
+                              fetchPlans();
+                            }}
+                            className="border-amber-400 text-amber-700 hover:bg-amber-100/60 font-bold text-xs"
+                          >
+                            Change / Reassign Plan
+                          </Button>
+                        )}
                       </div>
 
                       {linkError && (
@@ -867,6 +958,82 @@ export default function Bookings() {
                           <span>{linkError}</span>
                         </div>
                       )}
+
+                      {/* Display Existing Plan Assignments */}
+                      {assignmentsLoading ? (
+                        <div className="flex items-center gap-2 text-xs font-semibold text-navy-400 py-3">
+                          <RefreshCw className="w-4 h-4 animate-spin text-amber-500" />
+                          Checking student plan assignment status…
+                        </div>
+                      ) : existingAssignments.length > 0 && !showPaymentLinkSection ? (
+                        <div className="space-y-3">
+                          {existingAssignments.map((assignment: any, idx: number) => {
+                            const isPaid = assignment.paymentStatus === 'SUCCESS';
+                            return (
+                              <div
+                                key={assignment.planId || idx}
+                                className="rounded-2xl border border-navy-200/80 bg-white p-4 space-y-3 shadow-sm"
+                              >
+                                <div className="flex items-start justify-between gap-3">
+                                  <div>
+                                    <div className="flex items-center gap-2">
+                                      <h4 className="font-display font-extrabold text-navy-800 text-sm">
+                                        {assignment.planName || assignment.planId}
+                                      </h4>
+                                      <StatusPill status={assignment.paymentStatus || 'PENDING'} />
+                                    </div>
+                                    {assignment.planDescription && (
+                                      <p className="text-xs text-navy-500 mt-0.5">{assignment.planDescription}</p>
+                                    )}
+                                    <p className="text-[11px] font-semibold text-navy-400 mt-1">
+                                      Duration: {assignment.durationMonths || 1} Months · Assigned by{' '}
+                                      {assignment.assignedBy || 'Admin'} on{' '}
+                                      {assignment.assignedAt ? new Date(assignment.assignedAt).toLocaleDateString() : '-'}
+                                    </p>
+                                  </div>
+                                  <div className="text-right shrink-0">
+                                    <span className="font-display text-base font-extrabold text-navy-800">
+                                      {formatMoney(assignment.finalAmount, assignment.currency)}
+                                    </span>
+                                    {assignment.discountAmount > 0 && (
+                                      <p className="text-[10px] text-emerald-600 font-bold">
+                                        Saved {formatMoney(assignment.discountAmount, assignment.currency)}
+                                      </p>
+                                    )}
+                                  </div>
+                                </div>
+
+                                <div className="flex flex-wrap items-center justify-between gap-2 border-t border-navy-100 pt-3">
+                                  <span className="text-[11px] font-mono text-navy-400">
+                                    Payment ID: {assignment.paymentId || '-'}
+                                  </span>
+                                  {!isPaid ? (
+                                    <Button
+                                      size="sm"
+                                      onClick={() => handleRefreshPaymentLink(selectedBooking.studentId)}
+                                      disabled={linkLoading}
+                                      className="bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-xs"
+                                      icon={
+                                        linkLoading ? (
+                                          <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                                        ) : (
+                                          <Link2 className="w-3.5 h-3.5" />
+                                        )
+                                      }
+                                    >
+                                      {linkLoading ? 'Generating…' : 'Generate Fresh Payment Link'}
+                                    </Button>
+                                  ) : (
+                                    <span className="inline-flex items-center gap-1 text-xs font-extrabold text-emerald-700">
+                                      <CheckCircle2 className="w-4 h-4 text-emerald-600" /> Paid &amp; Enrolled
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      ) : null}
 
                       {/* Plan Selection Form */}
                       {showPaymentLinkSection && !generatedPaymentLink && (
@@ -929,12 +1096,12 @@ export default function Bookings() {
                                 </Button>
                                 <Button
                                   size="sm"
-                                  onClick={() => handleGeneratePaymentLink(selectedBooking.studentId)}
+                                  onClick={() => handleAssignPlan(selectedBooking.studentId)}
                                   disabled={linkLoading || !selectedPlanId}
                                   className="bg-amber-500 hover:bg-amber-600 text-white font-extrabold"
                                   icon={linkLoading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Link2 className="w-4 h-4" />}
                                 >
-                                  {linkLoading ? 'Generating…' : 'Generate Secure Payment Link'}
+                                  {linkLoading ? 'Assigning…' : 'Assign Plan & Generate Payment Link'}
                                 </Button>
                               </div>
                             </div>
@@ -944,7 +1111,7 @@ export default function Bookings() {
 
                       {/* Generated Link Display & Share Actions */}
                       {generatedPaymentLink && (
-                        <div className="rounded-2xl bg-white p-4 border border-emerald-200 space-y-3">
+                        <div className="rounded-2xl bg-white p-4 border border-emerald-200 space-y-3 shadow-sm">
                           <div className="flex items-center justify-between">
                             <span className="inline-flex items-center gap-1.5 text-xs font-extrabold text-emerald-800">
                               <CheckCircle2 className="w-4 h-4 text-emerald-600" />

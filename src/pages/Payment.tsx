@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -99,7 +99,22 @@ function loadCashfreeSDK(): Promise<any> {
 export default function Payment() {
   const [searchParams] = useSearchParams();
   const studentId = searchParams.get('student_id') || searchParams.get('studentId') || '';
-  const token = searchParams.get('token') || '';
+  const rawToken = searchParams.get('token') || '';
+
+  // Cache token in sessionStorage so returning from PayPal (where PayPal might pass its own token=EC-...) doesn't lose authorization
+  const effectiveToken = useMemo(() => {
+    if (rawToken && !rawToken.startsWith('EC-')) {
+      try {
+        sessionStorage.setItem(`tot_payment_token_${studentId}`, rawToken);
+      } catch {}
+      return rawToken;
+    }
+    try {
+      const cached = sessionStorage.getItem(`tot_payment_token_${studentId}`);
+      if (cached) return cached;
+    } catch {}
+    return rawToken;
+  }, [rawToken, studentId]);
 
   const [details, setDetails] = useState<PaymentDetails | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -112,7 +127,7 @@ export default function Payment() {
 
   // Fetch payment details
   const fetchPaymentDetails = useCallback(async () => {
-    if (!studentId || !token) {
+    if (!studentId || !effectiveToken) {
       setIsLoading(false);
       return;
     }
@@ -123,8 +138,8 @@ export default function Payment() {
 
     try {
       const endpoint = import.meta.env.PROD
-        ? `https://api.theonlyteacher.com/api/payments/details?student_id=${encodeURIComponent(studentId)}&token=${encodeURIComponent(token)}`
-        : `/api/payments/details?student_id=${encodeURIComponent(studentId)}&token=${encodeURIComponent(token)}`;
+        ? `https://api.theonlyteacher.com/api/payments/details?student_id=${encodeURIComponent(studentId)}&token=${encodeURIComponent(effectiveToken)}`
+        : `/api/payments/details?student_id=${encodeURIComponent(studentId)}&token=${encodeURIComponent(effectiveToken)}`;
 
       const res = await fetch(endpoint, {
         headers: { Accept: 'application/json' },
@@ -167,15 +182,40 @@ export default function Payment() {
     } finally {
       setIsLoading(false);
     }
-  }, [studentId, token]);
+  }, [studentId, effectiveToken]);
 
   useEffect(() => {
     fetchPaymentDetails();
   }, [fetchPaymentDetails]);
 
+  // Auto-verify if returning from PayPal (e.g. searchParams has PayerID or order is INITIATED with PayPal)
+  useEffect(() => {
+    if (!details?.paymentId || details.status !== 'INITIATED') return;
+
+    const payerId = searchParams.get('PayerID');
+    if (payerId || details.gateway === 'PAYPAL') {
+      const verifyEndpoint = import.meta.env.PROD
+        ? 'https://api.theonlyteacher.com/api/payments/verify'
+        : '/api/payments/verify';
+
+      fetch(verifyEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ paymentId: details.paymentId }),
+      })
+        .then((res) => res.json())
+        .then((resData) => {
+          if (resData?.success) {
+            fetchPaymentDetails();
+          }
+        })
+        .catch(() => {});
+    }
+  }, [details?.paymentId, details?.status, details?.gateway, searchParams, fetchPaymentDetails]);
+
   // Handle gateway cancellation to switch gateway
   const handleCancelInitiatedOrder = async () => {
-    if (!details?.paymentId || !token) return;
+    if (!details?.paymentId || !effectiveToken) return;
     setIsProcessing(true);
     setProcessError(null);
 
@@ -188,7 +228,7 @@ export default function Payment() {
         method: 'POST',
         headers: {
           Accept: 'application/json',
-          'X-Payment-Token': token,
+          'X-Payment-Token': effectiveToken,
         },
       });
 
@@ -207,7 +247,7 @@ export default function Payment() {
 
   // Handle Initiate Payment
   const handleInitiatePayment = async () => {
-    if (!details?.paymentId || !token) return;
+    if (!details?.paymentId || !effectiveToken) return;
     if (!selectedGateway) {
       setProcessError('Please select a payment gateway.');
       return;
@@ -226,7 +266,7 @@ export default function Payment() {
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
-          'X-Payment-Token': token,
+          'X-Payment-Token': effectiveToken,
         },
         body: JSON.stringify({ gateway: selectedGateway }),
       });
@@ -295,7 +335,7 @@ export default function Payment() {
   // --------------------------------------------------------------------------
   // Missing or Invalid URL Parameters
   // --------------------------------------------------------------------------
-  if (!studentId || !token) {
+  if (!studentId || !effectiveToken) {
     return (
       <div className="min-h-[80vh] flex items-center justify-center p-4 bg-navy-50/50">
         <div className="max-w-md w-full bg-white rounded-3xl p-8 border border-navy-100 shadow-clay text-center space-y-5">
